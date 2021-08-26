@@ -1,3 +1,3 @@
 # data-science-practical-approach
 
-jupyter-book build src --builder pdfhtml
+jupyter-book build src --builder pdflatex
