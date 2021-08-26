@@ -1,0 +1,3919 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Exploration and Visualization: Case study &#8212; Data Science - A practical Approach</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c2_data_preparation/introduction.html">
+   2. Data Preparation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c2_data_preparation/missing_data.html">
+   3. Missing data
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c3_data_preprocessing/introduction.html">
+   4. Data Preprocessing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c4_data_exploration/introduction.html">
+   5. Data Exploration
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c5_data_visualisation/introduction.html">
+   6. Data Visualisation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c6_machine_learning/introduction.html">
+   7. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Olist.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FOlist.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Olist.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/Olist.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#goals">
+   Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parsing">
+   Parsing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparation">
+   Preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-types">
+     Data Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#missing-values">
+     Missing values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concatenation">
+     Concatenation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#duplicates">
+     Duplicates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexing">
+     Indexing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#translation">
+     Translation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#processing">
+   Processing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#product-pricing">
+     Product pricing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploration">
+   Exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Product pricing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#normal-distribution">
+       normal distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#numerical-correlation">
+       Numerical correlation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#variance-inflation">
+       Variance inflation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#categorical-correlation">
+       Categorical correlation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#grouping-by-category">
+       Grouping by category
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dealing-with-small-subsets-in-data">
+       Dealing with small subsets in data
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   Visualization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Product pricing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Normal distribution
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       Numerical correlation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       Variance Inflation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       Categorical correlation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       Grouping by category
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     Product pricing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#playground">
+   Playground
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="data-exploration-and-visualization-case-study">
+<h1>Data Exploration and Visualization: Case study<a class="headerlink" href="#data-exploration-and-visualization-case-study" title="Permalink to this headline">¶</a></h1>
+<p>In this case study we will create an overview on how a generic Data Analysis study on a dataset works.</p>
+<p>The case study is divided into several parts:</p>
+<ul class="simple">
+<li><p>Goals</p></li>
+<li><p>Parsing</p></li>
+<li><p>Preparation (cleaning)</p></li>
+<li><p>Processing</p></li>
+<li><p>Exploration</p></li>
+<li><p>Visualization</p></li>
+<li><p>Conclusion</p></li>
+</ul>
+<div class="section" id="goals">
+<h2>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h2>
+<p>In this section we will state the goals we try to obtain by analyzing this dataset. Here are the questions that our customer had:</p>
+<ul class="simple">
+<li><p>Can we predict prices for products?</p></li>
+<li><p>Do customers behave predictable, can we recommend specific items to specific customers?</p></li>
+<li><p>Sellers with more/better reviews seem to do better, can you quantify this?</p></li>
+<li><p>Are there items with a specific time pattern?</p></li>
+<li><p>Are products related to geographical information?</p></li>
+<li><p>Is there anything else remarkable in our data?</p></li>
+</ul>
+<p>We’ll (try to) keep these question in mind when performing the case study.</p>
+</div>
+<div class="section" id="parsing">
+<h2>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h2>
+<p>we start out by importing all necessary libraries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">set_matplotlib_formats</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">~/</span><span class="n">git</span><span class="o">/</span><span class="n">data_science_practical_approach</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">ipykernel_22625</span><span class="o">/</span><span class="mf">4057771804.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">json</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>in order to download datasets from kaggle, we need an API key to access their API, we’ll make that here</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;lorenzf&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;7a44a9e99b27e796177d793a3d85b8cf&quot;</span>
+        <span class="p">}</span>
+        <span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>now we can import kaggle too and download the datasets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">kaggle</span>
+<span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;olistbr/brazilian-ecommerce&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;olistbr/marketing-funnel-olist&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run &#39;chmod 600 /root/.kaggle/kaggle.json&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>the csv files are now in the ‘./data’ folder, we can now read them using pandas, here is the list of all csv files in our folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;olist_products_dataset.csv&#39;,
+ &#39;olist_order_items_dataset.csv&#39;,
+ &#39;olist_sellers_dataset.csv&#39;,
+ &#39;olist_customers_dataset.csv&#39;,
+ &#39;olist_order_reviews_dataset.csv&#39;,
+ &#39;olist_geolocation_dataset.csv&#39;,
+ &#39;product_category_name_translation.csv&#39;,
+ &#39;olist_closed_deals_dataset.csv&#39;,
+ &#39;olist_order_payments_dataset.csv&#39;,
+ &#39;olist_marketing_qualified_leads_dataset.csv&#39;,
+ &#39;olist_orders_dataset.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>we will now parse interesting dataframes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/olist_customers_dataset.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">customers</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">customers</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (99441, 5)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>customer_unique_id</th>
+      <th>customer_zip_code_prefix</th>
+      <th>customer_city</th>
+      <th>customer_state</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>06b8999e2fba1a1fbc88172c00ba8bc7</td>
+      <td>861eff4711a542e4b93843c6dd7febb0</td>
+      <td>14409</td>
+      <td>franca</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>18955e83d337fd6b2def6b18a428ac77</td>
+      <td>290c77bc529b7ac935b93aa66c333dc3</td>
+      <td>9790</td>
+      <td>sao bernardo do campo</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4e7b3e00288586ebd08712fdd0374a03</td>
+      <td>060e732b5b29e8181a18229c7b0b2b5e</td>
+      <td>1151</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>b2b6027bc5c5109e529d4dc6358b12c3</td>
+      <td>259dac757896d24d7702b9acbbff3f3c</td>
+      <td>8775</td>
+      <td>mogi das cruzes</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4f2d8ab171c80ec8364f7c12e35b23ad</td>
+      <td>345ecd01c38d18a9036ed96c73b8d066</td>
+      <td>13056</td>
+      <td>campinas</td>
+      <td>SP</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sellers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/olist_sellers_dataset.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sellers</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">sellers</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (3095, 4)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>seller_id</th>
+      <th>seller_zip_code_prefix</th>
+      <th>seller_city</th>
+      <th>seller_state</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3442f8959a84dea7ee197c632cb2df15</td>
+      <td>13023</td>
+      <td>campinas</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>d1b65fc7debc3361ea86b5f14c68d2e2</td>
+      <td>13844</td>
+      <td>mogi guacu</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ce3ad9de960102d0677a81f5d0bb7b2d</td>
+      <td>20031</td>
+      <td>rio de janeiro</td>
+      <td>RJ</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>c0f3eea2e14555b6faeea3dd58c1b1c3</td>
+      <td>4195</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>51a04a8a6bdcb23deccc82b0b80742cf</td>
+      <td>12914</td>
+      <td>braganca paulista</td>
+      <td>SP</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/olist_products_dataset.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">products</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">products</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (32951, 9)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_id</th>
+      <th>product_category_name</th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1e9e8ef04dbcff4541ed26657ea517e5</td>
+      <td>perfumaria</td>
+      <td>40.0</td>
+      <td>287.0</td>
+      <td>1.0</td>
+      <td>225.0</td>
+      <td>16.0</td>
+      <td>10.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3aa071139cb16b67ca9e5dea641aaa2f</td>
+      <td>artes</td>
+      <td>44.0</td>
+      <td>276.0</td>
+      <td>1.0</td>
+      <td>1000.0</td>
+      <td>30.0</td>
+      <td>18.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>96bd76ec8810374ed1b65e291975717f</td>
+      <td>esporte_lazer</td>
+      <td>46.0</td>
+      <td>250.0</td>
+      <td>1.0</td>
+      <td>154.0</td>
+      <td>18.0</td>
+      <td>9.0</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>cef67bcfe19066a932b7673e239eb23d</td>
+      <td>bebes</td>
+      <td>27.0</td>
+      <td>261.0</td>
+      <td>1.0</td>
+      <td>371.0</td>
+      <td>26.0</td>
+      <td>4.0</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9dc1a7de274444849c219cff195d0b71</td>
+      <td>utilidades_domesticas</td>
+      <td>37.0</td>
+      <td>402.0</td>
+      <td>4.0</td>
+      <td>625.0</td>
+      <td>20.0</td>
+      <td>17.0</td>
+      <td>13.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">translation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/product_category_name_translation.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">translation</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">translation</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (71, 2)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_category_name</th>
+      <th>product_category_name_english</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>beleza_saude</td>
+      <td>health_beauty</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>informatica_acessorios</td>
+      <td>computers_accessories</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automotivo</td>
+      <td>auto</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>cama_mesa_banho</td>
+      <td>bed_bath_table</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>moveis_decoracao</td>
+      <td>furniture_decor</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/olist_order_items_dataset.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">orders</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">orders</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (112650, 7)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>order_id</th>
+      <th>order_item_id</th>
+      <th>product_id</th>
+      <th>seller_id</th>
+      <th>shipping_limit_date</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>00010242fe8c5a6d1ba2dd792cb16214</td>
+      <td>1</td>
+      <td>4244733e06e7ecb4970a6e2683c13e61</td>
+      <td>48436dade18ac8b2bce089ec2a041202</td>
+      <td>2017-09-19 09:45:35</td>
+      <td>58.90</td>
+      <td>13.29</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>00018f77f2f0320c557190d7a144bdd3</td>
+      <td>1</td>
+      <td>e5f2d52b802189ee658865ca93d83a8f</td>
+      <td>dd7ddc04e1b6c2c614352b383efe2d36</td>
+      <td>2017-05-03 11:05:13</td>
+      <td>239.90</td>
+      <td>19.93</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>000229ec398224ef6ca0657da4fc703e</td>
+      <td>1</td>
+      <td>c777355d18b72b67abbeef9df44fd0fd</td>
+      <td>5b51032eddd242adc84c38acab88f23d</td>
+      <td>2018-01-18 14:48:30</td>
+      <td>199.00</td>
+      <td>17.87</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>00024acbcdf0a6daa1e931b038114c75</td>
+      <td>1</td>
+      <td>7634da152a4610f1595efa32f14722fc</td>
+      <td>9d7a1d34a5052409006425275ba1c2b4</td>
+      <td>2018-08-15 10:10:18</td>
+      <td>12.99</td>
+      <td>12.79</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00042b26cf59d7ce69dfabb4e55b4fd9</td>
+      <td>1</td>
+      <td>ac6c3623068f30de03045865e4e10089</td>
+      <td>df560393f3a51e74553ab94004ba5c87</td>
+      <td>2017-02-13 13:57:51</td>
+      <td>199.90</td>
+      <td>18.14</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order_reviews</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/olist_order_reviews_dataset.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">order_reviews</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">order_reviews</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (100000, 7)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review_id</th>
+      <th>order_id</th>
+      <th>review_score</th>
+      <th>review_comment_title</th>
+      <th>review_comment_message</th>
+      <th>review_creation_date</th>
+      <th>review_answer_timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7bc2406110b926393aa56f80a40eba40</td>
+      <td>73fc7af87114b39712e6da79b0a377eb</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2018-01-18 00:00:00</td>
+      <td>2018-01-18 21:46:59</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>80e641a11e56f04c1ad469d5645fdfde</td>
+      <td>a548910a1c6147796b98fdf73dbeba33</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2018-03-10 00:00:00</td>
+      <td>2018-03-11 03:05:13</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>228ce5500dc1d8e020d8d1322874b6f0</td>
+      <td>f9e4b658b201a9f2ecdecbb34bed034b</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2018-02-17 00:00:00</td>
+      <td>2018-02-18 14:36:24</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>e64fb393e7b32834bb789ff8bb30750e</td>
+      <td>658677c97b385a9be170737859d3511b</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>Recebi bem antes do prazo estipulado.</td>
+      <td>2017-04-21 00:00:00</td>
+      <td>2017-04-21 22:02:06</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>f7c4243c7fe1938f181bec41a392bdeb</td>
+      <td>8e6bfb81e283fa7e4f11123a3fb894f1</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>Parabéns lojas lannister adorei comprar pela I...</td>
+      <td>2018-03-01 00:00:00</td>
+      <td>2018-03-02 10:26:53</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>here we perform tasks to prepare the data in a more pleasing format.</p>
+<div class="section" id="data-types">
+<h3>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
+<p>Before we do anything with our data, it is good to see if our data types are in order</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 99441 entries, 0 to 99440
+Data columns (total 5 columns):
+ #   Column                    Non-Null Count  Dtype 
+---  ------                    --------------  ----- 
+ 0   customer_id               99441 non-null  object
+ 1   customer_unique_id        99441 non-null  object
+ 2   customer_zip_code_prefix  99441 non-null  int64 
+ 3   customer_city             99441 non-null  object
+ 4   customer_state            99441 non-null  object
+dtypes: int64(1), object(4)
+memory usage: 3.8+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span><span class="p">[</span><span class="s1">&#39;customer_city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">customers</span><span class="p">[</span><span class="s1">&#39;customer_city&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">customers</span><span class="p">[</span><span class="s1">&#39;customer_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">customers</span><span class="p">[</span><span class="s1">&#39;customer_state&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">customers</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 99441 entries, 0 to 99440
+Data columns (total 5 columns):
+ #   Column                    Non-Null Count  Dtype   
+---  ------                    --------------  -----   
+ 0   customer_id               99441 non-null  object  
+ 1   customer_unique_id        99441 non-null  object  
+ 2   customer_zip_code_prefix  99441 non-null  int64   
+ 3   customer_city             99441 non-null  category
+ 4   customer_state            99441 non-null  category
+dtypes: category(2), int64(1), object(2)
+memory usage: 2.7+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sellers</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 3095 entries, 0 to 3094
+Data columns (total 4 columns):
+ #   Column                  Non-Null Count  Dtype 
+---  ------                  --------------  ----- 
+ 0   seller_id               3095 non-null   object
+ 1   seller_zip_code_prefix  3095 non-null   int64 
+ 2   seller_city             3095 non-null   object
+ 3   seller_state            3095 non-null   object
+dtypes: int64(1), object(3)
+memory usage: 96.8+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sellers</span><span class="p">[</span><span class="s1">&#39;seller_city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sellers</span><span class="p">[</span><span class="s1">&#39;seller_city&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">sellers</span><span class="p">[</span><span class="s1">&#39;seller_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sellers</span><span class="p">[</span><span class="s1">&#39;seller_state&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">sellers</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 3095 entries, 0 to 3094
+Data columns (total 4 columns):
+ #   Column                  Non-Null Count  Dtype   
+---  ------                  --------------  -----   
+ 0   seller_id               3095 non-null   object  
+ 1   seller_zip_code_prefix  3095 non-null   int64   
+ 2   seller_city             3095 non-null   category
+ 3   seller_state            3095 non-null   category
+dtypes: category(2), int64(1), object(1)
+memory usage: 83.1+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 32951 entries, 0 to 32950
+Data columns (total 9 columns):
+ #   Column                      Non-Null Count  Dtype  
+---  ------                      --------------  -----  
+ 0   product_id                  32951 non-null  object 
+ 1   product_category_name       32341 non-null  object 
+ 2   product_name_lenght         32341 non-null  float64
+ 3   product_description_lenght  32341 non-null  float64
+ 4   product_photos_qty          32341 non-null  float64
+ 5   product_weight_g            32949 non-null  float64
+ 6   product_length_cm           32949 non-null  float64
+ 7   product_height_cm           32949 non-null  float64
+ 8   product_width_cm            32949 non-null  float64
+dtypes: float64(7), object(2)
+memory usage: 2.3+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">products</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 32951 entries, 0 to 32950
+Data columns (total 9 columns):
+ #   Column                      Non-Null Count  Dtype   
+---  ------                      --------------  -----   
+ 0   product_id                  32951 non-null  object  
+ 1   product_category_name       32341 non-null  category
+ 2   product_name_lenght         32341 non-null  float64 
+ 3   product_description_lenght  32341 non-null  float64 
+ 4   product_photos_qty          32341 non-null  float64 
+ 5   product_weight_g            32949 non-null  float64 
+ 6   product_length_cm           32949 non-null  float64 
+ 7   product_height_cm           32949 non-null  float64 
+ 8   product_width_cm            32949 non-null  float64 
+dtypes: category(1), float64(7), object(1)
+memory usage: 2.0+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 112650 entries, 0 to 112649
+Data columns (total 7 columns):
+ #   Column               Non-Null Count   Dtype  
+---  ------               --------------   -----  
+ 0   order_id             112650 non-null  object 
+ 1   order_item_id        112650 non-null  int64  
+ 2   product_id           112650 non-null  object 
+ 3   seller_id            112650 non-null  object 
+ 4   shipping_limit_date  112650 non-null  object 
+ 5   price                112650 non-null  float64
+ 6   freight_value        112650 non-null  float64
+dtypes: float64(2), int64(1), object(4)
+memory usage: 6.0+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;shipping_limit_date&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;shipping_limit_date&#39;</span><span class="p">])</span>
+<span class="n">orders</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 112650 entries, 0 to 112649
+Data columns (total 7 columns):
+ #   Column               Non-Null Count   Dtype         
+---  ------               --------------   -----         
+ 0   order_id             112650 non-null  object        
+ 1   order_item_id        112650 non-null  int64         
+ 2   product_id           112650 non-null  object        
+ 3   seller_id            112650 non-null  object        
+ 4   shipping_limit_date  112650 non-null  datetime64[ns]
+ 5   price                112650 non-null  float64       
+ 6   freight_value        112650 non-null  float64       
+dtypes: datetime64[ns](1), float64(2), int64(1), object(3)
+memory usage: 6.0+ MB
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="missing-values">
+<h3>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline">¶</a></h3>
+<p>for each dataframe we apply a few checks in order to see the quality of data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;customer missing values: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">customers</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>customer missing values: 
+customer_id                 False
+customer_unique_id          False
+customer_zip_code_prefix    False
+customer_city               False
+customer_state              False
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sellers missing values: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sellers</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sellers missing values: 
+seller_id                 False
+seller_zip_code_prefix    False
+seller_city               False
+seller_state              False
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;products missing values: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">products</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>products missing values: 
+product_id                    False
+product_category_name          True
+product_name_lenght            True
+product_description_lenght     True
+product_photos_qty             True
+product_weight_g               True
+product_length_cm              True
+product_height_cm              True
+product_width_cm               True
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>we can see that there are missing values for products, let’s see how many!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_id                      0
+product_category_name         610
+product_name_lenght           610
+product_description_lenght    610
+product_photos_qty            610
+product_weight_g                2
+product_length_cm               2
+product_height_cm               2
+product_width_cm                2
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>as there are not ‘that many’ products with missing information, I opted to drop them out. But maybe later i’ll come back to that decision if these products seem crucial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products</span> <span class="o">=</span> <span class="n">products</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;orders missing values: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">orders</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>orders missing values: 
+order_id               False
+order_item_id          False
+product_id             False
+seller_id              False
+shipping_limit_date    False
+price                  False
+freight_value          False
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="concatenation">
+<h3>Concatenation<a class="headerlink" href="#concatenation" title="Permalink to this headline">¶</a></h3>
+<p>There does not seem to be a need to concatenate multiple dataframes, so we have no need for it here</p>
+</div>
+<div class="section" id="duplicates">
+<h3>Duplicates<a class="headerlink" href="#duplicates" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;customer duplicates: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">customers</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>customer duplicates: 
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seller duplicates: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sellers</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>seller duplicates: 
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;products duplicates: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">products</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>products duplicates: 
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;orders duplicates: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">orders</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>orders duplicates: 
+False
+</pre></div>
+</div>
+</div>
+</div>
+<p>No duplicates, that’s a good sign, it means that each customer, seller and product is unique!</p>
+</div>
+<div class="section" id="indexing">
+<h3>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h3>
+<p>It is more convenient to work with an index, usually we can use ids as index</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">customers</span> <span class="o">=</span> <span class="n">customers</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span>
+<span class="n">customers</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_unique_id</th>
+      <th>customer_zip_code_prefix</th>
+      <th>customer_city</th>
+      <th>customer_state</th>
+    </tr>
+    <tr>
+      <th>customer_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>06b8999e2fba1a1fbc88172c00ba8bc7</th>
+      <td>861eff4711a542e4b93843c6dd7febb0</td>
+      <td>14409</td>
+      <td>franca</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>18955e83d337fd6b2def6b18a428ac77</th>
+      <td>290c77bc529b7ac935b93aa66c333dc3</td>
+      <td>9790</td>
+      <td>sao bernardo do campo</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>4e7b3e00288586ebd08712fdd0374a03</th>
+      <td>060e732b5b29e8181a18229c7b0b2b5e</td>
+      <td>1151</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>b2b6027bc5c5109e529d4dc6358b12c3</th>
+      <td>259dac757896d24d7702b9acbbff3f3c</td>
+      <td>8775</td>
+      <td>mogi das cruzes</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>4f2d8ab171c80ec8364f7c12e35b23ad</th>
+      <td>345ecd01c38d18a9036ed96c73b8d066</td>
+      <td>13056</td>
+      <td>campinas</td>
+      <td>SP</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sellers</span> <span class="o">=</span> <span class="n">sellers</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;seller_id&#39;</span><span class="p">)</span>
+<span class="n">sellers</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>seller_zip_code_prefix</th>
+      <th>seller_city</th>
+      <th>seller_state</th>
+    </tr>
+    <tr>
+      <th>seller_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3442f8959a84dea7ee197c632cb2df15</th>
+      <td>13023</td>
+      <td>campinas</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>d1b65fc7debc3361ea86b5f14c68d2e2</th>
+      <td>13844</td>
+      <td>mogi guacu</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>ce3ad9de960102d0677a81f5d0bb7b2d</th>
+      <td>20031</td>
+      <td>rio de janeiro</td>
+      <td>RJ</td>
+    </tr>
+    <tr>
+      <th>c0f3eea2e14555b6faeea3dd58c1b1c3</th>
+      <td>4195</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+    </tr>
+    <tr>
+      <th>51a04a8a6bdcb23deccc82b0b80742cf</th>
+      <td>12914</td>
+      <td>braganca paulista</td>
+      <td>SP</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products</span> <span class="o">=</span> <span class="n">products</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;product_id&#39;</span><span class="p">)</span>
+<span class="n">products</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_category_name</th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+    </tr>
+    <tr>
+      <th>product_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1e9e8ef04dbcff4541ed26657ea517e5</th>
+      <td>perfumaria</td>
+      <td>40.0</td>
+      <td>287.0</td>
+      <td>1.0</td>
+      <td>225.0</td>
+      <td>16.0</td>
+      <td>10.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>3aa071139cb16b67ca9e5dea641aaa2f</th>
+      <td>artes</td>
+      <td>44.0</td>
+      <td>276.0</td>
+      <td>1.0</td>
+      <td>1000.0</td>
+      <td>30.0</td>
+      <td>18.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>96bd76ec8810374ed1b65e291975717f</th>
+      <td>esporte_lazer</td>
+      <td>46.0</td>
+      <td>250.0</td>
+      <td>1.0</td>
+      <td>154.0</td>
+      <td>18.0</td>
+      <td>9.0</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>cef67bcfe19066a932b7673e239eb23d</th>
+      <td>bebes</td>
+      <td>27.0</td>
+      <td>261.0</td>
+      <td>1.0</td>
+      <td>371.0</td>
+      <td>26.0</td>
+      <td>4.0</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>9dc1a7de274444849c219cff195d0b71</th>
+      <td>utilidades_domesticas</td>
+      <td>37.0</td>
+      <td>402.0</td>
+      <td>4.0</td>
+      <td>625.0</td>
+      <td>20.0</td>
+      <td>17.0</td>
+      <td>13.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;order_id&#39;</span><span class="p">)</span>
+<span class="n">orders</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>order_item_id</th>
+      <th>product_id</th>
+      <th>seller_id</th>
+      <th>shipping_limit_date</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+    <tr>
+      <th>order_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>00010242fe8c5a6d1ba2dd792cb16214</th>
+      <td>1</td>
+      <td>4244733e06e7ecb4970a6e2683c13e61</td>
+      <td>48436dade18ac8b2bce089ec2a041202</td>
+      <td>2017-09-19 09:45:35</td>
+      <td>58.90</td>
+      <td>13.29</td>
+    </tr>
+    <tr>
+      <th>00018f77f2f0320c557190d7a144bdd3</th>
+      <td>1</td>
+      <td>e5f2d52b802189ee658865ca93d83a8f</td>
+      <td>dd7ddc04e1b6c2c614352b383efe2d36</td>
+      <td>2017-05-03 11:05:13</td>
+      <td>239.90</td>
+      <td>19.93</td>
+    </tr>
+    <tr>
+      <th>000229ec398224ef6ca0657da4fc703e</th>
+      <td>1</td>
+      <td>c777355d18b72b67abbeef9df44fd0fd</td>
+      <td>5b51032eddd242adc84c38acab88f23d</td>
+      <td>2018-01-18 14:48:30</td>
+      <td>199.00</td>
+      <td>17.87</td>
+    </tr>
+    <tr>
+      <th>00024acbcdf0a6daa1e931b038114c75</th>
+      <td>1</td>
+      <td>7634da152a4610f1595efa32f14722fc</td>
+      <td>9d7a1d34a5052409006425275ba1c2b4</td>
+      <td>2018-08-15 10:10:18</td>
+      <td>12.99</td>
+      <td>12.79</td>
+    </tr>
+    <tr>
+      <th>00042b26cf59d7ce69dfabb4e55b4fd9</th>
+      <td>1</td>
+      <td>ac6c3623068f30de03045865e4e10089</td>
+      <td>df560393f3a51e74553ab94004ba5c87</td>
+      <td>2017-02-13 13:57:51</td>
+      <td>199.90</td>
+      <td>18.14</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="translation">
+<h3>Translation<a class="headerlink" href="#translation" title="Permalink to this headline">¶</a></h3>
+<p>for the products we have a specific dataset that contains the translations, we can apply that to the products dataframe</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>  <span class="n">translation_dict</span> <span class="o">=</span> <span class="n">translation</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">)[</span><span class="s1">&#39;product_category_name_english&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="n">products</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">rename_categories</span><span class="p">(</span><span class="n">translation_dict</span><span class="p">)</span>
+<span class="n">products</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_category_name</th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+    </tr>
+    <tr>
+      <th>product_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1e9e8ef04dbcff4541ed26657ea517e5</th>
+      <td>perfumery</td>
+      <td>40.0</td>
+      <td>287.0</td>
+      <td>1.0</td>
+      <td>225.0</td>
+      <td>16.0</td>
+      <td>10.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>3aa071139cb16b67ca9e5dea641aaa2f</th>
+      <td>art</td>
+      <td>44.0</td>
+      <td>276.0</td>
+      <td>1.0</td>
+      <td>1000.0</td>
+      <td>30.0</td>
+      <td>18.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>96bd76ec8810374ed1b65e291975717f</th>
+      <td>sports_leisure</td>
+      <td>46.0</td>
+      <td>250.0</td>
+      <td>1.0</td>
+      <td>154.0</td>
+      <td>18.0</td>
+      <td>9.0</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>cef67bcfe19066a932b7673e239eb23d</th>
+      <td>baby</td>
+      <td>27.0</td>
+      <td>261.0</td>
+      <td>1.0</td>
+      <td>371.0</td>
+      <td>26.0</td>
+      <td>4.0</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>9dc1a7de274444849c219cff195d0b71</th>
+      <td>housewares</td>
+      <td>37.0</td>
+      <td>402.0</td>
+      <td>4.0</td>
+      <td>625.0</td>
+      <td>20.0</td>
+      <td>17.0</td>
+      <td>13.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="processing">
+<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="product-pricing">
+<h3>Product pricing<a class="headerlink" href="#product-pricing" title="Permalink to this headline">¶</a></h3>
+<p>if we want to find out if there is a correlation between pricing and products, we need to match each product with a price, let’s see what happens when we merge orders and products</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>order_item_id</th>
+      <th>product_id</th>
+      <th>seller_id</th>
+      <th>shipping_limit_date</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+    <tr>
+      <th>order_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>00010242fe8c5a6d1ba2dd792cb16214</th>
+      <td>1</td>
+      <td>4244733e06e7ecb4970a6e2683c13e61</td>
+      <td>48436dade18ac8b2bce089ec2a041202</td>
+      <td>2017-09-19 09:45:35</td>
+      <td>58.90</td>
+      <td>13.29</td>
+    </tr>
+    <tr>
+      <th>00018f77f2f0320c557190d7a144bdd3</th>
+      <td>1</td>
+      <td>e5f2d52b802189ee658865ca93d83a8f</td>
+      <td>dd7ddc04e1b6c2c614352b383efe2d36</td>
+      <td>2017-05-03 11:05:13</td>
+      <td>239.90</td>
+      <td>19.93</td>
+    </tr>
+    <tr>
+      <th>000229ec398224ef6ca0657da4fc703e</th>
+      <td>1</td>
+      <td>c777355d18b72b67abbeef9df44fd0fd</td>
+      <td>5b51032eddd242adc84c38acab88f23d</td>
+      <td>2018-01-18 14:48:30</td>
+      <td>199.00</td>
+      <td>17.87</td>
+    </tr>
+    <tr>
+      <th>00024acbcdf0a6daa1e931b038114c75</th>
+      <td>1</td>
+      <td>7634da152a4610f1595efa32f14722fc</td>
+      <td>9d7a1d34a5052409006425275ba1c2b4</td>
+      <td>2018-08-15 10:10:18</td>
+      <td>12.99</td>
+      <td>12.79</td>
+    </tr>
+    <tr>
+      <th>00042b26cf59d7ce69dfabb4e55b4fd9</th>
+      <td>1</td>
+      <td>ac6c3623068f30de03045865e4e10089</td>
+      <td>df560393f3a51e74553ab94004ba5c87</td>
+      <td>2017-02-13 13:57:51</td>
+      <td>199.90</td>
+      <td>18.14</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>it seems that we only have prices of complete orders, which makes things more complicated. Below you can see that some orders contain multiple unique products, therefore we cannot easily deduce the price of a single item…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">product_id</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1    95430
+2     2846
+3      298
+4       70
+6       10
+5        8
+7        3
+8        1
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>well, let us see if we can find all orders with one item, these prices should agree with the price of the product</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multi_item_orders</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_item_id&#39;</span><span class="p">]</span><span class="o">!=</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">single_item_orders</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">multi_item_orders</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price</span> <span class="o">=</span> <span class="n">products</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">single_item_orders</span><span class="p">[[</span><span class="s1">&#39;product_id&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;freight_value&#39;</span><span class="p">]],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;product_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;product_id&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_category_name</th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>e17e4f88e31525f7deef66779844ddce</th>
+      <td>perfumery</td>
+      <td>40.0</td>
+      <td>287.0</td>
+      <td>1.0</td>
+      <td>225.0</td>
+      <td>16.0</td>
+      <td>10.0</td>
+      <td>14.0</td>
+      <td>10.91</td>
+      <td>7.39</td>
+    </tr>
+    <tr>
+      <th>5236307716393b7114b53ee991f36956</th>
+      <td>art</td>
+      <td>44.0</td>
+      <td>276.0</td>
+      <td>1.0</td>
+      <td>1000.0</td>
+      <td>30.0</td>
+      <td>18.0</td>
+      <td>20.0</td>
+      <td>248.00</td>
+      <td>17.99</td>
+    </tr>
+    <tr>
+      <th>01f66e58769f84129811d43eefd187fb</th>
+      <td>sports_leisure</td>
+      <td>46.0</td>
+      <td>250.0</td>
+      <td>1.0</td>
+      <td>154.0</td>
+      <td>18.0</td>
+      <td>9.0</td>
+      <td>15.0</td>
+      <td>79.80</td>
+      <td>7.82</td>
+    </tr>
+    <tr>
+      <th>143d00a4f2dde4e0364ee1821577adb3</th>
+      <td>baby</td>
+      <td>27.0</td>
+      <td>261.0</td>
+      <td>1.0</td>
+      <td>371.0</td>
+      <td>26.0</td>
+      <td>4.0</td>
+      <td>26.0</td>
+      <td>112.30</td>
+      <td>9.54</td>
+    </tr>
+    <tr>
+      <th>86cafb8794cb99a9b1b77fc8e48fbbbb</th>
+      <td>housewares</td>
+      <td>37.0</td>
+      <td>402.0</td>
+      <td>4.0</td>
+      <td>625.0</td>
+      <td>20.0</td>
+      <td>17.0</td>
+      <td>13.0</td>
+      <td>37.90</td>
+      <td>8.29</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>6e4008bddce63615856554f94e5233db</th>
+      <td>bed_bath_table</td>
+      <td>50.0</td>
+      <td>799.0</td>
+      <td>1.0</td>
+      <td>1400.0</td>
+      <td>27.0</td>
+      <td>7.0</td>
+      <td>27.0</td>
+      <td>127.50</td>
+      <td>11.91</td>
+    </tr>
+    <tr>
+      <th>7c8a032bb75e0e4d524b14ba147d4ba5</th>
+      <td>bed_bath_table</td>
+      <td>50.0</td>
+      <td>799.0</td>
+      <td>1.0</td>
+      <td>1400.0</td>
+      <td>27.0</td>
+      <td>7.0</td>
+      <td>27.0</td>
+      <td>127.50</td>
+      <td>17.14</td>
+    </tr>
+    <tr>
+      <th>fc957026f2482ab3bddf91ebc9d0dfc5</th>
+      <td>bed_bath_table</td>
+      <td>50.0</td>
+      <td>799.0</td>
+      <td>1.0</td>
+      <td>1400.0</td>
+      <td>27.0</td>
+      <td>7.0</td>
+      <td>27.0</td>
+      <td>127.00</td>
+      <td>12.39</td>
+    </tr>
+    <tr>
+      <th>NaN</th>
+      <td>computers_accessories</td>
+      <td>60.0</td>
+      <td>156.0</td>
+      <td>2.0</td>
+      <td>700.0</td>
+      <td>31.0</td>
+      <td>13.0</td>
+      <td>20.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>f3a47ba087f05d39a74ed1b653f0be1b</th>
+      <td>bed_bath_table</td>
+      <td>58.0</td>
+      <td>309.0</td>
+      <td>1.0</td>
+      <td>2083.0</td>
+      <td>12.0</td>
+      <td>2.0</td>
+      <td>7.0</td>
+      <td>107.50</td>
+      <td>27.05</td>
+    </tr>
+  </tbody>
+</table>
+<p>90991 rows × 10 columns</p>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="exploration">
+<h2>Exploration<a class="headerlink" href="#exploration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Product pricing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>for the product pricing we created a dataframe that contained the single item price for most products, lets review the dataframe</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">products_w_price</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 90991 entries, e17e4f88e31525f7deef66779844ddce to f3a47ba087f05d39a74ed1b653f0be1b
+Data columns (total 10 columns):
+ #   Column                      Non-Null Count  Dtype   
+---  ------                      --------------  -----   
+ 0   product_category_name       90991 non-null  category
+ 1   product_name_lenght         90991 non-null  float64 
+ 2   product_description_lenght  90991 non-null  float64 
+ 3   product_photos_qty          90991 non-null  float64 
+ 4   product_weight_g            90991 non-null  float64 
+ 5   product_length_cm           90991 non-null  float64 
+ 6   product_height_cm           90991 non-null  float64 
+ 7   product_width_cm            90991 non-null  float64 
+ 8   price                       87575 non-null  float64 
+ 9   freight_value               87575 non-null  float64 
+dtypes: category(1), float64(9)
+memory usage: 7.0+ MB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_category_name</th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>e17e4f88e31525f7deef66779844ddce</th>
+      <td>perfumery</td>
+      <td>40.0</td>
+      <td>287.0</td>
+      <td>1.0</td>
+      <td>225.0</td>
+      <td>16.0</td>
+      <td>10.0</td>
+      <td>14.0</td>
+      <td>10.91</td>
+      <td>7.39</td>
+    </tr>
+    <tr>
+      <th>5236307716393b7114b53ee991f36956</th>
+      <td>art</td>
+      <td>44.0</td>
+      <td>276.0</td>
+      <td>1.0</td>
+      <td>1000.0</td>
+      <td>30.0</td>
+      <td>18.0</td>
+      <td>20.0</td>
+      <td>248.00</td>
+      <td>17.99</td>
+    </tr>
+    <tr>
+      <th>01f66e58769f84129811d43eefd187fb</th>
+      <td>sports_leisure</td>
+      <td>46.0</td>
+      <td>250.0</td>
+      <td>1.0</td>
+      <td>154.0</td>
+      <td>18.0</td>
+      <td>9.0</td>
+      <td>15.0</td>
+      <td>79.80</td>
+      <td>7.82</td>
+    </tr>
+    <tr>
+      <th>143d00a4f2dde4e0364ee1821577adb3</th>
+      <td>baby</td>
+      <td>27.0</td>
+      <td>261.0</td>
+      <td>1.0</td>
+      <td>371.0</td>
+      <td>26.0</td>
+      <td>4.0</td>
+      <td>26.0</td>
+      <td>112.30</td>
+      <td>9.54</td>
+    </tr>
+    <tr>
+      <th>86cafb8794cb99a9b1b77fc8e48fbbbb</th>
+      <td>housewares</td>
+      <td>37.0</td>
+      <td>402.0</td>
+      <td>4.0</td>
+      <td>625.0</td>
+      <td>20.0</td>
+      <td>17.0</td>
+      <td>13.0</td>
+      <td>37.90</td>
+      <td>8.29</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>90991.000000</td>
+      <td>90991.000000</td>
+      <td>90991.000000</td>
+      <td>90991.000000</td>
+      <td>90991.000000</td>
+      <td>90991.000000</td>
+      <td>90991.000000</td>
+      <td>87575.000000</td>
+      <td>87575.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>48.847600</td>
+      <td>796.600664</td>
+      <td>2.267290</td>
+      <td>2120.521085</td>
+      <td>30.124529</td>
+      <td>16.479399</td>
+      <td>23.054434</td>
+      <td>130.453913</td>
+      <td>20.405906</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>10.009026</td>
+      <td>654.302954</td>
+      <td>1.757818</td>
+      <td>3807.197438</td>
+      <td>16.160075</td>
+      <td>13.306558</td>
+      <td>11.778329</td>
+      <td>197.401912</td>
+      <td>16.052020</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>5.000000</td>
+      <td>4.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>7.000000</td>
+      <td>2.000000</td>
+      <td>6.000000</td>
+      <td>0.850000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>42.000000</td>
+      <td>352.000000</td>
+      <td>1.000000</td>
+      <td>300.000000</td>
+      <td>18.000000</td>
+      <td>8.000000</td>
+      <td>15.000000</td>
+      <td>44.495000</td>
+      <td>13.440000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>52.000000</td>
+      <td>610.000000</td>
+      <td>2.000000</td>
+      <td>700.000000</td>
+      <td>25.000000</td>
+      <td>13.000000</td>
+      <td>20.000000</td>
+      <td>79.980000</td>
+      <td>16.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>57.000000</td>
+      <td>1000.000000</td>
+      <td>3.000000</td>
+      <td>1825.000000</td>
+      <td>38.000000</td>
+      <td>20.000000</td>
+      <td>30.000000</td>
+      <td>144.900000</td>
+      <td>21.400000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>76.000000</td>
+      <td>3992.000000</td>
+      <td>20.000000</td>
+      <td>40425.000000</td>
+      <td>105.000000</td>
+      <td>105.000000</td>
+      <td>118.000000</td>
+      <td>6735.000000</td>
+      <td>409.680000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="section" id="normal-distribution">
+<h4>normal distribution<a class="headerlink" href="#normal-distribution" title="Permalink to this headline">¶</a></h4>
+<p>When we would want to predict the price of an item, it means the the other information of that item should correlate with said price. we can do that for all numerical values with a correlation plot. Before we do that let us use shapiro wilk to test normality</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">dropna</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_name_lenght
+(0.9154905080795288, 0.0)
+product_description_lenght
+(0.8121932148933411, 0.0)
+product_photos_qty
+(0.743693470954895, 0.0)
+product_weight_g
+(0.5443710088729858, 0.0)
+product_length_cm
+(0.8115382194519043, 0.0)
+product_height_cm
+(0.8004813194274902, 0.0)
+product_width_cm
+(0.8457856774330139, 0.0)
+price
+(0.4680249094963074, 0.0)
+freight_value
+(0.5769327282905579, 0.0)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.6/dist-packages/scipy/stats/morestats.py:1676: UserWarning: p-value may not be accurate for N &gt; 5000.
+  warnings.warn(&quot;p-value may not be accurate for N &gt; 5000.&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="numerical-correlation">
+<h4>Numerical correlation<a class="headerlink" href="#numerical-correlation" title="Permalink to this headline">¶</a></h4>
+<p>hmm it seems that we are dealing with very non normal data, which is usually the case if human behaviour is involved. We should be careful when using linear or parametric methods, so instead of calculating the pearson correlation coefficients, I opt to go for spearman rank correlations</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_corr</span> <span class="o">=</span> <span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+<span class="n">pricing_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>product_name_lenght</th>
+      <td>1.000000</td>
+      <td>0.082110</td>
+      <td>0.165681</td>
+      <td>0.077482</td>
+      <td>0.055458</td>
+      <td>-0.042872</td>
+      <td>0.062193</td>
+      <td>0.026564</td>
+      <td>0.033853</td>
+    </tr>
+    <tr>
+      <th>product_description_lenght</th>
+      <td>0.082110</td>
+      <td>1.000000</td>
+      <td>0.118462</td>
+      <td>0.103894</td>
+      <td>-0.014464</td>
+      <td>0.127800</td>
+      <td>-0.063551</td>
+      <td>0.218892</td>
+      <td>0.123991</td>
+    </tr>
+    <tr>
+      <th>product_photos_qty</th>
+      <td>0.165681</td>
+      <td>0.118462</td>
+      <td>1.000000</td>
+      <td>0.010332</td>
+      <td>0.001108</td>
+      <td>-0.073537</td>
+      <td>-0.012228</td>
+      <td>0.026766</td>
+      <td>0.007767</td>
+    </tr>
+    <tr>
+      <th>product_weight_g</th>
+      <td>0.077482</td>
+      <td>0.103894</td>
+      <td>0.010332</td>
+      <td>1.000000</td>
+      <td>0.618865</td>
+      <td>0.536049</td>
+      <td>0.616737</td>
+      <td>0.524087</td>
+      <td>0.460155</td>
+    </tr>
+    <tr>
+      <th>product_length_cm</th>
+      <td>0.055458</td>
+      <td>-0.014464</td>
+      <td>0.001108</td>
+      <td>0.618865</td>
+      <td>1.000000</td>
+      <td>0.260230</td>
+      <td>0.638266</td>
+      <td>0.260411</td>
+      <td>0.293482</td>
+    </tr>
+    <tr>
+      <th>product_height_cm</th>
+      <td>-0.042872</td>
+      <td>0.127800</td>
+      <td>-0.073537</td>
+      <td>0.536049</td>
+      <td>0.260230</td>
+      <td>1.000000</td>
+      <td>0.342317</td>
+      <td>0.356680</td>
+      <td>0.295279</td>
+    </tr>
+    <tr>
+      <th>product_width_cm</th>
+      <td>0.062193</td>
+      <td>-0.063551</td>
+      <td>-0.012228</td>
+      <td>0.616737</td>
+      <td>0.638266</td>
+      <td>0.342317</td>
+      <td>1.000000</td>
+      <td>0.274180</td>
+      <td>0.283687</td>
+    </tr>
+    <tr>
+      <th>price</th>
+      <td>0.026564</td>
+      <td>0.218892</td>
+      <td>0.026766</td>
+      <td>0.524087</td>
+      <td>0.260411</td>
+      <td>0.356680</td>
+      <td>0.274180</td>
+      <td>1.000000</td>
+      <td>0.445154</td>
+    </tr>
+    <tr>
+      <th>freight_value</th>
+      <td>0.033853</td>
+      <td>0.123991</td>
+      <td>0.007767</td>
+      <td>0.460155</td>
+      <td>0.293482</td>
+      <td>0.295279</td>
+      <td>0.283687</td>
+      <td>0.445154</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="variance-inflation">
+<h4>Variance inflation<a class="headerlink" href="#variance-inflation" title="Permalink to this headline">¶</a></h4>
+<p>it looks like there seem to be some interesting correlations, the price is (slightly) correlated with things as product description, weight, length, height, width and freight value, indicating that bigger items are priced higher.
+We have to take into account that freight value is on itself correlating with the latter and therefore might be inflating our results, lets use VIF to check this</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="k">import</span> <span class="n">variance_inflation_factor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.6/dist-packages/statsmodels/tools/_testing.py:19: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;product_name_lenght&#39;</span><span class="p">,</span> <span class="s1">&#39;product_description_lenght&#39;</span><span class="p">,</span> <span class="s1">&#39;product_photos_qty&#39;</span><span class="p">,</span> <span class="s1">&#39;product_weight_g&#39;</span><span class="p">,</span> <span class="s1">&#39;product_length_cm&#39;</span><span class="p">,</span> <span class="s1">&#39;product_height_cm&#39;</span><span class="p">,</span> <span class="s1">&#39;product_width_cm&#39;</span><span class="p">,</span> <span class="s1">&#39;freight_value&#39;</span><span class="p">]</span>
+<span class="n">vif_compatible_price</span> <span class="o">=</span> <span class="n">products_w_price</span><span class="p">[</span><span class="n">cols_to_keep</span><span class="p">]</span>
+<span class="n">vif_compatible_price</span> <span class="o">=</span> <span class="n">vif_compatible_price</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="n">vif_compatible_price</span> <span class="o">=</span> <span class="n">vif_compatible_price</span><span class="o">.</span><span class="n">values</span>
+<span class="n">vif_price</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cols_to_keep</span><span class="p">):</span>
+  <span class="n">vif_price</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">vif_compatible_price</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">vif_compatible_price</span><span class="p">,</span> <span class="n">idx</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_name_lenght: 	9.31669476790696
+product_description_lenght: 	2.56022139812164
+product_photos_qty: 	2.7618344464628604
+product_weight_g: 	3.041859125336769
+product_length_cm: 	6.820907759918533
+product_height_cm: 	3.686708040653942
+product_width_cm: 	7.7388710828170835
+freight_value: 	4.1851224676888155
+</pre></div>
+</div>
+</div>
+</div>
+<p>As mentioned earlier, the values here are hard to interpret, however the values seem to be lower than my experience expected. If infinite values arise we know that we need to do things different. Let’s assume the collinearity between these columns is ok and they don’t interfere with eachother enough to make a difference in the outcome.</p>
+</div>
+<div class="section" id="categorical-correlation">
+<h4>Categorical correlation<a class="headerlink" href="#categorical-correlation" title="Permalink to this headline">¶</a></h4>
+<p>Something interesting we haven’t looked into yet is the product category, we could try an ANOVA, but knowing at least one category is different is just a beginning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;[&#39;product_name_lenght&#39;, &#39;product_description_lenght&#39;, &#39;product_photos_qty&#39;, &#39;product_weight_g&#39;, &#39;product_length_cm&#39;, &#39;product_height_cm&#39;, &#39;product_width_cm&#39;, &#39;price&#39;, &#39;freight_value&#39;]&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price_p_category</span> <span class="o">=</span> <span class="p">[</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">products_w_price</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">category</span><span class="p">,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">products_w_price</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">f_oneway</span><span class="p">(</span><span class="o">*</span><span class="n">products_w_price_p_category</span><span class="p">)</span>
+
+<span class="n">anova_price</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+  <span class="n">anova_price</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">test</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span>
+
+<span class="n">anova_price</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">anova_price</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="n">anova_price</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>test</th>
+      <th>p</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>product_name_lenght</th>
+      <td>75.721841</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>product_description_lenght</th>
+      <td>188.961232</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>product_photos_qty</th>
+      <td>119.219872</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>product_weight_g</th>
+      <td>296.729258</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>product_length_cm</th>
+      <td>387.834682</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>product_height_cm</th>
+      <td>394.784176</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>product_width_cm</th>
+      <td>450.042245</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>price</th>
+      <td>155.185233</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>freight_value</th>
+      <td>98.666293</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>it seems that every continuous column has at least one category that differs from the rest, aside from order item id, which is always 1.</p>
+</div>
+<div class="section" id="grouping-by-category">
+<h4>Grouping by category<a class="headerlink" href="#grouping-by-category" title="Permalink to this headline">¶</a></h4>
+<p>Now comes the tricky part, we would like to know if specific categories perform better on the correlations, but this is impossible to do by hand! However python gives us the opportunity to automate this. To do this properly we have to set a rule:</p>
+<ul class="simple">
+<li><p>correlations should be better than the original one without separation of categories</p></li>
+</ul>
+<p>Look closely how we do almost exactly the same, however we aggregate (groupby) based on the category name</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>product_name_lenght</th>
+      <td>1.000000</td>
+      <td>0.082110</td>
+      <td>0.165681</td>
+      <td>0.077482</td>
+      <td>0.055458</td>
+      <td>-0.042872</td>
+      <td>0.062193</td>
+      <td>0.026564</td>
+      <td>0.033853</td>
+    </tr>
+    <tr>
+      <th>product_description_lenght</th>
+      <td>0.082110</td>
+      <td>1.000000</td>
+      <td>0.118462</td>
+      <td>0.103894</td>
+      <td>-0.014464</td>
+      <td>0.127800</td>
+      <td>-0.063551</td>
+      <td>0.218892</td>
+      <td>0.123991</td>
+    </tr>
+    <tr>
+      <th>product_photos_qty</th>
+      <td>0.165681</td>
+      <td>0.118462</td>
+      <td>1.000000</td>
+      <td>0.010332</td>
+      <td>0.001108</td>
+      <td>-0.073537</td>
+      <td>-0.012228</td>
+      <td>0.026766</td>
+      <td>0.007767</td>
+    </tr>
+    <tr>
+      <th>product_weight_g</th>
+      <td>0.077482</td>
+      <td>0.103894</td>
+      <td>0.010332</td>
+      <td>1.000000</td>
+      <td>0.618865</td>
+      <td>0.536049</td>
+      <td>0.616737</td>
+      <td>0.524087</td>
+      <td>0.460155</td>
+    </tr>
+    <tr>
+      <th>product_length_cm</th>
+      <td>0.055458</td>
+      <td>-0.014464</td>
+      <td>0.001108</td>
+      <td>0.618865</td>
+      <td>1.000000</td>
+      <td>0.260230</td>
+      <td>0.638266</td>
+      <td>0.260411</td>
+      <td>0.293482</td>
+    </tr>
+    <tr>
+      <th>product_height_cm</th>
+      <td>-0.042872</td>
+      <td>0.127800</td>
+      <td>-0.073537</td>
+      <td>0.536049</td>
+      <td>0.260230</td>
+      <td>1.000000</td>
+      <td>0.342317</td>
+      <td>0.356680</td>
+      <td>0.295279</td>
+    </tr>
+    <tr>
+      <th>product_width_cm</th>
+      <td>0.062193</td>
+      <td>-0.063551</td>
+      <td>-0.012228</td>
+      <td>0.616737</td>
+      <td>0.638266</td>
+      <td>0.342317</td>
+      <td>1.000000</td>
+      <td>0.274180</td>
+      <td>0.283687</td>
+    </tr>
+    <tr>
+      <th>price</th>
+      <td>0.026564</td>
+      <td>0.218892</td>
+      <td>0.026766</td>
+      <td>0.524087</td>
+      <td>0.260411</td>
+      <td>0.356680</td>
+      <td>0.274180</td>
+      <td>1.000000</td>
+      <td>0.445154</td>
+    </tr>
+    <tr>
+      <th>freight_value</th>
+      <td>0.033853</td>
+      <td>0.123991</td>
+      <td>0.007767</td>
+      <td>0.460155</td>
+      <td>0.293482</td>
+      <td>0.295279</td>
+      <td>0.283687</td>
+      <td>0.445154</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_rel_corr</span> <span class="o">=</span> <span class="n">products_w_price</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">x</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">pricing_corr</span>
+    <span class="p">)</span>
+<span class="n">pricing_rel_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+    <tr>
+      <th>product_category_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">agro_industry_and_commerce</th>
+      <th>product_name_lenght</th>
+      <td>0.000000</td>
+      <td>0.542952</td>
+      <td>0.187918</td>
+      <td>0.177061</td>
+      <td>-0.053490</td>
+      <td>0.020177</td>
+      <td>0.019613</td>
+      <td>0.102946</td>
+      <td>0.036661</td>
+    </tr>
+    <tr>
+      <th>product_description_lenght</th>
+      <td>0.542952</td>
+      <td>0.000000</td>
+      <td>0.371003</td>
+      <td>0.202440</td>
+      <td>-0.077728</td>
+      <td>-0.154644</td>
+      <td>-0.007971</td>
+      <td>0.122573</td>
+      <td>0.057213</td>
+    </tr>
+    <tr>
+      <th>product_photos_qty</th>
+      <td>0.187918</td>
+      <td>0.371003</td>
+      <td>0.000000</td>
+      <td>0.054755</td>
+      <td>-0.029653</td>
+      <td>0.038771</td>
+      <td>-0.110457</td>
+      <td>0.079174</td>
+      <td>-0.009524</td>
+    </tr>
+    <tr>
+      <th>product_weight_g</th>
+      <td>0.177061</td>
+      <td>0.202440</td>
+      <td>0.054755</td>
+      <td>0.000000</td>
+      <td>0.047166</td>
+      <td>0.266439</td>
+      <td>0.088765</td>
+      <td>0.119472</td>
+      <td>0.171163</td>
+    </tr>
+    <tr>
+      <th>product_length_cm</th>
+      <td>-0.053490</td>
+      <td>-0.077728</td>
+      <td>-0.029653</td>
+      <td>0.047166</td>
+      <td>0.000000</td>
+      <td>0.385746</td>
+      <td>0.186860</td>
+      <td>0.244199</td>
+      <td>0.308595</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">housewares</th>
+      <th>product_length_cm</th>
+      <td>0.018919</td>
+      <td>0.115452</td>
+      <td>0.015662</td>
+      <td>-0.064704</td>
+      <td>0.000000</td>
+      <td>-0.107682</td>
+      <td>-0.046127</td>
+      <td>0.282794</td>
+      <td>0.121902</td>
+    </tr>
+    <tr>
+      <th>product_height_cm</th>
+      <td>0.022937</td>
+      <td>-0.062700</td>
+      <td>-0.100511</td>
+      <td>0.081217</td>
+      <td>-0.107682</td>
+      <td>0.000000</td>
+      <td>0.066649</td>
+      <td>-0.040533</td>
+      <td>-0.016564</td>
+    </tr>
+    <tr>
+      <th>product_width_cm</th>
+      <td>0.031462</td>
+      <td>0.176834</td>
+      <td>-0.055473</td>
+      <td>0.052512</td>
+      <td>-0.046127</td>
+      <td>0.066649</td>
+      <td>0.000000</td>
+      <td>0.195201</td>
+      <td>0.085940</td>
+    </tr>
+    <tr>
+      <th>price</th>
+      <td>0.069826</td>
+      <td>0.079829</td>
+      <td>0.156669</td>
+      <td>0.179154</td>
+      <td>0.282794</td>
+      <td>-0.040533</td>
+      <td>0.195201</td>
+      <td>0.000000</td>
+      <td>0.098247</td>
+    </tr>
+    <tr>
+      <th>freight_value</th>
+      <td>0.068276</td>
+      <td>-0.017176</td>
+      <td>0.089144</td>
+      <td>0.092696</td>
+      <td>0.121902</td>
+      <td>-0.016564</td>
+      <td>0.085940</td>
+      <td>0.098247</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>657 rows × 9 columns</p>
+</div></div></div>
+</div>
+<p>for those who are already proficient with python can read that I opted to take the absolute correlation (meaning negatives become positives), this way both negative and positive correlations mean the same thing. Then I subtracted with the overall absolute correlation and divided that whole with the overall correlation giving me a relative change. When this relative change is positive, that category has an increased correlation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_corr_stacked</span> <span class="o">=</span> <span class="n">pricing_rel_corr</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">pricing_corr_stacked</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_category_name                                                                    
+security_and_services              product_width_cm            product_description_lenght    1.063551
+                                   product_description_lenght  product_width_cm              1.063551
+                                   product_height_cm           product_name_lenght           1.042872
+                                   product_name_lenght         product_height_cm             1.042872
+pc_gamer                           product_name_lenght         product_height_cm             1.042872
+                                                                                               ...   
+                                   product_weight_g            product_width_cm             -1.536737
+furniture_mattress_and_upholstery  product_length_cm           product_weight_g             -1.542839
+                                   product_weight_g            product_length_cm            -1.542839
+pc_gamer                           product_width_cm            product_length_cm            -1.558266
+                                   product_length_cm           product_width_cm             -1.558266
+Length: 5836, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>wow! we seem to be having very strong correlation increases up to 99%!? Is this possible? We should be very suspicious about these results, lets us find out why there are this high increases by calculating the initial correlation of ‘security_and_services’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_p_cat_corr</span> <span class="o">=</span> <span class="n">products_w_price</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">x</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_p_cat_corr</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="s1">&#39;security_and_services&#39;</span><span class="p">,</span><span class="s1">&#39;price&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_name_lenght           1.0
+product_description_lenght    1.0
+product_photos_qty           -1.0
+product_weight_g              1.0
+product_length_cm             1.0
+product_height_cm             1.0
+product_width_cm              1.0
+price                         1.0
+freight_value                 1.0
+Name: (security_and_services, price), dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_corr</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_name_lenght           0.026564
+product_description_lenght    0.218892
+product_photos_qty            0.026766
+product_weight_g              0.524087
+product_length_cm             0.260411
+product_height_cm             0.356680
+product_width_cm              0.274180
+price                         1.000000
+freight_value                 0.445154
+Name: price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is not normal, a perfect correlation might indicate a category with only one record, let us print the subset of data belonging to this category</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price</span><span class="p">[</span><span class="n">products_w_price</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;security_and_services&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_category_name</th>
+      <th>product_name_lenght</th>
+      <th>product_description_lenght</th>
+      <th>product_photos_qty</th>
+      <th>product_weight_g</th>
+      <th>product_length_cm</th>
+      <th>product_height_cm</th>
+      <th>product_width_cm</th>
+      <th>price</th>
+      <th>freight_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bede3503afed051733eeb4a84d1adcc5</th>
+      <td>security_and_services</td>
+      <td>48.0</td>
+      <td>461.0</td>
+      <td>4.0</td>
+      <td>400.0</td>
+      <td>26.0</td>
+      <td>22.0</td>
+      <td>11.0</td>
+      <td>100.00</td>
+      <td>15.45</td>
+    </tr>
+    <tr>
+      <th>2c4ada2e75c2ad41dd93cebb5df5f023</th>
+      <td>security_and_services</td>
+      <td>55.0</td>
+      <td>506.0</td>
+      <td>1.0</td>
+      <td>1225.0</td>
+      <td>27.0</td>
+      <td>35.0</td>
+      <td>15.0</td>
+      <td>183.29</td>
+      <td>25.77</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="dealing-with-small-subsets-in-data">
+<h4>Dealing with small subsets in data<a class="headerlink" href="#dealing-with-small-subsets-in-data" title="Permalink to this headline">¶</a></h4>
+<p>as expected, we only have 2 item here making things a lot more complicated. We can solve this by making a compromise, since predicting prices for categories (of there is a difference in categories) with little to no examples is inaccurate, we can choose to drop all small categories. This means that our prediction is not capable for certain items however.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">category_sizes</span> <span class="o">=</span> <span class="n">products_w_price</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+<span class="n">small_categories</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">category_sizes</span><span class="p">[</span><span class="n">category_sizes</span><span class="o">&lt;</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">small_categories</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;security_and_services&#39;,
+ &#39;fashion_childrens_clothes&#39;,
+ &#39;pc_gamer&#39;,
+ &#39;cds_dvds_musicals&#39;,
+ &#39;la_cuisine&#39;,
+ &#39;portateis_cozinha_e_preparadores_de_alimentos&#39;,
+ &#39;home_comfort_2&#39;,
+ &#39;flowers&#39;,
+ &#39;arts_and_craftmanship&#39;,
+ &#39;diapers_and_hygiene&#39;,
+ &#39;fashion_sport&#39;,
+ &#39;party_supplies&#39;,
+ &#39;music&#39;,
+ &#39;fashio_female_clothing&#39;,
+ &#39;furniture_mattress_and_upholstery&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We opted for a minimum of 50 items per category, let’s see how that improves our relative correlations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_corr_stacked</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">small_categories</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_category_name                                                          
+fashion_underwear_beach  product_photos_qty          product_height_cm             0.849303
+                         product_height_cm           product_photos_qty            0.849303
+christmas_supplies       product_width_cm            product_description_lenght    0.838264
+                         product_description_lenght  product_width_cm              0.838264
+                         product_length_cm           product_description_lenght    0.789431
+                                                                                     ...   
+fashion_underwear_beach  product_weight_g            product_length_cm            -1.037104
+books_imported           price                       product_width_cm             -1.136276
+                         product_width_cm            price                        -1.136276
+fashion_shoes            product_length_cm           product_width_cm             -1.273546
+                         product_width_cm            product_length_cm            -1.273546
+Length: 4698, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we filtered out smaller categories that might have high fluctuations, however we are not interested into correlations between any 2 columns (keep your goals in mind!) so we are going to filter only the price. I even found a method (xs) which I never use myself, google is your friend!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_corr_stacked</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">small_categories</span><span class="p">)</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>product_category_name                                                   
+small_appliances_home_oven_and_coffee  price  product_photos_qty            0.705878
+computers                              price  product_photos_qty            0.703822
+furniture_bedroom                      price  product_photos_qty            0.638002
+home_confort                           price  product_name_lenght           0.631313
+fashion_shoes                          price  product_name_lenght           0.604471
+                                                                              ...   
+computers                              price  product_height_cm            -0.810059
+construction_tools_lights              price  product_description_lenght   -0.812678
+computers                              price  product_length_cm            -0.819188
+                                              product_weight_g             -0.984040
+books_imported                         price  product_width_cm             -1.136276
+Length: 522, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, here I personally believe we have something we can work with! We can clearly see a relative change for correlation with certain columns. One thing that still remains is to filter per category the most important change compared to the average correlation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_most_important</span> <span class="o">=</span> <span class="n">pricing_corr_stacked</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">small_categories</span><span class="p">)</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">)</span>
+<span class="n">pricing_most_important</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">,</span> <span class="s1">&#39;relative_correlation&#39;</span><span class="p">]</span>
+<span class="n">pricing_most_important</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>parameter</th>
+      <th>relative_correlation</th>
+    </tr>
+    <tr>
+      <th>product_category_name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>small_appliances_home_oven_and_coffee</th>
+      <td>product_photos_qty</td>
+      <td>0.705878</td>
+    </tr>
+    <tr>
+      <th>computers</th>
+      <td>product_photos_qty</td>
+      <td>0.703822</td>
+    </tr>
+    <tr>
+      <th>furniture_bedroom</th>
+      <td>product_photos_qty</td>
+      <td>0.638002</td>
+    </tr>
+    <tr>
+      <th>home_confort</th>
+      <td>product_name_lenght</td>
+      <td>0.631313</td>
+    </tr>
+    <tr>
+      <th>fashion_shoes</th>
+      <td>product_name_lenght</td>
+      <td>0.604471</td>
+    </tr>
+    <tr>
+      <th>fashion_underwear_beach</th>
+      <td>product_photos_qty</td>
+      <td>0.577173</td>
+    </tr>
+    <tr>
+      <th>cine_photo</th>
+      <td>product_description_lenght</td>
+      <td>0.554634</td>
+    </tr>
+    <tr>
+      <th>electronics</th>
+      <td>product_photos_qty</td>
+      <td>0.547695</td>
+    </tr>
+    <tr>
+      <th>fixed_telephony</th>
+      <td>product_description_lenght</td>
+      <td>0.524150</td>
+    </tr>
+    <tr>
+      <th>christmas_supplies</th>
+      <td>product_length_cm</td>
+      <td>0.513941</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_least_important</span> <span class="o">=</span> <span class="n">pricing_corr_stacked</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">small_categories</span><span class="p">)</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">)</span>
+<span class="n">pricing_least_important</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">,</span> <span class="s1">&#39;relative_correlation&#39;</span><span class="p">]</span>
+<span class="n">pricing_least_important</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>parameter</th>
+      <th>relative_correlation</th>
+    </tr>
+    <tr>
+      <th>product_category_name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>home_confort</th>
+      <td>product_length_cm</td>
+      <td>-0.444956</td>
+    </tr>
+    <tr>
+      <th>furniture_bedroom</th>
+      <td>product_name_lenght</td>
+      <td>-0.472171</td>
+    </tr>
+    <tr>
+      <th>fashion_shoes</th>
+      <td>product_photos_qty</td>
+      <td>-0.491136</td>
+    </tr>
+    <tr>
+      <th>furniture_living_room</th>
+      <td>product_description_lenght</td>
+      <td>-0.507893</td>
+    </tr>
+    <tr>
+      <th>audio</th>
+      <td>product_name_lenght</td>
+      <td>-0.530846</td>
+    </tr>
+    <tr>
+      <th>industry_commerce_and_business</th>
+      <td>product_height_cm</td>
+      <td>-0.596886</td>
+    </tr>
+    <tr>
+      <th>fashion_underwear_beach</th>
+      <td>product_length_cm</td>
+      <td>-0.629531</td>
+    </tr>
+    <tr>
+      <th>construction_tools_lights</th>
+      <td>product_description_lenght</td>
+      <td>-0.812678</td>
+    </tr>
+    <tr>
+      <th>computers</th>
+      <td>product_weight_g</td>
+      <td>-0.984040</td>
+    </tr>
+    <tr>
+      <th>books_imported</th>
+      <td>product_width_cm</td>
+      <td>-1.136276</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What we can distill here:</p>
+<ul class="simple">
+<li><p>the quantity of photo’s is important for small applicances, computers, furniture,… which is to be expected because you are willing to pay more if you are sure it looks like you want it to look</p></li>
+<li><p>the weight of fasion accessories and ‘industry commerce’ is not as important compared to other categories, as these things are always light, expensive or not</p></li>
+</ul>
+<p>Anyway, now it is up to you to further interpret these values, but I think this should already give a nice idea on how we can estimate prices and how this changes per category.</p>
+</div>
+</div>
+</div>
+<div class="section" id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Product pricing<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Now that we done the exploration, we can back our hypothesi up with some visual representations, many plots you will make will not end up in the final product but are meant to give you a more clear view on the situation itself</p>
+<div class="section" id="id3">
+<h4>Normal distribution<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>In the exploration we talked about the non normal distribution of our dataset, let us plot the numerical columns into histograms to verify this. Fortunately, pandas has a built-in hist method that works perfect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Olist_99_0.svg" src="_images/Olist_99_0.svg" /></div>
+</div>
+<p>ouch! this doesn’t look normally distributed at all, we can also put it into a boxplot and compare with a bar plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;level_1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span><span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Output hidden; open in https://colab.research.google.com to view.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;level_1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span><span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Olist_102_0.svg" src="_images/Olist_102_0.svg" /></div>
+</div>
+<p>These 2 plots look alike, but in my opinion the first clearly shows that the peak consists out of outliers, hence the non normal distribution. Can you find the column responsible for this peak using the histograms?</p>
+</div>
+<div class="section" id="id4">
+<h4>Numerical correlation<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>We saw there were some numerical correlations within the dataset, let us try to visualize these, the first thing that pops into my mind is the pairplot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f65a010feb8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>hmm it seems that in this case the pairplot doesn’t seem to be that conclusive, but we already knew that the correlations werent that appearent. Let us keep it simple and make a heatmap of the correlation statistic!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ok this is basically the same as in the exploration but with colors, these colors however give us a good way to group correlations, we can see that the width, height, length and weight create a nice block, and are also correlated with the price.</p>
+</div>
+<div class="section" id="id5">
+<h4>Variance Inflation<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>We looked into the inflation inbetween those correlated columns, because it might be that they are telling the same story. To illustrate this information we can use a bar chart.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">vif_price</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This way we can see that both the product length and width are highly correlated with other columns in the dataset i.e. their variation is explainable by other columns in the dataset. We opted to not remove any parameters here.</p>
+</div>
+<div class="section" id="id6">
+<h4>Categorical correlation<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p>We performed anova tests to know if and how much variance there is between categories for each numerical column. we can use a bar plot to visualize.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anova_price</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This might not be my best plot I ever made, but it quantifies the amount of variation of a numerical column compared to the category column ‘category’ item specs as size vary more whilst the name and description remain much more the same. In this plot, you can see I made a crucial mistake by using the same axis range for the test statistic and the p-value, which is much smaller (between 0-1). Don’t do this yourself! (I didn’t bother as all p-values are 0 except for order_item_id)</p>
+</div>
+<div class="section" id="id7">
+<h4>Grouping by category<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>As last we grouped by category and recalculated the numerical correlation for each category apart. Note that we removed lowly populated categories as the prediction of the price might be not representative. I will use a boxplot to show any variation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products_w_price_sorted_price</span> <span class="o">=</span> <span class="n">products_w_price</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="n">products_w_price_sorted_price</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">products_w_price</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;product_category_name&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">products_w_price_sorted_price</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span><span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>cool! here we can see the variation in groups for the price column, this way we can deduce wich categories are highly priced and which are lowly priced. Our machine learning solution later will use this information to help decide the price (if we of course use it to train the model). We can conclude that while the variation in each category can be high, there is a trend in price between categories.</p>
+<p>We also calculated relative changes of correlation between price and other numerical columns inbetween categories. Let’s see if we can visualize that information, my best guess would be a bar chart</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pricing_most_important</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">pricing_most_important</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top_n</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">pricing_most_important</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top_n</span><span class="p">)[</span><span class="s1">&#39;relative_correlation&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">pricing_most_important</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top_n</span><span class="p">)[</span><span class="s1">&#39;parameter&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> 
+                   <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> 
+                   <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span> <span class="o">=</span> <span class="s1">&#39;bottom&#39;</span><span class="p">,</span> 
+                   <span class="n">xytext</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> 
+                <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+                   <span class="n">textcoords</span> <span class="o">=</span> <span class="s1">&#39;offset points&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span> <span class="s1">&#39;.1f&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="o">*</span><span class="mf">0.9</span><span class="p">),</span> 
+                   <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> 
+                   <span class="n">xytext</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> 
+                   <span class="n">textcoords</span> <span class="o">=</span> <span class="s1">&#39;offset points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span><span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see I put a little bit more effort in this last graph as I think this is the nice visualisation to show others. We can also make a similar plot but with the relatively least important features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">pricing_least_important</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">top_n</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">pricing_least_important</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">top_n</span><span class="p">)[</span><span class="s1">&#39;relative_correlation&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">pricing_least_important</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">top_n</span><span class="p">)[</span><span class="s1">&#39;parameter&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> 
+                   <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> 
+                   <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span> <span class="o">=</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span> 
+                   <span class="n">xytext</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">),</span> 
+                <span class="n">rotation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+                   <span class="n">textcoords</span> <span class="o">=</span> <span class="s1">&#39;offset points&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span> <span class="s1">&#39;.1f&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="o">*</span><span class="mf">0.9</span><span class="p">),</span> 
+                   <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> 
+                   <span class="n">xytext</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> 
+                   <span class="n">textcoords</span> <span class="o">=</span> <span class="s1">&#39;offset points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span><span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>Product pricing<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>To conclude the product pricing analysis, we checked for normal distributions which werent present, so we had to opt for non-parametric/non-linear methods (although in many cases these will still do fine). We checked for numerical correlations but these were not really interesting, which led to the idea that perhaps per category our price could be predicted more accurate. This was proven by the fact that our price surely differs inbetween categories.</p>
+<p>We split up our dataset by grouping per category and removing small categories, now we could see that a relative change in correlation - meaning that the correlation of a column in our dataset with the price was different in that category compared to the overall correlation of this column with the price - was present for all categories. For each category we selected both the highest increase in correlation - meaning a ‘spike’ in importance - for that category and the highest decrease - meaning a ‘drop’ in importance - for that category.</p>
+<p>These plots hence show the most important and least important attributes for an item concerning the price e.g. if we want to increase the price of an item in the computers category, we need to make sure it has enough pictures and not try to decrease the weight value.</p>
+</div>
+</div>
+<div class="section" id="playground">
+<h2>Playground<a class="headerlink" href="#playground" title="Permalink to this headline">¶</a></h2>
+<p>here I can experiment with new ideas, and so can you!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order_reviews</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_per_seller</span> <span class="o">=</span> <span class="n">order_reviews</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">av_review</span> <span class="o">=</span> <span class="n">reviews_per_seller</span><span class="p">[</span><span class="n">reviews_per_seller</span><span class="p">[</span><span class="s1">&#39;order_item_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="mf">1.0</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;seller_id&#39;</span><span class="p">)[</span><span class="s1">&#39;review_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_revenue</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_item_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="mf">1.0</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;seller_id&#39;</span><span class="p">)[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_revenue</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;revenue&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">av_review</span><span class="p">,</span> <span class="n">total_revenue</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">reviews</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
