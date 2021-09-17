@@ -1,0 +1,1288 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. Indexing and slicing &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Missing Data" href="missing_data.html" />
+    <link rel="prev" title="2. Data Preparation" href="introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   2. Data Preparation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="missing_data.html">
+   4. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concatenation_deduplication.html">
+   5. Concatenation and deduplication
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
+   6. Data Preprocessing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_exploration/introduction.html">
+   7. Data Exploration
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_visualisation/introduction.html">
+   8. Data Visualisation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   9. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c2_data_preparation/indexing_slicing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc2_data_preparation/indexing_slicing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c2_data_preparation/indexing_slicing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c2_data_preparation/indexing_slicing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="indexing-and-slicing">
+<h1><span class="section-number">3. </span>Indexing and slicing<a class="headerlink" href="#indexing-and-slicing" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install yfinance
+<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting yfinance
+  Using cached yfinance-0.1.63-py2.py3-none-any.whl
+Requirement already satisfied: numpy&gt;=1.15 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from yfinance) (1.21.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting lxml&gt;=4.5.1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached lxml-4.6.3-cp38-cp38-manylinux2014_x86_64.whl (6.8 MB)
+Requirement already satisfied: requests&gt;=2.20 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from yfinance) (2.26.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas&gt;=0.24
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached pandas-1.3.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.5 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting multitasking&gt;=0.0.7
+  Using cached multitasking-0.0.9-py3-none-any.whl
+Requirement already satisfied: python-dateutil&gt;=2.7.3 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from pandas&gt;=0.24-&gt;yfinance) (2.8.2)
+Requirement already satisfied: pytz&gt;=2017.3 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from pandas&gt;=0.24-&gt;yfinance) (2021.1)
+Requirement already satisfied: six&gt;=1.5 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from python-dateutil&gt;=2.7.3-&gt;pandas&gt;=0.24-&gt;yfinance) (1.16.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer~=2.0.0 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from requests&gt;=2.20-&gt;yfinance) (2.0.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from requests&gt;=2.20-&gt;yfinance) (2021.5.30)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from requests&gt;=2.20-&gt;yfinance) (1.26.6)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from requests&gt;=2.20-&gt;yfinance) (3.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pandas, multitasking, lxml, yfinance
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed lxml-4.6.3 multitasking-0.0.9 pandas-1.3.3 yfinance-0.1.63
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: You are using pip version 21.1.2; however, version 21.2.4 is available.</span>
+<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;/home/lorenzf/git/data-science-practical-approach/venv/bin/python -m pip install --upgrade pip&#39; command.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">-</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timestamp(&#39;2021-06-09 23:05:46.374369&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;2020-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2021-01-01&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-12-31</th>
+      <td>81.000000</td>
+      <td>84.258003</td>
+      <td>80.416000</td>
+      <td>83.666000</td>
+      <td>83.666000</td>
+      <td>51428500</td>
+    </tr>
+    <tr>
+      <th>2020-01-02</th>
+      <td>84.900002</td>
+      <td>86.139999</td>
+      <td>84.342003</td>
+      <td>86.052002</td>
+      <td>86.052002</td>
+      <td>47660500</td>
+    </tr>
+    <tr>
+      <th>2020-01-03</th>
+      <td>88.099998</td>
+      <td>90.800003</td>
+      <td>87.384003</td>
+      <td>88.601997</td>
+      <td>88.601997</td>
+      <td>88892500</td>
+    </tr>
+    <tr>
+      <th>2020-01-06</th>
+      <td>88.094002</td>
+      <td>90.311996</td>
+      <td>88.000000</td>
+      <td>90.307999</td>
+      <td>90.307999</td>
+      <td>50665000</td>
+    </tr>
+    <tr>
+      <th>2020-01-07</th>
+      <td>92.279999</td>
+      <td>94.325996</td>
+      <td>90.671997</td>
+      <td>93.811996</td>
+      <td>93.811996</td>
+      <td>89410500</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2020-12-24</th>
+      <td>642.989990</td>
+      <td>666.090027</td>
+      <td>641.000000</td>
+      <td>661.770020</td>
+      <td>661.770020</td>
+      <td>22865600</td>
+    </tr>
+    <tr>
+      <th>2020-12-28</th>
+      <td>674.510010</td>
+      <td>681.400024</td>
+      <td>660.799988</td>
+      <td>663.690002</td>
+      <td>663.690002</td>
+      <td>32278600</td>
+    </tr>
+    <tr>
+      <th>2020-12-29</th>
+      <td>661.000000</td>
+      <td>669.900024</td>
+      <td>655.000000</td>
+      <td>665.989990</td>
+      <td>665.989990</td>
+      <td>22910800</td>
+    </tr>
+    <tr>
+      <th>2020-12-30</th>
+      <td>672.000000</td>
+      <td>696.599976</td>
+      <td>668.359985</td>
+      <td>694.780029</td>
+      <td>694.780029</td>
+      <td>42846000</td>
+    </tr>
+    <tr>
+      <th>2020-12-31</th>
+      <td>699.989990</td>
+      <td>718.719971</td>
+      <td>691.119995</td>
+      <td>705.669983</td>
+      <td>705.669983</td>
+      <td>49649900</td>
+    </tr>
+  </tbody>
+</table>
+<p>254 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Open&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Open</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>81.000000</th>
+      <td>84.258003</td>
+      <td>80.416000</td>
+      <td>83.666000</td>
+      <td>83.666000</td>
+      <td>51428500</td>
+    </tr>
+    <tr>
+      <th>84.900002</th>
+      <td>86.139999</td>
+      <td>84.342003</td>
+      <td>86.052002</td>
+      <td>86.052002</td>
+      <td>47660500</td>
+    </tr>
+    <tr>
+      <th>88.099998</th>
+      <td>90.800003</td>
+      <td>87.384003</td>
+      <td>88.601997</td>
+      <td>88.601997</td>
+      <td>88892500</td>
+    </tr>
+    <tr>
+      <th>88.094002</th>
+      <td>90.311996</td>
+      <td>88.000000</td>
+      <td>90.307999</td>
+      <td>90.307999</td>
+      <td>50665000</td>
+    </tr>
+    <tr>
+      <th>92.279999</th>
+      <td>94.325996</td>
+      <td>90.671997</td>
+      <td>93.811996</td>
+      <td>93.811996</td>
+      <td>89410500</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>642.989990</th>
+      <td>666.090027</td>
+      <td>641.000000</td>
+      <td>661.770020</td>
+      <td>661.770020</td>
+      <td>22865600</td>
+    </tr>
+    <tr>
+      <th>674.510010</th>
+      <td>681.400024</td>
+      <td>660.799988</td>
+      <td>663.690002</td>
+      <td>663.690002</td>
+      <td>32278600</td>
+    </tr>
+    <tr>
+      <th>661.000000</th>
+      <td>669.900024</td>
+      <td>655.000000</td>
+      <td>665.989990</td>
+      <td>665.989990</td>
+      <td>22910800</td>
+    </tr>
+    <tr>
+      <th>672.000000</th>
+      <td>696.599976</td>
+      <td>668.359985</td>
+      <td>694.780029</td>
+      <td>694.780029</td>
+      <td>42846000</td>
+    </tr>
+    <tr>
+      <th>699.989990</th>
+      <td>718.719971</td>
+      <td>691.119995</td>
+      <td>705.669983</td>
+      <td>705.669983</td>
+      <td>49649900</td>
+    </tr>
+  </tbody>
+</table>
+<p>254 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-06-01&#39;</span><span class="p">:</span><span class="s1">&#39;2020-06-30&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-06-01</th>
+      <td>171.600006</td>
+      <td>179.800003</td>
+      <td>170.820007</td>
+      <td>179.619995</td>
+      <td>179.619995</td>
+      <td>74697500</td>
+    </tr>
+    <tr>
+      <th>2020-06-02</th>
+      <td>178.940002</td>
+      <td>181.731995</td>
+      <td>174.199997</td>
+      <td>176.311996</td>
+      <td>176.311996</td>
+      <td>67828000</td>
+    </tr>
+    <tr>
+      <th>2020-06-03</th>
+      <td>177.623993</td>
+      <td>179.587997</td>
+      <td>176.020004</td>
+      <td>176.591995</td>
+      <td>176.591995</td>
+      <td>39747500</td>
+    </tr>
+    <tr>
+      <th>2020-06-04</th>
+      <td>177.975998</td>
+      <td>179.149994</td>
+      <td>171.688004</td>
+      <td>172.876007</td>
+      <td>172.876007</td>
+      <td>44438500</td>
+    </tr>
+    <tr>
+      <th>2020-06-05</th>
+      <td>175.567993</td>
+      <td>177.304001</td>
+      <td>173.240005</td>
+      <td>177.132004</td>
+      <td>177.132004</td>
+      <td>39059500</td>
+    </tr>
+    <tr>
+      <th>2020-06-08</th>
+      <td>183.800003</td>
+      <td>190.000000</td>
+      <td>181.832001</td>
+      <td>189.983994</td>
+      <td>189.983994</td>
+      <td>70873500</td>
+    </tr>
+    <tr>
+      <th>2020-06-09</th>
+      <td>188.001999</td>
+      <td>190.888000</td>
+      <td>184.785995</td>
+      <td>188.134003</td>
+      <td>188.134003</td>
+      <td>56941000</td>
+    </tr>
+    <tr>
+      <th>2020-06-10</th>
+      <td>198.376007</td>
+      <td>205.496002</td>
+      <td>196.500000</td>
+      <td>205.009995</td>
+      <td>205.009995</td>
+      <td>92817000</td>
+    </tr>
+    <tr>
+      <th>2020-06-11</th>
+      <td>198.039993</td>
+      <td>203.792007</td>
+      <td>194.399994</td>
+      <td>194.567993</td>
+      <td>194.567993</td>
+      <td>79582500</td>
+    </tr>
+    <tr>
+      <th>2020-06-12</th>
+      <td>196.000000</td>
+      <td>197.595993</td>
+      <td>182.520004</td>
+      <td>187.056000</td>
+      <td>187.056000</td>
+      <td>83817000</td>
+    </tr>
+    <tr>
+      <th>2020-06-15</th>
+      <td>183.557999</td>
+      <td>199.768005</td>
+      <td>181.699997</td>
+      <td>198.179993</td>
+      <td>198.179993</td>
+      <td>78486000</td>
+    </tr>
+    <tr>
+      <th>2020-06-16</th>
+      <td>202.369995</td>
+      <td>202.576004</td>
+      <td>192.477997</td>
+      <td>196.425995</td>
+      <td>196.425995</td>
+      <td>70255500</td>
+    </tr>
+    <tr>
+      <th>2020-06-17</th>
+      <td>197.542007</td>
+      <td>201.000000</td>
+      <td>196.514008</td>
+      <td>198.358002</td>
+      <td>198.358002</td>
+      <td>49454000</td>
+    </tr>
+    <tr>
+      <th>2020-06-18</th>
+      <td>200.600006</td>
+      <td>203.839996</td>
+      <td>198.893997</td>
+      <td>200.792007</td>
+      <td>200.792007</td>
+      <td>48759500</td>
+    </tr>
+    <tr>
+      <th>2020-06-19</th>
+      <td>202.556000</td>
+      <td>203.194000</td>
+      <td>198.268005</td>
+      <td>200.179993</td>
+      <td>200.179993</td>
+      <td>43398500</td>
+    </tr>
+    <tr>
+      <th>2020-06-22</th>
+      <td>199.990005</td>
+      <td>201.776001</td>
+      <td>198.003998</td>
+      <td>198.863998</td>
+      <td>198.863998</td>
+      <td>31812000</td>
+    </tr>
+    <tr>
+      <th>2020-06-23</th>
+      <td>199.776001</td>
+      <td>202.399994</td>
+      <td>198.802002</td>
+      <td>200.356003</td>
+      <td>200.356003</td>
+      <td>31826500</td>
+    </tr>
+    <tr>
+      <th>2020-06-24</th>
+      <td>198.822006</td>
+      <td>200.175995</td>
+      <td>190.628006</td>
+      <td>192.169998</td>
+      <td>192.169998</td>
+      <td>54798000</td>
+    </tr>
+    <tr>
+      <th>2020-06-25</th>
+      <td>190.854004</td>
+      <td>197.195999</td>
+      <td>187.429993</td>
+      <td>197.195999</td>
+      <td>197.195999</td>
+      <td>46272500</td>
+    </tr>
+    <tr>
+      <th>2020-06-26</th>
+      <td>198.955994</td>
+      <td>199.000000</td>
+      <td>190.973999</td>
+      <td>191.947998</td>
+      <td>191.947998</td>
+      <td>44274500</td>
+    </tr>
+    <tr>
+      <th>2020-06-29</th>
+      <td>193.802002</td>
+      <td>202.000000</td>
+      <td>189.703995</td>
+      <td>201.869995</td>
+      <td>201.869995</td>
+      <td>45132000</td>
+    </tr>
+    <tr>
+      <th>2020-06-30</th>
+      <td>201.300003</td>
+      <td>217.537994</td>
+      <td>200.746002</td>
+      <td>215.962006</td>
+      <td>215.962006</td>
+      <td>84592500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-05-01&#39;</span><span class="p">:</span><span class="s1">&#39;2020-05-31&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Volume</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1363518000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install seaborn
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting seaborn
+  Using cached seaborn-0.11.2-py3-none-any.whl (292 kB)
+Requirement already satisfied: pandas&gt;=0.23 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from seaborn) (1.3.3)
+Requirement already satisfied: matplotlib&gt;=2.2 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from seaborn) (3.4.3)
+Requirement already satisfied: numpy&gt;=1.15 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from seaborn) (1.21.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scipy&gt;=1.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached scipy-1.7.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl (28.4 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (2.4.7)
+Requirement already satisfied: pillow&gt;=6.2.0 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (8.3.1)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (2.8.2)
+Requirement already satisfied: cycler&gt;=0.10 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (0.10.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (1.3.1)
+Requirement already satisfied: six in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from cycler&gt;=0.10-&gt;matplotlib&gt;=2.2-&gt;seaborn) (1.16.0)
+Requirement already satisfied: pytz&gt;=2017.3 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from pandas&gt;=0.23-&gt;seaborn) (2021.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: scipy, seaborn
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed scipy-1.7.1 seaborn-0.11.2
+<span class=" -Color -Color-Yellow">WARNING: You are using pip version 21.1.2; however, version 21.2.4 is available.</span>
+<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;/home/lorenzf/git/data-science-practical-approach/venv/bin/python -m pip install --upgrade pip&#39; command.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_df</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;tips&#39;</span><span class="p">)</span>
+<span class="n">tip_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span> <span class="o">=</span> <span class="n">tip_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Sun&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Sun</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>20.90</td>
+      <td>3.50</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>30.46</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Dinner</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>18.15</td>
+      <td>3.50</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>23.10</td>
+      <td>4.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <td>15.69</td>
+      <td>1.50</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>76 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span> <span class="o">=</span> <span class="n">tip_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="s1">&#39;Thur&#39;</span><span class="p">,</span><span class="s1">&#39;Lunch&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">tip</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13322/2537502835.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
+  tip_index_df.loc[(&#39;Thur&#39;,&#39;Lunch&#39;)].tip.mean()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.767704918032786
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c2_data_preparation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="introduction.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">2. </span>Data Preparation</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="missing_data.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">4. </span>Missing Data</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
