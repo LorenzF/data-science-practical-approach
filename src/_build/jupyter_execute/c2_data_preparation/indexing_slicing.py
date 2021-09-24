@@ -6,83 +6,81 @@
 # In[1]:
 
 
-get_ipython().system('pip install yfinance')
-import yfinance as yf
 import pandas as pd
 
 
 # In[2]:
 
 
-pd.Timestamp.now()-pd.Timedelta(days=100)
+min_temp_df = pd.read_csv('https://raw.githubusercontent.com/jbrownlee/Datasets/master/daily-min-temperatures.csv')
+min_temp_df
 
 
 # In[3]:
 
 
-df = yf.download('TSLA', '2020-01-01', '2021-01-01')
+min_temp_df.Date = pd.to_datetime(min_temp_df.Date)
 
 
 # In[4]:
 
 
-df
+min_temp_df = min_temp_df.set_index('Date')
 
 
 # In[5]:
 
 
-df.set_index('Open')
+min_temp_df.loc['1989-06-01':'1989-06-30']
 
 
 # In[6]:
 
 
-df.loc['2020-06-01':'2020-06-30']
+min_temp_df.loc['1989-06-01':'1989-06-30'].mean()
 
 
 # In[7]:
 
 
-df.loc['2020-05-01':'2020-05-31'].Volume.sum()
-
-
-# In[8]:
-
-
-get_ipython().system('pip install seaborn')
 import seaborn as sns
 
 
-# In[9]:
+# In[8]:
 
 
 tip_df = sns.load_dataset('tips')
 tip_df.head()
 
 
-# In[10]:
+# In[9]:
 
 
 tip_index_df = tip_df.set_index('day')
 
 
-# In[11]:
+# In[10]:
 
 
 tip_index_df.loc['Sun']
 
 
-# In[12]:
+# In[11]:
 
 
 tip_index_df = tip_df.set_index(['day','time'])
 
 
-# In[13]:
+# In[12]:
 
 
 tip_index_df.loc[('Thur','Lunch')].tip.mean()
+
+
+# In[13]:
+
+
+pd.pivot_table(tip_df, values='total_bill', index='day', columns='time', aggfunc='median')
 
 
 # In[ ]:

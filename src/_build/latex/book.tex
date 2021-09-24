@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Sep 17, 2021}
+\date{Sep 24, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -123,243 +123,89 @@ this is an introduction
 \chapter{Indexing and slicing}
 \label{\detokenize{c2_data_preparation/indexing_slicing:indexing-and-slicing}}\label{\detokenize{c2_data_preparation/indexing_slicing::doc}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o}{!}pip install yfinance
-\PYG{k+kn}{import} \PYG{n+nn}{yfinance} \PYG{k}{as} \PYG{n+nn}{yf}
 \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting yfinance
-  Using cached yfinance\PYGZhy{}0.1.63\PYGZhy{}py2.py3\PYGZhy{}none\PYGZhy{}any.whl
-Requirement already satisfied: numpy\PYGZgt{}=1.15 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from yfinance) (1.21.2)
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/jbrownlee/Datasets/master/daily\PYGZhy{}min\PYGZhy{}temperatures.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting lxml\PYGZgt{}=4.5.1
+            Date  Temp
+0     1981\PYGZhy{}01\PYGZhy{}01  20.7
+1     1981\PYGZhy{}01\PYGZhy{}02  17.9
+2     1981\PYGZhy{}01\PYGZhy{}03  18.8
+3     1981\PYGZhy{}01\PYGZhy{}04  14.6
+4     1981\PYGZhy{}01\PYGZhy{}05  15.8
+...          ...   ...
+3645  1990\PYGZhy{}12\PYGZhy{}27  14.0
+3646  1990\PYGZhy{}12\PYGZhy{}28  13.6
+3647  1990\PYGZhy{}12\PYGZhy{}29  13.5
+3648  1990\PYGZhy{}12\PYGZhy{}30  15.7
+3649  1990\PYGZhy{}12\PYGZhy{}31  13.0
+
+[3650 rows x 2 columns]
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-  Using cached lxml\PYGZhy{}4.6.3\PYGZhy{}cp38\PYGZhy{}cp38\PYGZhy{}manylinux2014\PYGZus{}x86\PYGZus{}64.whl (6.8 MB)
-Requirement already satisfied: requests\PYGZgt{}=2.20 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from yfinance) (2.26.0)
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{Date} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}datetime}\PYG{p}{(}\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{Date}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting pandas\PYGZgt{}=0.24
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df} \PYG{o}{=} \PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Date}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-  Using cached pandas\PYGZhy{}1.3.3\PYGZhy{}cp38\PYGZhy{}cp38\PYGZhy{}manylinux\PYGZus{}2\PYGZus{}17\PYGZus{}x86\PYGZus{}64.manylinux2014\PYGZus{}x86\PYGZus{}64.whl (11.5 MB)
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}30}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting multitasking\PYGZgt{}=0.0.7
-  Using cached multitasking\PYGZhy{}0.0.9\PYGZhy{}py3\PYGZhy{}none\PYGZhy{}any.whl
-Requirement already satisfied: python\PYGZhy{}dateutil\PYGZgt{}=2.7.3 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from pandas\PYGZgt{}=0.24\PYGZhy{}\PYGZgt{}yfinance) (2.8.2)
-Requirement already satisfied: pytz\PYGZgt{}=2017.3 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from pandas\PYGZgt{}=0.24\PYGZhy{}\PYGZgt{}yfinance) (2021.1)
-Requirement already satisfied: six\PYGZgt{}=1.5 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from python\PYGZhy{}dateutil\PYGZgt{}=2.7.3\PYGZhy{}\PYGZgt{}pandas\PYGZgt{}=0.24\PYGZhy{}\PYGZgt{}yfinance) (1.16.0)
+            Temp
+Date            
+1989\PYGZhy{}06\PYGZhy{}01   2.3
+1989\PYGZhy{}06\PYGZhy{}02   1.4
+1989\PYGZhy{}06\PYGZhy{}03   2.1
+1989\PYGZhy{}06\PYGZhy{}04   6.6
+1989\PYGZhy{}06\PYGZhy{}05   8.9
+1989\PYGZhy{}06\PYGZhy{}06   7.8
+1989\PYGZhy{}06\PYGZhy{}07   9.0
+1989\PYGZhy{}06\PYGZhy{}08  10.3
+1989\PYGZhy{}06\PYGZhy{}09   7.9
+1989\PYGZhy{}06\PYGZhy{}10   7.2
+1989\PYGZhy{}06\PYGZhy{}11   8.6
+1989\PYGZhy{}06\PYGZhy{}12   8.8
+1989\PYGZhy{}06\PYGZhy{}13   6.2
+1989\PYGZhy{}06\PYGZhy{}14   9.5
+1989\PYGZhy{}06\PYGZhy{}15  10.2
+1989\PYGZhy{}06\PYGZhy{}16   9.7
+1989\PYGZhy{}06\PYGZhy{}17  11.2
+1989\PYGZhy{}06\PYGZhy{}18  10.2
+1989\PYGZhy{}06\PYGZhy{}19  10.1
+1989\PYGZhy{}06\PYGZhy{}20   8.1
+1989\PYGZhy{}06\PYGZhy{}21   6.6
+1989\PYGZhy{}06\PYGZhy{}22   5.0
+1989\PYGZhy{}06\PYGZhy{}23   4.7
+1989\PYGZhy{}06\PYGZhy{}24   5.3
+1989\PYGZhy{}06\PYGZhy{}25   4.5
+1989\PYGZhy{}06\PYGZhy{}26   2.3
+1989\PYGZhy{}06\PYGZhy{}27   1.4
+1989\PYGZhy{}06\PYGZhy{}28   0.5
+1989\PYGZhy{}06\PYGZhy{}29   2.4
+1989\PYGZhy{}06\PYGZhy{}30   8.0
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Requirement already satisfied: charset\PYGZhy{}normalizer\PYGZti{}=2.0.0 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from requests\PYGZgt{}=2.20\PYGZhy{}\PYGZgt{}yfinance) (2.0.4)
-Requirement already satisfied: certifi\PYGZgt{}=2017.4.17 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from requests\PYGZgt{}=2.20\PYGZhy{}\PYGZgt{}yfinance) (2021.5.30)
-Requirement already satisfied: urllib3\PYGZlt{}1.27,\PYGZgt{}=1.21.1 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from requests\PYGZgt{}=2.20\PYGZhy{}\PYGZgt{}yfinance) (1.26.6)
-Requirement already satisfied: idna\PYGZlt{}4,\PYGZgt{}=2.5 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from requests\PYGZgt{}=2.20\PYGZhy{}\PYGZgt{}yfinance) (3.2)
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}30}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Installing collected packages: pandas, multitasking, lxml, yfinance
+Temp    6.56
+dtype: float64
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Successfully installed lxml\PYGZhy{}4.6.3 multitasking\PYGZhy{}0.0.9 pandas\PYGZhy{}1.3.3 yfinance\PYGZhy{}0.1.63
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{Color+ColorYellow}{WARNING: You are using pip version 21.1.2; however, version 21.2.4 is available.}
-\PYG{Color+ColorYellow}{You should consider upgrading via the \PYGZsq{}/home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/bin/python \PYGZhy{}m pip install \PYGZhy{}\PYGZhy{}upgrade pip\PYGZsq{} command.}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{pd}\PYG{o}{.}\PYG{n}{Timestamp}\PYG{o}{.}\PYG{n}{now}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{pd}\PYG{o}{.}\PYG{n}{Timedelta}\PYG{p}{(}\PYG{n}{days}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Timestamp(\PYGZsq{}2021\PYGZhy{}06\PYGZhy{}09 23:05:46.374369\PYGZsq{})
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df} \PYG{o}{=} \PYG{n}{yf}\PYG{o}{.}\PYG{n}{download}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TSLA}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2020\PYGZhy{}01\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2021\PYGZhy{}01\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-[*********************100\PYGZpc{}***********************]  1 of 1 completed
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-                  Open        High         Low       Close   Adj Close  \PYGZbs{}
-Date                                                                     
-2019\PYGZhy{}12\PYGZhy{}31   81.000000   84.258003   80.416000   83.666000   83.666000   
-2020\PYGZhy{}01\PYGZhy{}02   84.900002   86.139999   84.342003   86.052002   86.052002   
-2020\PYGZhy{}01\PYGZhy{}03   88.099998   90.800003   87.384003   88.601997   88.601997   
-2020\PYGZhy{}01\PYGZhy{}06   88.094002   90.311996   88.000000   90.307999   90.307999   
-2020\PYGZhy{}01\PYGZhy{}07   92.279999   94.325996   90.671997   93.811996   93.811996   
-...                ...         ...         ...         ...         ...   
-2020\PYGZhy{}12\PYGZhy{}24  642.989990  666.090027  641.000000  661.770020  661.770020   
-2020\PYGZhy{}12\PYGZhy{}28  674.510010  681.400024  660.799988  663.690002  663.690002   
-2020\PYGZhy{}12\PYGZhy{}29  661.000000  669.900024  655.000000  665.989990  665.989990   
-2020\PYGZhy{}12\PYGZhy{}30  672.000000  696.599976  668.359985  694.780029  694.780029   
-2020\PYGZhy{}12\PYGZhy{}31  699.989990  718.719971  691.119995  705.669983  705.669983   
-
-              Volume  
-Date                  
-2019\PYGZhy{}12\PYGZhy{}31  51428500  
-2020\PYGZhy{}01\PYGZhy{}02  47660500  
-2020\PYGZhy{}01\PYGZhy{}03  88892500  
-2020\PYGZhy{}01\PYGZhy{}06  50665000  
-2020\PYGZhy{}01\PYGZhy{}07  89410500  
-...              ...  
-2020\PYGZhy{}12\PYGZhy{}24  22865600  
-2020\PYGZhy{}12\PYGZhy{}28  32278600  
-2020\PYGZhy{}12\PYGZhy{}29  22910800  
-2020\PYGZhy{}12\PYGZhy{}30  42846000  
-2020\PYGZhy{}12\PYGZhy{}31  49649900  
-
-[254 rows x 6 columns]
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Open}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-                  High         Low       Close   Adj Close    Volume
-Open                                                                
-81.000000    84.258003   80.416000   83.666000   83.666000  51428500
-84.900002    86.139999   84.342003   86.052002   86.052002  47660500
-88.099998    90.800003   87.384003   88.601997   88.601997  88892500
-88.094002    90.311996   88.000000   90.307999   90.307999  50665000
-92.279999    94.325996   90.671997   93.811996   93.811996  89410500
-...                ...         ...         ...         ...       ...
-642.989990  666.090027  641.000000  661.770020  661.770020  22865600
-674.510010  681.400024  660.799988  663.690002  663.690002  32278600
-661.000000  669.900024  655.000000  665.989990  665.989990  22910800
-672.000000  696.599976  668.359985  694.780029  694.780029  42846000
-699.989990  718.719971  691.119995  705.669983  705.669983  49649900
-
-[254 rows x 5 columns]
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2020\PYGZhy{}06\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2020\PYGZhy{}06\PYGZhy{}30}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-                  Open        High         Low       Close   Adj Close  \PYGZbs{}
-Date                                                                     
-2020\PYGZhy{}06\PYGZhy{}01  171.600006  179.800003  170.820007  179.619995  179.619995   
-2020\PYGZhy{}06\PYGZhy{}02  178.940002  181.731995  174.199997  176.311996  176.311996   
-2020\PYGZhy{}06\PYGZhy{}03  177.623993  179.587997  176.020004  176.591995  176.591995   
-2020\PYGZhy{}06\PYGZhy{}04  177.975998  179.149994  171.688004  172.876007  172.876007   
-2020\PYGZhy{}06\PYGZhy{}05  175.567993  177.304001  173.240005  177.132004  177.132004   
-2020\PYGZhy{}06\PYGZhy{}08  183.800003  190.000000  181.832001  189.983994  189.983994   
-2020\PYGZhy{}06\PYGZhy{}09  188.001999  190.888000  184.785995  188.134003  188.134003   
-2020\PYGZhy{}06\PYGZhy{}10  198.376007  205.496002  196.500000  205.009995  205.009995   
-2020\PYGZhy{}06\PYGZhy{}11  198.039993  203.792007  194.399994  194.567993  194.567993   
-2020\PYGZhy{}06\PYGZhy{}12  196.000000  197.595993  182.520004  187.056000  187.056000   
-2020\PYGZhy{}06\PYGZhy{}15  183.557999  199.768005  181.699997  198.179993  198.179993   
-2020\PYGZhy{}06\PYGZhy{}16  202.369995  202.576004  192.477997  196.425995  196.425995   
-2020\PYGZhy{}06\PYGZhy{}17  197.542007  201.000000  196.514008  198.358002  198.358002   
-2020\PYGZhy{}06\PYGZhy{}18  200.600006  203.839996  198.893997  200.792007  200.792007   
-2020\PYGZhy{}06\PYGZhy{}19  202.556000  203.194000  198.268005  200.179993  200.179993   
-2020\PYGZhy{}06\PYGZhy{}22  199.990005  201.776001  198.003998  198.863998  198.863998   
-2020\PYGZhy{}06\PYGZhy{}23  199.776001  202.399994  198.802002  200.356003  200.356003   
-2020\PYGZhy{}06\PYGZhy{}24  198.822006  200.175995  190.628006  192.169998  192.169998   
-2020\PYGZhy{}06\PYGZhy{}25  190.854004  197.195999  187.429993  197.195999  197.195999   
-2020\PYGZhy{}06\PYGZhy{}26  198.955994  199.000000  190.973999  191.947998  191.947998   
-2020\PYGZhy{}06\PYGZhy{}29  193.802002  202.000000  189.703995  201.869995  201.869995   
-2020\PYGZhy{}06\PYGZhy{}30  201.300003  217.537994  200.746002  215.962006  215.962006   
-
-              Volume  
-Date                  
-2020\PYGZhy{}06\PYGZhy{}01  74697500  
-2020\PYGZhy{}06\PYGZhy{}02  67828000  
-2020\PYGZhy{}06\PYGZhy{}03  39747500  
-2020\PYGZhy{}06\PYGZhy{}04  44438500  
-2020\PYGZhy{}06\PYGZhy{}05  39059500  
-2020\PYGZhy{}06\PYGZhy{}08  70873500  
-2020\PYGZhy{}06\PYGZhy{}09  56941000  
-2020\PYGZhy{}06\PYGZhy{}10  92817000  
-2020\PYGZhy{}06\PYGZhy{}11  79582500  
-2020\PYGZhy{}06\PYGZhy{}12  83817000  
-2020\PYGZhy{}06\PYGZhy{}15  78486000  
-2020\PYGZhy{}06\PYGZhy{}16  70255500  
-2020\PYGZhy{}06\PYGZhy{}17  49454000  
-2020\PYGZhy{}06\PYGZhy{}18  48759500  
-2020\PYGZhy{}06\PYGZhy{}19  43398500  
-2020\PYGZhy{}06\PYGZhy{}22  31812000  
-2020\PYGZhy{}06\PYGZhy{}23  31826500  
-2020\PYGZhy{}06\PYGZhy{}24  54798000  
-2020\PYGZhy{}06\PYGZhy{}25  46272500  
-2020\PYGZhy{}06\PYGZhy{}26  44274500  
-2020\PYGZhy{}06\PYGZhy{}29  45132000  
-2020\PYGZhy{}06\PYGZhy{}30  84592500  
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2020\PYGZhy{}05\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2020\PYGZhy{}05\PYGZhy{}31}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{Volume}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-1363518000
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o}{!}pip install seaborn
 \PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting seaborn
-  Using cached seaborn\PYGZhy{}0.11.2\PYGZhy{}py3\PYGZhy{}none\PYGZhy{}any.whl (292 kB)
-Requirement already satisfied: pandas\PYGZgt{}=0.23 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from seaborn) (1.3.3)
-Requirement already satisfied: matplotlib\PYGZgt{}=2.2 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from seaborn) (3.4.3)
-Requirement already satisfied: numpy\PYGZgt{}=1.15 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from seaborn) (1.21.2)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting scipy\PYGZgt{}=1.0
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-  Using cached scipy\PYGZhy{}1.7.1\PYGZhy{}cp38\PYGZhy{}cp38\PYGZhy{}manylinux\PYGZus{}2\PYGZus{}5\PYGZus{}x86\PYGZus{}64.manylinux1\PYGZus{}x86\PYGZus{}64.whl (28.4 MB)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Requirement already satisfied: pyparsing\PYGZgt{}=2.2.1 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from matplotlib\PYGZgt{}=2.2\PYGZhy{}\PYGZgt{}seaborn) (2.4.7)
-Requirement already satisfied: pillow\PYGZgt{}=6.2.0 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from matplotlib\PYGZgt{}=2.2\PYGZhy{}\PYGZgt{}seaborn) (8.3.1)
-Requirement already satisfied: python\PYGZhy{}dateutil\PYGZgt{}=2.7 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from matplotlib\PYGZgt{}=2.2\PYGZhy{}\PYGZgt{}seaborn) (2.8.2)
-Requirement already satisfied: cycler\PYGZgt{}=0.10 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from matplotlib\PYGZgt{}=2.2\PYGZhy{}\PYGZgt{}seaborn) (0.10.0)
-Requirement already satisfied: kiwisolver\PYGZgt{}=1.0.1 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from matplotlib\PYGZgt{}=2.2\PYGZhy{}\PYGZgt{}seaborn) (1.3.1)
-Requirement already satisfied: six in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from cycler\PYGZgt{}=0.10\PYGZhy{}\PYGZgt{}matplotlib\PYGZgt{}=2.2\PYGZhy{}\PYGZgt{}seaborn) (1.16.0)
-Requirement already satisfied: pytz\PYGZgt{}=2017.3 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from pandas\PYGZgt{}=0.23\PYGZhy{}\PYGZgt{}seaborn) (2021.1)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Installing collected packages: scipy, seaborn
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Successfully installed scipy\PYGZhy{}1.7.1 seaborn\PYGZhy{}0.11.2
-\PYG{Color+ColorYellow}{WARNING: You are using pip version 21.1.2; however, version 21.2.4 is available.}
-\PYG{Color+ColorYellow}{You should consider upgrading via the \PYGZsq{}/home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/bin/python \PYGZhy{}m pip install \PYGZhy{}\PYGZhy{}upgrade pip\PYGZsq{} command.}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -411,7 +257,7 @@ Sun       15.69  1.50    Male    Yes  Dinner     2
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\PYGZus{}13322/2537502835.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
+/tmp/ipykernel\PYGZus{}36874/2537502835.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
   tip\PYGZus{}index\PYGZus{}df.loc[(\PYGZsq{}Thur\PYGZsq{},\PYGZsq{}Lunch\PYGZsq{})].tip.mean()
 \end{sphinxVerbatim}
 
@@ -419,23 +265,42 @@ Sun       15.69  1.50    Male    Yes  Dinner     2
 2.767704918032786
 \end{sphinxVerbatim}
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pd}\PYG{o}{.}\PYG{n}{pivot\PYGZus{}table}\PYG{p}{(}\PYG{n}{tip\PYGZus{}df}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{total\PYGZus{}bill}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{time}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{aggfunc}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{median}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+time  Lunch  Dinner
+day                
+Thur  16.00  18.780
+Fri   13.42  18.665
+Sat     NaN  18.240
+Sun     NaN  19.630
+\end{sphinxVerbatim}
+
 
 \chapter{Missing Data}
 \label{\detokenize{c2_data_preparation/missing_data:missing-data}}\label{\detokenize{c2_data_preparation/missing_data::doc}}
 \sphinxAtStartPar
-this is a notebook about missing data
+In this notebook we will look at a few datasets where values from columns are missing.
+It is crucial for data science and machine learning to have a dataset where no values are missing as algorithms are usually not able to handle data with information missing.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{variable} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{test}\PYG{l+s+s1}{\PYGZsq{}}
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+For python, we will be using the pandas library to handle our dataset.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \end{sphinxVerbatim}
 
+
+\section{Kamyr digester}
+\label{\detokenize{c2_data_preparation/missing_data:kamyr-digester}}
+\sphinxAtStartPar
+The first dataset we will be looking at is taken from a psysical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://openmv.net/file/kamyr\PYGZhy{}digester.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{kamyr\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://openmv.net/file/kamyr\PYGZhy{}digester.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{kamyr\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -470,39 +335,86 @@ this is a notebook about missing data
 [5 rows x 23 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Interesting, there seem to be 22 sensor values and 1 timestamp for each record. As mechanical devices are prone to noise and dropouts of sensors we would be foolish to assume no missing values are present.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{kamyr\PYGZus{}df}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{kamyr\PYGZus{}df}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Observation          0
-Y\PYGZhy{}Kappa              0
-ChipRate             4
-BF\PYGZhy{}CMratio          14
-BlowFlow            13
-ChipLevel4           1
-T\PYGZhy{}upperExt\PYGZhy{}2         1
-T\PYGZhy{}lowerExt\PYGZhy{}2         1
-UCZAA               24
-WhiteFlow\PYGZhy{}4          1
-AAWhiteSt\PYGZhy{}4        141
-AA\PYGZhy{}Wood\PYGZhy{}4            1
-ChipMoisture\PYGZhy{}4       1
-SteamFlow\PYGZhy{}4          1
-Lower\PYGZhy{}HeatT\PYGZhy{}3        1
-Upper\PYGZhy{}HeatT\PYGZhy{}3        1
-ChipMass\PYGZhy{}4           1
-WeakLiquorF          1
-BlackFlow\PYGZhy{}2          1
-WeakWashF            1
-SteamHeatF\PYGZhy{}3         1
-T\PYGZhy{}Top\PYGZhy{}Chips\PYGZhy{}4        1
-SulphidityL\PYGZhy{}4      141
-dtype: int64
+Observation         0.00
+Y\PYGZhy{}Kappa             0.00
+ChipRate            1.33
+BF\PYGZhy{}CMratio          4.65
+BlowFlow            4.32
+ChipLevel4          0.33
+T\PYGZhy{}upperExt\PYGZhy{}2        0.33
+T\PYGZhy{}lowerExt\PYGZhy{}2        0.33
+UCZAA               7.97
+WhiteFlow\PYGZhy{}4         0.33
+AAWhiteSt\PYGZhy{}4        46.84
+AA\PYGZhy{}Wood\PYGZhy{}4           0.33
+ChipMoisture\PYGZhy{}4      0.33
+SteamFlow\PYGZhy{}4         0.33
+Lower\PYGZhy{}HeatT\PYGZhy{}3       0.33
+Upper\PYGZhy{}HeatT\PYGZhy{}3       0.33
+ChipMass\PYGZhy{}4          0.33
+WeakLiquorF         0.33
+BlackFlow\PYGZhy{}2         0.33
+WeakWashF           0.33
+SteamHeatF\PYGZhy{}3        0.33
+T\PYGZhy{}Top\PYGZhy{}Chips\PYGZhy{}4       0.33
+SulphidityL\PYGZhy{}4      46.84
+dtype: float64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+As expected, the datapoint ‘AAWhiteSt\sphinxhyphen{}4’ even has 46\% of data missing!
+It seems we only have 300 datapoints and presumably these missing values occur in different records our dataset will be decimated if we just drop all rows with missing values.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kamyr\PYGZus{}df}\PYG{o}{.}\PYG{n}{shape}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{ffill}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{SulphidityL\PYGZhy{}4 }\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+(301, 23)
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kamyr\PYGZus{}df}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{shape}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(131, 23)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+As we drop all rows with missing values, we are left with only 131 records.
+Whilst this might be good enough for some purposes, there are more viable options.
+
+\sphinxAtStartPar
+Perhaps we can first remove the column with the most missing values and then drop all remaining
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kamyr\PYGZus{}df}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AAWhiteSt\PYGZhy{}4 }\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{SulphidityL\PYGZhy{}4 }\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{shape}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(263, 21)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Significantly better, although we lost the information of 2 sensors we now have a complete dataset with 263 records. For purposes where those 2 sensors are irrelevant this is a viable option, keep in mind that this dataset is still 100\% truthful, as we have not imputed any values.
+
+\sphinxAtStartPar
+Another option, where we retain all our records would be using the timely nature of our dataset, each record is a measurement with an interval of 1 hour. I have no knowledge of this dataset but one might make the assumption that the interval of 1 hour is taken as the state of the machine does not alter much in 1 hour. Therefore we could do what is called a forward fill, where we fill in the missing values with the same value of the sensor for the previous measurement.
+
+\sphinxAtStartPar
+This would solve nearly all nan values as there might be a problem where the first value is missing. This is shown below.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kamyr\PYGZus{}df}\PYG{o}{.}\PYG{n}{fillna}\PYG{p}{(}\PYG{n}{method}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ffill}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{SulphidityL\PYGZhy{}4 }\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -520,9 +432,18 @@ dtype: int64
 Name: SulphidityL\PYGZhy{}4 , Length: 301, dtype: float64
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Although our dataset is not fully the truth, we can see that little to no changes occur in the sensor and using a forward fill is arguably the most suitable option.
+
+
+\section{Travel times}
+\label{\detokenize{c2_data_preparation/missing_data:travel-times}}
+\sphinxAtStartPar
+Another dataset from the same source contains a collection of recorded travel times and specific information about the travel itself as e.g.: the day of the week, where they were going, …
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://openmv.net/file/travel\PYGZhy{}times.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{df}
+\PYG{n}{travel\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://openmv.net/file/travel\PYGZhy{}times.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{travel\PYGZus{}df}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -555,136 +476,146 @@ Name: SulphidityL\PYGZhy{}4 , Length: 301, dtype: float64
 [205 rows x 13 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+we have a total of 205 records and we can already see that the FuelEconomy column seems pretty bad, let’s quantify that.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{travel\PYGZus{}df}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Date                0
-StartTime           0
-DayOfWeek           0
-GoingTo             0
-Distance            0
-MaxSpeed            0
-AvgSpeed            0
-AvgMovingSpeed      0
-FuelEconomy        17
-TotalTime           0
-MovingTime          0
-Take407All          0
-Comments          181
-dtype: int64
+Date               0.00
+StartTime          0.00
+DayOfWeek          0.00
+GoingTo            0.00
+Distance           0.00
+MaxSpeed           0.00
+AvgSpeed           0.00
+AvgMovingSpeed     0.00
+FuelEconomy        8.29
+TotalTime          0.00
+MovingTime         0.00
+Take407All         0.00
+Comments          88.29
+dtype: float64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+In the end, it doesn’t seem that bad, but there are comments and nearly none of them are filled in. Which in perspective is understandable. Let’s see what the comments look like
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{travel\PYGZus{}df}\PYG{p}{[}\PYG{o}{\PYGZti{}}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}\PYG{o}{.}\PYG{n}{Comments}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{p}{[}\PYG{o}{\PYGZti{}}\PYG{n}{df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}
+15                                  Put snow tires on
+39                                         Heavy rain
+49                                Huge traffic backup
+50      Pumped tires up: check fuel economy improved?
+52                                Backed up at Bronte
+54                                Backed up at Bronte
+60                                              Rainy
+78                                   Rain, rain, rain
+91                                   Rain, rain, rain
+92         Accident: backup from Hamilton to 407 ramp
+110                                           Raining
+132                           Back to school traffic?
+133                Took 407 all the way (to McMaster)
+150                             Heavy volume on Derry
+156                        Start early to run a batch
+158    Accident at 403/highway 6; detour along Dundas
+165                                      Detour taken
+166                                    Must be Friday
+172                             Medium amount of rain
+174                                         New tires
+182                              Turn around on Derry
+184                                       Empty roads
+187                            Police slowdown on 403
+189                         Accident blocked 407 exit
+Name: Comments, dtype: object
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+As you would expect, these comments are text based. Now imagine we would like to run some Natural Language Processing (NLP) on these, it would be a pain to perform string operations on it when it is riddled with missing values.
+
+\sphinxAtStartPar
+Here a simple example where we select all records containing the word ‘rain’, with no avail.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{travel\PYGZus{}df}\PYG{p}{[}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{contains}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rain}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n+ne}{ValueError}\PYG{g+gWhitespace}{                                }Traceback (most recent call last)
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}36906}\PYG{o}{/}\PYG{l+m+mf}{1298831137.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{n}{travel\PYGZus{}df}\PYG{p}{[}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{contains}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rain}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
+
+\PYG{n+nn}{\PYGZti{}/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages/pandas/core/frame.py} in \PYG{n+ni}{\PYGZus{}\PYGZus{}getitem\PYGZus{}\PYGZus{}}\PYG{n+nt}{(self, key)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{3446} 
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{3447}         \PYG{c+c1}{\PYGZsh{} Do we have a (boolean) 1d indexer?}
+\PYG{n+ne}{\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{3448}         \PYG{k}{if} \PYG{n}{com}\PYG{o}{.}\PYG{n}{is\PYGZus{}bool\PYGZus{}indexer}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)}\PYG{p}{:}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{3449}             \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}getitem\PYGZus{}bool\PYGZus{}array}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{3450} 
+
+\PYG{n+nn}{\PYGZti{}/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages/pandas/core/common.py} in \PYG{n+ni}{is\PYGZus{}bool\PYGZus{}indexer}\PYG{n+nt}{(key)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{137}                     \PYG{c+c1}{\PYGZsh{} Don\PYGZsq{}t raise on e.g. [\PYGZdq{}A\PYGZdq{}, \PYGZdq{}B\PYGZdq{}, np.nan], see}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{138}                     \PYG{c+c1}{\PYGZsh{}  test\PYGZus{}loc\PYGZus{}getitem\PYGZus{}list\PYGZus{}of\PYGZus{}labels\PYGZus{}categoricalindex\PYGZus{}with\PYGZus{}na}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{139}                     \PYG{k}{raise} \PYG{n+ne}{ValueError}\PYG{p}{(}\PYG{n}{na\PYGZus{}msg}\PYG{p}{)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{140}                 \PYG{k}{return} \PYG{k+kc}{False}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{141}             \PYG{k}{return} \PYG{k+kc}{True}
+
+\PYG{n+ne}{ValueError}: Cannot mask with non\PYGZhy{}boolean array containing NA / NaN values
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The last line of the python error traceback gives us the reason it failed, because there were NaN values present.
+
+\sphinxAtStartPar
+Luckily the string variable has more or less it’s on ‘null’ value, being an empty string, this way these operations are still possible, most of the comments will just contain nothing.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments} \PYG{o}{=} \PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{fillna}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{travel\PYGZus{}df}\PYG{p}{[}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{contains}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rain}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
            Date StartTime  DayOfWeek GoingTo  Distance  MaxSpeed  AvgSpeed  \PYGZbs{}
-15   12/19/2011     07:34     Monday     GSK     52.00     137.8      76.5   
 39   11/29/2011     07:23    Tuesday     GSK     51.74     112.2      55.3   
-49   11/21/2011     07:24     Monday     GSK     52.25     127.3      38.1   
-50   11/17/2011     16:16   Thursday    Home     51.16     127.6      72.4   
-52   11/16/2011     16:13  Wednesday    Home     51.12     125.1      65.0   
-54   11/15/2011     17:36    Tuesday    Home     51.06     122.8      61.4   
 60    11/9/2011     16:15  Wednesday    Home     51.28     121.4      65.9   
 78   10/25/2011     17:24    Tuesday    Home     52.87     123.5      65.1   
 91   10/12/2011     17:47  Wednesday    Home     51.40     114.4      59.7   
-92   10/12/2011     08:28  Wednesday     GSK     50.58     128.4      59.5   
 110   9/27/2011     07:36    Tuesday     GSK     50.65     128.1      86.3   
-132    9/7/2011     07:57  Wednesday     GSK     49.08     125.1      56.5   
-133    9/6/2011     16:27    Tuesday    Home     52.88     131.6      95.4   
-150   8/24/2011     07:59  Wednesday     GSK     49.07     127.1      58.5   
-156   8/19/2011     07:05     Friday     GSK     49.18     123.0      72.0   
-158   8/18/2011     08:11   Thursday     GSK     52.26     137.7      51.2   
-165   8/12/2011     17:25     Friday    Home     55.57     127.7      69.6   
-166   8/12/2011     08:05     Friday     GSK     49.02     128.4      76.7   
 172    8/9/2011     08:15    Tuesday     GSK     49.08     134.8      60.5   
-174    8/8/2011     08:07     Monday     GSK     49.25     126.3      68.5   
-182    8/2/2011     07:38    Tuesday     GSK     53.48     124.9      68.8   
-184   7/29/2011     08:22     Friday     GSK     49.07     121.1      73.2   
-187   7/27/2011     17:24  Wednesday    Home     50.98     124.9      68.3   
-189   7/26/2011     17:15    Tuesday    Home     51.28     122.1      43.7   
 
      AvgMovingSpeed FuelEconomy  TotalTime  MovingTime Take407All  \PYGZbs{}
-15             87.8        8.89       40.8        35.5         No   
 39             61.0         NaN       56.2        50.9         No   
-49             50.3       10.05       82.3        62.4         No   
-50             77.4       10.05       42.4        39.6         No   
-52             73.1        9.53       47.2        41.9         No   
-54             70.9        9.53       49.9        43.2         No   
 60             71.8        9.35       46.7        42.1         No   
 78             72.4        8.97       48.7        43.8         No   
 91             65.8        8.75       51.7        46.9         No   
-92             67.3        8.75       51.0        45.1        Yes   
 110            88.6        8.31       35.2        34.3        Yes   
-132            66.5         8.5       52.1        44.3         No   
-133            98.3         8.5       33.3        32.3        Yes   
-150            71.5        8.54       50.3        41.1         No   
-156            81.4        8.37       41.0        36.3         No   
-158            64.1        8.37       61.2        48.9         No   
-165            77.1        8.54       47.9        43.2         No   
-166            82.9        8.54       38.4        35.5         No   
 172            67.2        8.54       48.7        43.8         No   
-174            78.2        8.54       43.1        37.8         No   
-182            78.8        8.48       46.7        40.7         No   
-184            77.7        8.45       40.2        37.9         No   
-187            71.9        8.45       44.8        42.6         No   
-189            51.5        8.45       70.5        59.8         No   
 
-                                           Comments  
-15                                Put snow tires on  
-39                                       Heavy rain  
-49                              Huge traffic backup  
-50    Pumped tires up: check fuel economy improved?  
-52                              Backed up at Bronte  
-54                              Backed up at Bronte  
-60                                            Rainy  
-78                                 Rain, rain, rain  
-91                                 Rain, rain, rain  
-92       Accident: backup from Hamilton to 407 ramp  
-110                                         Raining  
-132                         Back to school traffic?  
-133              Took 407 all the way (to McMaster)  
-150                           Heavy volume on Derry  
-156                      Start early to run a batch  
-158  Accident at 403/highway 6; detour along Dundas  
-165                                    Detour taken  
-166                                  Must be Friday  
-172                           Medium amount of rain  
-174                                       New tires  
-182                            Turn around on Derry  
-184                                     Empty roads  
-187                          Police slowdown on 403  
-189                       Accident blocked 407 exit  
+                  Comments  
+39              Heavy rain  
+60                   Rainy  
+78        Rain, rain, rain  
+91        Rain, rain, rain  
+110                Raining  
+172  Medium amount of rain  
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{n}{df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Comments}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsq{}}
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+Fixed! now we can use the comments for analysis.
+
+\sphinxAtStartPar
+We still have to fix the FuelEconomy, let us take a look at the non NaN values
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{Comments}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-0       
-1       
-2       
-3       
-4       
-      ..
-200     
-201     
-202     
-203     
-204     
-Name: Comments, Length: 205, dtype: object
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{p}{[}\PYG{o}{\PYGZti{}}\PYG{n}{df}\PYG{o}{.}\PYG{n}{FuelEconomy}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}
+\PYG{n}{travel\PYGZus{}df}\PYG{p}{[}\PYG{o}{\PYGZti{}}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{FuelEconomy}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -717,8 +648,11 @@ Name: Comments, Length: 205, dtype: object
 [188 rows x 13 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+It seems that aside NaN values there are also other intruders, a quick check on the data type (Dtype) reveils it is not recognised as a number!
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -744,12 +678,14 @@ dtypes: float64(6), object(7)
 memory usage: 20.9+ KB
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{FuelEconomy} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}numeric}\PYG{p}{(}\PYG{n}{df}\PYG{o}{.}\PYG{n}{FuelEconomy}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{coerce}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+The column is noted as an object or string type, meaning that these numbers are given as ‘9.24’ instead of 9.24 and numerical operations are not possible.
+We can cast them to numeric but have to warn pandas to coerce errors, meaning errors will be converted to NaN values.
+Later we’ll handle the NaN’s.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{FuelEconomy} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}numeric}\PYG{p}{(}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{FuelEconomy}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{coerce}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -775,8 +711,12 @@ dtypes: float64(7), object(6)
 memory usage: 20.9+ KB
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Wonderful, now the column is numerical and we can see 2 more missing values have popped up!
+We could easily drop these 19 records and have a complete dataset.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df}\PYG{p}{[}\PYG{o}{\PYGZti{}}\PYG{n}{df}\PYG{o}{.}\PYG{n}{FuelEconomy}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}
+\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -809,71 +749,106 @@ memory usage: 20.9+ KB
 [186 rows x 13 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+However im leaving them as an excercise for you to apply a technique we will see in the next part
+
+
+\section{Material properties}
+\label{\detokenize{c2_data_preparation/missing_data:material-properties}}
+\sphinxAtStartPar
+Another dataset from the same source contains the material properties from 30 samples, this time there is not timestamp as the samples are not related in time with each other.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{http://openmv.net/file/raw\PYGZhy{}material\PYGZhy{}properties.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{material\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{http://openmv.net/file/raw\PYGZhy{}material\PYGZhy{}properties.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{material\PYGZus{}df}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-   Sample  size1  size2  size3  density1  density2  density3
-0  X12558  0.696   2.69   6.38      41.8     17.18      3.90
-1  X14728  0.636   2.30   5.14      38.1     12.73      3.89
-2  X15468  0.841   2.85   5.20      37.6     13.58      3.98
-3  X21364  0.609   2.13   4.62      34.2     11.12      4.02
-4  X23671  0.684   2.16   4.87      36.4     12.24      3.92
+    Sample  size1  size2  size3  density1  density2  density3
+0   X12558  0.696   2.69   6.38      41.8     17.18      3.90
+1   X14728  0.636   2.30   5.14      38.1     12.73      3.89
+2   X15468  0.841   2.85   5.20      37.6     13.58      3.98
+3   X21364  0.609   2.13   4.62      34.2     11.12      4.02
+4   X23671  0.684   2.16   4.87      36.4     12.24      3.92
+5   X24055  0.762   2.81   6.36      38.1     13.28      3.89
+6   X24905  0.552   2.34   5.03      41.3     16.71      3.86
+7   X25917  0.501   2.17   5.09       NaN       NaN       NaN
+8   X27871  0.619   2.11   5.13       NaN       NaN       NaN
+9   X28690  0.610   2.10   4.18      35.0     12.15      3.86
+10  X31385  0.532   2.09   4.93       NaN       NaN       NaN
+11  X31813  0.738   2.29   5.47       NaN       NaN       NaN
+12  X32807  0.779   2.62   5.59       NaN       NaN       NaN
+13  X33943  0.537   2.23   5.41      35.2     11.34      3.99
+14  X35035  0.702   2.05   5.10      34.2     10.54      4.02
+15  X39223  0.768   2.51   5.09      34.9     12.55      3.90
+16  X40503  0.714   2.56   6.03      35.6     12.20      4.02
+17  X41400  0.621   2.42   5.10      38.7     14.27      3.98
+18  X42988  0.726   2.11   4.69      37.1     13.14      3.98
+19  X44749  0.698   2.36   5.40      36.6     12.16      4.01
+20  X45295    NaN    NaN    NaN      38.1     13.34      3.89
+21  X46965  0.759   2.47   4.83      38.7     14.83      3.89
+22  X49666  0.535   2.13   5.23       NaN       NaN       NaN
+23  X50678  0.716   2.29   5.45      37.3     13.70      3.92
+24  X52894  0.635   2.08   4.94       NaN       NaN       NaN
+25  X53925  0.598   2.12   4.69      37.9     13.45      3.78
+26  X54254  0.700   2.47   5.22      38.8     14.72      3.92
+27  X54272  0.957   2.96   7.37      36.2     13.38      4.20
+28  X54394  0.759   2.66   5.36      35.2     12.19      3.98
+29  X55408  0.661   2.10   4.27       NaN       NaN       NaN
+30  X56952  0.646   2.38   4.51      40.1     15.68      3.86
+31  X57095  0.662   2.34   4.71      35.0     12.37      3.90
+32  X57128  0.749   2.43   5.16      37.3     13.04      3.92
+33  X61870  0.598   2.21   4.90       NaN       NaN       NaN
+34  X61888  0.619   2.59   5.81       NaN       NaN       NaN
+35  X72736  0.693   2.05   5.02      39.6     15.55      3.94
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+let us quantify the amount of missing data
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{material\PYGZus{}df}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{material\PYGZus{}df}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o}{!}pip install sklearn
+Sample       0.00
+size1        2.78
+size2        2.78
+size3        2.78
+density1    27.78
+density2    27.78
+density3    27.78
+dtype: float64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Unfortunately that is a lot of missing data, covered in all records, dropping here seems almost impossible if we want to keep a healthy amount of records.
+
+\sphinxAtStartPar
+Here it would be wise to go for a more elaborate method of imputation, I opted for the K\sphinxhyphen{}nearest neighbours method, which looks at the K most similar records in the dataset to make an educated guess on what the missing value could be, this because we can assume that records with similar data are also similar over all the properties (columns).
+
+\sphinxAtStartPar
+Im using the sklearn library for this, which has more imputation techniques such as MICE.
+More info can be found \sphinxhref{https://scikit-learn.org/stable/modules/impute.html}{here}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{impute} \PYG{k+kn}{import} \PYG{n}{KNNImputer}
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting sklearn
-  Using cached sklearn\PYGZhy{}0.0\PYGZhy{}py2.py3\PYGZhy{}none\PYGZhy{}any.whl
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting scikit\PYGZhy{}learn
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-  Using cached scikit\PYGZus{}learn\PYGZhy{}0.24.2\PYGZhy{}cp38\PYGZhy{}cp38\PYGZhy{}manylinux2010\PYGZus{}x86\PYGZus{}64.whl (24.9 MB)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting threadpoolctl\PYGZgt{}=2.0.0
-  Using cached threadpoolctl\PYGZhy{}2.2.0\PYGZhy{}py3\PYGZhy{}none\PYGZhy{}any.whl (12 kB)
-Requirement already satisfied: scipy\PYGZgt{}=0.19.1 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from scikit\PYGZhy{}learn\PYGZhy{}\PYGZgt{}sklearn) (1.7.1)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Collecting joblib\PYGZgt{}=0.11
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-  Using cached joblib\PYGZhy{}1.0.1\PYGZhy{}py3\PYGZhy{}none\PYGZhy{}any.whl (303 kB)
-Requirement already satisfied: numpy\PYGZgt{}=1.13.3 in /home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages (from scikit\PYGZhy{}learn\PYGZhy{}\PYGZgt{}sklearn) (1.21.2)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Installing collected packages: threadpoolctl, joblib, scikit\PYGZhy{}learn, sklearn
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Successfully installed joblib\PYGZhy{}1.0.1 scikit\PYGZhy{}learn\PYGZhy{}0.24.2 sklearn\PYGZhy{}0.0 threadpoolctl\PYGZhy{}2.2.0
-\PYG{Color+ColorYellow}{WARNING: You are using pip version 21.1.2; however, version 21.2.4 is available.}
-\PYG{Color+ColorYellow}{You should consider upgrading via the \PYGZsq{}/home/lorenzf/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/bin/python \PYGZhy{}m pip install \PYGZhy{}\PYGZhy{}upgrade pip\PYGZsq{} command.}
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+im creating an imputer object and specify that i want to use the 5 most similar records and weigh them by distance from the to imputed record, meaning closer neighbours are more important.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{imputer} \PYG{o}{=} \PYG{n}{KNNImputer}\PYG{p}{(}\PYG{n}{n\PYGZus{}neighbors}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{weights}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{distance}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+As the imputer only takes numerical values I had to do some pandas magic and drop the first column, which I then added again. The result is a fully filled dataset, you can recognise the new values as they are not rounded.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}
-    \PYG{n}{imputer}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{df}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sample}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,} 
-    \PYG{n}{columns}\PYG{o}{=}\PYG{n}{df}\PYG{o}{.}\PYG{n}{columns}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sample}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{imputer}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{material\PYGZus{}df}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sample}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,} 
+    \PYG{n}{columns}\PYG{o}{=}\PYG{n}{material\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sample}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{p}{)}
 \end{sphinxVerbatim}
 
@@ -916,6 +891,9 @@ Successfully installed joblib\PYGZhy{}1.0.1 scikit\PYGZhy{}learn\PYGZhy{}0.24.2 
 34  0.619000  2.590000  5.810000  35.932339  12.318210  3.989911
 35  0.693000  2.050000  5.020000  39.600000  15.550000  3.940000
 \end{sphinxVerbatim}
+
+\sphinxAtStartPar
+This concludes the part of missing values, perhaps you can try yourself and impute the missing values for the FuelEconomy using the SimpleImputer or even the IterativeImputer.
 
 
 \chapter{Concatenation and deduplication}
@@ -1017,6 +995,110 @@ Successfully installed joblib\PYGZhy{}1.0.1 scikit\PYGZhy{}learn\PYGZhy{}0.24.2 
 
 [6405008 rows x 18 columns]
 \end{sphinxVerbatim}
+
+
+\chapter{Some practice}
+\label{\detokenize{c2_data_preparation/some_practice:some-practice}}\label{\detokenize{c2_data_preparation/some_practice::doc}}
+\sphinxAtStartPar
+Now that you have learned techniques in data preparation, why don’t you put them to use in this wonderfully horrifying dataset. Good luck!
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+\PYG{k+kn}{import} \PYG{n+nn}{json}
+
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{kaggle}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n+ne}{ModuleNotFoundError}\PYG{g+gWhitespace}{                       }Traceback (most recent call last)
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}36949}\PYG{o}{/}\PYG{l+m+mf}{2054829274.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{3} 
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{4} \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{5} \PYG{k+kn}{import} \PYG{n+nn}{kaggle}
+
+\PYG{n+ne}{ModuleNotFoundError}: No module named \PYGZsq{}kaggle\PYGZsq{}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/root/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
+    \PYG{n}{json}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}
+        \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{username}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{lorenzf}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{key}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{7a44a9e99b27e796177d793a3d85b8cf}\PYG{l+s+s2}{\PYGZdq{}}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{p}{,} \PYG{n}{f}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kaggle}\PYG{o}{.}\PYG{n}{api}\PYG{o}{.}\PYG{n}{dataset\PYGZus{}download\PYGZus{}files}\PYG{p}{(}\PYG{n}{dataset}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PromptCloudHQ/us\PYGZhy{}jobs\PYGZhy{}on\PYGZhy{}monstercom}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{path}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{unzip}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/monster\PYGZus{}com\PYGZhy{}job\PYGZus{}sample.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+                    country country\PYGZus{}code date\PYGZus{}added has\PYGZus{}expired  \PYGZbs{}
+0  United States of America           US        NaN          No   
+1  United States of America           US        NaN          No   
+2  United States of America           US        NaN          No   
+3  United States of America           US        NaN          No   
+4  United States of America           US        NaN          No   
+
+          job\PYGZus{}board                                    job\PYGZus{}description  \PYGZbs{}
+0  jobs.monster.com  TeamSoft is seeing an IT Support Specialist to...   
+1  jobs.monster.com  The Wisconsin State Journal is seeking a flexi...   
+2  jobs.monster.com  Report this job About the Job DePuy Synthes Co...   
+3  jobs.monster.com  Why Join Altec? If you’re considering a career...   
+4  jobs.monster.com  Position ID\PYGZsh{}  76162 \PYGZsh{} Positions  1 State  CT C...   
+
+                                           job\PYGZus{}title             job\PYGZus{}type  \PYGZbs{}
+0               IT Support Technician Job in Madison   Full Time Employee   
+1            Business Reporter/Editor Job in Madison            Full Time   
+2  Johnson \PYGZam{} Johnson Family of Companies Job Appl...  Full Time, Employee   
+3                    Engineer \PYGZhy{} Quality Job in Dixon            Full Time   
+4       Shift Supervisor \PYGZhy{} Part\PYGZhy{}Time Job in Camphill   Full Time Employee   
+
+                                            location  \PYGZbs{}
+0                                  Madison, WI 53702   
+1                                  Madison, WI 53708   
+2  DePuy Synthes Companies is a member of Johnson...   
+3                                          Dixon, CA   
+4                                       Camphill, PA   
+
+                      organization  \PYGZbs{}
+0                              NaN   
+1          Printing and Publishing   
+2  Personal and Household Services   
+3                 Altec Industries   
+4                           Retail   
+
+                                            page\PYGZus{}url salary  \PYGZbs{}
+0  http://jobview.monster.com/it\PYGZhy{}support\PYGZhy{}technici...    NaN   
+1  http://jobview.monster.com/business\PYGZhy{}reporter\PYGZhy{}e...    NaN   
+2  http://jobview.monster.com/senior\PYGZhy{}training\PYGZhy{}lea...    NaN   
+3  http://jobview.monster.com/engineer\PYGZhy{}quality\PYGZhy{}jo...    NaN   
+4  http://jobview.monster.com/shift\PYGZhy{}supervisor\PYGZhy{}pa...    NaN   
+
+                       sector                           uniq\PYGZus{}id  
+0     IT/Software Development  11d599f229a80023d2f40e7c52cd941e  
+1                         NaN  e4cbb126dabf22159aff90223243ff2a  
+2                         NaN  839106b353877fa3d896ffb9c1fe01c0  
+3   Experienced (Non\PYGZhy{}Manager)  58435fcab804439efdcaa7ecca0fd783  
+4  Project/Program Management  64d0272dc8496abfd9523a8df63c184c  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Need some inspiration? perhaps \sphinxhref{https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty}{this} might work.
 
 
 \part{3. Data Preprocessing}
