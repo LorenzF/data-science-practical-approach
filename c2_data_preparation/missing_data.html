@@ -125,6 +125,11 @@
    5. Concatenation and deduplication
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="some_practice.html">
+   6. Some practice
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -134,7 +139,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   6. Data Preprocessing
+   7. Data Preprocessing
   </a>
  </li>
 </ul>
@@ -146,7 +151,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   7. Data Exploration
+   8. Data Exploration
   </a>
  </li>
 </ul>
@@ -158,7 +163,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   8. Data Visualisation
+   9. Data Visualisation
   </a>
  </li>
 </ul>
@@ -170,7 +175,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   9. Machine Learning
+   10. Machine Learning
   </a>
  </li>
 </ul>
@@ -277,6 +282,29 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kamyr-digester">
+   4.1. Kamyr digester
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#travel-times">
+   4.2. Travel times
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#material-properties">
+   4.3. Material properties
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -287,14 +315,9 @@
                 
   <div class="section" id="missing-data">
 <h1><span class="section-number">4. </span>Missing Data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h1>
-<p>this is a notebook about missing data</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variable</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>In this notebook we will look at a few datasets where values from columns are missing.
+It is crucial for data science and machine learning to have a dataset where no values are missing as algorithms are usually not able to handle data with information missing.</p>
+<p>For python, we will be using the pandas library to handle our dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -302,10 +325,13 @@
 </div>
 </div>
 </div>
+<div class="section" id="kamyr-digester">
+<h2><span class="section-number">4.1. </span>Kamyr digester<a class="headerlink" href="#kamyr-digester" title="Permalink to this headline">¶</a></h2>
+<p>The first dataset we will be looking at is taken from a psysical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/kamyr-digester.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/kamyr-digester.csv&#39;</span><span class="p">)</span>
+<span class="n">kamyr_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -477,44 +503,89 @@
 <p>5 rows × 23 columns</p>
 </div></div></div>
 </div>
+<p>Interesting, there seem to be 22 sensor values and 1 timestamp for each record. As mechanical devices are prone to noise and dropouts of sensors we would be foolish to assume no missing values are present.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kamyr_df</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation          0
-Y-Kappa              0
-ChipRate             4
-BF-CMratio          14
-BlowFlow            13
-ChipLevel4           1
-T-upperExt-2         1
-T-lowerExt-2         1
-UCZAA               24
-WhiteFlow-4          1
-AAWhiteSt-4        141
-AA-Wood-4            1
-ChipMoisture-4       1
-SteamFlow-4          1
-Lower-HeatT-3        1
-Upper-HeatT-3        1
-ChipMass-4           1
-WeakLiquorF          1
-BlackFlow-2          1
-WeakWashF            1
-SteamHeatF-3         1
-T-Top-Chips-4        1
-SulphidityL-4      141
-dtype: int64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Observation         0.00
+Y-Kappa             0.00
+ChipRate            1.33
+BF-CMratio          4.65
+BlowFlow            4.32
+ChipLevel4          0.33
+T-upperExt-2        0.33
+T-lowerExt-2        0.33
+UCZAA               7.97
+WhiteFlow-4         0.33
+AAWhiteSt-4        46.84
+AA-Wood-4           0.33
+ChipMoisture-4      0.33
+SteamFlow-4         0.33
+Lower-HeatT-3       0.33
+Upper-HeatT-3       0.33
+ChipMass-4          0.33
+WeakLiquorF         0.33
+BlackFlow-2         0.33
+WeakWashF           0.33
+SteamHeatF-3        0.33
+T-Top-Chips-4       0.33
+SulphidityL-4      46.84
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, the datapoint ‘AAWhiteSt-4’ even has 46% of data missing!
+It seems we only have 300 datapoints and presumably these missing values occur in different records our dataset will be decimated if we just drop all rows with missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(301, 23)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">ffill</span><span class="p">()[</span><span class="s1">&#39;SulphidityL-4 &#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(131, 23)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we drop all rows with missing values, we are left with only 131 records.
+Whilst this might be good enough for some purposes, there are more viable options.</p>
+<p>Perhaps we can first remove the column with the most missing values and then drop all remaining</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AAWhiteSt-4 &#39;</span><span class="p">,</span><span class="s1">&#39;SulphidityL-4 &#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(263, 21)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Significantly better, although we lost the information of 2 sensors we now have a complete dataset with 263 records. For purposes where those 2 sensors are irrelevant this is a viable option, keep in mind that this dataset is still 100% truthful, as we have not imputed any values.</p>
+<p>Another option, where we retain all our records would be using the timely nature of our dataset, each record is a measurement with an interval of 1 hour. I have no knowledge of this dataset but one might make the assumption that the interval of 1 hour is taken as the state of the machine does not alter much in 1 hour. Therefore we could do what is called a forward fill, where we fill in the missing values with the same value of the sensor for the previous measurement.</p>
+<p>This would solve nearly all nan values as there might be a problem where the first value is missing. This is shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)[</span><span class="s1">&#39;SulphidityL-4 &#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -535,10 +606,15 @@ Name: SulphidityL-4 , Length: 301, dtype: float64
 </div>
 </div>
 </div>
+<p>Although our dataset is not fully the truth, we can see that little to no changes occur in the sensor and using a forward fill is arguably the most suitable option.</p>
+</div>
+<div class="section" id="travel-times">
+<h2><span class="section-number">4.2. </span>Travel times<a class="headerlink" href="#travel-times" title="Permalink to this headline">¶</a></h2>
+<p>Another dataset from the same source contains a collection of recorded travel times and specific information about the travel itself as e.g.: the day of the week, where they were going, …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/travel-times.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/travel-times.csv&#39;</span><span class="p">)</span>
+<span class="n">travel_df</span>
 </pre></div>
 </div>
 </div>
@@ -758,34 +834,114 @@ Name: SulphidityL-4 , Length: 301, dtype: float64
 <p>205 rows × 13 columns</p>
 </div></div></div>
 </div>
+<p>we have a total of 205 records and we can already see that the FuelEconomy column seems pretty bad, let’s quantify that.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">travel_df</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date                0
-StartTime           0
-DayOfWeek           0
-GoingTo             0
-Distance            0
-MaxSpeed            0
-AvgSpeed            0
-AvgMovingSpeed      0
-FuelEconomy        17
-TotalTime           0
-MovingTime          0
-Take407All          0
-Comments          181
-dtype: int64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date               0.00
+StartTime          0.00
+DayOfWeek          0.00
+GoingTo            0.00
+Distance           0.00
+MaxSpeed           0.00
+AvgSpeed           0.00
+AvgMovingSpeed     0.00
+FuelEconomy        8.29
+TotalTime          0.00
+MovingTime         0.00
+Take407All         0.00
+Comments          88.29
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the end, it doesn’t seem that bad, but there are comments and nearly none of them are filled in. Which in perspective is understandable. Let’s see what the comments look like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="p">[</span><span class="o">~</span><span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">Comments</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15                                  Put snow tires on
+39                                         Heavy rain
+49                                Huge traffic backup
+50      Pumped tires up: check fuel economy improved?
+52                                Backed up at Bronte
+54                                Backed up at Bronte
+60                                              Rainy
+78                                   Rain, rain, rain
+91                                   Rain, rain, rain
+92         Accident: backup from Hamilton to 407 ramp
+110                                           Raining
+132                           Back to school traffic?
+133                Took 407 all the way (to McMaster)
+150                             Heavy volume on Derry
+156                        Start early to run a batch
+158    Accident at 403/highway 6; detour along Dundas
+165                                      Detour taken
+166                                    Must be Friday
+172                             Medium amount of rain
+174                                         New tires
+182                              Turn around on Derry
+184                                       Empty roads
+187                            Police slowdown on 403
+189                         Accident blocked 407 exit
+Name: Comments, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you would expect, these comments are text based. Now imagine we would like to run some Natural Language Processing (NLP) on these, it would be a pain to perform string operations on it when it is riddled with missing values.</p>
+<p>Here a simple example where we select all records containing the word ‘rain’, with no avail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="p">[</span><span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;rain&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_36906</span><span class="o">/</span><span class="mf">1298831137.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">travel_df</span><span class="p">[</span><span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;rain&#39;</span><span class="p">)]</span>
+
+<span class="nn">~/git/data-science-practical-approach/venv/lib/python3.8/site-packages/pandas/core/frame.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3446</span> 
+<span class="g g-Whitespace">   </span><span class="mi">3447</span>         <span class="c1"># Do we have a (boolean) 1d indexer?</span>
+<span class="ne">-&gt; </span><span class="mi">3448</span>         <span class="k">if</span> <span class="n">com</span><span class="o">.</span><span class="n">is_bool_indexer</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3449</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_bool_array</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3450</span> 
+
+<span class="nn">~/git/data-science-practical-approach/venv/lib/python3.8/site-packages/pandas/core/common.py</span> in <span class="ni">is_bool_indexer</span><span class="nt">(key)</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>                     <span class="c1"># Don&#39;t raise on e.g. [&quot;A&quot;, &quot;B&quot;, np.nan], see</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>                     <span class="c1">#  test_loc_getitem_list_of_labels_categoricalindex_with_na</span>
+<span class="ne">--&gt; </span><span class="mi">139</span>                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">na_msg</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span>                 <span class="k">return</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>             <span class="k">return</span> <span class="kc">True</span>
+
+<span class="ne">ValueError</span>: Cannot mask with non-boolean array containing NA / NaN values
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last line of the python error traceback gives us the reason it failed, because there were NaN values present.</p>
+<p>Luckily the string variable has more or less it’s on ‘null’ value, being an empty string, this way these operations are still possible, most of the comments will just contain nothing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span> <span class="o">=</span> <span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="p">[</span><span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;rain&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -825,22 +981,6 @@ dtype: int64
   </thead>
   <tbody>
     <tr>
-      <th>15</th>
-      <td>12/19/2011</td>
-      <td>07:34</td>
-      <td>Monday</td>
-      <td>GSK</td>
-      <td>52.00</td>
-      <td>137.8</td>
-      <td>76.5</td>
-      <td>87.8</td>
-      <td>8.89</td>
-      <td>40.8</td>
-      <td>35.5</td>
-      <td>No</td>
-      <td>Put snow tires on</td>
-    </tr>
-    <tr>
       <th>39</th>
       <td>11/29/2011</td>
       <td>07:23</td>
@@ -855,70 +995,6 @@ dtype: int64
       <td>50.9</td>
       <td>No</td>
       <td>Heavy rain</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>11/21/2011</td>
-      <td>07:24</td>
-      <td>Monday</td>
-      <td>GSK</td>
-      <td>52.25</td>
-      <td>127.3</td>
-      <td>38.1</td>
-      <td>50.3</td>
-      <td>10.05</td>
-      <td>82.3</td>
-      <td>62.4</td>
-      <td>No</td>
-      <td>Huge traffic backup</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>11/17/2011</td>
-      <td>16:16</td>
-      <td>Thursday</td>
-      <td>Home</td>
-      <td>51.16</td>
-      <td>127.6</td>
-      <td>72.4</td>
-      <td>77.4</td>
-      <td>10.05</td>
-      <td>42.4</td>
-      <td>39.6</td>
-      <td>No</td>
-      <td>Pumped tires up: check fuel economy improved?</td>
-    </tr>
-    <tr>
-      <th>52</th>
-      <td>11/16/2011</td>
-      <td>16:13</td>
-      <td>Wednesday</td>
-      <td>Home</td>
-      <td>51.12</td>
-      <td>125.1</td>
-      <td>65.0</td>
-      <td>73.1</td>
-      <td>9.53</td>
-      <td>47.2</td>
-      <td>41.9</td>
-      <td>No</td>
-      <td>Backed up at Bronte</td>
-    </tr>
-    <tr>
-      <th>54</th>
-      <td>11/15/2011</td>
-      <td>17:36</td>
-      <td>Tuesday</td>
-      <td>Home</td>
-      <td>51.06</td>
-      <td>122.8</td>
-      <td>61.4</td>
-      <td>70.9</td>
-      <td>9.53</td>
-      <td>49.9</td>
-      <td>43.2</td>
-      <td>No</td>
-      <td>Backed up at Bronte</td>
     </tr>
     <tr>
       <th>60</th>
@@ -969,22 +1045,6 @@ dtype: int64
       <td>Rain, rain, rain</td>
     </tr>
     <tr>
-      <th>92</th>
-      <td>10/12/2011</td>
-      <td>08:28</td>
-      <td>Wednesday</td>
-      <td>GSK</td>
-      <td>50.58</td>
-      <td>128.4</td>
-      <td>59.5</td>
-      <td>67.3</td>
-      <td>8.75</td>
-      <td>51.0</td>
-      <td>45.1</td>
-      <td>Yes</td>
-      <td>Accident: backup from Hamilton to 407 ramp</td>
-    </tr>
-    <tr>
       <th>110</th>
       <td>9/27/2011</td>
       <td>07:36</td>
@@ -999,118 +1059,6 @@ dtype: int64
       <td>34.3</td>
       <td>Yes</td>
       <td>Raining</td>
-    </tr>
-    <tr>
-      <th>132</th>
-      <td>9/7/2011</td>
-      <td>07:57</td>
-      <td>Wednesday</td>
-      <td>GSK</td>
-      <td>49.08</td>
-      <td>125.1</td>
-      <td>56.5</td>
-      <td>66.5</td>
-      <td>8.5</td>
-      <td>52.1</td>
-      <td>44.3</td>
-      <td>No</td>
-      <td>Back to school traffic?</td>
-    </tr>
-    <tr>
-      <th>133</th>
-      <td>9/6/2011</td>
-      <td>16:27</td>
-      <td>Tuesday</td>
-      <td>Home</td>
-      <td>52.88</td>
-      <td>131.6</td>
-      <td>95.4</td>
-      <td>98.3</td>
-      <td>8.5</td>
-      <td>33.3</td>
-      <td>32.3</td>
-      <td>Yes</td>
-      <td>Took 407 all the way (to McMaster)</td>
-    </tr>
-    <tr>
-      <th>150</th>
-      <td>8/24/2011</td>
-      <td>07:59</td>
-      <td>Wednesday</td>
-      <td>GSK</td>
-      <td>49.07</td>
-      <td>127.1</td>
-      <td>58.5</td>
-      <td>71.5</td>
-      <td>8.54</td>
-      <td>50.3</td>
-      <td>41.1</td>
-      <td>No</td>
-      <td>Heavy volume on Derry</td>
-    </tr>
-    <tr>
-      <th>156</th>
-      <td>8/19/2011</td>
-      <td>07:05</td>
-      <td>Friday</td>
-      <td>GSK</td>
-      <td>49.18</td>
-      <td>123.0</td>
-      <td>72.0</td>
-      <td>81.4</td>
-      <td>8.37</td>
-      <td>41.0</td>
-      <td>36.3</td>
-      <td>No</td>
-      <td>Start early to run a batch</td>
-    </tr>
-    <tr>
-      <th>158</th>
-      <td>8/18/2011</td>
-      <td>08:11</td>
-      <td>Thursday</td>
-      <td>GSK</td>
-      <td>52.26</td>
-      <td>137.7</td>
-      <td>51.2</td>
-      <td>64.1</td>
-      <td>8.37</td>
-      <td>61.2</td>
-      <td>48.9</td>
-      <td>No</td>
-      <td>Accident at 403/highway 6; detour along Dundas</td>
-    </tr>
-    <tr>
-      <th>165</th>
-      <td>8/12/2011</td>
-      <td>17:25</td>
-      <td>Friday</td>
-      <td>Home</td>
-      <td>55.57</td>
-      <td>127.7</td>
-      <td>69.6</td>
-      <td>77.1</td>
-      <td>8.54</td>
-      <td>47.9</td>
-      <td>43.2</td>
-      <td>No</td>
-      <td>Detour taken</td>
-    </tr>
-    <tr>
-      <th>166</th>
-      <td>8/12/2011</td>
-      <td>08:05</td>
-      <td>Friday</td>
-      <td>GSK</td>
-      <td>49.02</td>
-      <td>128.4</td>
-      <td>76.7</td>
-      <td>82.9</td>
-      <td>8.54</td>
-      <td>38.4</td>
-      <td>35.5</td>
-      <td>No</td>
-      <td>Must be Friday</td>
     </tr>
     <tr>
       <th>172</th>
@@ -1128,123 +1076,15 @@ dtype: int64
       <td>No</td>
       <td>Medium amount of rain</td>
     </tr>
-    <tr>
-      <th>174</th>
-      <td>8/8/2011</td>
-      <td>08:07</td>
-      <td>Monday</td>
-      <td>GSK</td>
-      <td>49.25</td>
-      <td>126.3</td>
-      <td>68.5</td>
-      <td>78.2</td>
-      <td>8.54</td>
-      <td>43.1</td>
-      <td>37.8</td>
-      <td>No</td>
-      <td>New tires</td>
-    </tr>
-    <tr>
-      <th>182</th>
-      <td>8/2/2011</td>
-      <td>07:38</td>
-      <td>Tuesday</td>
-      <td>GSK</td>
-      <td>53.48</td>
-      <td>124.9</td>
-      <td>68.8</td>
-      <td>78.8</td>
-      <td>8.48</td>
-      <td>46.7</td>
-      <td>40.7</td>
-      <td>No</td>
-      <td>Turn around on Derry</td>
-    </tr>
-    <tr>
-      <th>184</th>
-      <td>7/29/2011</td>
-      <td>08:22</td>
-      <td>Friday</td>
-      <td>GSK</td>
-      <td>49.07</td>
-      <td>121.1</td>
-      <td>73.2</td>
-      <td>77.7</td>
-      <td>8.45</td>
-      <td>40.2</td>
-      <td>37.9</td>
-      <td>No</td>
-      <td>Empty roads</td>
-    </tr>
-    <tr>
-      <th>187</th>
-      <td>7/27/2011</td>
-      <td>17:24</td>
-      <td>Wednesday</td>
-      <td>Home</td>
-      <td>50.98</td>
-      <td>124.9</td>
-      <td>68.3</td>
-      <td>71.9</td>
-      <td>8.45</td>
-      <td>44.8</td>
-      <td>42.6</td>
-      <td>No</td>
-      <td>Police slowdown on 403</td>
-    </tr>
-    <tr>
-      <th>189</th>
-      <td>7/26/2011</td>
-      <td>17:15</td>
-      <td>Tuesday</td>
-      <td>Home</td>
-      <td>51.28</td>
-      <td>122.1</td>
-      <td>43.7</td>
-      <td>51.5</td>
-      <td>8.45</td>
-      <td>70.5</td>
-      <td>59.8</td>
-      <td>No</td>
-      <td>Accident blocked 407 exit</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+<p>Fixed! now we can use the comments for analysis.</p>
+<p>We still have to fix the FuelEconomy, let us take a look at the non NaN values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span><span class="s1">&#39;Comments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">Comments</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       
-1       
-2       
-3       
-4       
-      ..
-200     
-201     
-202     
-203     
-204     
-Name: Comments, Length: 205, dtype: object
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">FuelEconomy</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="p">[</span><span class="o">~</span><span class="n">travel_df</span><span class="o">.</span><span class="n">FuelEconomy</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
 </pre></div>
 </div>
 </div>
@@ -1464,9 +1304,10 @@ Name: Comments, Length: 205, dtype: object
 <p>188 rows × 13 columns</p>
 </div></div></div>
 </div>
+<p>It seems that aside NaN values there are also other intruders, a quick check on the data type (Dtype) reveils it is not recognised as a number!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1495,16 +1336,13 @@ memory usage: 20.9+ KB
 </div>
 </div>
 </div>
+<p>The column is noted as an object or string type, meaning that these numbers are given as ‘9.24’ instead of 9.24 and numerical operations are not possible.
+We can cast them to numeric but have to warn pandas to coerce errors, meaning errors will be converted to NaN values.
+Later we’ll handle the NaN’s.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">FuelEconomy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">FuelEconomy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="o">.</span><span class="n">FuelEconomy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">travel_df</span><span class="o">.</span><span class="n">FuelEconomy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="n">travel_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1533,9 +1371,11 @@ memory usage: 20.9+ KB
 </div>
 </div>
 </div>
+<p>Wonderful, now the column is numerical and we can see 2 more missing values have popped up!
+We could easily drop these 19 records and have a complete dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">FuelEconomy</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1755,10 +1595,15 @@ memory usage: 20.9+ KB
 <p>186 rows × 13 columns</p>
 </div></div></div>
 </div>
+<p>However im leaving them as an excercise for you to apply a technique we will see in the next part</p>
+</div>
+<div class="section" id="material-properties">
+<h2><span class="section-number">4.3. </span>Material properties<a class="headerlink" href="#material-properties" title="Permalink to this headline">¶</a></h2>
+<p>Another dataset from the same source contains the material properties from 30 samples, this time there is not timestamp as the samples are not related in time with each other.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://openmv.net/file/raw-material-properties.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">material_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://openmv.net/file/raw-material-properties.csv&#39;</span><span class="p">)</span>
+<span class="n">material_df</span>
 </pre></div>
 </div>
 </div>
@@ -1841,50 +1686,352 @@ memory usage: 20.9+ KB
       <td>12.24</td>
       <td>3.92</td>
     </tr>
+    <tr>
+      <th>5</th>
+      <td>X24055</td>
+      <td>0.762</td>
+      <td>2.81</td>
+      <td>6.36</td>
+      <td>38.1</td>
+      <td>13.28</td>
+      <td>3.89</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>X24905</td>
+      <td>0.552</td>
+      <td>2.34</td>
+      <td>5.03</td>
+      <td>41.3</td>
+      <td>16.71</td>
+      <td>3.86</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>X25917</td>
+      <td>0.501</td>
+      <td>2.17</td>
+      <td>5.09</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>X27871</td>
+      <td>0.619</td>
+      <td>2.11</td>
+      <td>5.13</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>X28690</td>
+      <td>0.610</td>
+      <td>2.10</td>
+      <td>4.18</td>
+      <td>35.0</td>
+      <td>12.15</td>
+      <td>3.86</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>X31385</td>
+      <td>0.532</td>
+      <td>2.09</td>
+      <td>4.93</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>X31813</td>
+      <td>0.738</td>
+      <td>2.29</td>
+      <td>5.47</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>X32807</td>
+      <td>0.779</td>
+      <td>2.62</td>
+      <td>5.59</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>X33943</td>
+      <td>0.537</td>
+      <td>2.23</td>
+      <td>5.41</td>
+      <td>35.2</td>
+      <td>11.34</td>
+      <td>3.99</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>X35035</td>
+      <td>0.702</td>
+      <td>2.05</td>
+      <td>5.10</td>
+      <td>34.2</td>
+      <td>10.54</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>X39223</td>
+      <td>0.768</td>
+      <td>2.51</td>
+      <td>5.09</td>
+      <td>34.9</td>
+      <td>12.55</td>
+      <td>3.90</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>X40503</td>
+      <td>0.714</td>
+      <td>2.56</td>
+      <td>6.03</td>
+      <td>35.6</td>
+      <td>12.20</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>X41400</td>
+      <td>0.621</td>
+      <td>2.42</td>
+      <td>5.10</td>
+      <td>38.7</td>
+      <td>14.27</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>X42988</td>
+      <td>0.726</td>
+      <td>2.11</td>
+      <td>4.69</td>
+      <td>37.1</td>
+      <td>13.14</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>X44749</td>
+      <td>0.698</td>
+      <td>2.36</td>
+      <td>5.40</td>
+      <td>36.6</td>
+      <td>12.16</td>
+      <td>4.01</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>X45295</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>38.1</td>
+      <td>13.34</td>
+      <td>3.89</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>X46965</td>
+      <td>0.759</td>
+      <td>2.47</td>
+      <td>4.83</td>
+      <td>38.7</td>
+      <td>14.83</td>
+      <td>3.89</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>X49666</td>
+      <td>0.535</td>
+      <td>2.13</td>
+      <td>5.23</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>X50678</td>
+      <td>0.716</td>
+      <td>2.29</td>
+      <td>5.45</td>
+      <td>37.3</td>
+      <td>13.70</td>
+      <td>3.92</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>X52894</td>
+      <td>0.635</td>
+      <td>2.08</td>
+      <td>4.94</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>X53925</td>
+      <td>0.598</td>
+      <td>2.12</td>
+      <td>4.69</td>
+      <td>37.9</td>
+      <td>13.45</td>
+      <td>3.78</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>X54254</td>
+      <td>0.700</td>
+      <td>2.47</td>
+      <td>5.22</td>
+      <td>38.8</td>
+      <td>14.72</td>
+      <td>3.92</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>X54272</td>
+      <td>0.957</td>
+      <td>2.96</td>
+      <td>7.37</td>
+      <td>36.2</td>
+      <td>13.38</td>
+      <td>4.20</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>X54394</td>
+      <td>0.759</td>
+      <td>2.66</td>
+      <td>5.36</td>
+      <td>35.2</td>
+      <td>12.19</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>X55408</td>
+      <td>0.661</td>
+      <td>2.10</td>
+      <td>4.27</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>X56952</td>
+      <td>0.646</td>
+      <td>2.38</td>
+      <td>4.51</td>
+      <td>40.1</td>
+      <td>15.68</td>
+      <td>3.86</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>X57095</td>
+      <td>0.662</td>
+      <td>2.34</td>
+      <td>4.71</td>
+      <td>35.0</td>
+      <td>12.37</td>
+      <td>3.90</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>X57128</td>
+      <td>0.749</td>
+      <td>2.43</td>
+      <td>5.16</td>
+      <td>37.3</td>
+      <td>13.04</td>
+      <td>3.92</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>X61870</td>
+      <td>0.598</td>
+      <td>2.21</td>
+      <td>4.90</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>X61888</td>
+      <td>0.619</td>
+      <td>2.59</td>
+      <td>5.81</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>X72736</td>
+      <td>0.693</td>
+      <td>2.05</td>
+      <td>5.02</td>
+      <td>39.6</td>
+      <td>15.55</td>
+      <td>3.94</td>
+    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+<p>let us quantify the amount of missing data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install sklearn
-<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">KNNImputer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">material_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_df</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting sklearn
-  Using cached sklearn-0.0-py2.py3-none-any.whl
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scikit-learn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached scikit_learn-0.24.2-cp38-cp38-manylinux2010_x86_64.whl (24.9 MB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting threadpoolctl&gt;=2.0.0
-  Using cached threadpoolctl-2.2.0-py3-none-any.whl (12 kB)
-Requirement already satisfied: scipy&gt;=0.19.1 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from scikit-learn-&gt;sklearn) (1.7.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting joblib&gt;=0.11
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached joblib-1.0.1-py3-none-any.whl (303 kB)
-Requirement already satisfied: numpy&gt;=1.13.3 in /home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages (from scikit-learn-&gt;sklearn) (1.21.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: threadpoolctl, joblib, scikit-learn, sklearn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed joblib-1.0.1 scikit-learn-0.24.2 sklearn-0.0 threadpoolctl-2.2.0
-<span class=" -Color -Color-Yellow">WARNING: You are using pip version 21.1.2; however, version 21.2.4 is available.</span>
-<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;/home/lorenzf/git/data-science-practical-approach/venv/bin/python -m pip install --upgrade pip&#39; command.</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample       0.00
+size1        2.78
+size2        2.78
+size3        2.78
+density1    27.78
+density2    27.78
+density3    27.78
+dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
+<p>Unfortunately that is a lot of missing data, covered in all records, dropping here seems almost impossible if we want to keep a healthy amount of records.</p>
+<p>Here it would be wise to go for a more elaborate method of imputation, I opted for the K-nearest neighbours method, which looks at the K most similar records in the dataset to make an educated guess on what the missing value could be, this because we can assume that records with similar data are also similar over all the properties (columns).</p>
+<p>Im using the sklearn library for this, which has more imputation techniques such as MICE.
+More info can be found <a class="reference external" href="https://scikit-learn.org/stable/modules/impute.html">here</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">KNNImputer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>im creating an imputer object and specify that i want to use the 5 most similar records and weigh them by distance from the to imputed record, meaning closer neighbours are more important.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imputer</span> <span class="o">=</span> <span class="n">KNNImputer</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s2">&quot;distance&quot;</span><span class="p">)</span>
@@ -1892,11 +2039,12 @@ Requirement already satisfied: numpy&gt;=1.13.3 in /home/lorenzf/git/data-scienc
 </div>
 </div>
 </div>
+<p>As the imputer only takes numerical values I had to do some pandas magic and drop the first column, which I then added again. The result is a fully filled dataset, you can recognise the new values as they are not rounded.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sample&#39;</span><span class="p">])),</span> 
-    <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Sample&#39;</span><span class="p">)</span>
+    <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">material_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sample&#39;</span><span class="p">])),</span> 
+    <span class="n">columns</span><span class="o">=</span><span class="n">material_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Sample&#39;</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -2256,6 +2404,8 @@ Requirement already satisfied: numpy&gt;=1.13.3 in /home/lorenzf/git/data-scienc
   </tbody>
 </table>
 </div></div></div>
+</div>
+<p>This concludes the part of missing values, perhaps you can try yourself and impute the missing values for the FuelEconomy using the SimpleImputer or even the IterativeImputer.</p>
 </div>
 </div>
 
