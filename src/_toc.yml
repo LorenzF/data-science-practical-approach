@@ -12,6 +12,7 @@ parts:
   - file: c2_data_preparation/indexing_slicing
   - file: c2_data_preparation/missing_data
   - file: c2_data_preparation/concatenation_deduplication
+  - file: c2_data_preparation/some_practice
 - caption: 3. Data Preprocessing
   numbered: true
   chapters:
