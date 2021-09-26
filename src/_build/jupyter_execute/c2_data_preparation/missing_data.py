@@ -21,7 +21,7 @@ import pandas as pd
 # In[2]:
 
 
-kamyr_df = pd.read_csv('https://openmv.net/file/kamyr-digester.csv')
+kamyr_df = pd.read_csv('https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/kamyr-digester.csv')
 kamyr_df.head()
 
 
@@ -80,7 +80,7 @@ kamyr_df.fillna(method='ffill')['SulphidityL-4 ']
 # In[8]:
 
 
-travel_df = pd.read_csv('https://openmv.net/file/travel-times.csv')
+travel_df = pd.read_csv('https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/travel-times.csv')
 travel_df
 
 
@@ -179,7 +179,7 @@ travel_df.dropna()
 # In[18]:
 
 
-material_df = pd.read_csv('http://openmv.net/file/raw-material-properties.csv')
+material_df = pd.read_csv('https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/raw-material-properties.csv')
 material_df
 
 
@@ -214,7 +214,7 @@ imputer = KNNImputer(n_neighbors=5, weights="distance")
 
 # As the imputer only takes numerical values I had to do some pandas magic and drop the first column, which I then added again. The result is a fully filled dataset, you can recognise the new values as they are not rounded.
 
-# In[23]:
+# In[22]:
 
 
 pd.DataFrame(

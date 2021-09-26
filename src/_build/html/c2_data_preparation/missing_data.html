@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4. Missing Data &#8212; Data Science - A practical Approach</title>
+    <title>3. Missing Data &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Concatenation and deduplication" href="concatenation_deduplication.html" />
-    <link rel="prev" title="3. Indexing and slicing" href="indexing_slicing.html" />
+    <link rel="next" title="4. Concatenation and deduplication" href="concatenation_deduplication.html" />
+    <link rel="prev" title="2. Data Preparation" href="introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -110,19 +110,19 @@
    2. Data Preparation
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="indexing_slicing.html">
-   3. Indexing and slicing
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   4. Missing Data
+   3. Missing Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concatenation_deduplication.html">
-   5. Concatenation and deduplication
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="outliers_validity.html">
+   5. Outliers and validity
   </a>
  </li>
  <li class="toctree-l1">
@@ -142,6 +142,11 @@
    7. Data Preprocessing
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   8. Indexing and slicing
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -151,7 +156,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   8. Data Exploration
+   9. Data Exploration
   </a>
  </li>
 </ul>
@@ -163,7 +168,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   9. Data Visualisation
+   10. Data Visualisation
   </a>
  </li>
 </ul>
@@ -175,7 +180,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   10. Machine Learning
+   11. Machine Learning
   </a>
  </li>
 </ul>
@@ -289,17 +294,17 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#kamyr-digester">
-   4.1. Kamyr digester
+   3.1. Kamyr digester
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#travel-times">
-   4.2. Travel times
+   3.2. Travel times
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#material-properties">
-   4.3. Material properties
+   3.3. Material properties
   </a>
  </li>
 </ul>
@@ -314,7 +319,7 @@
               <div>
                 
   <div class="section" id="missing-data">
-<h1><span class="section-number">4. </span>Missing Data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">3. </span>Missing Data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h1>
 <p>In this notebook we will look at a few datasets where values from columns are missing.
 It is crucial for data science and machine learning to have a dataset where no values are missing as algorithms are usually not able to handle data with information missing.</p>
 <p>For python, we will be using the pandas library to handle our dataset.</p>
@@ -326,11 +331,11 @@ It is crucial for data science and machine learning to have a dataset where no v
 </div>
 </div>
 <div class="section" id="kamyr-digester">
-<h2><span class="section-number">4.1. </span>Kamyr digester<a class="headerlink" href="#kamyr-digester" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1. </span>Kamyr digester<a class="headerlink" href="#kamyr-digester" title="Permalink to this headline">¶</a></h2>
 <p>The first dataset we will be looking at is taken from a psysical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/kamyr-digester.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/kamyr-digester.csv&#39;</span><span class="p">)</span>
 <span class="n">kamyr_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -609,11 +614,11 @@ Name: SulphidityL-4 , Length: 301, dtype: float64
 <p>Although our dataset is not fully the truth, we can see that little to no changes occur in the sensor and using a forward fill is arguably the most suitable option.</p>
 </div>
 <div class="section" id="travel-times">
-<h2><span class="section-number">4.2. </span>Travel times<a class="headerlink" href="#travel-times" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>Travel times<a class="headerlink" href="#travel-times" title="Permalink to this headline">¶</a></h2>
 <p>Another dataset from the same source contains a collection of recorded travel times and specific information about the travel itself as e.g.: the day of the week, where they were going, …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/travel-times.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">travel_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/travel-times.csv&#39;</span><span class="p">)</span>
 <span class="n">travel_df</span>
 </pre></div>
 </div>
@@ -908,7 +913,7 @@ Name: Comments, dtype: object
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_36906</span><span class="o">/</span><span class="mf">1298831137.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_25543</span><span class="o">/</span><span class="mf">1298831137.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">travel_df</span><span class="p">[</span><span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;rain&#39;</span><span class="p">)]</span>
 
 <span class="nn">~/git/data-science-practical-approach/venv/lib/python3.8/site-packages/pandas/core/frame.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, key)</span>
@@ -1598,11 +1603,11 @@ We could easily drop these 19 records and have a complete dataset.</p>
 <p>However im leaving them as an excercise for you to apply a technique we will see in the next part</p>
 </div>
 <div class="section" id="material-properties">
-<h2><span class="section-number">4.3. </span>Material properties<a class="headerlink" href="#material-properties" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.3. </span>Material properties<a class="headerlink" href="#material-properties" title="Permalink to this headline">¶</a></h2>
 <p>Another dataset from the same source contains the material properties from 30 samples, this time there is not timestamp as the samples are not related in time with each other.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">material_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://openmv.net/file/raw-material-properties.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">material_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/raw-material-properties.csv&#39;</span><span class="p">)</span>
 <span class="n">material_df</span>
 </pre></div>
 </div>
@@ -2439,11 +2444,11 @@ More info can be found <a class="reference external" href="https://scikit-learn.
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="indexing_slicing.html" title="previous page">
+        <a class="left-prev" href="introduction.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">3. </span>Indexing and slicing</p>
+                <p class="prevnext-title"><span class="section-number">2. </span>Data Preparation</p>
             </div>
         </a>
     </div>
@@ -2451,7 +2456,7 @@ More info can be found <a class="reference external" href="https://scikit-learn.
         <a class="right-next" href="concatenation_deduplication.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">5. </span>Concatenation and deduplication</p>
+                <p class="prevnext-title"><span class="section-number">4. </span>Concatenation and deduplication</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

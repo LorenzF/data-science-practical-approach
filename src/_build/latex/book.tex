@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Sep 24, 2021}
+\date{Sep 27, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -99,7 +99,7 @@
 this is a foreword
 
 \sphinxAtStartPar
-pdf version can be found here \sphinxhref{https://github.com/LorenzF/data-science-practical-approach/raw/main/src/\_build/latex/book.pdf}{here}.
+pdf version can be found \sphinxhref{https://github.com/LorenzF/data-science-practical-approach/raw/main/src/\_build/latex/book.pdf}{here}.
 
 
 \part{1. Introduction}
@@ -118,165 +118,6 @@ this is an introduction
 \label{\detokenize{c2_data_preparation/introduction:data-preparation}}\label{\detokenize{c2_data_preparation/introduction::doc}}
 \sphinxAtStartPar
 this is an introduction
-
-
-\chapter{Indexing and slicing}
-\label{\detokenize{c2_data_preparation/indexing_slicing:indexing-and-slicing}}\label{\detokenize{c2_data_preparation/indexing_slicing::doc}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{min\PYGZus{}temp\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/jbrownlee/Datasets/master/daily\PYGZhy{}min\PYGZhy{}temperatures.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{min\PYGZus{}temp\PYGZus{}df}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-            Date  Temp
-0     1981\PYGZhy{}01\PYGZhy{}01  20.7
-1     1981\PYGZhy{}01\PYGZhy{}02  17.9
-2     1981\PYGZhy{}01\PYGZhy{}03  18.8
-3     1981\PYGZhy{}01\PYGZhy{}04  14.6
-4     1981\PYGZhy{}01\PYGZhy{}05  15.8
-...          ...   ...
-3645  1990\PYGZhy{}12\PYGZhy{}27  14.0
-3646  1990\PYGZhy{}12\PYGZhy{}28  13.6
-3647  1990\PYGZhy{}12\PYGZhy{}29  13.5
-3648  1990\PYGZhy{}12\PYGZhy{}30  15.7
-3649  1990\PYGZhy{}12\PYGZhy{}31  13.0
-
-[3650 rows x 2 columns]
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{Date} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}datetime}\PYG{p}{(}\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{Date}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{min\PYGZus{}temp\PYGZus{}df} \PYG{o}{=} \PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Date}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}30}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-            Temp
-Date            
-1989\PYGZhy{}06\PYGZhy{}01   2.3
-1989\PYGZhy{}06\PYGZhy{}02   1.4
-1989\PYGZhy{}06\PYGZhy{}03   2.1
-1989\PYGZhy{}06\PYGZhy{}04   6.6
-1989\PYGZhy{}06\PYGZhy{}05   8.9
-1989\PYGZhy{}06\PYGZhy{}06   7.8
-1989\PYGZhy{}06\PYGZhy{}07   9.0
-1989\PYGZhy{}06\PYGZhy{}08  10.3
-1989\PYGZhy{}06\PYGZhy{}09   7.9
-1989\PYGZhy{}06\PYGZhy{}10   7.2
-1989\PYGZhy{}06\PYGZhy{}11   8.6
-1989\PYGZhy{}06\PYGZhy{}12   8.8
-1989\PYGZhy{}06\PYGZhy{}13   6.2
-1989\PYGZhy{}06\PYGZhy{}14   9.5
-1989\PYGZhy{}06\PYGZhy{}15  10.2
-1989\PYGZhy{}06\PYGZhy{}16   9.7
-1989\PYGZhy{}06\PYGZhy{}17  11.2
-1989\PYGZhy{}06\PYGZhy{}18  10.2
-1989\PYGZhy{}06\PYGZhy{}19  10.1
-1989\PYGZhy{}06\PYGZhy{}20   8.1
-1989\PYGZhy{}06\PYGZhy{}21   6.6
-1989\PYGZhy{}06\PYGZhy{}22   5.0
-1989\PYGZhy{}06\PYGZhy{}23   4.7
-1989\PYGZhy{}06\PYGZhy{}24   5.3
-1989\PYGZhy{}06\PYGZhy{}25   4.5
-1989\PYGZhy{}06\PYGZhy{}26   2.3
-1989\PYGZhy{}06\PYGZhy{}27   1.4
-1989\PYGZhy{}06\PYGZhy{}28   0.5
-1989\PYGZhy{}06\PYGZhy{}29   2.4
-1989\PYGZhy{}06\PYGZhy{}30   8.0
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}30}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Temp    6.56
-dtype: float64
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tip\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tips}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{tip\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-   total\PYGZus{}bill   tip     sex smoker  day    time  size
-0       16.99  1.01  Female     No  Sun  Dinner     2
-1       10.34  1.66    Male     No  Sun  Dinner     3
-2       21.01  3.50    Male     No  Sun  Dinner     3
-3       23.68  3.31    Male     No  Sun  Dinner     2
-4       24.59  3.61  Female     No  Sun  Dinner     4
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tip\PYGZus{}index\PYGZus{}df} \PYG{o}{=} \PYG{n}{tip\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tip\PYGZus{}index\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-     total\PYGZus{}bill   tip     sex smoker    time  size
-day                                               
-Sun       16.99  1.01  Female     No  Dinner     2
-Sun       10.34  1.66    Male     No  Dinner     3
-Sun       21.01  3.50    Male     No  Dinner     3
-Sun       23.68  3.31    Male     No  Dinner     2
-Sun       24.59  3.61  Female     No  Dinner     4
-..          ...   ...     ...    ...     ...   ...
-Sun       20.90  3.50  Female    Yes  Dinner     3
-Sun       30.46  2.00    Male    Yes  Dinner     5
-Sun       18.15  3.50  Female    Yes  Dinner     3
-Sun       23.10  4.00    Male    Yes  Dinner     3
-Sun       15.69  1.50    Male    Yes  Dinner     2
-
-[76 rows x 6 columns]
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tip\PYGZus{}index\PYGZus{}df} \PYG{o}{=} \PYG{n}{tip\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{time}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tip\PYGZus{}index\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Thur}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Lunch}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tip}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\PYGZus{}36874/2537502835.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
-  tip\PYGZus{}index\PYGZus{}df.loc[(\PYGZsq{}Thur\PYGZsq{},\PYGZsq{}Lunch\PYGZsq{})].tip.mean()
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-2.767704918032786
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{pd}\PYG{o}{.}\PYG{n}{pivot\PYGZus{}table}\PYG{p}{(}\PYG{n}{tip\PYGZus{}df}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{total\PYGZus{}bill}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{time}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{aggfunc}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{median}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-time  Lunch  Dinner
-day                
-Thur  16.00  18.780
-Fri   13.42  18.665
-Sat     NaN  18.240
-Sun     NaN  19.630
-\end{sphinxVerbatim}
 
 
 \chapter{Missing Data}
@@ -299,7 +140,7 @@ For python, we will be using the pandas library to handle our dataset.
 The first dataset we will be looking at is taken from a psysical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{kamyr\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://openmv.net/file/kamyr\PYGZhy{}digester.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{kamyr\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/kamyr\PYGZhy{}digester.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n}{kamyr\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
@@ -442,7 +283,7 @@ Although our dataset is not fully the truth, we can see that little to no change
 Another dataset from the same source contains a collection of recorded travel times and specific information about the travel itself as e.g.: the day of the week, where they were going, …
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{travel\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://openmv.net/file/travel\PYGZhy{}times.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{travel\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/travel\PYGZhy{}times.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n}{travel\PYGZus{}df}
 \end{sphinxVerbatim}
 
@@ -548,7 +389,7 @@ Here a simple example where we select all records containing the word ‘rain’
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{n+ne}{ValueError}\PYG{g+gWhitespace}{                                }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}36906}\PYG{o}{/}\PYG{l+m+mf}{1298831137.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}25543}\PYG{o}{/}\PYG{l+m+mf}{1298831137.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
 \PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{n}{travel\PYGZus{}df}\PYG{p}{[}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{contains}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rain}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
 
 \PYG{n+nn}{\PYGZti{}/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages/pandas/core/frame.py} in \PYG{n+ni}{\PYGZus{}\PYGZus{}getitem\PYGZus{}\PYGZus{}}\PYG{n+nt}{(self, key)}
@@ -759,7 +600,7 @@ However im leaving them as an excercise for you to apply a technique we will see
 Another dataset from the same source contains the material properties from 30 samples, this time there is not timestamp as the samples are not related in time with each other.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{material\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{http://openmv.net/file/raw\PYGZhy{}material\PYGZhy{}properties.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{material\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/raw\PYGZhy{}material\PYGZhy{}properties.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n}{material\PYGZus{}df}
 \end{sphinxVerbatim}
 
@@ -899,28 +740,52 @@ This concludes the part of missing values, perhaps you can try yourself and impu
 \chapter{Concatenation and deduplication}
 \label{\detokenize{c2_data_preparation/concatenation_deduplication:concatenation-and-deduplication}}\label{\detokenize{c2_data_preparation/concatenation_deduplication::doc}}
 \sphinxAtStartPar
-\sphinxurl{https://s3.amazonaws.com/nyc-tlc/trip+data/yellow\_tripdata\_2020-01.csv}
+In this notebook we are going to investigate the concepts of stitching data files (concatenation) and verifying the integrity of our data concercing duplicates
+
+
+\section{Concatenation}
+\label{\detokenize{c2_data_preparation/concatenation_deduplication:concatenation}}
+\sphinxAtStartPar
+When dealing with large amounts of data, fractioning is often the only solution.
+Not only does this tidy up your data space, but it also benefits computation.
+Aside from that, appending new data to your data lake is independent of the historical data.
+However if you want to perform historical analysis this means you will need to perform additional operations.
+
+\sphinxAtStartPar
+In this notebook we have a setup of a very small data lake containing daily minimal temperatures.
+If you would look closely in the url you would see the following structure.
+\begin{quote}
+
+\sphinxAtStartPar
+data/temperature/australia/melbourne/1981.csv
+\end{quote}
+
+\sphinxAtStartPar
+This is a straight\sphinxhyphen{}forward but perfect example on how fragmentation works, in our data lake we have:
+temperatures data fractioned by country, city and year. As we are working with daily temperatures further fractioning would not be interesting, but you could fraction e.g. per month.
+
+\sphinxAtStartPar
+In the cells below, we read our both 1981 and 1982 data and concatenate them using python.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{n+ne}{ModuleNotFoundError}\PYG{g+gWhitespace}{                       }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}13304}\PYG{o}{/}\PYG{l+m+mf}{4080736814.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
-
-\PYG{n+ne}{ModuleNotFoundError}: No module named \PYGZsq{}pandas\PYGZsq{}
+\PYG{n}{melbourne\PYGZus{}1981\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/temperatures/australia/melbourne/1981.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/yellow\PYGZus{}tripdata\PYGZus{}2020\PYGZhy{}01.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{melbourne\PYGZus{}1982\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/temperatures/australia/melbourne/1982.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-/home/lorenzf/.local/lib/python3.8/site\PYGZhy{}packages/IPython/core/interactiveshell.py:3441: DtypeWarning: Columns (6) have mixed types.Specify dtype option on import or set low\PYGZus{}memory=False.
-  exec(code\PYGZus{}obj, self.user\PYGZus{}global\PYGZus{}ns, self.user\PYGZus{}ns)
+\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{(}
+    \PYG{p}{[}
+        \PYG{n}{melbourne\PYGZus{}1981\PYGZus{}df}\PYG{p}{,}
+        \PYG{n}{melbourne\PYGZus{}1982\PYGZus{}df}\PYG{p}{,}
+    \PYG{p}{]}
+\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -928,72 +793,374 @@ This concludes the part of missing values, perhaps you can try yourself and impu
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-         VendorID tpep\PYGZus{}pickup\PYGZus{}datetime tpep\PYGZus{}dropoff\PYGZus{}datetime  passenger\PYGZus{}count  \PYGZbs{}
-0             1.0  2020\PYGZhy{}01\PYGZhy{}01 00:28:15   2020\PYGZhy{}01\PYGZhy{}01 00:33:03              1.0   
-1             1.0  2020\PYGZhy{}01\PYGZhy{}01 00:35:39   2020\PYGZhy{}01\PYGZhy{}01 00:43:04              1.0   
-2             1.0  2020\PYGZhy{}01\PYGZhy{}01 00:47:41   2020\PYGZhy{}01\PYGZhy{}01 00:53:52              1.0   
-3             1.0  2020\PYGZhy{}01\PYGZhy{}01 00:55:23   2020\PYGZhy{}01\PYGZhy{}01 01:00:14              1.0   
-4             2.0  2020\PYGZhy{}01\PYGZhy{}01 00:01:58   2020\PYGZhy{}01\PYGZhy{}01 00:04:16              1.0   
-...           ...                  ...                   ...              ...   
-6405003       NaN  2020\PYGZhy{}01\PYGZhy{}31 22:51:00   2020\PYGZhy{}01\PYGZhy{}31 23:22:00              NaN   
-6405004       NaN  2020\PYGZhy{}01\PYGZhy{}31 22:10:00   2020\PYGZhy{}01\PYGZhy{}31 23:26:00              NaN   
-6405005       NaN  2020\PYGZhy{}01\PYGZhy{}31 22:50:07   2020\PYGZhy{}01\PYGZhy{}31 23:17:57              NaN   
-6405006       NaN  2020\PYGZhy{}01\PYGZhy{}31 22:25:53   2020\PYGZhy{}01\PYGZhy{}31 22:48:32              NaN   
-6405007       NaN  2020\PYGZhy{}01\PYGZhy{}31 22:44:00   2020\PYGZhy{}01\PYGZhy{}31 23:06:00              NaN   
+           Date  Temp
+0    1981\PYGZhy{}01\PYGZhy{}01  20.7
+1    1981\PYGZhy{}01\PYGZhy{}02  17.9
+2    1981\PYGZhy{}01\PYGZhy{}03  18.8
+3    1981\PYGZhy{}01\PYGZhy{}04  14.6
+4    1981\PYGZhy{}01\PYGZhy{}05  15.8
+..          ...   ...
+360  1982\PYGZhy{}12\PYGZhy{}27  15.3
+361  1982\PYGZhy{}12\PYGZhy{}28  16.3
+362  1982\PYGZhy{}12\PYGZhy{}29  15.8
+363  1982\PYGZhy{}12\PYGZhy{}30  17.7
+364  1982\PYGZhy{}12\PYGZhy{}31  16.3
 
-         trip\PYGZus{}distance  RatecodeID store\PYGZus{}and\PYGZus{}fwd\PYGZus{}flag  PULocationID  \PYGZbs{}
-0                 1.20         1.0                  N           238   
-1                 1.20         1.0                  N           239   
-2                 0.60         1.0                  N           238   
-3                 0.80         1.0                  N           238   
-4                 0.00         1.0                  N           193   
-...                ...         ...                ...           ...   
-6405003           3.24         NaN                NaN           237   
-6405004          22.13         NaN                NaN           259   
-6405005          10.51         NaN                NaN           137   
-6405006           5.49         NaN                NaN            50   
-6405007          11.60         NaN                NaN           179   
+[730 rows x 2 columns]
+\end{sphinxVerbatim}
 
-         DOLocationID  payment\PYGZus{}type  fare\PYGZus{}amount  extra  mta\PYGZus{}tax  tip\PYGZus{}amount  \PYGZbs{}
-0                 239           1.0         6.00   3.00      0.5        1.47   
-1                 238           1.0         7.00   3.00      0.5        1.50   
-2                 238           1.0         6.00   3.00      0.5        1.00   
-3                 151           1.0         5.50   0.50      0.5        1.36   
-4                 193           2.0         3.50   0.50      0.5        0.00   
-...               ...           ...          ...    ...      ...         ...   
-6405003           234           NaN        17.59   2.75      0.5        0.00   
-6405004            45           NaN        46.67   2.75      0.5        0.00   
-6405005           169           NaN        48.85   2.75      0.0        0.00   
-6405006            42           NaN        27.17   2.75      0.0        0.00   
-6405007           205           NaN        54.56   2.75      0.5        0.00   
+\sphinxAtStartPar
+And there you have it! we now have a dataframe containing both data from 1981 as 1982.
+Can you figure out what I calculated in the next cell? Do you think there might be a more ‘clean’ solution?
 
-         tolls\PYGZus{}amount  improvement\PYGZus{}surcharge  total\PYGZus{}amount  \PYGZbs{}
-0                0.00                    0.3         11.27   
-1                0.00                    0.3         12.30   
-2                0.00                    0.3         10.80   
-3                0.00                    0.3          8.16   
-4                0.00                    0.3          4.80   
-...               ...                    ...           ...   
-6405003          0.00                    0.3         21.14   
-6405004         12.24                    0.3         62.46   
-6405005          0.00                    0.3         51.90   
-6405006          0.00                    0.3         30.22   
-6405007          0.00                    0.3         58.11   
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{p}{[}\PYG{n}{df}\PYG{o}{.}\PYG{n}{Date}\PYG{o}{.}\PYG{n}{str}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{:}\PYG{l+m+mi}{7}\PYG{p}{]}\PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{Temp}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
 
-         congestion\PYGZus{}surcharge  
-0                         2.5  
-1                         2.5  
-2                         2.5  
-3                         0.0  
-4                         0.0  
-...                       ...  
-6405003                   0.0  
-6405004                   0.0  
-6405005                   0.0  
-6405006                   0.0  
-6405007                   0.0  
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+17.140322580645158
+\end{sphinxVerbatim}
 
-[6405008 rows x 18 columns]
+\sphinxAtStartPar
+As an exercise I would ask you now to create a small python script that given a begin and end year (between 1981 and 1990) can automatically concatenate all the necessary data
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1982}\PYG{p}{,}\PYG{l+m+mi}{1987}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+1982
+1983
+1984
+1985
+1986
+\end{sphinxVerbatim}
+
+
+\section{Deduplication}
+\label{\detokenize{c2_data_preparation/concatenation_deduplication:deduplication}}
+\sphinxAtStartPar
+Another important aspect of data cleaning is the removal of duplicates.
+Here we fragment of a dataset from activity on a popular games platform.
+We can see which user has either bought or played specific games and how often.
+Unfortunately for some reason, entries might have duplicates which we have to deal with as otherwise users might have e.g. bought a game twice.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/steam.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{df}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+        user\PYGZus{}id                                          game    action  freq
+0      11373749                   Sid Meier\PYGZsq{}s Civilization IV  purchase   1.0
+1      11373749                   Sid Meier\PYGZsq{}s Civilization IV      play   0.1
+2      11373749                   Sid Meier\PYGZsq{}s Civilization IV  purchase   1.0
+3      11373749  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword  purchase   1.0
+4      11373749  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword  purchase   1.0
+...         ...                                           ...       ...   ...
+1834  112845094                                        Arma 2  purchase   1.0
+1835  112845094                  Grand Theft Auto San Andreas  purchase   1.0
+1836  112845094                    Grand Theft Auto Vice City  purchase   1.0
+1837  112845094                    Grand Theft Auto Vice City  purchase   1.0
+1838  112845094                          Grand Theft Auto III  purchase   1.0
+
+[1839 rows x 4 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We have a dataframe with 1839 interactions, you can see that the freq either notes the amount they bought (which always 1 as there is not use in buying it more) or the amount in hours they played.
+
+\sphinxAtStartPar
+Let us straightforward ask pandas to remove all rows that have an exact duplicate
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{o}{.}\PYG{n}{drop\PYGZus{}duplicates}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+        user\PYGZus{}id                                          game    action  freq
+0      11373749                   Sid Meier\PYGZsq{}s Civilization IV  purchase   1.0
+1      11373749                   Sid Meier\PYGZsq{}s Civilization IV      play   0.1
+3      11373749  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword  purchase   1.0
+5      11373749          Sid Meier\PYGZsq{}s Civilization IV Warlords  purchase   1.0
+7      56038151                       Tom Clancy\PYGZsq{}s H.A.W.X. 2  purchase   1.0
+...         ...                                           ...       ...   ...
+1831  112845094                  Grand Theft Auto San Andreas  purchase   1.0
+1832  112845094                  Grand Theft Auto San Andreas      play   0.2
+1833  112845094                          Grand Theft Auto III  purchase   1.0
+1834  112845094                                        Arma 2  purchase   1.0
+1836  112845094                    Grand Theft Auto Vice City  purchase   1.0
+
+[1132 rows x 4 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Alright! this seemed to have dropped 707 rows from our dataset, but we would like to know more about those.
+Let’s ask which rows the algorithm has dropped:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{p}{[}\PYG{n}{df}\PYG{o}{.}\PYG{n}{duplicated}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+        user\PYGZus{}id                                          game    action  freq
+2      11373749                   Sid Meier\PYGZsq{}s Civilization IV  purchase   1.0
+4      11373749  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword  purchase   1.0
+6      11373749          Sid Meier\PYGZsq{}s Civilization IV Warlords  purchase   1.0
+10     56038151                  Grand Theft Auto San Andreas  purchase   1.0
+12     56038151                    Grand Theft Auto Vice City  purchase   1.0
+...         ...                                           ...       ...   ...
+1827   39146470          Sid Meier\PYGZsq{}s Civilization IV Warlords  purchase   1.0
+1830   48666962                                      Crysis 2  purchase   1.0
+1835  112845094                  Grand Theft Auto San Andreas  purchase   1.0
+1837  112845094                    Grand Theft Auto Vice City  purchase   1.0
+1838  112845094                          Grand Theft Auto III  purchase   1.0
+
+[707 rows x 4 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Here we can see the duplicates, no particular pattern seems to be present, we could just for curiosity count the games that are duplicated
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{p}{[}\PYG{n}{df}\PYG{o}{.}\PYG{n}{duplicated}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}\PYG{o}{.}\PYG{n}{game}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Grand Theft Auto San Andreas                    172
+Grand Theft Auto Vice City                      103
+Sid Meier\PYGZsq{}s Civilization IV                      98
+Grand Theft Auto III                             90
+Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword     80
+Sid Meier\PYGZsq{}s Civilization IV Warlords             79
+Sid Meier\PYGZsq{}s Civilization IV Colonization         75
+Crysis 2                                          7
+Arma 2                                            1
+Tom Clancy\PYGZsq{}s H.A.W.X. 2                           1
+TERA                                              1
+Name: game, dtype: int64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+It seems there are some games which are very prone to being duplicated, at this point we could go and ask the IT department why these games are acting weird.
+
+\sphinxAtStartPar
+Another thing im interested about is the perspective of a single gamer, here we took a single user\_id and printed all his games
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{p}{[}\PYG{n}{df}\PYG{o}{.}\PYG{n}{user\PYGZus{}id} \PYG{o}{==} \PYG{l+m+mi}{11373749}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+    user\PYGZus{}id                                          game    action  freq
+0  11373749                   Sid Meier\PYGZsq{}s Civilization IV  purchase   1.0
+1  11373749                   Sid Meier\PYGZsq{}s Civilization IV      play   0.1
+2  11373749                   Sid Meier\PYGZsq{}s Civilization IV  purchase   1.0
+3  11373749  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword  purchase   1.0
+4  11373749  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword  purchase   1.0
+5  11373749          Sid Meier\PYGZsq{}s Civilization IV Warlords  purchase   1.0
+6  11373749          Sid Meier\PYGZsq{}s Civilization IV Warlords  purchase   1.0
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Ah, you can see all of his three games are somehow duplicated in purchase, also it seems he only played one of them for only 0.1 hours.
+Looks like he fell to the bait of a tempting summer sale but didn’t realise he had no time to actually play it.
+
+\sphinxAtStartPar
+Another thing I would like to mention here is that this dataset would make a fine recommender system as it contains user ids and hours played.
+Add game metadata (description) and reviews to the mix and your data preparation is done!
+
+\sphinxAtStartPar
+We can remove all duplicates now by overwriting our dataframe
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df} \PYG{o}{=} \PYG{n}{df}\PYG{o}{.}\PYG{n}{drop\PYGZus{}duplicates}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+One thing still bothers me, as hours played can change over time it might be that different snapshots have produced different values, therefore more duplicates might be present with different hours\_played.
+
+\sphinxAtStartPar
+Time to investigate this by using a subset of columns in the drop\_duplicates algorithm
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{o}{.}\PYG{n}{drop\PYGZus{}duplicates}\PYG{p}{(}\PYG{n}{subset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{user\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{game}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+        user\PYGZus{}id                                          game    action  freq
+0      11373749                   Sid Meier\PYGZsq{}s Civilization IV  purchase   1.0
+1      11373749                   Sid Meier\PYGZsq{}s Civilization IV      play   0.1
+3      11373749  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword  purchase   1.0
+5      11373749          Sid Meier\PYGZsq{}s Civilization IV Warlords  purchase   1.0
+7      56038151                       Tom Clancy\PYGZsq{}s H.A.W.X. 2  purchase   1.0
+...         ...                                           ...       ...   ...
+1831  112845094                  Grand Theft Auto San Andreas  purchase   1.0
+1832  112845094                  Grand Theft Auto San Andreas      play   0.2
+1833  112845094                          Grand Theft Auto III  purchase   1.0
+1834  112845094                                        Arma 2  purchase   1.0
+1836  112845094                    Grand Theft Auto Vice City  purchase   1.0
+
+[1120 rows x 4 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Seems we have shaved off another 12 records, so our intuition was right, again lets see which the duplicates are:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{p}{[}\PYG{n}{df}\PYG{o}{.}\PYG{n}{duplicated}\PYG{p}{(}\PYG{n}{subset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{user\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{game}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+        user\PYGZus{}id                                          game action  freq
+118   118664413                  Grand Theft Auto San Andreas   play   0.2
+458    50769696                  Grand Theft Auto San Andreas   play   3.1
+521    71411882                          Grand Theft Auto III   play   0.2
+607    33865373                   Sid Meier\PYGZsq{}s Civilization IV   play   2.0
+898    71510748                  Grand Theft Auto San Andreas   play   0.2
+908    28472068                    Grand Theft Auto Vice City   play   0.4
+910    28472068                  Grand Theft Auto San Andreas   play   0.2
+912    28472068                          Grand Theft Auto III   play   0.1
+1506   59925638                       Tom Clancy\PYGZsq{}s H.A.W.X. 2   play   0.3
+1553  148362155                  Grand Theft Auto San Andreas   play  12.5
+1709  176261926  Sid Meier\PYGZsq{}s Civilization IV Beyond the Sword   play   0.4
+1711  176261926                   Sid Meier\PYGZsq{}s Civilization IV   play   0.2
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+As expected the duplicates are all in the ‘play’ action, to complete our view we extract the data of a single user
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df}\PYG{p}{[}\PYG{n}{df}\PYG{o}{.}\PYG{n}{user\PYGZus{}id}\PYG{o}{==}\PYG{l+m+mi}{118664413}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+       user\PYGZus{}id                          game    action  freq
+115  118664413  Grand Theft Auto San Andreas  purchase   1.0
+116  118664413  Grand Theft Auto San Andreas      play   1.9
+118  118664413  Grand Theft Auto San Andreas      play   0.2
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+It looks like we have a problem now, we know these are duplicates and should be removed, but which one?
+Personally I would argue here that we keep the highest value, as it is impossible to ‘unplay’ hours on the game.
+I will leave this as an exercise for you, but the solution is pretty tricky so i’ll give a hint:
+
+\sphinxAtStartPar
+The algorithm always keeps the first record in case of duplicates, so you could sort the rows making sure the higher value is always encountered first, good luck!
+
+
+\chapter{Outliers and validity}
+\label{\detokenize{c2_data_preparation/outliers_validity:outliers-and-validity}}\label{\detokenize{c2_data_preparation/outliers_validity::doc}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{wafer\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://openmv.net/file/silicon\PYGZhy{}wafer\PYGZhy{}thickness.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{wafer\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+      G1     G2     G3     G4     G5     G6     G7     G8     G9
+0  0.175  0.188 \PYGZhy{}0.159  0.095  0.374 \PYGZhy{}0.238 \PYGZhy{}0.800  0.158 \PYGZhy{}0.211
+1  0.102  0.075  0.141  0.180  0.138 \PYGZhy{}0.057 \PYGZhy{}0.075  0.072  0.072
+2  0.607  0.711  0.879  0.765  0.592  0.187  0.431  0.345  0.187
+3  0.774  0.823  0.619  0.370  0.725  0.439 \PYGZhy{}0.025 \PYGZhy{}0.259  0.496
+4  0.504  0.644  0.845  0.681  0.502  0.151  0.404  0.296  0.260
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{iqr} \PYG{o}{=} \PYG{n}{wafer\PYGZus{}df}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{l+m+mf}{0.75}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{wafer\PYGZus{}df}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{l+m+mf}{0.25}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{range\PYGZus{}df} \PYG{o}{=} \PYG{p}{(}\PYG{n}{wafer\PYGZus{}df}\PYG{o}{\PYGZhy{}}\PYG{n}{wafer\PYGZus{}df}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{p}{)}\PYG{p}{)}\PYG{o}{/}\PYG{n}{iqr}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{range\PYGZus{}df}\PYG{p}{[}\PYG{p}{(}\PYG{n}{range\PYGZus{}df}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{.}\PYG{n}{any}\PYG{p}{(}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{columns}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+            G1         G2         G3         G4         G5        G6  \PYGZbs{}
+8     2.232430   2.009016   1.956542   1.589328   1.843890  1.544669   
+38   12.891135  12.827049  12.832178  13.913292  11.429506  9.500865   
+39    3.691318   3.981148   3.774387   4.081944   3.248059  3.729107   
+61    2.010106   2.153279   1.987980   1.863745   1.858602  1.274928   
+110   3.678457   2.841803   3.204808   3.180562   2.669391  0.518732   
+112   2.361047   2.086066   2.363384   2.107670   1.925623  1.238040   
+117   1.475425   1.043443   2.154415   2.582182   0.653862  1.823631   
+120   1.791456   1.484426   2.583449   1.440686   2.085819  0.990202   
+121   1.791456   1.484426   2.583449   1.440686   2.085819  0.990202   
+152   2.610932   2.102459   2.387425   2.549786   2.169187  1.730259   
+154  \PYGZhy{}0.529169  \PYGZhy{}0.538525  \PYGZhy{}0.404993  \PYGZhy{}0.331586  \PYGZhy{}0.552513  4.565994   
+
+            G7        G8        G9  
+8     1.233344  0.419604  1.582851  
+38   10.305875  9.927200  9.055620  
+39    3.304890  3.846374  3.149479  
+61    1.237283  0.825451  0.955968  
+110   0.700361  0.176555  0.727694  
+112   1.766328  0.890800  1.377752  
+117   1.581227  0.857552  1.188876  
+120   1.782081  1.034107  1.822711  
+121   1.782081  1.034107  1.822711  
+152   2.241549  1.713958  1.592121  
+154  \PYGZhy{}0.051854 \PYGZhy{}0.382918 \PYGZhy{}0.536501  
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{range\PYGZus{}df}\PYG{p}{[}\PYG{p}{(}\PYG{n}{range\PYGZus{}df}\PYG{o}{\PYGZlt{}}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{.}\PYG{n}{any}\PYG{p}{(}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{columns}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+           G1        G2        G3        G4        G5        G6        G7  \PYGZbs{}
+54  \PYGZhy{}1.550758 \PYGZhy{}1.525410 \PYGZhy{}1.843736 \PYGZhy{}2.082897 \PYGZhy{}1.659174 \PYGZhy{}1.203458 \PYGZhy{}1.184772   
+56  \PYGZhy{}1.732660 \PYGZhy{}1.510656 \PYGZhy{}2.121128 \PYGZhy{}2.122916 \PYGZhy{}1.781774 \PYGZhy{}1.521614 \PYGZhy{}1.909419   
+59  \PYGZhy{}1.971520 \PYGZhy{}1.310656 \PYGZhy{}2.328248 \PYGZhy{}1.175798 \PYGZhy{}2.067838 \PYGZhy{}0.915274 \PYGZhy{}1.783394   
+64  \PYGZhy{}1.234727 \PYGZhy{}1.361475 \PYGZhy{}0.736015 \PYGZhy{}1.055741 \PYGZhy{}2.224765 \PYGZhy{}0.839193 \PYGZhy{}0.679357   
+65  \PYGZhy{}2.226918 \PYGZhy{}1.194262 \PYGZhy{}2.117429 \PYGZhy{}2.161029 \PYGZhy{}2.043318 \PYGZhy{}0.190202 \PYGZhy{}1.004923   
+102 \PYGZhy{}2.484153 \PYGZhy{}2.330328 \PYGZhy{}1.568192 \PYGZhy{}2.808957 \PYGZhy{}1.945239 \PYGZhy{}1.340634 \PYGZhy{}0.846078   
+
+           G8        G9  
+54  \PYGZhy{}1.650903 \PYGZhy{}1.245655  
+56  \PYGZhy{}1.782746 \PYGZhy{}1.159907  
+59  \PYGZhy{}1.304672 \PYGZhy{}1.514484  
+64  \PYGZhy{}0.865578 \PYGZhy{}0.663963  
+65  \PYGZhy{}0.270565 \PYGZhy{}0.794902  
+102 \PYGZhy{}1.691029 \PYGZhy{}0.887601  
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{ensemble} \PYG{k+kn}{import} \PYG{n}{IsolationForest}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{clf} \PYG{o}{=} \PYG{n}{IsolationForest}\PYG{p}{(}\PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{wafer\PYGZus{}df}\PYG{p}{)}
+\PYG{n}{wafer\PYGZus{}df}\PYG{p}{[}\PYG{n}{clf}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{wafer\PYGZus{}df}\PYG{p}{)}\PYG{o}{==}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+        G1     G2     G3     G4     G5     G6     G7     G8     G9
+8    1.396  1.461  1.342  1.122  1.394  1.408  0.924  0.638  1.375
+20  \PYGZhy{}0.558 \PYGZhy{}0.705 \PYGZhy{}0.526 \PYGZhy{}0.412 \PYGZhy{}0.753 \PYGZhy{}0.998 \PYGZhy{}0.270  0.598 \PYGZhy{}1.416
+38   7.197  8.060  7.223  7.589  7.258  8.310  7.835  8.931  7.824
+39   2.190  2.664  2.325  2.430  2.253  3.303  2.502  3.627  2.727
+54  \PYGZhy{}0.663 \PYGZhy{}0.695 \PYGZhy{}0.713 \PYGZhy{}0.805 \PYGZhy{}0.749 \PYGZhy{}0.976 \PYGZhy{}0.918 \PYGZhy{}1.168 \PYGZhy{}1.066
+56  \PYGZhy{}0.762 \PYGZhy{}0.686 \PYGZhy{}0.863 \PYGZhy{}0.826 \PYGZhy{}0.824 \PYGZhy{}1.252 \PYGZhy{}1.470 \PYGZhy{}1.283 \PYGZhy{}0.992
+59  \PYGZhy{}0.892 \PYGZhy{}0.564 \PYGZhy{}0.975 \PYGZhy{}0.329 \PYGZhy{}0.999 \PYGZhy{}0.726 \PYGZhy{}1.374 \PYGZhy{}0.866 \PYGZhy{}1.298
+61   1.275  1.549  1.359  1.266  1.403  1.174  0.927  0.992  0.834
+65  \PYGZhy{}1.031 \PYGZhy{}0.493 \PYGZhy{}0.861 \PYGZhy{}0.846 \PYGZhy{}0.984 \PYGZhy{}0.097 \PYGZhy{}0.781  0.036 \PYGZhy{}0.677
+102 \PYGZhy{}1.171 \PYGZhy{}1.186 \PYGZhy{}0.564 \PYGZhy{}1.186 \PYGZhy{}0.924 \PYGZhy{}1.095 \PYGZhy{}0.660 \PYGZhy{}1.203 \PYGZhy{}0.757
+106 \PYGZhy{}0.659 \PYGZhy{}0.451 \PYGZhy{}0.692 \PYGZhy{}0.708 \PYGZhy{}0.595 \PYGZhy{}0.726 \PYGZhy{}1.031 \PYGZhy{}0.877 \PYGZhy{}1.080
+110  2.183  1.969  2.017  1.957  1.899  0.518  0.518  0.426  0.637
+112  1.466  1.508  1.562  1.394  1.444  1.142  1.330  1.049  1.198
+117  0.984  0.872  1.449  1.643  0.666  1.650  1.189  1.020  1.035
+120  1.156  1.141  1.681  1.044  1.542  0.927  1.342  1.174  1.582
+121  1.156  1.141  1.681  1.044  1.542  0.927  1.342  1.174  1.582
+152  1.602  1.518  1.575  1.626  1.593  1.569  1.692  1.767  1.383
 \end{sphinxVerbatim}
 
 
@@ -1007,25 +1174,14 @@ Now that you have learned techniques in data preparation, why don’t you put th
 \PYG{k+kn}{import} \PYG{n+nn}{json}
 
 \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
-\PYG{k+kn}{import} \PYG{n+nn}{kaggle}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{n+ne}{ModuleNotFoundError}\PYG{g+gWhitespace}{                       }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}36949}\PYG{o}{/}\PYG{l+m+mf}{2054829274.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{3} 
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{4} \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{5} \PYG{k+kn}{import} \PYG{n+nn}{kaggle}
+\PYG{n}{kaggle\PYGZus{}dir} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{expanduser}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZti{}/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{n}{kaggle\PYGZus{}dir}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{n}{kaggle\PYGZus{}dir}\PYG{p}{)}
 
-\PYG{n+ne}{ModuleNotFoundError}: No module named \PYGZsq{}kaggle\PYGZsq{}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
-    \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-
-\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/root/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
+\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{kaggle\PYGZus{}dir}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
     \PYG{n}{json}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}
         \PYG{p}{\PYGZob{}}
             \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{username}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{lorenzf}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
@@ -1035,7 +1191,18 @@ Now that you have learned techniques in data preparation, why don’t you put th
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{kaggle}
 \PYG{n}{kaggle}\PYG{o}{.}\PYG{n}{api}\PYG{o}{.}\PYG{n}{dataset\PYGZus{}download\PYGZus{}files}\PYG{p}{(}\PYG{n}{dataset}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PromptCloudHQ/us\PYGZhy{}jobs\PYGZhy{}on\PYGZhy{}monstercom}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{path}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{unzip}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n+ne}{ModuleNotFoundError}\PYG{g+gWhitespace}{                       }Traceback (most recent call last)
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}25600}\PYG{o}{/}\PYG{l+m+mf}{39646943.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{k+kn}{import} \PYG{n+nn}{kaggle}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{2} \PYG{n}{kaggle}\PYG{o}{.}\PYG{n}{api}\PYG{o}{.}\PYG{n}{dataset\PYGZus{}download\PYGZus{}files}\PYG{p}{(}\PYG{n}{dataset}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PromptCloudHQ/us\PYGZhy{}jobs\PYGZhy{}on\PYGZhy{}monstercom}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{path}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{unzip}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+\PYG{n+ne}{ModuleNotFoundError}: No module named \PYGZsq{}kaggle\PYGZsq{}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -1098,7 +1265,7 @@ Now that you have learned techniques in data preparation, why don’t you put th
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-Need some inspiration? perhaps \sphinxhref{https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty}{this} might work.
+Need some inspiration? perhaps \sphinxhref{https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty}{this} might help!
 
 
 \part{3. Data Preprocessing}
@@ -1108,6 +1275,202 @@ Need some inspiration? perhaps \sphinxhref{https://www.kaggle.com/ankkur13/perfe
 \label{\detokenize{c3_data_preprocessing/introduction:data-preprocessing}}\label{\detokenize{c3_data_preprocessing/introduction::doc}}
 \sphinxAtStartPar
 this is an introduction
+
+
+\chapter{Indexing and slicing}
+\label{\detokenize{c3_data_preprocessing/indexing_slicing:indexing-and-slicing}}\label{\detokenize{c3_data_preprocessing/indexing_slicing::doc}}
+\sphinxAtStartPar
+In
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/temperatures/australia/melbourne/1981.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+           Date  Temp
+0    1981\PYGZhy{}01\PYGZhy{}01  20.7
+1    1981\PYGZhy{}01\PYGZhy{}02  17.9
+2    1981\PYGZhy{}01\PYGZhy{}03  18.8
+3    1981\PYGZhy{}01\PYGZhy{}04  14.6
+4    1981\PYGZhy{}01\PYGZhy{}05  15.8
+..          ...   ...
+360  1981\PYGZhy{}12\PYGZhy{}27  15.5
+361  1981\PYGZhy{}12\PYGZhy{}28  13.3
+362  1981\PYGZhy{}12\PYGZhy{}29  15.6
+363  1981\PYGZhy{}12\PYGZhy{}30  15.2
+364  1981\PYGZhy{}12\PYGZhy{}31  17.4
+
+[365 rows x 2 columns]
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{Date} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}datetime}\PYG{p}{(}\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{Date}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df} \PYG{o}{=} \PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Date}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1981\PYGZhy{}06\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1981\PYGZhy{}06\PYGZhy{}30}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+            Temp
+Date            
+1981\PYGZhy{}06\PYGZhy{}01  11.6
+1981\PYGZhy{}06\PYGZhy{}02  10.6
+1981\PYGZhy{}06\PYGZhy{}03   9.8
+1981\PYGZhy{}06\PYGZhy{}04  11.2
+1981\PYGZhy{}06\PYGZhy{}05   5.7
+1981\PYGZhy{}06\PYGZhy{}06   7.1
+1981\PYGZhy{}06\PYGZhy{}07   2.5
+1981\PYGZhy{}06\PYGZhy{}08   3.5
+1981\PYGZhy{}06\PYGZhy{}09   4.6
+1981\PYGZhy{}06\PYGZhy{}10  11.0
+1981\PYGZhy{}06\PYGZhy{}11   5.7
+1981\PYGZhy{}06\PYGZhy{}12   7.7
+1981\PYGZhy{}06\PYGZhy{}13  10.4
+1981\PYGZhy{}06\PYGZhy{}14  11.4
+1981\PYGZhy{}06\PYGZhy{}15   9.2
+1981\PYGZhy{}06\PYGZhy{}16   6.1
+1981\PYGZhy{}06\PYGZhy{}17   2.7
+1981\PYGZhy{}06\PYGZhy{}18   4.3
+1981\PYGZhy{}06\PYGZhy{}19   6.3
+1981\PYGZhy{}06\PYGZhy{}20   3.8
+1981\PYGZhy{}06\PYGZhy{}21   4.4
+1981\PYGZhy{}06\PYGZhy{}22   7.1
+1981\PYGZhy{}06\PYGZhy{}23   4.8
+1981\PYGZhy{}06\PYGZhy{}24   5.8
+1981\PYGZhy{}06\PYGZhy{}25   6.2
+1981\PYGZhy{}06\PYGZhy{}26   7.3
+1981\PYGZhy{}06\PYGZhy{}27   9.2
+1981\PYGZhy{}06\PYGZhy{}28  10.2
+1981\PYGZhy{}06\PYGZhy{}29   9.5
+1981\PYGZhy{}06\PYGZhy{}30   9.5
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1989\PYGZhy{}06\PYGZhy{}30}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Temp   NaN
+dtype: float64
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{min\PYGZus{}temp\PYGZus{}df}\PYG{o}{.}\PYG{n}{resample}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MS}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+                 Temp
+Date                 
+1981\PYGZhy{}01\PYGZhy{}01  17.712903
+1981\PYGZhy{}02\PYGZhy{}01  17.678571
+1981\PYGZhy{}03\PYGZhy{}01  13.500000
+1981\PYGZhy{}04\PYGZhy{}01  12.356667
+1981\PYGZhy{}05\PYGZhy{}01   9.490323
+1981\PYGZhy{}06\PYGZhy{}01   7.306667
+1981\PYGZhy{}07\PYGZhy{}01   7.577419
+1981\PYGZhy{}08\PYGZhy{}01   7.238710
+1981\PYGZhy{}09\PYGZhy{}01  10.143333
+1981\PYGZhy{}10\PYGZhy{}01  10.087097
+1981\PYGZhy{}11\PYGZhy{}01  11.890000
+1981\PYGZhy{}12\PYGZhy{}01  13.680645
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tip\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tips}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{tip\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+   total\PYGZus{}bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tip\PYGZus{}index\PYGZus{}df} \PYG{o}{=} \PYG{n}{tip\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tip\PYGZus{}index\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+     total\PYGZus{}bill   tip     sex smoker    time  size
+day                                               
+Sun       16.99  1.01  Female     No  Dinner     2
+Sun       10.34  1.66    Male     No  Dinner     3
+Sun       21.01  3.50    Male     No  Dinner     3
+Sun       23.68  3.31    Male     No  Dinner     2
+Sun       24.59  3.61  Female     No  Dinner     4
+..          ...   ...     ...    ...     ...   ...
+Sun       20.90  3.50  Female    Yes  Dinner     3
+Sun       30.46  2.00    Male    Yes  Dinner     5
+Sun       18.15  3.50  Female    Yes  Dinner     3
+Sun       23.10  4.00    Male    Yes  Dinner     3
+Sun       15.69  1.50    Male    Yes  Dinner     2
+
+[76 rows x 6 columns]
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tip\PYGZus{}index\PYGZus{}df} \PYG{o}{=} \PYG{n}{tip\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{time}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tip\PYGZus{}index\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Thur}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Lunch}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tip}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/tmp/ipykernel\PYGZus{}25625/2537502835.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
+  tip\PYGZus{}index\PYGZus{}df.loc[(\PYGZsq{}Thur\PYGZsq{},\PYGZsq{}Lunch\PYGZsq{})].tip.mean()
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+2.767704918032786
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pd}\PYG{o}{.}\PYG{n}{pivot\PYGZus{}table}\PYG{p}{(}\PYG{n}{tip\PYGZus{}df}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{total\PYGZus{}bill}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{time}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{aggfunc}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{median}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+time  Lunch  Dinner
+day                
+Thur  16.00  18.780
+Fri   13.42  18.665
+Sat     NaN  18.240
+Sun     NaN  19.630
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tip\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sex}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{time}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoker}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Male}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Dinner}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tip}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/tmp/ipykernel\PYGZus{}25625/3467525553.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
+  tip\PYGZus{}df.set\PYGZus{}index([\PYGZsq{}sex\PYGZsq{}, \PYGZsq{}time\PYGZsq{},\PYGZsq{}smoker\PYGZsq{}]).loc[(\PYGZsq{}Male\PYGZsq{}, \PYGZsq{}Dinner\PYGZsq{},\PYGZsq{}Yes\PYGZsq{})][\PYGZsq{}tip\PYGZsq{}].mean()
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+3.123191489361702
+\end{sphinxVerbatim}
 
 
 \part{4. Data Exploration}

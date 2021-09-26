@@ -3,18 +3,21 @@
 \contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
 \contentsline {part}{II\hspace {1em}2. Data Preparation}{7}{part.2}%
 \contentsline {chapter}{\numberline {2}Data Preparation}{9}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Indexing and slicing}{11}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Missing Data}{15}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Kamyr digester}{15}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Travel times}{17}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Material properties}{22}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Concatenation and deduplication}{25}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Some practice}{27}{chapter.6}%
-\contentsline {part}{III\hspace {1em}3. Data Preprocessing}{29}{part.3}%
-\contentsline {chapter}{\numberline {7}Data Preprocessing}{31}{chapter.7}%
-\contentsline {part}{IV\hspace {1em}4. Data Exploration}{33}{part.4}%
-\contentsline {chapter}{\numberline {8}Data Exploration}{35}{chapter.8}%
-\contentsline {part}{V\hspace {1em}5. Data Visualisation}{37}{part.5}%
-\contentsline {chapter}{\numberline {9}Data Visualisation}{39}{chapter.9}%
-\contentsline {part}{VI\hspace {1em}6. Machine Learning}{41}{part.6}%
-\contentsline {chapter}{\numberline {10}Machine Learning}{43}{chapter.10}%
+\contentsline {chapter}{\numberline {3}Missing Data}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Kamyr digester}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Travel times}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Material properties}{18}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Concatenation and deduplication}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Concatenation}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Deduplication}{22}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Outliers and validity}{27}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Some practice}{29}{chapter.6}%
+\contentsline {part}{III\hspace {1em}3. Data Preprocessing}{31}{part.3}%
+\contentsline {chapter}{\numberline {7}Data Preprocessing}{33}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Indexing and slicing}{35}{chapter.8}%
+\contentsline {part}{IV\hspace {1em}4. Data Exploration}{39}{part.4}%
+\contentsline {chapter}{\numberline {9}Data Exploration}{41}{chapter.9}%
+\contentsline {part}{V\hspace {1em}5. Data Visualisation}{43}{part.5}%
+\contentsline {chapter}{\numberline {10}Data Visualisation}{45}{chapter.10}%
+\contentsline {part}{VI\hspace {1em}6. Machine Learning}{47}{part.6}%
+\contentsline {chapter}{\numberline {11}Machine Learning}{49}{chapter.11}%

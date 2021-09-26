@@ -12,16 +12,16 @@ import os
 import json
 
 import pandas as pd
-import kaggle
 
 
 # In[2]:
 
 
-if not os.path.exists("/root/.kaggle"):
-    os.mkdir("/root/.kaggle")
+kaggle_dir = os.path.expanduser("~/.kaggle")
+if not os.path.exists(kaggle_dir):
+    os.mkdir(kaggle_dir)
 
-with open('/root/.kaggle/kaggle.json', 'w') as f:
+with open(f'{kaggle_dir}/kaggle.json', 'w') as f:
     json.dump(
         {
             "username":"lorenzf",
@@ -33,6 +33,7 @@ with open('/root/.kaggle/kaggle.json', 'w') as f:
 # In[3]:
 
 
+import kaggle
 kaggle.api.dataset_download_files(dataset='PromptCloudHQ/us-jobs-on-monstercom', path='./data', unzip=True)
 
 
@@ -54,4 +55,4 @@ df.head()
 
 
 
-# Need some inspiration? perhaps [this](https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty) might work.
+# Need some inspiration? perhaps [this](https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty) might help!
