@@ -9,7 +9,6 @@ parts:
   numbered: true
   chapters:
   - file: c2_data_preparation/introduction
-  - file: c2_data_preparation/indexing_slicing
   - file: c2_data_preparation/missing_data
   - file: c2_data_preparation/concatenation_deduplication
   - file: c2_data_preparation/outliers_validity
@@ -18,6 +17,7 @@ parts:
   numbered: true
   chapters:
   - file: c3_data_preprocessing/introduction
+  - file: c3_data_preprocessing/indexing_slicing
 - caption: 4. Data Exploration
   numbered: true
   chapters:
