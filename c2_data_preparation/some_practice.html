@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="7. Data Preprocessing" href="../c3_data_preprocessing/introduction.html" />
-    <link rel="prev" title="5. Concatenation and deduplication" href="concatenation_deduplication.html" />
+    <link rel="prev" title="5. Outliers and validity" href="outliers_validity.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -111,18 +111,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="indexing_slicing.html">
-   3. Indexing and slicing
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="missing_data.html">
-   4. Missing Data
+   3. Missing Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="concatenation_deduplication.html">
-   5. Concatenation and deduplication
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="outliers_validity.html">
+   5. Outliers and validity
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -142,6 +142,11 @@
    7. Data Preprocessing
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   8. Indexing and slicing
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -151,7 +156,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   8. Data Exploration
+   9. Data Exploration
   </a>
  </li>
 </ul>
@@ -163,7 +168,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   9. Data Visualisation
+   10. Data Visualisation
   </a>
  </li>
 </ul>
@@ -175,7 +180,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   10. Machine Learning
+   11. Machine Learning
   </a>
  </li>
 </ul>
@@ -299,29 +304,17 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">kaggle</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_36949</span><span class="o">/</span><span class="mf">2054829274.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">kaggle</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;kaggle&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kaggle_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.kaggle&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">kaggle_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">kaggle_dir</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">kaggle_dir</span><span class="si">}</span><span class="s1">/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
         <span class="p">{</span>
             <span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;lorenzf&quot;</span><span class="p">,</span>
@@ -334,7 +327,19 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;PromptCloudHQ/us-jobs-on-monstercom&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">kaggle</span>
+<span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;PromptCloudHQ/us-jobs-on-monstercom&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_25600</span><span class="o">/</span><span class="mf">39646943.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">kaggle</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;PromptCloudHQ/us-jobs-on-monstercom&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;kaggle&#39;
 </pre></div>
 </div>
 </div>
@@ -477,7 +482,7 @@
 </table>
 </div></div></div>
 </div>
-<p>Need some inspiration? perhaps <a class="reference external" href="https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty">this</a> might work.</p>
+<p>Need some inspiration? perhaps <a class="reference external" href="https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty">this</a> might help!</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -510,11 +515,11 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="concatenation_deduplication.html" title="previous page">
+        <a class="left-prev" href="outliers_validity.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">5. </span>Concatenation and deduplication</p>
+                <p class="prevnext-title"><span class="section-number">5. </span>Outliers and validity</p>
             </div>
         </a>
     </div>

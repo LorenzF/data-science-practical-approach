@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5. Concatenation and deduplication &#8212; Data Science - A practical Approach</title>
+    <title>4. Concatenation and deduplication &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Data Preprocessing" href="../c3_data_preprocessing/introduction.html" />
-    <link rel="prev" title="4. Missing Data" href="missing_data.html" />
+    <link rel="next" title="5. Outliers and validity" href="outliers_validity.html" />
+    <link rel="prev" title="3. Missing Data" href="missing_data.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -111,18 +111,23 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="indexing_slicing.html">
-   3. Indexing and slicing
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="missing_data.html">
-   4. Missing Data
+   3. Missing Data
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   5. Concatenation and deduplication
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="outliers_validity.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="some_practice.html">
+   6. Some practice
   </a>
  </li>
 </ul>
@@ -134,7 +139,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   6. Data Preprocessing
+   7. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   8. Indexing and slicing
   </a>
  </li>
 </ul>
@@ -146,7 +156,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   7. Data Exploration
+   9. Data Exploration
   </a>
  </li>
 </ul>
@@ -158,7 +168,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   8. Data Visualisation
+   10. Data Visualisation
   </a>
  </li>
 </ul>
@@ -170,7 +180,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   9. Machine Learning
+   11. Machine Learning
   </a>
  </li>
 </ul>
@@ -277,6 +287,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concatenation">
+   4.1. Concatenation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deduplication">
+   4.2. Deduplication
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -286,34 +314,51 @@
               <div>
                 
   <div class="section" id="concatenation-and-deduplication">
-<h1><span class="section-number">5. </span>Concatenation and deduplication<a class="headerlink" href="#concatenation-and-deduplication" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2020-01.csv">https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2020-01.csv</a></p>
+<h1><span class="section-number">4. </span>Concatenation and deduplication<a class="headerlink" href="#concatenation-and-deduplication" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we are going to investigate the concepts of stitching data files (concatenation) and verifying the integrity of our data concercing duplicates</p>
+<div class="section" id="concatenation">
+<h2><span class="section-number">4.1. </span>Concatenation<a class="headerlink" href="#concatenation" title="Permalink to this headline">¶</a></h2>
+<p>When dealing with large amounts of data, fractioning is often the only solution.
+Not only does this tidy up your data space, but it also benefits computation.
+Aside from that, appending new data to your data lake is independent of the historical data.
+However if you want to perform historical analysis this means you will need to perform additional operations.</p>
+<p>In this notebook we have a setup of a very small data lake containing daily minimal temperatures.
+If you would look closely in the url you would see the following structure.</p>
+<blockquote>
+<div><p>data/temperature/australia/melbourne/1981.csv</p>
+</div></blockquote>
+<p>This is a straight-forward but perfect example on how fragmentation works, in our data lake we have:
+temperatures data fractioned by country, city and year. As we are working with daily temperatures further fractioning would not be interesting, but you could fraction e.g. per month.</p>
+<p>In the cells below, we read our both 1981 and 1982 data and concatenate them using python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_13304</span><span class="o">/</span><span class="mf">4080736814.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">melbourne_1981_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/temperatures/australia/melbourne/1981.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2020-01.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">melbourne_1982_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/temperatures/australia/melbourne/1982.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/lorenzf/.local/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3441: DtypeWarning: Columns (6) have mixed types.Specify dtype option on import or set low_memory=False.
-  exec(code_obj, self.user_global_ns, self.user_ns)
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">melbourne_1981_df</span><span class="p">,</span>
+        <span class="n">melbourne_1982_df</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -343,131 +388,177 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VendorID</th>
-      <th>tpep_pickup_datetime</th>
-      <th>tpep_dropoff_datetime</th>
-      <th>passenger_count</th>
-      <th>trip_distance</th>
-      <th>RatecodeID</th>
-      <th>store_and_fwd_flag</th>
-      <th>PULocationID</th>
-      <th>DOLocationID</th>
-      <th>payment_type</th>
-      <th>fare_amount</th>
-      <th>extra</th>
-      <th>mta_tax</th>
-      <th>tip_amount</th>
-      <th>tolls_amount</th>
-      <th>improvement_surcharge</th>
-      <th>total_amount</th>
-      <th>congestion_surcharge</th>
+      <th>Date</th>
+      <th>Temp</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.0</td>
-      <td>2020-01-01 00:28:15</td>
-      <td>2020-01-01 00:33:03</td>
-      <td>1.0</td>
-      <td>1.20</td>
-      <td>1.0</td>
-      <td>N</td>
-      <td>238</td>
-      <td>239</td>
-      <td>1.0</td>
-      <td>6.00</td>
-      <td>3.00</td>
-      <td>0.5</td>
-      <td>1.47</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>11.27</td>
-      <td>2.5</td>
+      <td>1981-01-01</td>
+      <td>20.7</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1.0</td>
-      <td>2020-01-01 00:35:39</td>
-      <td>2020-01-01 00:43:04</td>
-      <td>1.0</td>
-      <td>1.20</td>
-      <td>1.0</td>
-      <td>N</td>
-      <td>239</td>
-      <td>238</td>
-      <td>1.0</td>
-      <td>7.00</td>
-      <td>3.00</td>
-      <td>0.5</td>
-      <td>1.50</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>12.30</td>
-      <td>2.5</td>
+      <td>1981-01-02</td>
+      <td>17.9</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1.0</td>
-      <td>2020-01-01 00:47:41</td>
-      <td>2020-01-01 00:53:52</td>
-      <td>1.0</td>
-      <td>0.60</td>
-      <td>1.0</td>
-      <td>N</td>
-      <td>238</td>
-      <td>238</td>
-      <td>1.0</td>
-      <td>6.00</td>
-      <td>3.00</td>
-      <td>0.5</td>
-      <td>1.00</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>10.80</td>
-      <td>2.5</td>
+      <td>1981-01-03</td>
+      <td>18.8</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1.0</td>
-      <td>2020-01-01 00:55:23</td>
-      <td>2020-01-01 01:00:14</td>
-      <td>1.0</td>
-      <td>0.80</td>
-      <td>1.0</td>
-      <td>N</td>
-      <td>238</td>
-      <td>151</td>
-      <td>1.0</td>
-      <td>5.50</td>
-      <td>0.50</td>
-      <td>0.5</td>
-      <td>1.36</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>8.16</td>
-      <td>0.0</td>
+      <td>1981-01-04</td>
+      <td>14.6</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2.0</td>
-      <td>2020-01-01 00:01:58</td>
-      <td>2020-01-01 00:04:16</td>
+      <td>1981-01-05</td>
+      <td>15.8</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>360</th>
+      <td>1982-12-27</td>
+      <td>15.3</td>
+    </tr>
+    <tr>
+      <th>361</th>
+      <td>1982-12-28</td>
+      <td>16.3</td>
+    </tr>
+    <tr>
+      <th>362</th>
+      <td>1982-12-29</td>
+      <td>15.8</td>
+    </tr>
+    <tr>
+      <th>363</th>
+      <td>1982-12-30</td>
+      <td>17.7</td>
+    </tr>
+    <tr>
+      <th>364</th>
+      <td>1982-12-31</td>
+      <td>16.3</td>
+    </tr>
+  </tbody>
+</table>
+<p>730 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>And there you have it! we now have a dataframe containing both data from 1981 as 1982.
+Can you figure out what I calculated in the next cell? Do you think there might be a more ‘clean’ solution?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;01&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Temp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.140322580645158
+</pre></div>
+</div>
+</div>
+</div>
+<p>As an exercise I would ask you now to create a small python script that given a begin and end year (between 1981 and 1990) can automatically concatenate all the necessary data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1982</span><span class="p">,</span><span class="mi">1987</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1982
+1983
+1984
+1985
+1986
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deduplication">
+<h2><span class="section-number">4.2. </span>Deduplication<a class="headerlink" href="#deduplication" title="Permalink to this headline">¶</a></h2>
+<p>Another important aspect of data cleaning is the removal of duplicates.
+Here we fragment of a dataset from activity on a popular games platform.
+We can see which user has either bought or played specific games and how often.
+Unfortunately for some reason, entries might have duplicates which we have to deal with as otherwise users might have e.g. bought a game twice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/steam.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>game</th>
+      <th>action</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>purchase</td>
       <td>1.0</td>
-      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>play</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>purchase</td>
       <td>1.0</td>
-      <td>N</td>
-      <td>193</td>
-      <td>193</td>
-      <td>2.0</td>
-      <td>3.50</td>
-      <td>0.50</td>
-      <td>0.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>4.80</td>
-      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>purchase</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -475,130 +566,701 @@
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
-      <th>6405003</th>
-      <td>NaN</td>
-      <td>2020-01-31 22:51:00</td>
-      <td>2020-01-31 23:22:00</td>
-      <td>NaN</td>
-      <td>3.24</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>237</td>
-      <td>234</td>
-      <td>NaN</td>
-      <td>17.59</td>
-      <td>2.75</td>
-      <td>0.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>21.14</td>
-      <td>0.0</td>
+      <th>1834</th>
+      <td>112845094</td>
+      <td>Arma 2</td>
+      <td>purchase</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>6405004</th>
-      <td>NaN</td>
-      <td>2020-01-31 22:10:00</td>
-      <td>2020-01-31 23:26:00</td>
-      <td>NaN</td>
-      <td>22.13</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>259</td>
-      <td>45</td>
-      <td>NaN</td>
-      <td>46.67</td>
-      <td>2.75</td>
-      <td>0.5</td>
-      <td>0.00</td>
-      <td>12.24</td>
-      <td>0.3</td>
-      <td>62.46</td>
-      <td>0.0</td>
+      <th>1835</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>purchase</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>6405005</th>
-      <td>NaN</td>
-      <td>2020-01-31 22:50:07</td>
-      <td>2020-01-31 23:17:57</td>
-      <td>NaN</td>
-      <td>10.51</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>137</td>
-      <td>169</td>
-      <td>NaN</td>
-      <td>48.85</td>
-      <td>2.75</td>
-      <td>0.0</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>51.90</td>
-      <td>0.0</td>
+      <th>1836</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto Vice City</td>
+      <td>purchase</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>6405006</th>
-      <td>NaN</td>
-      <td>2020-01-31 22:25:53</td>
-      <td>2020-01-31 22:48:32</td>
-      <td>NaN</td>
-      <td>5.49</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>50</td>
-      <td>42</td>
-      <td>NaN</td>
-      <td>27.17</td>
-      <td>2.75</td>
-      <td>0.0</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>30.22</td>
-      <td>0.0</td>
+      <th>1837</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto Vice City</td>
+      <td>purchase</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>6405007</th>
-      <td>NaN</td>
-      <td>2020-01-31 22:44:00</td>
-      <td>2020-01-31 23:06:00</td>
-      <td>NaN</td>
-      <td>11.60</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>179</td>
-      <td>205</td>
-      <td>NaN</td>
-      <td>54.56</td>
-      <td>2.75</td>
-      <td>0.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.3</td>
-      <td>58.11</td>
-      <td>0.0</td>
+      <th>1838</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto III</td>
+      <td>purchase</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
-<p>6405008 rows × 18 columns</p>
+<p>1839 rows × 4 columns</p>
 </div></div></div>
+</div>
+<p>We have a dataframe with 1839 interactions, you can see that the freq either notes the amount they bought (which always 1 as there is not use in buying it more) or the amount in hours they played.</p>
+<p>Let us straightforward ask pandas to remove all rows that have an exact duplicate</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>game</th>
+      <th>action</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>play</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Warlords</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>56038151</td>
+      <td>Tom Clancy's H.A.W.X. 2</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1831</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1832</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>1833</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto III</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1834</th>
+      <td>112845094</td>
+      <td>Arma 2</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1836</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto Vice City</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1132 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p>Alright! this seemed to have dropped 707 rows from our dataset, but we would like to know more about those.
+Let’s ask which rows the algorithm has dropped:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>game</th>
+      <th>action</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Warlords</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>56038151</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>56038151</td>
+      <td>Grand Theft Auto Vice City</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1827</th>
+      <td>39146470</td>
+      <td>Sid Meier's Civilization IV Warlords</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1830</th>
+      <td>48666962</td>
+      <td>Crysis 2</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1835</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1837</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto Vice City</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1838</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto III</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>707 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p>Here we can see the duplicates, no particular pattern seems to be present, we could just for curiosity count the games that are duplicated</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grand Theft Auto San Andreas                    172
+Grand Theft Auto Vice City                      103
+Sid Meier&#39;s Civilization IV                      98
+Grand Theft Auto III                             90
+Sid Meier&#39;s Civilization IV Beyond the Sword     80
+Sid Meier&#39;s Civilization IV Warlords             79
+Sid Meier&#39;s Civilization IV Colonization         75
+Crysis 2                                          7
+Arma 2                                            1
+Tom Clancy&#39;s H.A.W.X. 2                           1
+TERA                                              1
+Name: game, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>It seems there are some games which are very prone to being duplicated, at this point we could go and ask the IT department why these games are acting weird.</p>
+<p>Another thing im interested about is the perspective of a single gamer, here we took a single user_id and printed all his games</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="mi">11373749</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>game</th>
+      <th>action</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>play</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Warlords</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Warlords</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ah, you can see all of his three games are somehow duplicated in purchase, also it seems he only played one of them for only 0.1 hours.
+Looks like he fell to the bait of a tempting summer sale but didn’t realise he had no time to actually play it.</p>
+<p>Another thing I would like to mention here is that this dataset would make a fine recommender system as it contains user ids and hours played.
+Add game metadata (description) and reviews to the mix and your data preparation is done!</p>
+<p>We can remove all duplicates now by overwriting our dataframe</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One thing still bothers me, as hours played can change over time it might be that different snapshots have produced different values, therefore more duplicates might be present with different hours_played.</p>
+<p>Time to investigate this by using a subset of columns in the drop_duplicates algorithm</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;game&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>game</th>
+      <th>action</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>play</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>11373749</td>
+      <td>Sid Meier's Civilization IV Warlords</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>56038151</td>
+      <td>Tom Clancy's H.A.W.X. 2</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1831</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1832</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>1833</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto III</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1834</th>
+      <td>112845094</td>
+      <td>Arma 2</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1836</th>
+      <td>112845094</td>
+      <td>Grand Theft Auto Vice City</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1120 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p>Seems we have shaved off another 12 records, so our intuition was right, again lets see which the duplicates are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;game&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>game</th>
+      <th>action</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>118</th>
+      <td>118664413</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>458</th>
+      <td>50769696</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>3.1</td>
+    </tr>
+    <tr>
+      <th>521</th>
+      <td>71411882</td>
+      <td>Grand Theft Auto III</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>607</th>
+      <td>33865373</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>play</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>898</th>
+      <td>71510748</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>908</th>
+      <td>28472068</td>
+      <td>Grand Theft Auto Vice City</td>
+      <td>play</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>910</th>
+      <td>28472068</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>912</th>
+      <td>28472068</td>
+      <td>Grand Theft Auto III</td>
+      <td>play</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>1506</th>
+      <td>59925638</td>
+      <td>Tom Clancy's H.A.W.X. 2</td>
+      <td>play</td>
+      <td>0.3</td>
+    </tr>
+    <tr>
+      <th>1553</th>
+      <td>148362155</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>12.5</td>
+    </tr>
+    <tr>
+      <th>1709</th>
+      <td>176261926</td>
+      <td>Sid Meier's Civilization IV Beyond the Sword</td>
+      <td>play</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>1711</th>
+      <td>176261926</td>
+      <td>Sid Meier's Civilization IV</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As expected the duplicates are all in the ‘play’ action, to complete our view we extract the data of a single user</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">user_id</span><span class="o">==</span><span class="mi">118664413</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>game</th>
+      <th>action</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>115</th>
+      <td>118664413</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>purchase</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>118664413</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>1.9</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>118664413</td>
+      <td>Grand Theft Auto San Andreas</td>
+      <td>play</td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>It looks like we have a problem now, we know these are duplicates and should be removed, but which one?
+Personally I would argue here that we keep the highest value, as it is impossible to ‘unplay’ hours on the game.
+I will leave this as an exercise for you, but the solution is pretty tricky so i’ll give a hint:</p>
+<p>The algorithm always keeps the first record in case of duplicates, so you could sort the rows making sure the higher value is always encountered first, good luck!</p>
 </div>
 </div>
 
@@ -636,15 +1298,15 @@
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">4. </span>Missing Data</p>
+                <p class="prevnext-title"><span class="section-number">3. </span>Missing Data</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="../c3_data_preprocessing/introduction.html" title="next page">
+        <a class="right-next" href="outliers_validity.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">6. </span>Data Preprocessing</p>
+                <p class="prevnext-title"><span class="section-number">5. </span>Outliers and validity</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
