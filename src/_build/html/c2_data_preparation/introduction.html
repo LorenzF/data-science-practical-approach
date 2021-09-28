@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Data Preparation &#8212; Data Science - A practical Approach</title>
+    <title>2. Introduction &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -107,12 +107,27 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   2. Data Preparation
+   2. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="missing_data.html">
    3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="outliers_validity.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="some_practice.html">
+   6. Some practice
   </a>
  </li>
 </ul>
@@ -124,7 +139,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   4. Data Preprocessing
+   7. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   8. Indexing and slicing
   </a>
  </li>
 </ul>
@@ -136,7 +156,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   5. Data Exploration
+   9. Data Exploration
   </a>
  </li>
 </ul>
@@ -148,7 +168,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   6. Data Visualisation
+   10. Data Visualisation
   </a>
  </li>
 </ul>
@@ -160,7 +180,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   7. Machine Learning
+   11. Machine Learning
   </a>
  </li>
 </ul>
@@ -245,6 +265,61 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-data-preparation">
+   2.1. why Data Preparation?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accuracy">
+     2.1.1. Accuracy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#consistency">
+     2.1.2. Consistency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#completeness">
+     2.1.3. Completeness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#timeliness">
+     2.1.4. Timeliness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#believability">
+     2.1.5. Believability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretability">
+     2.1.6. Interpretability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-conclusion">
+     2.1.7. In conclusion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   2.2. Further reading
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -253,9 +328,94 @@
         
               <div>
                 
-  <div class="section" id="data-preparation">
-<h1><span class="section-number">2. </span>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h1>
-<p>this is an introduction</p>
+  <div class="section" id="introduction">
+<h1><span class="section-number">2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>When performing data science, we often do not elaborate about the preparation that went into the dataset.
+It is considered tedious and irrelevant to the story of the analysis,
+however it is often the most important part of data analysis.
+Data Preparation is the metaphorical foundation of your construction, if you fail to prepare data, you prepare to fail your analysis.</p>
+<blockquote>
+<div><p>Good data beats a fancy algorithm</p>
+</div></blockquote>
+<p>If you would perform an analysis and insert unprepared data, you will mostly be disappointed with the result.</p>
+<div class="section" id="why-data-preparation">
+<h2><span class="section-number">2.1. </span>why Data Preparation?<a class="headerlink" href="#why-data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>Aside from metaphors let us make the reasoning behind this step more tangile, to explain the relevance of this step, we partitioned the answer into a few key points.</p>
+<div class="section" id="accuracy">
+<h3><span class="section-number">2.1.1. </span>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h3>
+<p>There is no excuse for incorrect data and accuracy is the most important attribute.
+Let us assume that we have a dataset where for some reason the result are not accurate.
+This would led us to an analysis where we conclude a result that contains a bias.
+An example would be a dataset of sold cars, where the listed price is that of the stock car without options.
+Options are not incorporated in the price and we are perhaps training an algorithm that predicts the stock price.
+If you as a data scientist fail to report/correct this, your predictions are making sense, but always underestimate!</p>
+</div>
+<div class="section" id="consistency">
+<h3><span class="section-number">2.1.2. </span>Consistency<a class="headerlink" href="#consistency" title="Permalink to this headline">¶</a></h3>
+<p>They usually say something such as ‘consistency is key’ and with data preparation that is likewise true.
+A dataset where we do not have consistent results will never converge towards a particular answer.
+Note however that it might not be a problem of consistency but rather you are missing crucial information.
+If we would have a dataset where local temperatures are logged, we would like to see a consistency each 24 hours.
+However we do see there are day to day fluctuations, so perhaps we need to keep track of cloud and rain data to make the dataset more complete.
+We could then see that the results are more consistent yet the possibility of outliers is still present.
+Equally possible would be that our temperature sensor is not sensitive enough or has large fluctuations in readings, it is the task of the data scientist to figure this out.</p>
+<p>To get a visual  about accuracy and consistency this picture might help:</p>
+<p><img alt="Accuracy" src="https://github.com/LorenzF/data-science-practical-approach/raw/main/src/c2_data_preparation/pics/accuracy.png" /></p>
+</div>
+<div class="section" id="completeness">
+<h3><span class="section-number">2.1.3. </span>Completeness<a class="headerlink" href="#completeness" title="Permalink to this headline">¶</a></h3>
+<p>As hinted in the previous point, completeness is something you have to be aware of.
+Having ‘complete’ data is crucial for you narrative to give a correct answer, as you might otherwise lose detail.
+Note that you never will know if your data is complete as there might always be more data to mine.
+Yet you have to make a consideration between collecting more data and the effort required.
+This collecting can happen in multiple methods, as an example we use a survey where we asked several people 10 different questions, we could:</p>
+<ul class="simple">
+<li><p>gather new data, here our data grows ‘longer’ by asking the 10 question to more people.
+It might be that our sample of people were only students at a campus, so our data was not complete.</p></li>
+<li><p>gather new feature, by asking more questions to the same people (in case we could still find them).
+By doing this we get a better understanding of their opinion, again making our data more complete.</p></li>
+<li><p>fill missing values, by imputing the abstained questions with answers of similar records.
+When someone answered they did not want to answer we could figure out what they would have answered by looking at what persons answered that reply in a similar way.</p></li>
+</ul>
+</div>
+<div class="section" id="timeliness">
+<h3><span class="section-number">2.1.4. </span>Timeliness<a class="headerlink" href="#timeliness" title="Permalink to this headline">¶</a></h3>
+<p>For some datasets we are dealing with data that is time related.
+It can happen that data at specific timepoints is missing or delayed, resulting in a failure to use machine learning algorithms.
+A well-organised data pipeline utilises techniques of data preparation to circumvent these outages, usually this would be to retain the last successful datapoint.
+However in hindsight we could use more complex strategies to fill in these gaps or correct datetimes in our dataset,</p>
+<p>In this example the data stream is interrupted and data preparation is there to handle these outages before we can perform analysis.</p>
+<p><img alt="Timeliness" src="https://github.com/LorenzF/data-science-practical-approach/raw/main/src/c2_data_preparation/pics/timeliness.png" /></p>
+</div>
+<div class="section" id="believability">
+<h3><span class="section-number">2.1.5. </span>Believability<a class="headerlink" href="#believability" title="Permalink to this headline">¶</a></h3>
+<p>You could collect the most intricate dataset possible, but if the narrative that you are conducting contradicts itself, you will end up nowhere.
+During the process of data analytics it is important to apply a critical mind to what your dataset is telling you.
+Obviously this is not a reason to mask or mold the data so it agrees with your opinion.
+Rather you should be wary when conflicts happen and act accordingly, unfortunately it is impossible to write a generic tactic for this.
+As a data scientist your experience of the underlying subject should help create understanding of the topic, remember, gathering information from experts in the field is crucial here!</p>
+</div>
+<div class="section" id="interpretability">
+<h3><span class="section-number">2.1.6. </span>Interpretability<a class="headerlink" href="#interpretability" title="Permalink to this headline">¶</a></h3>
+<p>Another problem that might arise when you are diving deep into the data might be that you have created something no human could ever interpret.
+The Machine Learning algorithms outputs plausible and believable results, but it is impossible to understand the reasoning behind.
+For some this is perfectly acceptible, for some this is undesirable.
+It is your task as a data scientist to cater the wishes of the product operator and if they desire understanding as they would like to learn from the data driven process you need to unfold the process.
+Usually this comes down to which data transformations are used as some do produce an output that only makes mathematical sense.</p>
+</div>
+<div class="section" id="in-conclusion">
+<h3><span class="section-number">2.1.7. </span>In conclusion<a class="headerlink" href="#in-conclusion" title="Permalink to this headline">¶</a></h3>
+<p>There are multiple ways to deteriorate the quality of your data and raw formats of data often contain multiple.
+Before we can do anything with it these problems need to be resolved, if you fail to do so, the final output fails too.</p>
+<!--### Tasks of Data Preparation
+
+-->
+</div>
+</div>
+<div class="section" id="further-reading">
+<h2><span class="section-number">2.2. </span>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://towardsdatascience.com/the-ultimate-guide-to-data-cleaning-3969843991d4">Towards Data Science</a></p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

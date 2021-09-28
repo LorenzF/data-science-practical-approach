@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Sep 27, 2021}
+\date{Sep 28, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -96,9 +96,6 @@
 
 
 \sphinxAtStartPar
-this is a foreword
-
-\sphinxAtStartPar
 pdf version can be found \sphinxhref{https://github.com/LorenzF/data-science-practical-approach/raw/main/src/\_build/latex/book.pdf}{here}.
 
 
@@ -111,13 +108,241 @@ pdf version can be found \sphinxhref{https://github.com/LorenzF/data-science-pra
 this is an introduction
 
 
+\section{Structured vs Unstructured}
+\label{\detokenize{c1_introduction/introduction:structured-vs-unstructured}}
+\sphinxAtStartPar
+When performing data preparation an important aspect is to consider with the type of data we are working with.
+In general there are 2 types of data, but you could consider a third.
+
+
+\subsection{Structured data}
+\label{\detokenize{c1_introduction/introduction:structured-data}}
+\sphinxAtStartPar
+Structured data is data that adheres to a pre\sphinxhyphen{}defined data model and is therefore straightforward to analyze.
+This data model is the description of our data, each record has to be conform to the model.
+A table in a spreadsheet is a good example of the concept of structured data however often no data types are enforced, meaning a column can contain e.g. both numbers and text.
+Later we will see that a mixture of data types is often problematic therefor the need of a data model.
+
+
+\subsection{Unstructured data}
+\label{\detokenize{c1_introduction/introduction:unstructured-data}}
+\sphinxAtStartPar
+In contrast to structured data, there is no apparent data model but this does not mean the data is unusable or cluttered.
+Usually it means either no data model has yet been applied or we are dealing with data that is difficult to confine in a model.
+A great example of this would be images, or more general (binary) files.
+These obviously are hard to sort yet often data structures also contain metadata from these files, with data describing things as when the file was uploaded, what is shown in the file, …
+In turn the metadata can be structured and a data model can be related to the unstructured data.
+
+
+\subsection{Semi\sphinxhyphen{}structured data}
+\label{\detokenize{c1_introduction/introduction:semi-structured-data}}
+\sphinxAtStartPar
+As an intermediate option, we have what is called semi\sphinxhyphen{}structured data.
+The reasoning behind this is that the concept of tables is not always applicable, in some occasions e.g. data lakes there is no complex structure present compared to a database.
+In a data lake files are stored similar to the folder structure in your computer, with no fancy infrastructure behind it, thus reducing operation costs.
+This implies that a data model can not be enforced and the data is stored in generic files.
+
+
+\section{Data Structures}
+\label{\detokenize{c1_introduction/introduction:data-structures}}
+\sphinxAtStartPar
+There are several structures in which data can be stored and accessed, here we cover the 3 most important.
+
+
+\subsection{Data Lake}
+\label{\detokenize{c1_introduction/introduction:data-lake}}
+\sphinxAtStartPar
+As mentioned earlier a data lake would be the most cost efficient method as it relies on the least infrastructure and can be serverless.
+The concept behind a data lake is straight\sphinxhyphen{}forward, the data is stored in simple files with a specific notation e.g. parquet, csv, xml,…
+What is important when designing a data lake would be partitioning, this can be achieved by using subfolders and saving parts of the data in different files.
+To make this more tangible, take a look at this symbolic \sphinxhref{https://github.com/LorenzF/data-science-practical-approach/tree/main/src/c2\_data\_preparation/data/temperatures}{example} I provided.
+Instead of putting all data in one csv file, subfolder divide the data in Country, City and then the year.
+We could even further partition yet the data is here in daily frequency so that would create many small partitions.
+The difficulty for a data lake lies in the method of interacting, when adding new data one has to adhere to a agreed upon data model that is not enforced, meaning you could create incorrect data which then need to be cleaned.
+On the other hand efficiency of you data lake depends on good partitioning, as the order of divisioning of your folders. We could have also divided first on year and then on country and city.
+As a data scientist seeing the data lake might not be as common, as this is rather an engineering task, however using the concepts of a data lake in experimental projects can make a big difference.
+
+
+\subsection{Database}
+\label{\detokenize{c1_introduction/introduction:database}}
+\sphinxAtStartPar
+Another interesting data structure is the database, widely used for exceptional speeds and ease of use, yet costly in storage.
+Numerous implementations of servers using the SQL language are developed over the years with each their own dialect and advantages.
+The important take home message here is that you can easily perform queries on the database that pre\sphinxhyphen{}handles the data to retrieve the information you need.
+these operations include filtering, grouping categories, joining tables, ordering and much more, as SQL is a complete language on its own.
+As a data scientist these databases are much more common, so SQL is a good asset to learn!
+
+
+\subsection{Data Warehouse}
+\label{\detokenize{c1_introduction/introduction:data-warehouse}}
+\sphinxAtStartPar
+A next step towards data analysis is the data warehouse, where a database is composed of the most pragmatic method of storing your data a data warehouse consist of multiple views on your data.
+Based upon the data of a dataset the data warehouse transforms this data into a new format that displays the data in a new way.
+Let me illustrate with with a simple example, we have a database with a table that contains the rentals of books from multiple libraries.
+This table has a few columns: a timestamp, the library, the action (rent, return, …), the client\_id and the book\_id.
+If you would want to know if a book is available this database is perfect for your needs as you just have to find the last event for that book and if its a return the book is (or should be) there.
+Now image we would want to know how many books are being rented per month this database is insufficient, yet our data warehouse might contain such a view!
+It is up to the data engineer/scientist to create a computation that displays the amount of books rented per month.
+If they also would like to subdivided it per category of books, you would need to incorporate another table of the database where information of the books is stored.
+More on these operations of a data warehouse will be seen in the data preprocessing chapter.
+One last remark about data warehousing, it is important to optimize between memory and computation.
+Tables in our data warehouse compared to database can be computed in place reducing memory costs yet increasing computation costs.
+If a visualization tool often queries a table in your warehouse it is favorable to create it as a table in your database.
+
+
+\section{OLTP and OLAP}
+\label{\detokenize{c1_introduction/introduction:oltp-and-olap}}
+\sphinxAtStartPar
+From the previous section you might have deduced that a database and Data Warehouse serve 2 different purposes.
+These are denoted as OnLine Transaction Processing and OnLine Analytical Processing, as the names suggest these are used for transactional and analytical processes.
+
+
+\subsection{OLTP}
+\label{\detokenize{c1_introduction/introduction:oltp}}
+\sphinxAtStartPar
+For this method the database structure is optimal, let us review the example where we have libraries renting out books.
+Renting out a book would send a message to our OLTP system creating a new record stating that specific book is at this moment rented out from our library.
+OLTP handles day\sphinxhyphen{}to\sphinxhyphen{}day operational data that can be both written and read from our database.
+
+
+\subsection{OLAP}
+\label{\detokenize{c1_introduction/introduction:olap}}
+\sphinxAtStartPar
+In the case we would like to analyse data from the libraries we would use the OLAP method, creating multi\sphinxhyphen{}dimensional views from our transactional data.
+Our dimensions would be the date (aggregated per month), the library and the category of book, the chapter of data preprocessing will use these operations practically.
+I could write a whole chapter on OLAP operations however they are well described in \sphinxhref{https://en.wikipedia.org/wiki/OLAP\_cube}{this} wikipedia page.
+
+
 \part{2. Data Preparation}
 
 
-\chapter{Data Preparation}
-\label{\detokenize{c2_data_preparation/introduction:data-preparation}}\label{\detokenize{c2_data_preparation/introduction::doc}}
+\chapter{Introduction}
+\label{\detokenize{c2_data_preparation/introduction:introduction}}\label{\detokenize{c2_data_preparation/introduction::doc}}
 \sphinxAtStartPar
-this is an introduction
+When performing data science, we often do not elaborate about the preparation that went into the dataset.
+It is considered tedious and irrelevant to the story of the analysis,
+however it is often the most important part of data analysis.
+Data Preparation is the metaphorical foundation of your construction, if you fail to prepare data, you prepare to fail your analysis.
+\begin{quote}
+
+\sphinxAtStartPar
+Good data beats a fancy algorithm
+\end{quote}
+
+\sphinxAtStartPar
+If you would perform an analysis and insert unprepared data, you will mostly be disappointed with the result.
+
+
+\section{why Data Preparation?}
+\label{\detokenize{c2_data_preparation/introduction:why-data-preparation}}
+\sphinxAtStartPar
+Aside from metaphors let us make the reasoning behind this step more tangile, to explain the relevance of this step, we partitioned the answer into a few key points.
+
+
+\subsection{Accuracy}
+\label{\detokenize{c2_data_preparation/introduction:accuracy}}
+\sphinxAtStartPar
+There is no excuse for incorrect data and accuracy is the most important attribute.
+Let us assume that we have a dataset where for some reason the result are not accurate.
+This would led us to an analysis where we conclude a result that contains a bias.
+An example would be a dataset of sold cars, where the listed price is that of the stock car without options.
+Options are not incorporated in the price and we are perhaps training an algorithm that predicts the stock price.
+If you as a data scientist fail to report/correct this, your predictions are making sense, but always underestimate!
+
+
+\subsection{Consistency}
+\label{\detokenize{c2_data_preparation/introduction:consistency}}
+\sphinxAtStartPar
+They usually say something such as ‘consistency is key’ and with data preparation that is likewise true.
+A dataset where we do not have consistent results will never converge towards a particular answer.
+Note however that it might not be a problem of consistency but rather you are missing crucial information.
+If we would have a dataset where local temperatures are logged, we would like to see a consistency each 24 hours.
+However we do see there are day to day fluctuations, so perhaps we need to keep track of cloud and rain data to make the dataset more complete.
+We could then see that the results are more consistent yet the possibility of outliers is still present.
+Equally possible would be that our temperature sensor is not sensitive enough or has large fluctuations in readings, it is the task of the data scientist to figure this out.
+
+\sphinxAtStartPar
+To get a visual  about accuracy and consistency this picture might help:
+
+\sphinxAtStartPar
+\sphinxincludegraphics{{accuracy}.png}
+
+
+\subsection{Completeness}
+\label{\detokenize{c2_data_preparation/introduction:completeness}}
+\sphinxAtStartPar
+As hinted in the previous point, completeness is something you have to be aware of.
+Having ‘complete’ data is crucial for you narrative to give a correct answer, as you might otherwise lose detail.
+Note that you never will know if your data is complete as there might always be more data to mine.
+Yet you have to make a consideration between collecting more data and the effort required.
+This collecting can happen in multiple methods, as an example we use a survey where we asked several people 10 different questions, we could:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+gather new data, here our data grows ‘longer’ by asking the 10 question to more people.
+It might be that our sample of people were only students at a campus, so our data was not complete.
+
+\item {} 
+\sphinxAtStartPar
+gather new feature, by asking more questions to the same people (in case we could still find them).
+By doing this we get a better understanding of their opinion, again making our data more complete.
+
+\item {} 
+\sphinxAtStartPar
+fill missing values, by imputing the abstained questions with answers of similar records.
+When someone answered they did not want to answer we could figure out what they would have answered by looking at what persons answered that reply in a similar way.
+
+\end{itemize}
+
+
+\subsection{Timeliness}
+\label{\detokenize{c2_data_preparation/introduction:timeliness}}
+\sphinxAtStartPar
+For some datasets we are dealing with data that is time related.
+It can happen that data at specific timepoints is missing or delayed, resulting in a failure to use machine learning algorithms.
+A well\sphinxhyphen{}organised data pipeline utilises techniques of data preparation to circumvent these outages, usually this would be to retain the last successful datapoint.
+However in hindsight we could use more complex strategies to fill in these gaps or correct datetimes in our dataset,
+
+\sphinxAtStartPar
+In this example the data stream is interrupted and data preparation is there to handle these outages before we can perform analysis.
+
+\sphinxAtStartPar
+\sphinxincludegraphics{{timeliness}.png}
+
+
+\subsection{Believability}
+\label{\detokenize{c2_data_preparation/introduction:believability}}
+\sphinxAtStartPar
+You could collect the most intricate dataset possible, but if the narrative that you are conducting contradicts itself, you will end up nowhere.
+During the process of data analytics it is important to apply a critical mind to what your dataset is telling you.
+Obviously this is not a reason to mask or mold the data so it agrees with your opinion.
+Rather you should be wary when conflicts happen and act accordingly, unfortunately it is impossible to write a generic tactic for this.
+As a data scientist your experience of the underlying subject should help create understanding of the topic, remember, gathering information from experts in the field is crucial here!
+
+
+\subsection{Interpretability}
+\label{\detokenize{c2_data_preparation/introduction:interpretability}}
+\sphinxAtStartPar
+Another problem that might arise when you are diving deep into the data might be that you have created something no human could ever interpret.
+The Machine Learning algorithms outputs plausible and believable results, but it is impossible to understand the reasoning behind.
+For some this is perfectly acceptible, for some this is undesirable.
+It is your task as a data scientist to cater the wishes of the product operator and if they desire understanding as they would like to learn from the data driven process you need to unfold the process.
+Usually this comes down to which data transformations are used as some do produce an output that only makes mathematical sense.
+
+
+\subsection{In conclusion}
+\label{\detokenize{c2_data_preparation/introduction:in-conclusion}}
+\sphinxAtStartPar
+There are multiple ways to deteriorate the quality of your data and raw formats of data often contain multiple.
+Before we can do anything with it these problems need to be resolved, if you fail to do so, the final output fails too.
+
+
+
+
+\section{Further reading}
+\label{\detokenize{c2_data_preparation/introduction:further-reading}}
+\sphinxAtStartPar
+\sphinxhref{https://towardsdatascience.com/the-ultimate-guide-to-data-cleaning-3969843991d4}{Towards Data Science}
 
 
 \chapter{Missing Data}

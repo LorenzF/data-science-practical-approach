@@ -415,6 +415,10 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm
 OUTPUT book.toc
+INPUT accuracy.png
+INPUT accuracy.png
+INPUT timeliness.png
+INPUT timeliness.png
 INPUT book.ind
 INPUT book.ind
 INPUT book.aux

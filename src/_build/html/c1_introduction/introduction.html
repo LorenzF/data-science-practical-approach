@@ -51,7 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Data Preparation" href="../c2_data_preparation/introduction.html" />
+    <link rel="next" title="2. Introduction" href="../c2_data_preparation/introduction.html" />
     <link rel="prev" title="Foreword" href="../foreword.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -107,12 +107,27 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/introduction.html">
-   2. Data Preparation
+   2. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/missing_data.html">
    3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/outliers_validity.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/some_practice.html">
+   6. Some practice
   </a>
  </li>
 </ul>
@@ -124,7 +139,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   4. Data Preprocessing
+   7. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   8. Indexing and slicing
   </a>
  </li>
 </ul>
@@ -136,7 +156,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   5. Data Exploration
+   9. Data Exploration
   </a>
  </li>
 </ul>
@@ -148,7 +168,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   6. Data Visualisation
+   10. Data Visualisation
   </a>
  </li>
 </ul>
@@ -160,7 +180,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   7. Machine Learning
+   11. Machine Learning
   </a>
  </li>
 </ul>
@@ -245,6 +265,75 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structured-vs-unstructured">
+   1.1. Structured vs Unstructured
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#structured-data">
+     1.1.1. Structured data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unstructured-data">
+     1.1.2. Unstructured data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semi-structured-data">
+     1.1.3. Semi-structured data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-structures">
+   1.2. Data Structures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-lake">
+     1.2.1. Data Lake
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#database">
+     1.2.2. Database
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-warehouse">
+     1.2.3. Data Warehouse
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#oltp-and-olap">
+   1.3. OLTP and OLAP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#oltp">
+     1.3.1. OLTP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#olap">
+     1.3.2. OLAP
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -256,6 +345,89 @@
   <div class="section" id="introduction">
 <h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>this is an introduction</p>
+<div class="section" id="structured-vs-unstructured">
+<h2><span class="section-number">1.1. </span>Structured vs Unstructured<a class="headerlink" href="#structured-vs-unstructured" title="Permalink to this headline">¶</a></h2>
+<p>When performing data preparation an important aspect is to consider with the type of data we are working with.
+In general there are 2 types of data, but you could consider a third.</p>
+<div class="section" id="structured-data">
+<h3><span class="section-number">1.1.1. </span>Structured data<a class="headerlink" href="#structured-data" title="Permalink to this headline">¶</a></h3>
+<p>Structured data is data that adheres to a pre-defined data model and is therefore straightforward to analyze.
+This data model is the description of our data, each record has to be conform to the model.
+A table in a spreadsheet is a good example of the concept of structured data however often no data types are enforced, meaning a column can contain e.g. both numbers and text.
+Later we will see that a mixture of data types is often problematic therefor the need of a data model.</p>
+</div>
+<div class="section" id="unstructured-data">
+<h3><span class="section-number">1.1.2. </span>Unstructured data<a class="headerlink" href="#unstructured-data" title="Permalink to this headline">¶</a></h3>
+<p>In contrast to structured data, there is no apparent data model but this does not mean the data is unusable or cluttered.
+Usually it means either no data model has yet been applied or we are dealing with data that is difficult to confine in a model.
+A great example of this would be images, or more general (binary) files.
+These obviously are hard to sort yet often data structures also contain metadata from these files, with data describing things as when the file was uploaded, what is shown in the file, …
+In turn the metadata can be structured and a data model can be related to the unstructured data.</p>
+</div>
+<div class="section" id="semi-structured-data">
+<h3><span class="section-number">1.1.3. </span>Semi-structured data<a class="headerlink" href="#semi-structured-data" title="Permalink to this headline">¶</a></h3>
+<p>As an intermediate option, we have what is called semi-structured data.
+The reasoning behind this is that the concept of tables is not always applicable, in some occasions e.g. data lakes there is no complex structure present compared to a database.
+In a data lake files are stored similar to the folder structure in your computer, with no fancy infrastructure behind it, thus reducing operation costs.
+This implies that a data model can not be enforced and the data is stored in generic files.</p>
+</div>
+</div>
+<div class="section" id="data-structures">
+<h2><span class="section-number">1.2. </span>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
+<p>There are several structures in which data can be stored and accessed, here we cover the 3 most important.</p>
+<div class="section" id="data-lake">
+<h3><span class="section-number">1.2.1. </span>Data Lake<a class="headerlink" href="#data-lake" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned earlier a data lake would be the most cost efficient method as it relies on the least infrastructure and can be serverless.
+The concept behind a data lake is straight-forward, the data is stored in simple files with a specific notation e.g. parquet, csv, xml,…
+What is important when designing a data lake would be partitioning, this can be achieved by using subfolders and saving parts of the data in different files.
+To make this more tangible, take a look at this symbolic <a class="reference external" href="https://github.com/LorenzF/data-science-practical-approach/tree/main/src/c2_data_preparation/data/temperatures">example</a> I provided.
+Instead of putting all data in one csv file, subfolder divide the data in Country, City and then the year.
+We could even further partition yet the data is here in daily frequency so that would create many small partitions.
+The difficulty for a data lake lies in the method of interacting, when adding new data one has to adhere to a agreed upon data model that is not enforced, meaning you could create incorrect data which then need to be cleaned.
+On the other hand efficiency of you data lake depends on good partitioning, as the order of divisioning of your folders. We could have also divided first on year and then on country and city.
+As a data scientist seeing the data lake might not be as common, as this is rather an engineering task, however using the concepts of a data lake in experimental projects can make a big difference.</p>
+</div>
+<div class="section" id="database">
+<h3><span class="section-number">1.2.2. </span>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h3>
+<p>Another interesting data structure is the database, widely used for exceptional speeds and ease of use, yet costly in storage.
+Numerous implementations of servers using the SQL language are developed over the years with each their own dialect and advantages.
+The important take home message here is that you can easily perform queries on the database that pre-handles the data to retrieve the information you need.
+these operations include filtering, grouping categories, joining tables, ordering and much more, as SQL is a complete language on its own.
+As a data scientist these databases are much more common, so SQL is a good asset to learn!</p>
+</div>
+<div class="section" id="data-warehouse">
+<h3><span class="section-number">1.2.3. </span>Data Warehouse<a class="headerlink" href="#data-warehouse" title="Permalink to this headline">¶</a></h3>
+<p>A next step towards data analysis is the data warehouse, where a database is composed of the most pragmatic method of storing your data a data warehouse consist of multiple views on your data.
+Based upon the data of a dataset the data warehouse transforms this data into a new format that displays the data in a new way.
+Let me illustrate with with a simple example, we have a database with a table that contains the rentals of books from multiple libraries.
+This table has a few columns: a timestamp, the library, the action (rent, return, …), the client_id and the book_id.
+If you would want to know if a book is available this database is perfect for your needs as you just have to find the last event for that book and if its a return the book is (or should be) there.
+Now image we would want to know how many books are being rented per month this database is insufficient, yet our data warehouse might contain such a view!
+It is up to the data engineer/scientist to create a computation that displays the amount of books rented per month.
+If they also would like to subdivided it per category of books, you would need to incorporate another table of the database where information of the books is stored.
+More on these operations of a data warehouse will be seen in the data preprocessing chapter.
+One last remark about data warehousing, it is important to optimize between memory and computation.
+Tables in our data warehouse compared to database can be computed in place reducing memory costs yet increasing computation costs.
+If a visualization tool often queries a table in your warehouse it is favorable to create it as a table in your database.</p>
+</div>
+</div>
+<div class="section" id="oltp-and-olap">
+<h2><span class="section-number">1.3. </span>OLTP and OLAP<a class="headerlink" href="#oltp-and-olap" title="Permalink to this headline">¶</a></h2>
+<p>From the previous section you might have deduced that a database and Data Warehouse serve 2 different purposes.
+These are denoted as OnLine Transaction Processing and OnLine Analytical Processing, as the names suggest these are used for transactional and analytical processes.</p>
+<div class="section" id="oltp">
+<h3><span class="section-number">1.3.1. </span>OLTP<a class="headerlink" href="#oltp" title="Permalink to this headline">¶</a></h3>
+<p>For this method the database structure is optimal, let us review the example where we have libraries renting out books.
+Renting out a book would send a message to our OLTP system creating a new record stating that specific book is at this moment rented out from our library.
+OLTP handles day-to-day operational data that can be both written and read from our database.</p>
+</div>
+<div class="section" id="olap">
+<h3><span class="section-number">1.3.2. </span>OLAP<a class="headerlink" href="#olap" title="Permalink to this headline">¶</a></h3>
+<p>In the case we would like to analyse data from the libraries we would use the OLAP method, creating multi-dimensional views from our transactional data.
+Our dimensions would be the date (aggregated per month), the library and the category of book, the chapter of data preprocessing will use these operations practically.
+I could write a whole chapter on OLAP operations however they are well described in <a class="reference external" href="https://en.wikipedia.org/wiki/OLAP_cube">this</a> wikipedia page.</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -300,7 +472,7 @@
         <a class="right-next" href="../c2_data_preparation/introduction.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">2. </span>Data Preparation</p>
+                <p class="prevnext-title"><span class="section-number">2. </span>Introduction</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
