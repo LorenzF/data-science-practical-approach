@@ -16,7 +16,7 @@ import pandas as pd
 
 # ### Kamyr digester
 # 
-# The first dataset we will be looking at is taken from a psysical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let's have a look at the general structure
+# The first dataset we will be looking at is taken from a physical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let's have a look at the general structure
 
 # In[2]:
 

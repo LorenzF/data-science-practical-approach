@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Sep 28, 2021}
+\date{Sep 29, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -362,7 +362,7 @@ For python, we will be using the pandas library to handle our dataset.
 \section{Kamyr digester}
 \label{\detokenize{c2_data_preparation/missing_data:kamyr-digester}}
 \sphinxAtStartPar
-The first dataset we will be looking at is taken from a psysical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure
+The first dataset we will be looking at is taken from a physical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{kamyr\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c2\PYGZus{}data\PYGZus{}preparation/data/kamyr\PYGZhy{}digester.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -614,7 +614,7 @@ Here a simple example where we select all records containing the word ‘rain’
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{n+ne}{ValueError}\PYG{g+gWhitespace}{                                }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}25543}\PYG{o}{/}\PYG{l+m+mf}{1298831137.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}6376}\PYG{o}{/}\PYG{l+m+mf}{1298831137.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
 \PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{n}{travel\PYGZus{}df}\PYG{p}{[}\PYG{n}{travel\PYGZus{}df}\PYG{o}{.}\PYG{n}{Comments}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{contains}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rain}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
 
 \PYG{n+nn}{\PYGZti{}/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages/pandas/core/frame.py} in \PYG{n+ni}{\PYGZus{}\PYGZus{}getitem\PYGZus{}\PYGZus{}}\PYG{n+nt}{(self, key)}

@@ -1,0 +1,1513 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outliers and validity &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="some_practice.html">
+   5. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
+   6. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   7. Indexing and slicing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_exploration/introduction.html">
+   8. Data Exploration
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_visualisation/introduction.html">
+   9. Data Visualisation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   10. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c2_data_preparation/outliers.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc2_data_preparation/outliers.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c2_data_preparation/outliers.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c2_data_preparation/outliers.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#silicon-wafer-thickness">
+   Silicon wafer thickness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distillation-column">
+   Distillation column
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="outliers-and-validity">
+<h1>Outliers and validity<a class="headerlink" href="#outliers-and-validity" title="Permalink to this headline">¶</a></h1>
+<p>When preparing data we have to be cautious with the accuracy of our set.
+Outliers and invalid data points are difficult to detect but should be handled with caution.</p>
+<p>we start out by importing our most important library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="silicon-wafer-thickness">
+<h2>Silicon wafer thickness<a class="headerlink" href="#silicon-wafer-thickness" title="Permalink to this headline">¶</a></h2>
+<p>Our first dataset contains information about the production of silicon wafers, each wafers thickness is measure on 9 different spots.
+More information on the dataset can be found <a class="reference external" href="https://openmv.net/info/silicon-wafer-thickness">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wafer_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/silicon-wafer-thickness.csv&#39;</span><span class="p">)</span>
+<span class="n">wafer_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>G1</th>
+      <th>G2</th>
+      <th>G3</th>
+      <th>G4</th>
+      <th>G5</th>
+      <th>G6</th>
+      <th>G7</th>
+      <th>G8</th>
+      <th>G9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.175</td>
+      <td>0.188</td>
+      <td>-0.159</td>
+      <td>0.095</td>
+      <td>0.374</td>
+      <td>-0.238</td>
+      <td>-0.800</td>
+      <td>0.158</td>
+      <td>-0.211</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.102</td>
+      <td>0.075</td>
+      <td>0.141</td>
+      <td>0.180</td>
+      <td>0.138</td>
+      <td>-0.057</td>
+      <td>-0.075</td>
+      <td>0.072</td>
+      <td>0.072</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.607</td>
+      <td>0.711</td>
+      <td>0.879</td>
+      <td>0.765</td>
+      <td>0.592</td>
+      <td>0.187</td>
+      <td>0.431</td>
+      <td>0.345</td>
+      <td>0.187</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.774</td>
+      <td>0.823</td>
+      <td>0.619</td>
+      <td>0.370</td>
+      <td>0.725</td>
+      <td>0.439</td>
+      <td>-0.025</td>
+      <td>-0.259</td>
+      <td>0.496</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.504</td>
+      <td>0.644</td>
+      <td>0.845</td>
+      <td>0.681</td>
+      <td>0.502</td>
+      <td>0.151</td>
+      <td>0.404</td>
+      <td>0.296</td>
+      <td>0.260</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>we would like to investigate the distribution of measurements here, as we are early in this course using visualisation techniques would be too soon.
+This does not mean we can’t use simple mathematics, introducing the InterQuartile Range.
+A reason for using IQR over standard deviation is that with IQR we do not assume a normal distribution.
+The IQR calculates the range between the bottom ‘quart’ or 25% and the top 25%, giving us an indication of the spread of our results, we calculate this IQR for each of the 9 measurements independently.
+For more info about IQR you can visit <a class="reference external" href="https://en.wikipedia.org/wiki/Interquartile_range">wikipedia</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iqr</span> <span class="o">=</span> <span class="n">wafer_df</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span><span class="o">-</span><span class="n">wafer_df</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">iqr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G1    0.54425
+G2    0.61000
+G3    0.54075
+G4    0.52475
+G5    0.61175
+G6    0.86750
+G7    0.76175
+G8    0.87225
+G9    0.86300
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>you can see that the IQR spread for each measurement lays between 0.5 and 1 unit indicating that the 9 measurements of the wafer have a similar spread.
+With these IQR’s we could calculate for each point relative to the spread of the measurement how far it is from the median.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_spread_df</span> <span class="o">=</span> <span class="p">(</span><span class="n">wafer_df</span><span class="o">-</span><span class="n">wafer_df</span><span class="o">.</span><span class="n">median</span><span class="p">())</span><span class="o">/</span><span class="n">iqr</span>
+<span class="n">relative_spread_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>G1</th>
+      <th>G2</th>
+      <th>G3</th>
+      <th>G4</th>
+      <th>G5</th>
+      <th>G6</th>
+      <th>G7</th>
+      <th>G8</th>
+      <th>G9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.011024</td>
+      <td>-0.077869</td>
+      <td>-0.819233</td>
+      <td>-0.367794</td>
+      <td>0.176543</td>
+      <td>-0.352738</td>
+      <td>-1.029865</td>
+      <td>-0.130696</td>
+      <td>-0.254925</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.145154</td>
+      <td>-0.263115</td>
+      <td>-0.264448</td>
+      <td>-0.205812</td>
+      <td>-0.209236</td>
+      <td>-0.144092</td>
+      <td>-0.078110</td>
+      <td>-0.229292</td>
+      <td>0.073001</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.782729</td>
+      <td>0.779508</td>
+      <td>1.100324</td>
+      <td>0.909004</td>
+      <td>0.532897</td>
+      <td>0.137176</td>
+      <td>0.586150</td>
+      <td>0.083692</td>
+      <td>0.206257</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.089573</td>
+      <td>0.963115</td>
+      <td>0.619510</td>
+      <td>0.156265</td>
+      <td>0.750306</td>
+      <td>0.427666</td>
+      <td>-0.012471</td>
+      <td>-0.608770</td>
+      <td>0.564311</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.593477</td>
+      <td>0.669672</td>
+      <td>1.037448</td>
+      <td>0.748928</td>
+      <td>0.385779</td>
+      <td>0.095677</td>
+      <td>0.550706</td>
+      <td>0.027515</td>
+      <td>0.290846</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You can now see that some points are close to the median, whilst others are much higher, both positive as negative.
+By defining a threshold, we quantify what deviation has to be there to flag a reading as an outlier.
+The high outliers are seperated, note that only a single measurement of the 9 can trigger and render the total measurement as an outlier.
+Yet judging from the setup where we would want to find wafers with varying thickness that approach is desirable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_spread_df</span><span class="p">[(</span><span class="n">relative_spread_df</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>G1</th>
+      <th>G2</th>
+      <th>G3</th>
+      <th>G4</th>
+      <th>G5</th>
+      <th>G6</th>
+      <th>G7</th>
+      <th>G8</th>
+      <th>G9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>2.232430</td>
+      <td>2.009016</td>
+      <td>1.956542</td>
+      <td>1.589328</td>
+      <td>1.843890</td>
+      <td>1.544669</td>
+      <td>1.233344</td>
+      <td>0.419604</td>
+      <td>1.582851</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>12.891135</td>
+      <td>12.827049</td>
+      <td>12.832178</td>
+      <td>13.913292</td>
+      <td>11.429506</td>
+      <td>9.500865</td>
+      <td>10.305875</td>
+      <td>9.927200</td>
+      <td>9.055620</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>3.691318</td>
+      <td>3.981148</td>
+      <td>3.774387</td>
+      <td>4.081944</td>
+      <td>3.248059</td>
+      <td>3.729107</td>
+      <td>3.304890</td>
+      <td>3.846374</td>
+      <td>3.149479</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>2.010106</td>
+      <td>2.153279</td>
+      <td>1.987980</td>
+      <td>1.863745</td>
+      <td>1.858602</td>
+      <td>1.274928</td>
+      <td>1.237283</td>
+      <td>0.825451</td>
+      <td>0.955968</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>3.678457</td>
+      <td>2.841803</td>
+      <td>3.204808</td>
+      <td>3.180562</td>
+      <td>2.669391</td>
+      <td>0.518732</td>
+      <td>0.700361</td>
+      <td>0.176555</td>
+      <td>0.727694</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>2.361047</td>
+      <td>2.086066</td>
+      <td>2.363384</td>
+      <td>2.107670</td>
+      <td>1.925623</td>
+      <td>1.238040</td>
+      <td>1.766328</td>
+      <td>0.890800</td>
+      <td>1.377752</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>1.475425</td>
+      <td>1.043443</td>
+      <td>2.154415</td>
+      <td>2.582182</td>
+      <td>0.653862</td>
+      <td>1.823631</td>
+      <td>1.581227</td>
+      <td>0.857552</td>
+      <td>1.188876</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>1.791456</td>
+      <td>1.484426</td>
+      <td>2.583449</td>
+      <td>1.440686</td>
+      <td>2.085819</td>
+      <td>0.990202</td>
+      <td>1.782081</td>
+      <td>1.034107</td>
+      <td>1.822711</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>1.791456</td>
+      <td>1.484426</td>
+      <td>2.583449</td>
+      <td>1.440686</td>
+      <td>2.085819</td>
+      <td>0.990202</td>
+      <td>1.782081</td>
+      <td>1.034107</td>
+      <td>1.822711</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>2.610932</td>
+      <td>2.102459</td>
+      <td>2.387425</td>
+      <td>2.549786</td>
+      <td>2.169187</td>
+      <td>1.730259</td>
+      <td>2.241549</td>
+      <td>1.713958</td>
+      <td>1.592121</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>-0.529169</td>
+      <td>-0.538525</td>
+      <td>-0.404993</td>
+      <td>-0.331586</td>
+      <td>-0.552513</td>
+      <td>4.565994</td>
+      <td>-0.051854</td>
+      <td>-0.382918</td>
+      <td>-0.536501</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>seems we have a few high outliers, you can clearly see the measurements are mostly all across the board high, but in some cases (e.g. id 154) only one measurement was an outlier.
+We can do the same for the low outliers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_spread_df</span><span class="p">[(</span><span class="n">relative_spread_df</span><span class="o">&lt;-</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>G1</th>
+      <th>G2</th>
+      <th>G3</th>
+      <th>G4</th>
+      <th>G5</th>
+      <th>G6</th>
+      <th>G7</th>
+      <th>G8</th>
+      <th>G9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>54</th>
+      <td>-1.550758</td>
+      <td>-1.525410</td>
+      <td>-1.843736</td>
+      <td>-2.082897</td>
+      <td>-1.659174</td>
+      <td>-1.203458</td>
+      <td>-1.184772</td>
+      <td>-1.650903</td>
+      <td>-1.245655</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>-1.732660</td>
+      <td>-1.510656</td>
+      <td>-2.121128</td>
+      <td>-2.122916</td>
+      <td>-1.781774</td>
+      <td>-1.521614</td>
+      <td>-1.909419</td>
+      <td>-1.782746</td>
+      <td>-1.159907</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>-1.971520</td>
+      <td>-1.310656</td>
+      <td>-2.328248</td>
+      <td>-1.175798</td>
+      <td>-2.067838</td>
+      <td>-0.915274</td>
+      <td>-1.783394</td>
+      <td>-1.304672</td>
+      <td>-1.514484</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>-1.234727</td>
+      <td>-1.361475</td>
+      <td>-0.736015</td>
+      <td>-1.055741</td>
+      <td>-2.224765</td>
+      <td>-0.839193</td>
+      <td>-0.679357</td>
+      <td>-0.865578</td>
+      <td>-0.663963</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>-2.226918</td>
+      <td>-1.194262</td>
+      <td>-2.117429</td>
+      <td>-2.161029</td>
+      <td>-2.043318</td>
+      <td>-0.190202</td>
+      <td>-1.004923</td>
+      <td>-0.270565</td>
+      <td>-0.794902</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>-2.484153</td>
+      <td>-2.330328</td>
+      <td>-1.568192</td>
+      <td>-2.808957</td>
+      <td>-1.945239</td>
+      <td>-1.340634</td>
+      <td>-0.846078</td>
+      <td>-1.691029</td>
+      <td>-0.887601</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For a simple mathematical equation these result look promising, yet it can always be more sophisticated.
+Not going to deep into the subject we could perform some Machine Learning, using a unsupervised method.
+Here we use the sklearn library which contains the Isolation forest algorithm.
+More info about the algorithm <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">IsolationForest</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first create the classifier and train (fit) it with the generic wafer data.
+Then for each record of the wafer data we make a prediction, if it thinks its an outlier, we keep them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">IsolationForest</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">wafer_df</span><span class="p">)</span>
+<span class="n">wafer_df</span><span class="p">[</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">wafer_df</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>G1</th>
+      <th>G2</th>
+      <th>G3</th>
+      <th>G4</th>
+      <th>G5</th>
+      <th>G6</th>
+      <th>G7</th>
+      <th>G8</th>
+      <th>G9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>1.396</td>
+      <td>1.461</td>
+      <td>1.342</td>
+      <td>1.122</td>
+      <td>1.394</td>
+      <td>1.408</td>
+      <td>0.924</td>
+      <td>0.638</td>
+      <td>1.375</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>-0.558</td>
+      <td>-0.705</td>
+      <td>-0.526</td>
+      <td>-0.412</td>
+      <td>-0.753</td>
+      <td>-0.998</td>
+      <td>-0.270</td>
+      <td>0.598</td>
+      <td>-1.416</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>7.197</td>
+      <td>8.060</td>
+      <td>7.223</td>
+      <td>7.589</td>
+      <td>7.258</td>
+      <td>8.310</td>
+      <td>7.835</td>
+      <td>8.931</td>
+      <td>7.824</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>2.190</td>
+      <td>2.664</td>
+      <td>2.325</td>
+      <td>2.430</td>
+      <td>2.253</td>
+      <td>3.303</td>
+      <td>2.502</td>
+      <td>3.627</td>
+      <td>2.727</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>-0.663</td>
+      <td>-0.695</td>
+      <td>-0.713</td>
+      <td>-0.805</td>
+      <td>-0.749</td>
+      <td>-0.976</td>
+      <td>-0.918</td>
+      <td>-1.168</td>
+      <td>-1.066</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>-0.762</td>
+      <td>-0.686</td>
+      <td>-0.863</td>
+      <td>-0.826</td>
+      <td>-0.824</td>
+      <td>-1.252</td>
+      <td>-1.470</td>
+      <td>-1.283</td>
+      <td>-0.992</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>-0.892</td>
+      <td>-0.564</td>
+      <td>-0.975</td>
+      <td>-0.329</td>
+      <td>-0.999</td>
+      <td>-0.726</td>
+      <td>-1.374</td>
+      <td>-0.866</td>
+      <td>-1.298</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>1.275</td>
+      <td>1.549</td>
+      <td>1.359</td>
+      <td>1.266</td>
+      <td>1.403</td>
+      <td>1.174</td>
+      <td>0.927</td>
+      <td>0.992</td>
+      <td>0.834</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>-1.031</td>
+      <td>-0.493</td>
+      <td>-0.861</td>
+      <td>-0.846</td>
+      <td>-0.984</td>
+      <td>-0.097</td>
+      <td>-0.781</td>
+      <td>0.036</td>
+      <td>-0.677</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>-1.171</td>
+      <td>-1.186</td>
+      <td>-0.564</td>
+      <td>-1.186</td>
+      <td>-0.924</td>
+      <td>-1.095</td>
+      <td>-0.660</td>
+      <td>-1.203</td>
+      <td>-0.757</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>-0.659</td>
+      <td>-0.451</td>
+      <td>-0.692</td>
+      <td>-0.708</td>
+      <td>-0.595</td>
+      <td>-0.726</td>
+      <td>-1.031</td>
+      <td>-0.877</td>
+      <td>-1.080</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>2.183</td>
+      <td>1.969</td>
+      <td>2.017</td>
+      <td>1.957</td>
+      <td>1.899</td>
+      <td>0.518</td>
+      <td>0.518</td>
+      <td>0.426</td>
+      <td>0.637</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>1.466</td>
+      <td>1.508</td>
+      <td>1.562</td>
+      <td>1.394</td>
+      <td>1.444</td>
+      <td>1.142</td>
+      <td>1.330</td>
+      <td>1.049</td>
+      <td>1.198</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>0.984</td>
+      <td>0.872</td>
+      <td>1.449</td>
+      <td>1.643</td>
+      <td>0.666</td>
+      <td>1.650</td>
+      <td>1.189</td>
+      <td>1.020</td>
+      <td>1.035</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>1.156</td>
+      <td>1.141</td>
+      <td>1.681</td>
+      <td>1.044</td>
+      <td>1.542</td>
+      <td>0.927</td>
+      <td>1.342</td>
+      <td>1.174</td>
+      <td>1.582</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>1.156</td>
+      <td>1.141</td>
+      <td>1.681</td>
+      <td>1.044</td>
+      <td>1.542</td>
+      <td>0.927</td>
+      <td>1.342</td>
+      <td>1.174</td>
+      <td>1.582</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>1.602</td>
+      <td>1.518</td>
+      <td>1.575</td>
+      <td>1.626</td>
+      <td>1.593</td>
+      <td>1.569</td>
+      <td>1.692</td>
+      <td>1.767</td>
+      <td>1.383</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Comparing the results with our IQR approach we see a lot of similarities, here the id 154 record did not show up as we already realised this was perhaps not a strong enough outlier.
+You could enhance our IQR technique by checking the amount of measurements that are above the threshold and respond accordingly, I will leave you a little hint.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">relative_spread_df</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G1    7
+G2    7
+G3    8
+G4    6
+G5    6
+G6    3
+G7    3
+G8    2
+G9    2
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="distillation-column">
+<h2>Distillation column<a class="headerlink" href="#distillation-column" title="Permalink to this headline">¶</a></h2>
+<p>As an exercise you can try the same technique to this dataset and see what you would find, good luck!
+Be mindful that you do not incorporate the date as a variable in your outlier algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distil_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/distillation-tower.csv&#39;</span><span class="p">)</span>
+<span class="n">distil_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Temp1</th>
+      <th>FlowC1</th>
+      <th>Temp2</th>
+      <th>TempC1</th>
+      <th>Temp3</th>
+      <th>TempC2</th>
+      <th>TempC3</th>
+      <th>Temp4</th>
+      <th>PressureC1</th>
+      <th>...</th>
+      <th>Temp10</th>
+      <th>FlowC3</th>
+      <th>FlowC4</th>
+      <th>Temp11</th>
+      <th>Temp12</th>
+      <th>InvTemp1</th>
+      <th>InvTemp2</th>
+      <th>InvTemp3</th>
+      <th>InvPressure1</th>
+      <th>VapourPressure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000-08-21</td>
+      <td>139.9857</td>
+      <td>432.0636</td>
+      <td>377.8119</td>
+      <td>100.2204</td>
+      <td>492.1353</td>
+      <td>490.1459</td>
+      <td>180.5578</td>
+      <td>187.4331</td>
+      <td>215.0627</td>
+      <td>...</td>
+      <td>513.9653</td>
+      <td>8.6279</td>
+      <td>10.5988</td>
+      <td>30.8983</td>
+      <td>489.9900</td>
+      <td>2.0409</td>
+      <td>2.6468</td>
+      <td>2.1681</td>
+      <td>4.3524</td>
+      <td>32.5026</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-08-23</td>
+      <td>131.0470</td>
+      <td>487.4029</td>
+      <td>371.3060</td>
+      <td>100.2297</td>
+      <td>482.2100</td>
+      <td>480.3128</td>
+      <td>172.6575</td>
+      <td>179.5089</td>
+      <td>205.0999</td>
+      <td>...</td>
+      <td>504.5145</td>
+      <td>8.7662</td>
+      <td>10.7560</td>
+      <td>31.9099</td>
+      <td>480.2888</td>
+      <td>2.0821</td>
+      <td>2.6932</td>
+      <td>2.2207</td>
+      <td>4.5497</td>
+      <td>34.8598</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000-08-26</td>
+      <td>118.2666</td>
+      <td>437.3516</td>
+      <td>378.4483</td>
+      <td>100.3084</td>
+      <td>488.7266</td>
+      <td>487.0040</td>
+      <td>165.9400</td>
+      <td>172.9262</td>
+      <td>205.0304</td>
+      <td>...</td>
+      <td>508.9997</td>
+      <td>8.5319</td>
+      <td>10.5737</td>
+      <td>29.9165</td>
+      <td>486.6190</td>
+      <td>2.0550</td>
+      <td>2.6424</td>
+      <td>2.1796</td>
+      <td>4.5511</td>
+      <td>32.1666</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-08-29</td>
+      <td>118.1769</td>
+      <td>481.8314</td>
+      <td>378.0028</td>
+      <td>95.5766</td>
+      <td>493.1481</td>
+      <td>491.1137</td>
+      <td>167.2085</td>
+      <td>174.2338</td>
+      <td>205.2561</td>
+      <td>...</td>
+      <td>514.1794</td>
+      <td>8.6260</td>
+      <td>10.6695</td>
+      <td>30.6229</td>
+      <td>491.1304</td>
+      <td>2.0361</td>
+      <td>2.6455</td>
+      <td>2.1620</td>
+      <td>4.5464</td>
+      <td>30.4064</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000-08-30</td>
+      <td>120.7891</td>
+      <td>412.6471</td>
+      <td>377.8871</td>
+      <td>92.9052</td>
+      <td>490.2486</td>
+      <td>488.6641</td>
+      <td>167.0326</td>
+      <td>173.9681</td>
+      <td>205.0883</td>
+      <td>...</td>
+      <td>511.0948</td>
+      <td>8.5939</td>
+      <td>10.4922</td>
+      <td>29.4977</td>
+      <td>487.6475</td>
+      <td>2.0507</td>
+      <td>2.6463</td>
+      <td>2.1704</td>
+      <td>4.5499</td>
+      <td>30.9238</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>248</th>
+      <td>2003-01-26</td>
+      <td>130.8138</td>
+      <td>212.6385</td>
+      <td>341.5964</td>
+      <td>121.4354</td>
+      <td>468.3401</td>
+      <td>467.0299</td>
+      <td>174.7639</td>
+      <td>180.7649</td>
+      <td>229.7393</td>
+      <td>...</td>
+      <td>479.0290</td>
+      <td>5.5590</td>
+      <td>6.4470</td>
+      <td>16.4131</td>
+      <td>466.3347</td>
+      <td>2.1444</td>
+      <td>2.9274</td>
+      <td>2.2127</td>
+      <td>4.0911</td>
+      <td>38.8507</td>
+    </tr>
+    <tr>
+      <th>249</th>
+      <td>2003-01-28</td>
+      <td>128.9673</td>
+      <td>225.1412</td>
+      <td>349.8965</td>
+      <td>118.8604</td>
+      <td>479.7665</td>
+      <td>478.4652</td>
+      <td>176.2176</td>
+      <td>182.3646</td>
+      <td>230.5049</td>
+      <td>...</td>
+      <td>491.2362</td>
+      <td>5.6342</td>
+      <td>6.4360</td>
+      <td>17.2385</td>
+      <td>477.8816</td>
+      <td>2.0926</td>
+      <td>2.8580</td>
+      <td>2.1620</td>
+      <td>4.0783</td>
+      <td>34.2653</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>2003-01-31</td>
+      <td>130.5328</td>
+      <td>223.5965</td>
+      <td>345.9366</td>
+      <td>120.4027</td>
+      <td>474.5378</td>
+      <td>473.1145</td>
+      <td>176.3310</td>
+      <td>182.2578</td>
+      <td>230.6638</td>
+      <td>...</td>
+      <td>485.8786</td>
+      <td>5.4810</td>
+      <td>6.3575</td>
+      <td>16.9866</td>
+      <td>472.3176</td>
+      <td>2.1172</td>
+      <td>2.8907</td>
+      <td>2.1855</td>
+      <td>4.0756</td>
+      <td>36.5717</td>
+    </tr>
+    <tr>
+      <th>251</th>
+      <td>2003-02-03</td>
+      <td>128.5248</td>
+      <td>213.5613</td>
+      <td>343.4950</td>
+      <td>119.6989</td>
+      <td>469.3802</td>
+      <td>467.9954</td>
+      <td>174.6435</td>
+      <td>180.5093</td>
+      <td>230.5226</td>
+      <td>...</td>
+      <td>480.2879</td>
+      <td>5.4727</td>
+      <td>6.4175</td>
+      <td>16.6778</td>
+      <td>467.0001</td>
+      <td>2.1413</td>
+      <td>2.9113</td>
+      <td>2.2090</td>
+      <td>4.0780</td>
+      <td>38.1054</td>
+    </tr>
+    <tr>
+      <th>252</th>
+      <td>2003-02-04</td>
+      <td>131.0491</td>
+      <td>217.4117</td>
+      <td>346.1960</td>
+      <td>119.0825</td>
+      <td>474.6599</td>
+      <td>473.0381</td>
+      <td>177.1088</td>
+      <td>183.1810</td>
+      <td>225.6420</td>
+      <td>...</td>
+      <td>486.0253</td>
+      <td>5.4597</td>
+      <td>6.3291</td>
+      <td>16.8766</td>
+      <td>472.2701</td>
+      <td>2.1174</td>
+      <td>2.8885</td>
+      <td>2.1844</td>
+      <td>4.1608</td>
+      <td>35.6298</td>
+    </tr>
+  </tbody>
+</table>
+<p>253 rows × 28 columns</p>
+</div></div></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c2_data_preparation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
