@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Outliers and validity &#8212; Data Science - A practical Approach</title>
+    <title>5. Outliers and validity &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Some practice" href="some_practice.html" />
+    <link rel="prev" title="4. Concatenation and deduplication" href="concatenation_deduplication.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -102,7 +104,7 @@
   2. Data Preparation
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
    2. Introduction
@@ -118,9 +120,14 @@
    4. Concatenation and deduplication
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. Outliers and validity
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="some_practice.html">
-   5. Some practice
+   6. Some practice
   </a>
  </li>
 </ul>
@@ -132,12 +139,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   6. Data Preprocessing
+   7. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
-   7. Indexing and slicing
+   8. Indexing and slicing
   </a>
  </li>
 </ul>
@@ -149,7 +156,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   8. Data Exploration
+   9. Data Exploration
   </a>
  </li>
 </ul>
@@ -161,7 +168,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   9. Data Visualisation
+   10. Data Visualisation
   </a>
  </li>
 </ul>
@@ -173,7 +180,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   10. Machine Learning
+   11. Machine Learning
   </a>
  </li>
 </ul>
@@ -287,12 +294,12 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#silicon-wafer-thickness">
-   Silicon wafer thickness
+   5.1. Silicon wafer thickness
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#distillation-column">
-   Distillation column
+   5.2. Distillation column
   </a>
  </li>
 </ul>
@@ -307,7 +314,7 @@
               <div>
                 
   <div class="section" id="outliers-and-validity">
-<h1>Outliers and validity<a class="headerlink" href="#outliers-and-validity" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">5. </span>Outliers and validity<a class="headerlink" href="#outliers-and-validity" title="Permalink to this headline">¶</a></h1>
 <p>When preparing data we have to be cautious with the accuracy of our set.
 Outliers and invalid data points are difficult to detect but should be handled with caution.</p>
 <p>we start out by importing our most important library.</p>
@@ -319,7 +326,7 @@ Outliers and invalid data points are difficult to detect but should be handled w
 </div>
 </div>
 <div class="section" id="silicon-wafer-thickness">
-<h2>Silicon wafer thickness<a class="headerlink" href="#silicon-wafer-thickness" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Silicon wafer thickness<a class="headerlink" href="#silicon-wafer-thickness" title="Permalink to this headline">¶</a></h2>
 <p>Our first dataset contains information about the production of silicon wafers, each wafers thickness is measure on 9 different spots.
 More information on the dataset can be found <a class="reference external" href="https://openmv.net/info/silicon-wafer-thickness">here</a>.</p>
 <div class="cell docutils container">
@@ -1131,7 +1138,7 @@ dtype: int64
 </div>
 </div>
 <div class="section" id="distillation-column">
-<h2>Distillation column<a class="headerlink" href="#distillation-column" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.2. </span>Distillation column<a class="headerlink" href="#distillation-column" title="Permalink to this headline">¶</a></h2>
 <p>As an exercise you can try the same technique to this dataset and see what you would find, good luck!
 Be mindful that you do not incorporate the date as a variable in your outlier algorithm.</p>
 <div class="cell docutils container">
@@ -1485,6 +1492,24 @@ Be mindful that you do not incorporate the date as a variable in your outlier al
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="concatenation_deduplication.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">4. </span>Concatenation and deduplication</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="some_practice.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">6. </span>Some practice</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
