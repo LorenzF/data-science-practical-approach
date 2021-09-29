@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Concatenation and deduplication" href="concatenation_deduplication.html" />
-    <link rel="prev" title="2. Data Preparation" href="introduction.html" />
+    <link rel="prev" title="2. Introduction" href="introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -107,7 +107,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
-   2. Data Preparation
+   2. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -121,13 +121,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="outliers_validity.html">
-   5. Outliers and validity
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="some_practice.html">
-   6. Some practice
+   5. Some practice
   </a>
  </li>
 </ul>
@@ -139,12 +134,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   7. Data Preprocessing
+   6. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
-   8. Indexing and slicing
+   7. Indexing and slicing
   </a>
  </li>
 </ul>
@@ -156,7 +151,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   9. Data Exploration
+   8. Data Exploration
   </a>
  </li>
 </ul>
@@ -168,7 +163,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   10. Data Visualisation
+   9. Data Visualisation
   </a>
  </li>
 </ul>
@@ -180,7 +175,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   11. Machine Learning
+   10. Machine Learning
   </a>
  </li>
 </ul>
@@ -332,7 +327,7 @@ It is crucial for data science and machine learning to have a dataset where no v
 </div>
 <div class="section" id="kamyr-digester">
 <h2><span class="section-number">3.1. </span>Kamyr digester<a class="headerlink" href="#kamyr-digester" title="Permalink to this headline">¶</a></h2>
-<p>The first dataset we will be looking at is taken from a psysical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure</p>
+<p>The first dataset we will be looking at is taken from a physical device equiped with numerous sensors, each timepoint (1 hour) these sensors are read out and the data is collected. Let’s have a look at the general structure</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kamyr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/kamyr-digester.csv&#39;</span><span class="p">)</span>
@@ -913,7 +908,7 @@ Name: Comments, dtype: object
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_25543</span><span class="o">/</span><span class="mf">1298831137.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_6376</span><span class="o">/</span><span class="mf">1298831137.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">travel_df</span><span class="p">[</span><span class="n">travel_df</span><span class="o">.</span><span class="n">Comments</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;rain&#39;</span><span class="p">)]</span>
 
 <span class="nn">~/git/data-science-practical-approach/venv/lib/python3.8/site-packages/pandas/core/frame.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, key)</span>
@@ -2448,7 +2443,7 @@ More info can be found <a class="reference external" href="https://scikit-learn.
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">2. </span>Data Preparation</p>
+                <p class="prevnext-title"><span class="section-number">2. </span>Introduction</p>
             </div>
         </a>
     </div>

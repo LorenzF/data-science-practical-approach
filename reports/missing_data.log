@@ -22,7 +22,7 @@ travel_df[travel_df.Comments.str.lower().str.contains('rain')]
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mValueError[0m                                Traceback (most recent call last)
-[0;32m/tmp/ipykernel_25543/1298831137.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_6376/1298831137.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mtravel_df[0m[0;34m[[0m[0mtravel_df[0m[0;34m.[0m[0mComments[0m[0;34m.[0m[0mstr[0m[0;34m.[0m[0mlower[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mstr[0m[0;34m.[0m[0mcontains[0m[0;34m([0m[0;34m'rain'[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/git/data-science-practical-approach/venv/lib/python3.8/site-packages/pandas/core/frame.py[0m in [0;36m__getitem__[0;34m(self, key)[0m
