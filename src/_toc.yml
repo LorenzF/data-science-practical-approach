@@ -1,32 +1,36 @@
 format: jb-book
+options:
+  numbered: true
 root: foreword
 parts:
 - caption: 1. Introduction
-  numbered: true
   chapters:
   - file: c1_introduction/introduction
 - caption: 2. Data Preparation
-  numbered: true
   chapters:
   - file: c2_data_preparation/introduction
   - file: c2_data_preparation/missing_data
   - file: c2_data_preparation/concatenation_deduplication
   - file: c2_data_preparation/outliers
+  - file: c2_data_preparation/string_operations
+  - file: c2_data_preparation/datetime_operations
+  - file: c2_data_preparation/categorical_encoding
+  - file: c2_data_preparation/scaling_normalization
+  - file: c2_data_preparation/binning_ranking
   - file: c2_data_preparation/some_practice
 - caption: 3. Data Preprocessing
-  numbered: true
   chapters:
   - file: c3_data_preprocessing/introduction
   - file: c3_data_preprocessing/indexing_slicing
+  - file: c3_data_preprocessing/merge
+  - file: c3_data_preprocessing/groupby
+  - file: c3_data_preprocessing/pivot
 - caption: 4. Data Exploration
-  numbered: true
   chapters:
   - file: c4_data_exploration/introduction
 - caption: 5. Data Visualisation
-  numbered: true
   chapters:
   - file: c5_data_visualisation/introduction
 - caption: 6. Machine Learning
-  numbered: true
   chapters:
   - file: c6_machine_learning/introduction
