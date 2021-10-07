@@ -1,0 +1,2787 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binning and ranking &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. Some practice" href="some_practice.html" />
+    <link rel="prev" title="Scaling and Normalization" href="scaling_normalization.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="outliers.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="string_operations.html">
+   6. String operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="datetime_operations.html">
+   Datetime operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="categorical_encoding.html">
+   Categorical encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scaling_normalization.html">
+   Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="some_practice.html">
+   11. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
+   12. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   13. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/merge.html">
+   Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
+   Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
+   Pivot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_exploration/introduction.html">
+   14. Data Exploration
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_visualisation/introduction.html">
+   15. Data Visualisation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   16. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c2_data_preparation/binning_ranking.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc2_data_preparation/binning_ranking.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c2_data_preparation/binning_ranking.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c2_data_preparation/binning_ranking.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binning">
+   Binning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ranking">
+   Ranking
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="binning-and-ranking">
+<h1>Binning and ranking<a class="headerlink" href="#binning-and-ranking" title="Permalink to this headline">¶</a></h1>
+<p>When dealing with numerical data the trouble can sometimes be that numbers can have a wide variety.</p>
+<p>Here we apply 2 methods to deal with that, binning and ranking.
+With binning we change the numerical feature into a categorical/ordinal feature.
+Ranking is used when our numerical feature contains a non normal distribution that fails to be normalized.</p>
+<p>For this example we use a food consumption dataset, where european countries are listed and the relative percentage of each country is given that consumes the type of food, e.g. a value of 67 means that 67% of that country eats that type of food.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/food-consumption.csv&#39;</span><span class="p">)</span>
+<span class="n">food_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Real coffee</th>
+      <th>Instant coffee</th>
+      <th>Tea</th>
+      <th>Sweetener</th>
+      <th>Biscuits</th>
+      <th>Powder soup</th>
+      <th>Tin soup</th>
+      <th>Potatoes</th>
+      <th>Frozen fish</th>
+      <th>Frozen veggies</th>
+      <th>Apples</th>
+      <th>Oranges</th>
+      <th>Tinned fruit</th>
+      <th>Jam</th>
+      <th>Garlic</th>
+      <th>Butter</th>
+      <th>Margarine</th>
+      <th>Olive oil</th>
+      <th>Yoghurt</th>
+      <th>Crisp bread</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Germany</td>
+      <td>90</td>
+      <td>49</td>
+      <td>88</td>
+      <td>19.0</td>
+      <td>57.0</td>
+      <td>51</td>
+      <td>19</td>
+      <td>21</td>
+      <td>27</td>
+      <td>21</td>
+      <td>81</td>
+      <td>75</td>
+      <td>44</td>
+      <td>71</td>
+      <td>22</td>
+      <td>91</td>
+      <td>85</td>
+      <td>74</td>
+      <td>30.0</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Italy</td>
+      <td>82</td>
+      <td>10</td>
+      <td>60</td>
+      <td>2.0</td>
+      <td>55.0</td>
+      <td>41</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+      <td>2</td>
+      <td>67</td>
+      <td>71</td>
+      <td>9</td>
+      <td>46</td>
+      <td>80</td>
+      <td>66</td>
+      <td>24</td>
+      <td>94</td>
+      <td>5.0</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>France</td>
+      <td>88</td>
+      <td>42</td>
+      <td>63</td>
+      <td>4.0</td>
+      <td>76.0</td>
+      <td>53</td>
+      <td>11</td>
+      <td>23</td>
+      <td>11</td>
+      <td>5</td>
+      <td>87</td>
+      <td>84</td>
+      <td>40</td>
+      <td>45</td>
+      <td>88</td>
+      <td>94</td>
+      <td>47</td>
+      <td>36</td>
+      <td>57.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Holland</td>
+      <td>96</td>
+      <td>62</td>
+      <td>98</td>
+      <td>32.0</td>
+      <td>62.0</td>
+      <td>67</td>
+      <td>43</td>
+      <td>7</td>
+      <td>14</td>
+      <td>14</td>
+      <td>83</td>
+      <td>89</td>
+      <td>61</td>
+      <td>81</td>
+      <td>15</td>
+      <td>31</td>
+      <td>97</td>
+      <td>13</td>
+      <td>53.0</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Belgium</td>
+      <td>94</td>
+      <td>38</td>
+      <td>48</td>
+      <td>11.0</td>
+      <td>74.0</td>
+      <td>37</td>
+      <td>23</td>
+      <td>9</td>
+      <td>13</td>
+      <td>12</td>
+      <td>76</td>
+      <td>76</td>
+      <td>42</td>
+      <td>57</td>
+      <td>29</td>
+      <td>84</td>
+      <td>80</td>
+      <td>83</td>
+      <td>20.0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Luxembourg</td>
+      <td>97</td>
+      <td>61</td>
+      <td>86</td>
+      <td>28.0</td>
+      <td>79.0</td>
+      <td>73</td>
+      <td>12</td>
+      <td>7</td>
+      <td>26</td>
+      <td>23</td>
+      <td>85</td>
+      <td>94</td>
+      <td>83</td>
+      <td>20</td>
+      <td>91</td>
+      <td>94</td>
+      <td>94</td>
+      <td>84</td>
+      <td>31.0</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>England</td>
+      <td>27</td>
+      <td>86</td>
+      <td>99</td>
+      <td>22.0</td>
+      <td>91.0</td>
+      <td>55</td>
+      <td>76</td>
+      <td>17</td>
+      <td>20</td>
+      <td>24</td>
+      <td>76</td>
+      <td>68</td>
+      <td>89</td>
+      <td>91</td>
+      <td>11</td>
+      <td>95</td>
+      <td>94</td>
+      <td>57</td>
+      <td>11.0</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Portugal</td>
+      <td>72</td>
+      <td>26</td>
+      <td>77</td>
+      <td>2.0</td>
+      <td>22.0</td>
+      <td>34</td>
+      <td>1</td>
+      <td>5</td>
+      <td>20</td>
+      <td>3</td>
+      <td>22</td>
+      <td>51</td>
+      <td>8</td>
+      <td>16</td>
+      <td>89</td>
+      <td>65</td>
+      <td>78</td>
+      <td>92</td>
+      <td>6.0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Austria</td>
+      <td>55</td>
+      <td>31</td>
+      <td>61</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>33</td>
+      <td>1</td>
+      <td>5</td>
+      <td>15</td>
+      <td>11</td>
+      <td>49</td>
+      <td>42</td>
+      <td>14</td>
+      <td>41</td>
+      <td>51</td>
+      <td>51</td>
+      <td>72</td>
+      <td>28</td>
+      <td>13.0</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Switzerland</td>
+      <td>73</td>
+      <td>72</td>
+      <td>85</td>
+      <td>25.0</td>
+      <td>31.0</td>
+      <td>69</td>
+      <td>10</td>
+      <td>17</td>
+      <td>19</td>
+      <td>15</td>
+      <td>79</td>
+      <td>70</td>
+      <td>46</td>
+      <td>61</td>
+      <td>64</td>
+      <td>82</td>
+      <td>48</td>
+      <td>61</td>
+      <td>48.0</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Sweden</td>
+      <td>97</td>
+      <td>13</td>
+      <td>93</td>
+      <td>31.0</td>
+      <td>NaN</td>
+      <td>43</td>
+      <td>43</td>
+      <td>39</td>
+      <td>54</td>
+      <td>45</td>
+      <td>56</td>
+      <td>78</td>
+      <td>53</td>
+      <td>75</td>
+      <td>9</td>
+      <td>68</td>
+      <td>32</td>
+      <td>48</td>
+      <td>2.0</td>
+      <td>93</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Denmark</td>
+      <td>96</td>
+      <td>17</td>
+      <td>92</td>
+      <td>35.0</td>
+      <td>66.0</td>
+      <td>32</td>
+      <td>17</td>
+      <td>11</td>
+      <td>51</td>
+      <td>42</td>
+      <td>81</td>
+      <td>72</td>
+      <td>50</td>
+      <td>64</td>
+      <td>11</td>
+      <td>92</td>
+      <td>91</td>
+      <td>30</td>
+      <td>11.0</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Norway</td>
+      <td>92</td>
+      <td>17</td>
+      <td>83</td>
+      <td>13.0</td>
+      <td>62.0</td>
+      <td>51</td>
+      <td>4</td>
+      <td>17</td>
+      <td>30</td>
+      <td>15</td>
+      <td>61</td>
+      <td>72</td>
+      <td>34</td>
+      <td>51</td>
+      <td>11</td>
+      <td>63</td>
+      <td>94</td>
+      <td>28</td>
+      <td>2.0</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Finland</td>
+      <td>98</td>
+      <td>12</td>
+      <td>84</td>
+      <td>20.0</td>
+      <td>64.0</td>
+      <td>27</td>
+      <td>10</td>
+      <td>8</td>
+      <td>18</td>
+      <td>12</td>
+      <td>50</td>
+      <td>57</td>
+      <td>22</td>
+      <td>37</td>
+      <td>15</td>
+      <td>96</td>
+      <td>94</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Spain</td>
+      <td>70</td>
+      <td>40</td>
+      <td>40</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>43</td>
+      <td>2</td>
+      <td>14</td>
+      <td>23</td>
+      <td>7</td>
+      <td>59</td>
+      <td>77</td>
+      <td>30</td>
+      <td>38</td>
+      <td>86</td>
+      <td>44</td>
+      <td>51</td>
+      <td>91</td>
+      <td>16.0</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Ireland</td>
+      <td>30</td>
+      <td>52</td>
+      <td>99</td>
+      <td>11.0</td>
+      <td>80.0</td>
+      <td>75</td>
+      <td>18</td>
+      <td>2</td>
+      <td>5</td>
+      <td>3</td>
+      <td>57</td>
+      <td>52</td>
+      <td>46</td>
+      <td>89</td>
+      <td>5</td>
+      <td>97</td>
+      <td>25</td>
+      <td>31</td>
+      <td>3.0</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Here you could do some data validity, where we check if all values are between 0 and 100, or we check for missing values.
+I will leave that up to you</p>
+<div class="section" id="binning">
+<h2>Binning<a class="headerlink" href="#binning" title="Permalink to this headline">¶</a></h2>
+<p>the first thing we want to do is seperate the countries based on their coffee consumption, instead of creating arbitrary values we can perform a quantitative cut.
+This means we create a number of equally sized groups using the qcut function, we give them the labels low, medium and high.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;bin_coffee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;Real coffee&#39;</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">])</span>
+<span class="n">food_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Real coffee</th>
+      <th>Instant coffee</th>
+      <th>Tea</th>
+      <th>Sweetener</th>
+      <th>Biscuits</th>
+      <th>Powder soup</th>
+      <th>Tin soup</th>
+      <th>Potatoes</th>
+      <th>Frozen fish</th>
+      <th>Frozen veggies</th>
+      <th>Apples</th>
+      <th>Oranges</th>
+      <th>Tinned fruit</th>
+      <th>Jam</th>
+      <th>Garlic</th>
+      <th>Butter</th>
+      <th>Margarine</th>
+      <th>Olive oil</th>
+      <th>Yoghurt</th>
+      <th>Crisp bread</th>
+      <th>bin_coffee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Germany</td>
+      <td>90</td>
+      <td>49</td>
+      <td>88</td>
+      <td>19.0</td>
+      <td>57.0</td>
+      <td>51</td>
+      <td>19</td>
+      <td>21</td>
+      <td>27</td>
+      <td>21</td>
+      <td>81</td>
+      <td>75</td>
+      <td>44</td>
+      <td>71</td>
+      <td>22</td>
+      <td>91</td>
+      <td>85</td>
+      <td>74</td>
+      <td>30.0</td>
+      <td>26</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Italy</td>
+      <td>82</td>
+      <td>10</td>
+      <td>60</td>
+      <td>2.0</td>
+      <td>55.0</td>
+      <td>41</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+      <td>2</td>
+      <td>67</td>
+      <td>71</td>
+      <td>9</td>
+      <td>46</td>
+      <td>80</td>
+      <td>66</td>
+      <td>24</td>
+      <td>94</td>
+      <td>5.0</td>
+      <td>18</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>France</td>
+      <td>88</td>
+      <td>42</td>
+      <td>63</td>
+      <td>4.0</td>
+      <td>76.0</td>
+      <td>53</td>
+      <td>11</td>
+      <td>23</td>
+      <td>11</td>
+      <td>5</td>
+      <td>87</td>
+      <td>84</td>
+      <td>40</td>
+      <td>45</td>
+      <td>88</td>
+      <td>94</td>
+      <td>47</td>
+      <td>36</td>
+      <td>57.0</td>
+      <td>3</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Holland</td>
+      <td>96</td>
+      <td>62</td>
+      <td>98</td>
+      <td>32.0</td>
+      <td>62.0</td>
+      <td>67</td>
+      <td>43</td>
+      <td>7</td>
+      <td>14</td>
+      <td>14</td>
+      <td>83</td>
+      <td>89</td>
+      <td>61</td>
+      <td>81</td>
+      <td>15</td>
+      <td>31</td>
+      <td>97</td>
+      <td>13</td>
+      <td>53.0</td>
+      <td>15</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Belgium</td>
+      <td>94</td>
+      <td>38</td>
+      <td>48</td>
+      <td>11.0</td>
+      <td>74.0</td>
+      <td>37</td>
+      <td>23</td>
+      <td>9</td>
+      <td>13</td>
+      <td>12</td>
+      <td>76</td>
+      <td>76</td>
+      <td>42</td>
+      <td>57</td>
+      <td>29</td>
+      <td>84</td>
+      <td>80</td>
+      <td>83</td>
+      <td>20.0</td>
+      <td>5</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Luxembourg</td>
+      <td>97</td>
+      <td>61</td>
+      <td>86</td>
+      <td>28.0</td>
+      <td>79.0</td>
+      <td>73</td>
+      <td>12</td>
+      <td>7</td>
+      <td>26</td>
+      <td>23</td>
+      <td>85</td>
+      <td>94</td>
+      <td>83</td>
+      <td>20</td>
+      <td>91</td>
+      <td>94</td>
+      <td>94</td>
+      <td>84</td>
+      <td>31.0</td>
+      <td>24</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>England</td>
+      <td>27</td>
+      <td>86</td>
+      <td>99</td>
+      <td>22.0</td>
+      <td>91.0</td>
+      <td>55</td>
+      <td>76</td>
+      <td>17</td>
+      <td>20</td>
+      <td>24</td>
+      <td>76</td>
+      <td>68</td>
+      <td>89</td>
+      <td>91</td>
+      <td>11</td>
+      <td>95</td>
+      <td>94</td>
+      <td>57</td>
+      <td>11.0</td>
+      <td>28</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Portugal</td>
+      <td>72</td>
+      <td>26</td>
+      <td>77</td>
+      <td>2.0</td>
+      <td>22.0</td>
+      <td>34</td>
+      <td>1</td>
+      <td>5</td>
+      <td>20</td>
+      <td>3</td>
+      <td>22</td>
+      <td>51</td>
+      <td>8</td>
+      <td>16</td>
+      <td>89</td>
+      <td>65</td>
+      <td>78</td>
+      <td>92</td>
+      <td>6.0</td>
+      <td>9</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Austria</td>
+      <td>55</td>
+      <td>31</td>
+      <td>61</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>33</td>
+      <td>1</td>
+      <td>5</td>
+      <td>15</td>
+      <td>11</td>
+      <td>49</td>
+      <td>42</td>
+      <td>14</td>
+      <td>41</td>
+      <td>51</td>
+      <td>51</td>
+      <td>72</td>
+      <td>28</td>
+      <td>13.0</td>
+      <td>11</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Switzerland</td>
+      <td>73</td>
+      <td>72</td>
+      <td>85</td>
+      <td>25.0</td>
+      <td>31.0</td>
+      <td>69</td>
+      <td>10</td>
+      <td>17</td>
+      <td>19</td>
+      <td>15</td>
+      <td>79</td>
+      <td>70</td>
+      <td>46</td>
+      <td>61</td>
+      <td>64</td>
+      <td>82</td>
+      <td>48</td>
+      <td>61</td>
+      <td>48.0</td>
+      <td>30</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Sweden</td>
+      <td>97</td>
+      <td>13</td>
+      <td>93</td>
+      <td>31.0</td>
+      <td>NaN</td>
+      <td>43</td>
+      <td>43</td>
+      <td>39</td>
+      <td>54</td>
+      <td>45</td>
+      <td>56</td>
+      <td>78</td>
+      <td>53</td>
+      <td>75</td>
+      <td>9</td>
+      <td>68</td>
+      <td>32</td>
+      <td>48</td>
+      <td>2.0</td>
+      <td>93</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Denmark</td>
+      <td>96</td>
+      <td>17</td>
+      <td>92</td>
+      <td>35.0</td>
+      <td>66.0</td>
+      <td>32</td>
+      <td>17</td>
+      <td>11</td>
+      <td>51</td>
+      <td>42</td>
+      <td>81</td>
+      <td>72</td>
+      <td>50</td>
+      <td>64</td>
+      <td>11</td>
+      <td>92</td>
+      <td>91</td>
+      <td>30</td>
+      <td>11.0</td>
+      <td>34</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Norway</td>
+      <td>92</td>
+      <td>17</td>
+      <td>83</td>
+      <td>13.0</td>
+      <td>62.0</td>
+      <td>51</td>
+      <td>4</td>
+      <td>17</td>
+      <td>30</td>
+      <td>15</td>
+      <td>61</td>
+      <td>72</td>
+      <td>34</td>
+      <td>51</td>
+      <td>11</td>
+      <td>63</td>
+      <td>94</td>
+      <td>28</td>
+      <td>2.0</td>
+      <td>62</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Finland</td>
+      <td>98</td>
+      <td>12</td>
+      <td>84</td>
+      <td>20.0</td>
+      <td>64.0</td>
+      <td>27</td>
+      <td>10</td>
+      <td>8</td>
+      <td>18</td>
+      <td>12</td>
+      <td>50</td>
+      <td>57</td>
+      <td>22</td>
+      <td>37</td>
+      <td>15</td>
+      <td>96</td>
+      <td>94</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>64</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Spain</td>
+      <td>70</td>
+      <td>40</td>
+      <td>40</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>43</td>
+      <td>2</td>
+      <td>14</td>
+      <td>23</td>
+      <td>7</td>
+      <td>59</td>
+      <td>77</td>
+      <td>30</td>
+      <td>38</td>
+      <td>86</td>
+      <td>44</td>
+      <td>51</td>
+      <td>91</td>
+      <td>16.0</td>
+      <td>13</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Ireland</td>
+      <td>30</td>
+      <td>52</td>
+      <td>99</td>
+      <td>11.0</td>
+      <td>80.0</td>
+      <td>75</td>
+      <td>18</td>
+      <td>2</td>
+      <td>5</td>
+      <td>3</td>
+      <td>57</td>
+      <td>52</td>
+      <td>46</td>
+      <td>89</td>
+      <td>5</td>
+      <td>97</td>
+      <td>25</td>
+      <td>31</td>
+      <td>3.0</td>
+      <td>9</td>
+      <td>low</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>a new column has appeared at the end of our dataframe, containing the labels of our binning, countries with low coffee consumption are put in the low category and vice versa.
+Now we can seperate the countries with low coffee consumption from the rest</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="n">food_df</span><span class="o">.</span><span class="n">bin_coffee</span> <span class="o">==</span> <span class="s1">&#39;low&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Real coffee</th>
+      <th>Instant coffee</th>
+      <th>Tea</th>
+      <th>Sweetener</th>
+      <th>Biscuits</th>
+      <th>Powder soup</th>
+      <th>Tin soup</th>
+      <th>Potatoes</th>
+      <th>Frozen fish</th>
+      <th>Frozen veggies</th>
+      <th>Apples</th>
+      <th>Oranges</th>
+      <th>Tinned fruit</th>
+      <th>Jam</th>
+      <th>Garlic</th>
+      <th>Butter</th>
+      <th>Margarine</th>
+      <th>Olive oil</th>
+      <th>Yoghurt</th>
+      <th>Crisp bread</th>
+      <th>bin_coffee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>England</td>
+      <td>27</td>
+      <td>86</td>
+      <td>99</td>
+      <td>22.0</td>
+      <td>91.0</td>
+      <td>55</td>
+      <td>76</td>
+      <td>17</td>
+      <td>20</td>
+      <td>24</td>
+      <td>76</td>
+      <td>68</td>
+      <td>89</td>
+      <td>91</td>
+      <td>11</td>
+      <td>95</td>
+      <td>94</td>
+      <td>57</td>
+      <td>11.0</td>
+      <td>28</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Portugal</td>
+      <td>72</td>
+      <td>26</td>
+      <td>77</td>
+      <td>2.0</td>
+      <td>22.0</td>
+      <td>34</td>
+      <td>1</td>
+      <td>5</td>
+      <td>20</td>
+      <td>3</td>
+      <td>22</td>
+      <td>51</td>
+      <td>8</td>
+      <td>16</td>
+      <td>89</td>
+      <td>65</td>
+      <td>78</td>
+      <td>92</td>
+      <td>6.0</td>
+      <td>9</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Austria</td>
+      <td>55</td>
+      <td>31</td>
+      <td>61</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>33</td>
+      <td>1</td>
+      <td>5</td>
+      <td>15</td>
+      <td>11</td>
+      <td>49</td>
+      <td>42</td>
+      <td>14</td>
+      <td>41</td>
+      <td>51</td>
+      <td>51</td>
+      <td>72</td>
+      <td>28</td>
+      <td>13.0</td>
+      <td>11</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Switzerland</td>
+      <td>73</td>
+      <td>72</td>
+      <td>85</td>
+      <td>25.0</td>
+      <td>31.0</td>
+      <td>69</td>
+      <td>10</td>
+      <td>17</td>
+      <td>19</td>
+      <td>15</td>
+      <td>79</td>
+      <td>70</td>
+      <td>46</td>
+      <td>61</td>
+      <td>64</td>
+      <td>82</td>
+      <td>48</td>
+      <td>61</td>
+      <td>48.0</td>
+      <td>30</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Spain</td>
+      <td>70</td>
+      <td>40</td>
+      <td>40</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>43</td>
+      <td>2</td>
+      <td>14</td>
+      <td>23</td>
+      <td>7</td>
+      <td>59</td>
+      <td>77</td>
+      <td>30</td>
+      <td>38</td>
+      <td>86</td>
+      <td>44</td>
+      <td>51</td>
+      <td>91</td>
+      <td>16.0</td>
+      <td>13</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Ireland</td>
+      <td>30</td>
+      <td>52</td>
+      <td>99</td>
+      <td>11.0</td>
+      <td>80.0</td>
+      <td>75</td>
+      <td>18</td>
+      <td>2</td>
+      <td>5</td>
+      <td>3</td>
+      <td>57</td>
+      <td>52</td>
+      <td>46</td>
+      <td>89</td>
+      <td>5</td>
+      <td>97</td>
+      <td>25</td>
+      <td>31</td>
+      <td>3.0</td>
+      <td>9</td>
+      <td>low</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You can already see the England/Ireland stereotype here, note that those are the only 2 with really low coffee consumption, the others are only in this low binning because we requested equally spaced bins in our qcut function. using the cut function would result in a different outcome.
+Perhaps you could try that out?</p>
+<p>I tried to think of some metric to quantify the status of coffee drinkers, since we also have the instant coffee consumption we could create a metric where we subtract the amount of instant coffe drinkers from the amount of real coffee drinkers.
+This way we can measure that difference between them, I already went ahead and made equal quantity bins for them with labels low, medium and high ‘quality coffee’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;bin_qual_coffee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;Real coffee&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;Instant coffee&#39;</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="n">food_df</span><span class="o">.</span><span class="n">bin_qual_coffee</span><span class="o">==</span><span class="s1">&#39;high&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Real coffee</th>
+      <th>Instant coffee</th>
+      <th>Tea</th>
+      <th>Sweetener</th>
+      <th>Biscuits</th>
+      <th>Powder soup</th>
+      <th>Tin soup</th>
+      <th>Potatoes</th>
+      <th>Frozen fish</th>
+      <th>Frozen veggies</th>
+      <th>Apples</th>
+      <th>Oranges</th>
+      <th>Tinned fruit</th>
+      <th>Jam</th>
+      <th>Garlic</th>
+      <th>Butter</th>
+      <th>Margarine</th>
+      <th>Olive oil</th>
+      <th>Yoghurt</th>
+      <th>Crisp bread</th>
+      <th>bin_coffee</th>
+      <th>bin_qual_coffee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Italy</td>
+      <td>82</td>
+      <td>10</td>
+      <td>60</td>
+      <td>2.0</td>
+      <td>55.0</td>
+      <td>41</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+      <td>2</td>
+      <td>67</td>
+      <td>71</td>
+      <td>9</td>
+      <td>46</td>
+      <td>80</td>
+      <td>66</td>
+      <td>24</td>
+      <td>94</td>
+      <td>5.0</td>
+      <td>18</td>
+      <td>medium</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Sweden</td>
+      <td>97</td>
+      <td>13</td>
+      <td>93</td>
+      <td>31.0</td>
+      <td>NaN</td>
+      <td>43</td>
+      <td>43</td>
+      <td>39</td>
+      <td>54</td>
+      <td>45</td>
+      <td>56</td>
+      <td>78</td>
+      <td>53</td>
+      <td>75</td>
+      <td>9</td>
+      <td>68</td>
+      <td>32</td>
+      <td>48</td>
+      <td>2.0</td>
+      <td>93</td>
+      <td>high</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Denmark</td>
+      <td>96</td>
+      <td>17</td>
+      <td>92</td>
+      <td>35.0</td>
+      <td>66.0</td>
+      <td>32</td>
+      <td>17</td>
+      <td>11</td>
+      <td>51</td>
+      <td>42</td>
+      <td>81</td>
+      <td>72</td>
+      <td>50</td>
+      <td>64</td>
+      <td>11</td>
+      <td>92</td>
+      <td>91</td>
+      <td>30</td>
+      <td>11.0</td>
+      <td>34</td>
+      <td>high</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Norway</td>
+      <td>92</td>
+      <td>17</td>
+      <td>83</td>
+      <td>13.0</td>
+      <td>62.0</td>
+      <td>51</td>
+      <td>4</td>
+      <td>17</td>
+      <td>30</td>
+      <td>15</td>
+      <td>61</td>
+      <td>72</td>
+      <td>34</td>
+      <td>51</td>
+      <td>11</td>
+      <td>63</td>
+      <td>94</td>
+      <td>28</td>
+      <td>2.0</td>
+      <td>62</td>
+      <td>medium</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Finland</td>
+      <td>98</td>
+      <td>12</td>
+      <td>84</td>
+      <td>20.0</td>
+      <td>64.0</td>
+      <td>27</td>
+      <td>10</td>
+      <td>8</td>
+      <td>18</td>
+      <td>12</td>
+      <td>50</td>
+      <td>57</td>
+      <td>22</td>
+      <td>37</td>
+      <td>15</td>
+      <td>96</td>
+      <td>94</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>64</td>
+      <td>high</td>
+      <td>high</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Aha! you can see here which countries prefer the real coffee over the instant version.
+It seems the scandinavian countries together with obviously Italy are the true Caffeine connoisseur of Europe.
+Another intersting thing we can do now is take the mean for each product for both group high and low and take the difference for high - low.
+We can see the result below</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="n">food_df</span><span class="o">.</span><span class="n">bin_qual_coffee</span><span class="o">==</span><span class="s1">&#39;high&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="n">food_df</span><span class="p">[</span><span class="n">food_df</span><span class="o">.</span><span class="n">bin_qual_coffee</span><span class="o">==</span><span class="s1">&#39;low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_16521/3908782487.py:1: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with &#39;numeric_only=None&#39;) is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
+  food_df[food_df.bin_qual_coffee==&#39;high&#39;].mean()-food_df[food_df.bin_qual_coffee==&#39;low&#39;].mean()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Real coffee       34.500000
+Instant coffee   -43.366667
+Tea                2.066667
+Sweetener         -0.800000
+Biscuits           2.583333
+Powder soup      -18.200000
+Tin soup          -9.600000
+Potatoes           5.066667
+Frozen fish       15.400000
+Frozen veggies    10.866667
+Apples            -4.166667
+Oranges            3.666667
+Tinned fruit     -14.066667
+Jam              -12.233333
+Garlic           -13.466667
+Butter            10.333333
+Margarine          2.500000
+Olive oil         -3.433333
+Yoghurt          -19.000000
+Crisp bread       36.533333
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>It seems a preference for quality coffee also pairs with crisp bread, who knew?
+Do you think scaling/normalization might be interesting here? why (not)?</p>
+</div>
+<div class="section" id="ranking">
+<h2>Ranking<a class="headerlink" href="#ranking" title="Permalink to this headline">¶</a></h2>
+<p>In case normalization fails us and we are for some reason not able to get a normal distribution out of a feature, we can still resort to ranking.
+Note that non linear machine learning techniques often use a ranking functionality under the hood, therefore this technique is often not required, yet for educational purposes we are going to use it here anyway.
+Let’s see how the distribution for Real coffee consumption looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Real coffee&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Real coffee</th>
+      <th>Instant coffee</th>
+      <th>Tea</th>
+      <th>Sweetener</th>
+      <th>Biscuits</th>
+      <th>Powder soup</th>
+      <th>Tin soup</th>
+      <th>Potatoes</th>
+      <th>Frozen fish</th>
+      <th>Frozen veggies</th>
+      <th>Apples</th>
+      <th>Oranges</th>
+      <th>Tinned fruit</th>
+      <th>Jam</th>
+      <th>Garlic</th>
+      <th>Butter</th>
+      <th>Margarine</th>
+      <th>Olive oil</th>
+      <th>Yoghurt</th>
+      <th>Crisp bread</th>
+      <th>bin_coffee</th>
+      <th>bin_qual_coffee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>England</td>
+      <td>27</td>
+      <td>86</td>
+      <td>99</td>
+      <td>22.0</td>
+      <td>91.0</td>
+      <td>55</td>
+      <td>76</td>
+      <td>17</td>
+      <td>20</td>
+      <td>24</td>
+      <td>76</td>
+      <td>68</td>
+      <td>89</td>
+      <td>91</td>
+      <td>11</td>
+      <td>95</td>
+      <td>94</td>
+      <td>57</td>
+      <td>11.0</td>
+      <td>28</td>
+      <td>low</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Ireland</td>
+      <td>30</td>
+      <td>52</td>
+      <td>99</td>
+      <td>11.0</td>
+      <td>80.0</td>
+      <td>75</td>
+      <td>18</td>
+      <td>2</td>
+      <td>5</td>
+      <td>3</td>
+      <td>57</td>
+      <td>52</td>
+      <td>46</td>
+      <td>89</td>
+      <td>5</td>
+      <td>97</td>
+      <td>25</td>
+      <td>31</td>
+      <td>3.0</td>
+      <td>9</td>
+      <td>low</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Austria</td>
+      <td>55</td>
+      <td>31</td>
+      <td>61</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>33</td>
+      <td>1</td>
+      <td>5</td>
+      <td>15</td>
+      <td>11</td>
+      <td>49</td>
+      <td>42</td>
+      <td>14</td>
+      <td>41</td>
+      <td>51</td>
+      <td>51</td>
+      <td>72</td>
+      <td>28</td>
+      <td>13.0</td>
+      <td>11</td>
+      <td>low</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Spain</td>
+      <td>70</td>
+      <td>40</td>
+      <td>40</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>43</td>
+      <td>2</td>
+      <td>14</td>
+      <td>23</td>
+      <td>7</td>
+      <td>59</td>
+      <td>77</td>
+      <td>30</td>
+      <td>38</td>
+      <td>86</td>
+      <td>44</td>
+      <td>51</td>
+      <td>91</td>
+      <td>16.0</td>
+      <td>13</td>
+      <td>low</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Portugal</td>
+      <td>72</td>
+      <td>26</td>
+      <td>77</td>
+      <td>2.0</td>
+      <td>22.0</td>
+      <td>34</td>
+      <td>1</td>
+      <td>5</td>
+      <td>20</td>
+      <td>3</td>
+      <td>22</td>
+      <td>51</td>
+      <td>8</td>
+      <td>16</td>
+      <td>89</td>
+      <td>65</td>
+      <td>78</td>
+      <td>92</td>
+      <td>6.0</td>
+      <td>9</td>
+      <td>low</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Switzerland</td>
+      <td>73</td>
+      <td>72</td>
+      <td>85</td>
+      <td>25.0</td>
+      <td>31.0</td>
+      <td>69</td>
+      <td>10</td>
+      <td>17</td>
+      <td>19</td>
+      <td>15</td>
+      <td>79</td>
+      <td>70</td>
+      <td>46</td>
+      <td>61</td>
+      <td>64</td>
+      <td>82</td>
+      <td>48</td>
+      <td>61</td>
+      <td>48.0</td>
+      <td>30</td>
+      <td>low</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Italy</td>
+      <td>82</td>
+      <td>10</td>
+      <td>60</td>
+      <td>2.0</td>
+      <td>55.0</td>
+      <td>41</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+      <td>2</td>
+      <td>67</td>
+      <td>71</td>
+      <td>9</td>
+      <td>46</td>
+      <td>80</td>
+      <td>66</td>
+      <td>24</td>
+      <td>94</td>
+      <td>5.0</td>
+      <td>18</td>
+      <td>medium</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>France</td>
+      <td>88</td>
+      <td>42</td>
+      <td>63</td>
+      <td>4.0</td>
+      <td>76.0</td>
+      <td>53</td>
+      <td>11</td>
+      <td>23</td>
+      <td>11</td>
+      <td>5</td>
+      <td>87</td>
+      <td>84</td>
+      <td>40</td>
+      <td>45</td>
+      <td>88</td>
+      <td>94</td>
+      <td>47</td>
+      <td>36</td>
+      <td>57.0</td>
+      <td>3</td>
+      <td>medium</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Germany</td>
+      <td>90</td>
+      <td>49</td>
+      <td>88</td>
+      <td>19.0</td>
+      <td>57.0</td>
+      <td>51</td>
+      <td>19</td>
+      <td>21</td>
+      <td>27</td>
+      <td>21</td>
+      <td>81</td>
+      <td>75</td>
+      <td>44</td>
+      <td>71</td>
+      <td>22</td>
+      <td>91</td>
+      <td>85</td>
+      <td>74</td>
+      <td>30.0</td>
+      <td>26</td>
+      <td>medium</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Norway</td>
+      <td>92</td>
+      <td>17</td>
+      <td>83</td>
+      <td>13.0</td>
+      <td>62.0</td>
+      <td>51</td>
+      <td>4</td>
+      <td>17</td>
+      <td>30</td>
+      <td>15</td>
+      <td>61</td>
+      <td>72</td>
+      <td>34</td>
+      <td>51</td>
+      <td>11</td>
+      <td>63</td>
+      <td>94</td>
+      <td>28</td>
+      <td>2.0</td>
+      <td>62</td>
+      <td>medium</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Belgium</td>
+      <td>94</td>
+      <td>38</td>
+      <td>48</td>
+      <td>11.0</td>
+      <td>74.0</td>
+      <td>37</td>
+      <td>23</td>
+      <td>9</td>
+      <td>13</td>
+      <td>12</td>
+      <td>76</td>
+      <td>76</td>
+      <td>42</td>
+      <td>57</td>
+      <td>29</td>
+      <td>84</td>
+      <td>80</td>
+      <td>83</td>
+      <td>20.0</td>
+      <td>5</td>
+      <td>medium</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Holland</td>
+      <td>96</td>
+      <td>62</td>
+      <td>98</td>
+      <td>32.0</td>
+      <td>62.0</td>
+      <td>67</td>
+      <td>43</td>
+      <td>7</td>
+      <td>14</td>
+      <td>14</td>
+      <td>83</td>
+      <td>89</td>
+      <td>61</td>
+      <td>81</td>
+      <td>15</td>
+      <td>31</td>
+      <td>97</td>
+      <td>13</td>
+      <td>53.0</td>
+      <td>15</td>
+      <td>high</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Denmark</td>
+      <td>96</td>
+      <td>17</td>
+      <td>92</td>
+      <td>35.0</td>
+      <td>66.0</td>
+      <td>32</td>
+      <td>17</td>
+      <td>11</td>
+      <td>51</td>
+      <td>42</td>
+      <td>81</td>
+      <td>72</td>
+      <td>50</td>
+      <td>64</td>
+      <td>11</td>
+      <td>92</td>
+      <td>91</td>
+      <td>30</td>
+      <td>11.0</td>
+      <td>34</td>
+      <td>high</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Luxembourg</td>
+      <td>97</td>
+      <td>61</td>
+      <td>86</td>
+      <td>28.0</td>
+      <td>79.0</td>
+      <td>73</td>
+      <td>12</td>
+      <td>7</td>
+      <td>26</td>
+      <td>23</td>
+      <td>85</td>
+      <td>94</td>
+      <td>83</td>
+      <td>20</td>
+      <td>91</td>
+      <td>94</td>
+      <td>94</td>
+      <td>84</td>
+      <td>31.0</td>
+      <td>24</td>
+      <td>high</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Sweden</td>
+      <td>97</td>
+      <td>13</td>
+      <td>93</td>
+      <td>31.0</td>
+      <td>NaN</td>
+      <td>43</td>
+      <td>43</td>
+      <td>39</td>
+      <td>54</td>
+      <td>45</td>
+      <td>56</td>
+      <td>78</td>
+      <td>53</td>
+      <td>75</td>
+      <td>9</td>
+      <td>68</td>
+      <td>32</td>
+      <td>48</td>
+      <td>2.0</td>
+      <td>93</td>
+      <td>high</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Finland</td>
+      <td>98</td>
+      <td>12</td>
+      <td>84</td>
+      <td>20.0</td>
+      <td>64.0</td>
+      <td>27</td>
+      <td>10</td>
+      <td>8</td>
+      <td>18</td>
+      <td>12</td>
+      <td>50</td>
+      <td>57</td>
+      <td>22</td>
+      <td>37</td>
+      <td>15</td>
+      <td>96</td>
+      <td>94</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>64</td>
+      <td>high</td>
+      <td>high</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ah yes, about half of the values are 90 or higher, not really optimal as the range is between 0 and 100!
+We can also view this in a visual way using a density plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;Real coffee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Real coffee (raw)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Real coffee (raw)&#39;}, ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/binning_ranking_21_1.png" src="../_images/binning_ranking_21_1.png" />
+</div>
+</div>
+<p>For larger datasets this would be more useful as we cannot see our whole dataset, it is clear we have to do something about this, now imagine we can not use regular normalization techniques.
+The rank method now comes in handy!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;rank_coffee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;Real coffee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
+<span class="n">food_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Real coffee</th>
+      <th>Instant coffee</th>
+      <th>Tea</th>
+      <th>Sweetener</th>
+      <th>Biscuits</th>
+      <th>Powder soup</th>
+      <th>Tin soup</th>
+      <th>Potatoes</th>
+      <th>Frozen fish</th>
+      <th>Frozen veggies</th>
+      <th>Apples</th>
+      <th>Oranges</th>
+      <th>Tinned fruit</th>
+      <th>Jam</th>
+      <th>Garlic</th>
+      <th>Butter</th>
+      <th>Margarine</th>
+      <th>Olive oil</th>
+      <th>Yoghurt</th>
+      <th>Crisp bread</th>
+      <th>bin_coffee</th>
+      <th>bin_qual_coffee</th>
+      <th>rank_coffee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Germany</td>
+      <td>90</td>
+      <td>49</td>
+      <td>88</td>
+      <td>19.0</td>
+      <td>57.0</td>
+      <td>51</td>
+      <td>19</td>
+      <td>21</td>
+      <td>27</td>
+      <td>21</td>
+      <td>81</td>
+      <td>75</td>
+      <td>44</td>
+      <td>71</td>
+      <td>22</td>
+      <td>91</td>
+      <td>85</td>
+      <td>74</td>
+      <td>30.0</td>
+      <td>26</td>
+      <td>medium</td>
+      <td>medium</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Italy</td>
+      <td>82</td>
+      <td>10</td>
+      <td>60</td>
+      <td>2.0</td>
+      <td>55.0</td>
+      <td>41</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+      <td>2</td>
+      <td>67</td>
+      <td>71</td>
+      <td>9</td>
+      <td>46</td>
+      <td>80</td>
+      <td>66</td>
+      <td>24</td>
+      <td>94</td>
+      <td>5.0</td>
+      <td>18</td>
+      <td>medium</td>
+      <td>high</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>France</td>
+      <td>88</td>
+      <td>42</td>
+      <td>63</td>
+      <td>4.0</td>
+      <td>76.0</td>
+      <td>53</td>
+      <td>11</td>
+      <td>23</td>
+      <td>11</td>
+      <td>5</td>
+      <td>87</td>
+      <td>84</td>
+      <td>40</td>
+      <td>45</td>
+      <td>88</td>
+      <td>94</td>
+      <td>47</td>
+      <td>36</td>
+      <td>57.0</td>
+      <td>3</td>
+      <td>medium</td>
+      <td>medium</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Holland</td>
+      <td>96</td>
+      <td>62</td>
+      <td>98</td>
+      <td>32.0</td>
+      <td>62.0</td>
+      <td>67</td>
+      <td>43</td>
+      <td>7</td>
+      <td>14</td>
+      <td>14</td>
+      <td>83</td>
+      <td>89</td>
+      <td>61</td>
+      <td>81</td>
+      <td>15</td>
+      <td>31</td>
+      <td>97</td>
+      <td>13</td>
+      <td>53.0</td>
+      <td>15</td>
+      <td>high</td>
+      <td>low</td>
+      <td>12.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Belgium</td>
+      <td>94</td>
+      <td>38</td>
+      <td>48</td>
+      <td>11.0</td>
+      <td>74.0</td>
+      <td>37</td>
+      <td>23</td>
+      <td>9</td>
+      <td>13</td>
+      <td>12</td>
+      <td>76</td>
+      <td>76</td>
+      <td>42</td>
+      <td>57</td>
+      <td>29</td>
+      <td>84</td>
+      <td>80</td>
+      <td>83</td>
+      <td>20.0</td>
+      <td>5</td>
+      <td>medium</td>
+      <td>medium</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Luxembourg</td>
+      <td>97</td>
+      <td>61</td>
+      <td>86</td>
+      <td>28.0</td>
+      <td>79.0</td>
+      <td>73</td>
+      <td>12</td>
+      <td>7</td>
+      <td>26</td>
+      <td>23</td>
+      <td>85</td>
+      <td>94</td>
+      <td>83</td>
+      <td>20</td>
+      <td>91</td>
+      <td>94</td>
+      <td>94</td>
+      <td>84</td>
+      <td>31.0</td>
+      <td>24</td>
+      <td>high</td>
+      <td>medium</td>
+      <td>14.5</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>England</td>
+      <td>27</td>
+      <td>86</td>
+      <td>99</td>
+      <td>22.0</td>
+      <td>91.0</td>
+      <td>55</td>
+      <td>76</td>
+      <td>17</td>
+      <td>20</td>
+      <td>24</td>
+      <td>76</td>
+      <td>68</td>
+      <td>89</td>
+      <td>91</td>
+      <td>11</td>
+      <td>95</td>
+      <td>94</td>
+      <td>57</td>
+      <td>11.0</td>
+      <td>28</td>
+      <td>low</td>
+      <td>low</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Portugal</td>
+      <td>72</td>
+      <td>26</td>
+      <td>77</td>
+      <td>2.0</td>
+      <td>22.0</td>
+      <td>34</td>
+      <td>1</td>
+      <td>5</td>
+      <td>20</td>
+      <td>3</td>
+      <td>22</td>
+      <td>51</td>
+      <td>8</td>
+      <td>16</td>
+      <td>89</td>
+      <td>65</td>
+      <td>78</td>
+      <td>92</td>
+      <td>6.0</td>
+      <td>9</td>
+      <td>low</td>
+      <td>medium</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Austria</td>
+      <td>55</td>
+      <td>31</td>
+      <td>61</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>33</td>
+      <td>1</td>
+      <td>5</td>
+      <td>15</td>
+      <td>11</td>
+      <td>49</td>
+      <td>42</td>
+      <td>14</td>
+      <td>41</td>
+      <td>51</td>
+      <td>51</td>
+      <td>72</td>
+      <td>28</td>
+      <td>13.0</td>
+      <td>11</td>
+      <td>low</td>
+      <td>low</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Switzerland</td>
+      <td>73</td>
+      <td>72</td>
+      <td>85</td>
+      <td>25.0</td>
+      <td>31.0</td>
+      <td>69</td>
+      <td>10</td>
+      <td>17</td>
+      <td>19</td>
+      <td>15</td>
+      <td>79</td>
+      <td>70</td>
+      <td>46</td>
+      <td>61</td>
+      <td>64</td>
+      <td>82</td>
+      <td>48</td>
+      <td>61</td>
+      <td>48.0</td>
+      <td>30</td>
+      <td>low</td>
+      <td>low</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Sweden</td>
+      <td>97</td>
+      <td>13</td>
+      <td>93</td>
+      <td>31.0</td>
+      <td>NaN</td>
+      <td>43</td>
+      <td>43</td>
+      <td>39</td>
+      <td>54</td>
+      <td>45</td>
+      <td>56</td>
+      <td>78</td>
+      <td>53</td>
+      <td>75</td>
+      <td>9</td>
+      <td>68</td>
+      <td>32</td>
+      <td>48</td>
+      <td>2.0</td>
+      <td>93</td>
+      <td>high</td>
+      <td>high</td>
+      <td>14.5</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Denmark</td>
+      <td>96</td>
+      <td>17</td>
+      <td>92</td>
+      <td>35.0</td>
+      <td>66.0</td>
+      <td>32</td>
+      <td>17</td>
+      <td>11</td>
+      <td>51</td>
+      <td>42</td>
+      <td>81</td>
+      <td>72</td>
+      <td>50</td>
+      <td>64</td>
+      <td>11</td>
+      <td>92</td>
+      <td>91</td>
+      <td>30</td>
+      <td>11.0</td>
+      <td>34</td>
+      <td>high</td>
+      <td>high</td>
+      <td>12.5</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Norway</td>
+      <td>92</td>
+      <td>17</td>
+      <td>83</td>
+      <td>13.0</td>
+      <td>62.0</td>
+      <td>51</td>
+      <td>4</td>
+      <td>17</td>
+      <td>30</td>
+      <td>15</td>
+      <td>61</td>
+      <td>72</td>
+      <td>34</td>
+      <td>51</td>
+      <td>11</td>
+      <td>63</td>
+      <td>94</td>
+      <td>28</td>
+      <td>2.0</td>
+      <td>62</td>
+      <td>medium</td>
+      <td>high</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Finland</td>
+      <td>98</td>
+      <td>12</td>
+      <td>84</td>
+      <td>20.0</td>
+      <td>64.0</td>
+      <td>27</td>
+      <td>10</td>
+      <td>8</td>
+      <td>18</td>
+      <td>12</td>
+      <td>50</td>
+      <td>57</td>
+      <td>22</td>
+      <td>37</td>
+      <td>15</td>
+      <td>96</td>
+      <td>94</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>64</td>
+      <td>high</td>
+      <td>high</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Spain</td>
+      <td>70</td>
+      <td>40</td>
+      <td>40</td>
+      <td>NaN</td>
+      <td>62.0</td>
+      <td>43</td>
+      <td>2</td>
+      <td>14</td>
+      <td>23</td>
+      <td>7</td>
+      <td>59</td>
+      <td>77</td>
+      <td>30</td>
+      <td>38</td>
+      <td>86</td>
+      <td>44</td>
+      <td>51</td>
+      <td>91</td>
+      <td>16.0</td>
+      <td>13</td>
+      <td>low</td>
+      <td>low</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Ireland</td>
+      <td>30</td>
+      <td>52</td>
+      <td>99</td>
+      <td>11.0</td>
+      <td>80.0</td>
+      <td>75</td>
+      <td>18</td>
+      <td>2</td>
+      <td>5</td>
+      <td>3</td>
+      <td>57</td>
+      <td>52</td>
+      <td>46</td>
+      <td>89</td>
+      <td>5</td>
+      <td>97</td>
+      <td>25</td>
+      <td>31</td>
+      <td>3.0</td>
+      <td>9</td>
+      <td>low</td>
+      <td>low</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>At the end of our data a new column was appended, containing the ranking of each country with the lowest being 1 and the highest equal to the amount of countries.
+When we visualise this distribution we get a uniform distribution, not normal but still better than before!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_df</span><span class="p">[</span><span class="s1">&#39;rank_coffee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Real coffee (ranked)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Real coffee (ranked)&#39;}, ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/binning_ranking_25_1.png" src="../_images/binning_ranking_25_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c2_data_preparation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="scaling_normalization.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Scaling and Normalization</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="some_practice.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">11. </span>Some practice</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
