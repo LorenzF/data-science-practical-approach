@@ -5,53 +5,54 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foreword &#8212; Data Science - A practical Approach</title>
+    <title>6. String operations &#8212; Data Science - A practical Approach</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Introduction" href="c1_introduction/introduction.html" />
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Datetime operations" href="datetime_operations.html" />
+    <link rel="prev" title="5. Outliers and validity" href="outliers.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -68,20 +69,20 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+    <a class="navbar-brand text-wrap" href="../index.html">
       
       
       <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
    Foreword
   </a>
  </li>
@@ -93,7 +94,7 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="c1_introduction/introduction.html">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
    1. Introduction
   </a>
  </li>
@@ -103,54 +104,54 @@
   2. Data Preparation
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/introduction.html">
+  <a class="reference internal" href="introduction.html">
    2. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/missing_data.html">
+  <a class="reference internal" href="missing_data.html">
    3. Missing Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/concatenation_deduplication.html">
+  <a class="reference internal" href="concatenation_deduplication.html">
    4. Concatenation and deduplication
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/outliers.html">
+  <a class="reference internal" href="outliers.html">
    5. Outliers and validity
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/string_operations.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    6. String operations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/datetime_operations.html">
-   Datetime operations
+  <a class="reference internal" href="datetime_operations.html">
+   7. Datetime operations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/categorical_encoding.html">
-   Categorical encoding
+  <a class="reference internal" href="categorical_encoding.html">
+   8. Categorical encoding
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/scaling_normalization.html">
-   Scaling and Normalization
+  <a class="reference internal" href="scaling_normalization.html">
+   9. Scaling and Normalization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/binning_ranking.html">
-   Binning and ranking
+  <a class="reference internal" href="binning_ranking.html">
+   10. Binning and ranking
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c2_data_preparation/some_practice.html">
+  <a class="reference internal" href="some_practice.html">
    11. Some practice
   </a>
  </li>
@@ -162,28 +163,13 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="c3_data_preprocessing/introduction.html">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
    12. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c3_data_preprocessing/indexing_slicing.html">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
    13. Indexing and slicing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c3_data_preprocessing/merge.html">
-   Merge
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c3_data_preprocessing/groupby.html">
-   Groupby
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c3_data_preprocessing/pivot.html">
-   Pivot
   </a>
  </li>
 </ul>
@@ -194,7 +180,7 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="c4_data_exploration/introduction.html">
+  <a class="reference internal" href="../c4_data_exploration/introduction.html">
    14. Data Exploration
   </a>
  </li>
@@ -206,7 +192,7 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="c5_data_visualisation/introduction.html">
+  <a class="reference internal" href="../c5_data_visualisation/introduction.html">
    15. Data Visualisation
   </a>
  </li>
@@ -218,7 +204,7 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="c6_machine_learning/introduction.html">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
    16. Machine Learning
   </a>
  </li>
@@ -263,9 +249,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/foreword.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/c2_data_preparation/string_operations.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -283,7 +269,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fforeword.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc2_data_preparation/string_operations.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -299,6 +285,28 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c2_data_preparation/string_operations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c2_data_preparation/string_operations.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -312,21 +320,8 @@
         
               <div>
                 
-  <div class="section" id="foreword">
-<h1>Foreword<a class="headerlink" href="#foreword" title="Permalink to this headline">¶</a></h1>
-<p>pdf version can be found <a class="reference external" href="https://github.com/LorenzF/data-science-practical-approach/raw/main/src/_build/latex/book.pdf">here</a>.</p>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
+  <div class="section" id="string-operations">
+<h1><span class="section-number">6. </span>String operations<a class="headerlink" href="#string-operations" title="Permalink to this headline">¶</a></h1>
 </div>
 
     <script type="text/x-thebe-config">
@@ -342,7 +337,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./."
+            path: "./c2_data_preparation"
         },
         predefinedOutput: true
     }
@@ -358,11 +353,20 @@
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="outliers.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">5. </span>Outliers and validity</p>
+            </div>
+        </a>
+    </div>
      <div id="next">
-        <a class="right-next" href="c1_introduction/introduction.html" title="next page">
+        <a class="right-next" href="datetime_operations.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">1. </span>Introduction</p>
+                <p class="prevnext-title"><span class="section-number">7. </span>Datetime operations</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
@@ -388,7 +392,7 @@
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
   
   </body>

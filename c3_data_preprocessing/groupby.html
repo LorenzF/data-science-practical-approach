@@ -1,0 +1,1190 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groupby &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pivot" href="pivot.html" />
+    <link rel="prev" title="Merge" href="merge.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/outliers.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/string_operations.html">
+   6. String operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
+   Datetime operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
+   Categorical encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
+   Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
+   10. Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/some_practice.html">
+   11. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   12. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexing_slicing.html">
+   13. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="merge.html">
+   Merge
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pivot.html">
+   Pivot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_exploration/introduction.html">
+   14. Data Exploration
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_visualisation/introduction.html">
+   15. Data Visualisation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   16. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c3_data_preprocessing/groupby.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc3_data_preprocessing/groupby.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c3_data_preprocessing/groupby.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c3_data_preprocessing/groupby.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="groupby">
+<h1>Groupby<a class="headerlink" href="#groupby" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_rating_df</span> <span class="o">=</span> <span class="n">rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+<span class="n">grouped_rating_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+    <tr>
+      <th>placeID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>132654</th>
+      <td>0.250000</td>
+      <td>0.25</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>135040</th>
+      <td>0.250000</td>
+      <td>0.25</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>132560</th>
+      <td>0.500000</td>
+      <td>1.00</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>132663</th>
+      <td>0.500000</td>
+      <td>0.50</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>135069</th>
+      <td>0.500000</td>
+      <td>0.50</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>132755</th>
+      <td>1.800000</td>
+      <td>2.00</td>
+      <td>1.600000</td>
+    </tr>
+    <tr>
+      <th>132922</th>
+      <td>1.833333</td>
+      <td>1.50</td>
+      <td>1.833333</td>
+    </tr>
+    <tr>
+      <th>134986</th>
+      <td>2.000000</td>
+      <td>2.00</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>135034</th>
+      <td>2.000000</td>
+      <td>2.00</td>
+      <td>1.600000</td>
+    </tr>
+    <tr>
+      <th>132955</th>
+      <td>2.000000</td>
+      <td>1.80</td>
+      <td>1.800000</td>
+    </tr>
+  </tbody>
+</table>
+<p>130 rows × 3 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/geoplaces2.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">grouped_rating_df</span><span class="p">,</span> <span class="n">geo_df</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">merged_rating_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>the_geom_meter</th>
+      <th>name</th>
+      <th>address</th>
+      <th>city</th>
+      <th>state</th>
+      <th>...</th>
+      <th>alcohol</th>
+      <th>smoking_area</th>
+      <th>dress_code</th>
+      <th>accessibility</th>
+      <th>price</th>
+      <th>url</th>
+      <th>Rambience</th>
+      <th>franchise</th>
+      <th>area</th>
+      <th>other_services</th>
+    </tr>
+    <tr>
+      <th>placeID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>132654</th>
+      <td>0.250000</td>
+      <td>0.25</td>
+      <td>0.250000</td>
+      <td>23.735523</td>
+      <td>-99.129588</td>
+      <td>0101000020957F000040E8F628488557C18224E8B94845...</td>
+      <td>Carnitas Mata  Calle 16 de Septiembre</td>
+      <td>16 de Septiembre</td>
+      <td>victoria</td>
+      <td>tamaulipas</td>
+      <td>...</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>135040</th>
+      <td>0.250000</td>
+      <td>0.25</td>
+      <td>0.250000</td>
+      <td>22.135617</td>
+      <td>-100.969709</td>
+      <td>0101000020957F00001B552189B84A58C15A2AAEFD2CA2...</td>
+      <td>Restaurant los Compadres</td>
+      <td>Camino a Simon Diaz 155 Centro</td>
+      <td>San Luis Potosi</td>
+      <td>SLP</td>
+      <td>...</td>
+      <td>Wine-Beer</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>no_accessibility</td>
+      <td>high</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>132560</th>
+      <td>0.500000</td>
+      <td>1.00</td>
+      <td>0.250000</td>
+      <td>23.752304</td>
+      <td>-99.166913</td>
+      <td>0101000020957F0000FC60BDA8E88157C1B2C357D6DA4E...</td>
+      <td>puesto de gorditas</td>
+      <td>frente al tecnologico</td>
+      <td>victoria</td>
+      <td>tamaulipas</td>
+      <td>...</td>
+      <td>No_Alcohol_Served</td>
+      <td>permitted</td>
+      <td>informal</td>
+      <td>no_accessibility</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>open</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>132663</th>
+      <td>0.500000</td>
+      <td>0.50</td>
+      <td>0.666667</td>
+      <td>23.752511</td>
+      <td>-99.166954</td>
+      <td>0101000020957F0000FDF8D26EE08157C1FEDB6A1FDB4E...</td>
+      <td>tacos abi</td>
+      <td>?</td>
+      <td>victoria</td>
+      <td>tamaulipas</td>
+      <td>...</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>135069</th>
+      <td>0.500000</td>
+      <td>0.50</td>
+      <td>0.750000</td>
+      <td>22.140129</td>
+      <td>-100.944872</td>
+      <td>0101000020957F000038E5D546B74A58C18FD29AD0D29A...</td>
+      <td>Abondance Restaurante Bar</td>
+      <td>Industrias 908 Valle Dorado</td>
+      <td>San Luis Potosi</td>
+      <td>SLP</td>
+      <td>...</td>
+      <td>Wine-Beer</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>no_accessibility</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>132755</th>
+      <td>1.800000</td>
+      <td>2.00</td>
+      <td>1.600000</td>
+      <td>22.153324</td>
+      <td>-101.019546</td>
+      <td>0101000020957F000026CADE45A14658C1F011EBCA55AF...</td>
+      <td>La Estrella de Dimas</td>
+      <td>Av. de los Pintores</td>
+      <td>San Luis Potosi</td>
+      <td>S.L.P.</td>
+      <td>...</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>partially</td>
+      <td>medium</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>variety</td>
+    </tr>
+    <tr>
+      <th>132922</th>
+      <td>1.833333</td>
+      <td>1.50</td>
+      <td>1.833333</td>
+      <td>22.151135</td>
+      <td>-100.982311</td>
+      <td>0101000020957F000060A98A38FF4758C146718E41D9A4...</td>
+      <td>cafe punta del cielo</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>...</td>
+      <td>No_Alcohol_Served</td>
+      <td>permitted</td>
+      <td>formal</td>
+      <td>completely</td>
+      <td>medium</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>134986</th>
+      <td>2.000000</td>
+      <td>2.00</td>
+      <td>2.000000</td>
+      <td>18.928798</td>
+      <td>-99.239513</td>
+      <td>0101000020957F00002A0D05E2D96D5AC1AB058CB1EC56...</td>
+      <td>Restaurant Las Mananitas</td>
+      <td>Ricardo Linares 107</td>
+      <td>Cuernavaca</td>
+      <td>Morelos</td>
+      <td>...</td>
+      <td>Wine-Beer</td>
+      <td>none</td>
+      <td>formal</td>
+      <td>no_accessibility</td>
+      <td>high</td>
+      <td>lasmananitas.com.mx</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>135034</th>
+      <td>2.000000</td>
+      <td>2.00</td>
+      <td>1.600000</td>
+      <td>22.140517</td>
+      <td>-101.021422</td>
+      <td>0101000020957F000026D92BB4894858C161A7552DA2B0...</td>
+      <td>Michiko Restaurant Japones</td>
+      <td>Cordillera de Los Alpes 160 Lomas 2 Seccion</td>
+      <td>San Luis Potosi</td>
+      <td>SLP</td>
+      <td>...</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>no_accessibility</td>
+      <td>medium</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>132955</th>
+      <td>2.000000</td>
+      <td>1.80</td>
+      <td>1.800000</td>
+      <td>22.147622</td>
+      <td>-101.010275</td>
+      <td>0101000020957F000068BE7C87C24758C1920A360A08AD...</td>
+      <td>emilianos</td>
+      <td>venustiano carranza</td>
+      <td>san luis potos</td>
+      <td>mexico</td>
+      <td>...</td>
+      <td>Wine-Beer</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>t</td>
+      <td>closed</td>
+      <td>variety</td>
+    </tr>
+  </tbody>
+</table>
+<p>130 rows × 23 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;rating&#39;, &#39;food_rating&#39;, &#39;service_rating&#39;, &#39;latitude&#39;, &#39;longitude&#39;,
+       &#39;the_geom_meter&#39;, &#39;name&#39;, &#39;address&#39;, &#39;city&#39;, &#39;state&#39;, &#39;country&#39;, &#39;fax&#39;,
+       &#39;zip&#39;, &#39;alcohol&#39;, &#39;smoking_area&#39;, &#39;dress_code&#39;, &#39;accessibility&#39;,
+       &#39;price&#39;, &#39;url&#39;, &#39;Rambience&#39;, &#39;franchise&#39;, &#39;area&#39;, &#39;other_services&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>?</th>
+      <td>1.166045</td>
+      <td>1.232946</td>
+      <td>1.069169</td>
+    </tr>
+    <tr>
+      <th>Mexico</th>
+      <td>1.200977</td>
+      <td>1.229093</td>
+      <td>1.118162</td>
+    </tr>
+    <tr>
+      <th>mexico</th>
+      <td>1.062660</td>
+      <td>1.069006</td>
+      <td>0.900064</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">can</span> <span class="n">you</span> <span class="n">fix</span> <span class="n">this</span> <span class="n">string</span> problem<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Object `problem` not found.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;alcohol&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+    <tr>
+      <th>alcohol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Full_Bar</th>
+      <td>1.287124</td>
+      <td>1.218315</td>
+      <td>1.170311</td>
+    </tr>
+    <tr>
+      <th>No_Alcohol_Served</th>
+      <td>1.148075</td>
+      <td>1.194730</td>
+      <td>1.042417</td>
+    </tr>
+    <tr>
+      <th>Wine-Beer</th>
+      <td>1.231887</td>
+      <td>1.261840</td>
+      <td>1.174437</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;accessibility&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+    <tr>
+      <th>accessibility</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>completely</th>
+      <td>1.132494</td>
+      <td>1.203597</td>
+      <td>1.049709</td>
+    </tr>
+    <tr>
+      <th>no_accessibility</th>
+      <td>1.196189</td>
+      <td>1.206242</td>
+      <td>1.091278</td>
+    </tr>
+    <tr>
+      <th>partially</th>
+      <td>1.275356</td>
+      <td>1.330294</td>
+      <td>1.219991</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">accessibility</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>no_accessibility    76
+completely          45
+partially            9
+Name: accessibility, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+    <tr>
+      <th>price</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>high</th>
+      <td>1.258106</td>
+      <td>1.253816</td>
+      <td>1.174754</td>
+    </tr>
+    <tr>
+      <th>low</th>
+      <td>1.063059</td>
+      <td>1.135805</td>
+      <td>0.935632</td>
+    </tr>
+    <tr>
+      <th>medium</th>
+      <td>1.234342</td>
+      <td>1.255871</td>
+      <td>1.161361</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">can</span> <span class="n">you</span> <span class="n">solve</span> <span class="n">the</span> <span class="n">mean</span><span class="o">-</span><span class="n">mean</span> problem<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Object `problem` not found.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ow">in</span> <span class="n">the</span> <span class="n">merge</span> <span class="n">example</span> <span class="n">we</span> <span class="n">added</span> <span class="n">the</span> <span class="n">cuisine</span> <span class="nb">type</span><span class="p">,</span> <span class="n">could</span> <span class="n">you</span> <span class="n">perform</span> <span class="n">a</span> <span class="n">groupby</span> <span class="n">analysis</span> <span class="n">on</span> this<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Object `this` not found.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c3_data_preprocessing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="merge.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Merge</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="pivot.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Pivot</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

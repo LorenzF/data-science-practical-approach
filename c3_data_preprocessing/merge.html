@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>13. Indexing and slicing &#8212; Data Science - A practical Approach</title>
+    <title>Merge &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Data Exploration" href="../c4_data_exploration/introduction.html" />
-    <link rel="prev" title="12. Data Preprocessing" href="introduction.html" />
+    <link rel="next" title="Groupby" href="groupby.html" />
+    <link rel="prev" title="13. Indexing and slicing" href="indexing_slicing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,17 +132,17 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
-   7. Datetime operations
+   Datetime operations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
-   8. Categorical encoding
+   Categorical encoding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
-   9. Scaling and Normalization
+   Scaling and Normalization
   </a>
  </li>
  <li class="toctree-l1">
@@ -167,9 +167,24 @@
    12. Data Preprocessing
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexing_slicing.html">
+   13. Indexing and slicing
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   13. Indexing and slicing
+   Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="groupby.html">
+   Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pivot.html">
+   Pivot
   </a>
  </li>
 </ul>
@@ -249,7 +264,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/c3_data_preprocessing/indexing_slicing.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/c3_data_preprocessing/merge.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -269,7 +284,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc3_data_preprocessing/indexing_slicing.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc3_data_preprocessing/merge.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -290,7 +305,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c3_data_preprocessing/indexing_slicing.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c3_data_preprocessing/merge.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -298,7 +313,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c3_data_preprocessing/indexing_slicing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c3_data_preprocessing/merge.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -320,9 +335,9 @@
         
               <div>
                 
-  <div class="section" id="indexing-and-slicing">
-<h1><span class="section-number">13. </span>Indexing and slicing<a class="headerlink" href="#indexing-and-slicing" title="Permalink to this headline">¶</a></h1>
-<p>In</p>
+  <div class="section" id="merge">
+<h1>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://www.kaggle.com/uciml/restaurant-data-with-consumer-ratings">https://www.kaggle.com/uciml/restaurant-data-with-consumer-ratings</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -332,8 +347,14 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_temp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c2_data_preparation/data/temperatures/australia/melbourne/1981.csv&#39;</span><span class="p">)</span>
-<span class="n">min_temp_df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span>
 </pre></div>
 </div>
 </div>
@@ -356,35 +377,162 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Date</th>
-      <th>Temp</th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1981-01-01</td>
-      <td>20.7</td>
+      <td>U1077</td>
+      <td>135085</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1981-01-02</td>
-      <td>17.9</td>
+      <td>U1077</td>
+      <td>135038</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1981-01-03</td>
-      <td>18.8</td>
+      <td>U1077</td>
+      <td>132825</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1981-01-04</td>
-      <td>14.6</td>
+      <td>U1077</td>
+      <td>135060</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1981-01-05</td>
-      <td>15.8</td>
+      <td>U1068</td>
+      <td>135104</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1156</th>
+      <td>U1043</td>
+      <td>132630</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1157</th>
+      <td>U1011</td>
+      <td>132715</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1158</th>
+      <td>U1068</td>
+      <td>132733</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1159</th>
+      <td>U1068</td>
+      <td>132594</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1160</th>
+      <td>U1068</td>
+      <td>132660</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1161 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cuisine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/chefmozcuisine.csv&#39;</span><span class="p">)</span>
+<span class="n">cuisine_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>placeID</th>
+      <th>Rcuisine</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>135110</td>
+      <td>Spanish</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>135109</td>
+      <td>Italian</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>135107</td>
+      <td>Latin_American</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>135106</td>
+      <td>Mexican</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>135105</td>
+      <td>Fast_Food</td>
     </tr>
     <tr>
       <th>...</th>
@@ -392,52 +540,39 @@
       <td>...</td>
     </tr>
     <tr>
-      <th>360</th>
-      <td>1981-12-27</td>
-      <td>15.5</td>
+      <th>911</th>
+      <td>132005</td>
+      <td>Seafood</td>
     </tr>
     <tr>
-      <th>361</th>
-      <td>1981-12-28</td>
-      <td>13.3</td>
+      <th>912</th>
+      <td>132004</td>
+      <td>Seafood</td>
     </tr>
     <tr>
-      <th>362</th>
-      <td>1981-12-29</td>
-      <td>15.6</td>
+      <th>913</th>
+      <td>132003</td>
+      <td>International</td>
     </tr>
     <tr>
-      <th>363</th>
-      <td>1981-12-30</td>
-      <td>15.2</td>
+      <th>914</th>
+      <td>132002</td>
+      <td>Seafood</td>
     </tr>
     <tr>
-      <th>364</th>
-      <td>1981-12-31</td>
-      <td>17.4</td>
+      <th>915</th>
+      <td>132001</td>
+      <td>Dutch-Belgian</td>
     </tr>
   </tbody>
 </table>
-<p>365 rows × 2 columns</p>
+<p>916 rows × 2 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_temp_df</span><span class="o">.</span><span class="n">Date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">min_temp_df</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_temp_df</span> <span class="o">=</span> <span class="n">min_temp_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_temp_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;1981-06-01&#39;</span><span class="p">:</span><span class="s1">&#39;1981-06-30&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">rating_df</span><span class="p">,</span> <span class="n">cuisine_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;placeID&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+<span class="n">merged_df</span>
 </pre></div>
 </div>
 </div>
@@ -460,146 +595,184 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Temp</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+      <th>Rcuisine</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1981-06-01</th>
-      <td>11.6</td>
+      <th>0</th>
+      <td>U1077</td>
+      <td>135085</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Fast_Food</td>
     </tr>
     <tr>
-      <th>1981-06-02</th>
-      <td>10.6</td>
+      <th>1</th>
+      <td>U1108</td>
+      <td>135085</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Fast_Food</td>
     </tr>
     <tr>
-      <th>1981-06-03</th>
-      <td>9.8</td>
+      <th>2</th>
+      <td>U1081</td>
+      <td>135085</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>Fast_Food</td>
     </tr>
     <tr>
-      <th>1981-06-04</th>
-      <td>11.2</td>
+      <th>3</th>
+      <td>U1056</td>
+      <td>135085</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Fast_Food</td>
     </tr>
     <tr>
-      <th>1981-06-05</th>
-      <td>5.7</td>
+      <th>4</th>
+      <td>U1134</td>
+      <td>135085</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>Fast_Food</td>
     </tr>
     <tr>
-      <th>1981-06-06</th>
-      <td>7.1</td>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>1981-06-07</th>
-      <td>2.5</td>
+      <th>1038</th>
+      <td>U1061</td>
+      <td>132958</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>American</td>
     </tr>
     <tr>
-      <th>1981-06-08</th>
-      <td>3.5</td>
+      <th>1039</th>
+      <td>U1025</td>
+      <td>132958</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>American</td>
     </tr>
     <tr>
-      <th>1981-06-09</th>
-      <td>4.6</td>
+      <th>1040</th>
+      <td>U1097</td>
+      <td>132958</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>American</td>
     </tr>
     <tr>
-      <th>1981-06-10</th>
-      <td>11.0</td>
+      <th>1041</th>
+      <td>U1096</td>
+      <td>132958</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>American</td>
     </tr>
     <tr>
-      <th>1981-06-11</th>
-      <td>5.7</td>
+      <th>1042</th>
+      <td>U1136</td>
+      <td>132958</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>American</td>
     </tr>
-    <tr>
-      <th>1981-06-12</th>
-      <td>7.7</td>
+  </tbody>
+</table>
+<p>1043 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+      <th>Rcuisine</th>
     </tr>
-    <tr>
-      <th>1981-06-13</th>
-      <td>10.4</td>
-    </tr>
-    <tr>
-      <th>1981-06-14</th>
-      <td>11.4</td>
-    </tr>
-    <tr>
-      <th>1981-06-15</th>
-      <td>9.2</td>
-    </tr>
-    <tr>
-      <th>1981-06-16</th>
-      <td>6.1</td>
-    </tr>
-    <tr>
-      <th>1981-06-17</th>
-      <td>2.7</td>
-    </tr>
-    <tr>
-      <th>1981-06-18</th>
-      <td>4.3</td>
-    </tr>
-    <tr>
-      <th>1981-06-19</th>
-      <td>6.3</td>
-    </tr>
-    <tr>
-      <th>1981-06-20</th>
-      <td>3.8</td>
-    </tr>
-    <tr>
-      <th>1981-06-21</th>
-      <td>4.4</td>
-    </tr>
-    <tr>
-      <th>1981-06-22</th>
-      <td>7.1</td>
-    </tr>
-    <tr>
-      <th>1981-06-23</th>
-      <td>4.8</td>
-    </tr>
-    <tr>
-      <th>1981-06-24</th>
-      <td>5.8</td>
-    </tr>
-    <tr>
-      <th>1981-06-25</th>
-      <td>6.2</td>
-    </tr>
-    <tr>
-      <th>1981-06-26</th>
-      <td>7.3</td>
-    </tr>
-    <tr>
-      <th>1981-06-27</th>
-      <td>9.2</td>
-    </tr>
-    <tr>
-      <th>1981-06-28</th>
-      <td>10.2</td>
-    </tr>
-    <tr>
-      <th>1981-06-29</th>
-      <td>9.5</td>
-    </tr>
-    <tr>
-      <th>1981-06-30</th>
-      <td>9.5</td>
-    </tr>
+  </thead>
+  <tbody>
   </tbody>
 </table>
 </div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_temp_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;1989-06-01&#39;</span><span class="p">:</span><span class="s1">&#39;1989-06-30&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temp   NaN
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Fast_Food&#39;, &#39;Mexican&#39;, &#39;Seafood&#39;, &#39;Pizzeria&#39;, &#39;Regional&#39;,
+       &#39;Armenian&#39;, &#39;Cafeteria&#39;, &#39;American&#39;, &#39;Bar&#39;, &#39;Bar_Pub_Brewery&#39;,
+       &#39;Italian&#39;, &#39;Japanese&#39;, &#39;Contemporary&#39;, &#39;Burgers&#39;, &#39;Mediterranean&#39;,
+       &#39;International&#39;, &#39;Vietnamese&#39;, &#39;Family&#39;, &#39;Chinese&#39;,
+       &#39;Cafe-Coffee_Shop&#39;, &#39;Game&#39;, &#39;Bakery&#39;, &#39;Breakfast-Brunch&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="s1">&#39;Bar_Pub_Brewery&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.305085
+food_rating       1.169492
+service_rating    1.203390
 dtype: float64
 </pre></div>
 </div>
@@ -607,434 +780,102 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_temp_df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="s1">&#39;Bar&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Temp</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1981-01-01</th>
-      <td>17.712903</td>
-    </tr>
-    <tr>
-      <th>1981-02-01</th>
-      <td>17.678571</td>
-    </tr>
-    <tr>
-      <th>1981-03-01</th>
-      <td>13.500000</td>
-    </tr>
-    <tr>
-      <th>1981-04-01</th>
-      <td>12.356667</td>
-    </tr>
-    <tr>
-      <th>1981-05-01</th>
-      <td>9.490323</td>
-    </tr>
-    <tr>
-      <th>1981-06-01</th>
-      <td>7.306667</td>
-    </tr>
-    <tr>
-      <th>1981-07-01</th>
-      <td>7.577419</td>
-    </tr>
-    <tr>
-      <th>1981-08-01</th>
-      <td>7.238710</td>
-    </tr>
-    <tr>
-      <th>1981-09-01</th>
-      <td>10.143333</td>
-    </tr>
-    <tr>
-      <th>1981-10-01</th>
-      <td>10.087097</td>
-    </tr>
-    <tr>
-      <th>1981-11-01</th>
-      <td>11.890000</td>
-    </tr>
-    <tr>
-      <th>1981-12-01</th>
-      <td>13.680645</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.200000
+food_rating       1.135714
+service_rating    1.085714
+dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_df</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;tips&#39;</span><span class="p">)</span>
-<span class="n">tip_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="s1">&#39;Cafeteria&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total_bill</th>
-      <th>tip</th>
-      <th>sex</th>
-      <th>smoker</th>
-      <th>day</th>
-      <th>time</th>
-      <th>size</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16.99</td>
-      <td>1.01</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10.34</td>
-      <td>1.66</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>21.01</td>
-      <td>3.50</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>23.68</td>
-      <td>3.31</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>24.59</td>
-      <td>3.61</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Sun</td>
-      <td>Dinner</td>
-      <td>4</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span> <span class="o">=</span> <span class="n">tip_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">)</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.205882
+food_rating       1.127451
+service_rating    1.078431
+dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Sun&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="s1">&#39;Cafe-Coffee_Shop&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total_bill</th>
-      <th>tip</th>
-      <th>sex</th>
-      <th>smoker</th>
-      <th>time</th>
-      <th>size</th>
-    </tr>
-    <tr>
-      <th>day</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Sun</th>
-      <td>16.99</td>
-      <td>1.01</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>10.34</td>
-      <td>1.66</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>21.01</td>
-      <td>3.50</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>23.68</td>
-      <td>3.31</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>24.59</td>
-      <td>3.61</td>
-      <td>Female</td>
-      <td>No</td>
-      <td>Dinner</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>20.90</td>
-      <td>3.50</td>
-      <td>Female</td>
-      <td>Yes</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>30.46</td>
-      <td>2.00</td>
-      <td>Male</td>
-      <td>Yes</td>
-      <td>Dinner</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>18.15</td>
-      <td>3.50</td>
-      <td>Female</td>
-      <td>Yes</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>23.10</td>
-      <td>4.00</td>
-      <td>Male</td>
-      <td>Yes</td>
-      <td>Dinner</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>15.69</td>
-      <td>1.50</td>
-      <td>Male</td>
-      <td>Yes</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-<p>76 rows × 6 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span> <span class="o">=</span> <span class="n">tip_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.583333
+food_rating       1.333333
+service_rating    1.416667
+dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_index_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="s1">&#39;Thur&#39;</span><span class="p">,</span><span class="s1">&#39;Lunch&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">tip</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_payment_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/userpayment.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">rating_df</span><span class="p">,</span> <span class="n">user_payment_df</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span><span class="o">.</span><span class="n">Upayment</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_25625/2537502835.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
-  tip_index_df.loc[(&#39;Thur&#39;,&#39;Lunch&#39;)].tip.mean()
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.767704918032786
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;VISA&#39;, &#39;cash&#39;, &#39;bank_debit_cards&#39;, &#39;MasterCard-Eurocard&#39;,
+       &#39;American_Express&#39;], dtype=object)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">tip_df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span><span class="p">[</span><span class="n">payment_df</span><span class="o">.</span><span class="n">Upayment</span><span class="o">==</span><span class="s1">&#39;cash&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>time</th>
-      <th>Lunch</th>
-      <th>Dinner</th>
-    </tr>
-    <tr>
-      <th>day</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Thur</th>
-      <td>16.00</td>
-      <td>18.780</td>
-    </tr>
-    <tr>
-      <th>Fri</th>
-      <td>13.42</td>
-      <td>18.665</td>
-    </tr>
-    <tr>
-      <th>Sat</th>
-      <td>NaN</td>
-      <td>18.240</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>NaN</td>
-      <td>19.630</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.182815
+food_rating       1.200183
+service_rating    1.080439
+dtype: float64
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;smoker&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Dinner&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">)][</span><span class="s1">&#39;tip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span><span class="p">[</span><span class="n">payment_df</span><span class="o">.</span><span class="n">Upayment</span><span class="o">==</span><span class="s1">&#39;bank_debit_cards&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_25625/3467525553.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
-  tip_df.set_index([&#39;sex&#39;, &#39;time&#39;,&#39;smoker&#39;]).loc[(&#39;Male&#39;, &#39;Dinner&#39;,&#39;Yes&#39;)][&#39;tip&#39;].mean()
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.123191489361702
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.437908
+food_rating       1.562092
+service_rating    1.398693
+dtype: float64
 </pre></div>
 </div>
 </div>
@@ -1071,19 +912,19 @@ dtype: float64
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="introduction.html" title="previous page">
+        <a class="left-prev" href="indexing_slicing.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">12. </span>Data Preprocessing</p>
+                <p class="prevnext-title"><span class="section-number">13. </span>Indexing and slicing</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="../c4_data_exploration/introduction.html" title="next page">
+        <a class="right-next" href="groupby.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">14. </span>Data Exploration</p>
+                <p class="prevnext-title">Groupby</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

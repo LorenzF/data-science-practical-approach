@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>11. Some practice &#8212; Data Science - A practical Approach</title>
+    <title>Scaling and Normalization &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="12. Data Preprocessing" href="../c3_data_preprocessing/introduction.html" />
-    <link rel="prev" title="10. Binning and ranking" href="binning_ranking.html" />
+    <link rel="next" title="Binning and ranking" href="binning_ranking.html" />
+    <link rel="prev" title="Categorical encoding" href="categorical_encoding.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,26 +132,26 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="datetime_operations.html">
-   7. Datetime operations
+   Datetime operations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="categorical_encoding.html">
-   8. Categorical encoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="scaling_normalization.html">
-   9. Scaling and Normalization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="binning_ranking.html">
-   10. Binning and ranking
+   Categorical encoding
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
+   Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="binning_ranking.html">
+   Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="some_practice.html">
    11. Some practice
   </a>
  </li>
@@ -170,6 +170,21 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
    13. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/merge.html">
+   Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
+   Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
+   Pivot
   </a>
  </li>
 </ul>
@@ -249,7 +264,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/c2_data_preparation/some_practice.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/c2_data_preparation/scaling_normalization.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -269,7 +284,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc2_data_preparation/some_practice.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc2_data_preparation/scaling_normalization.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -290,7 +305,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c2_data_preparation/some_practice.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c2_data_preparation/scaling_normalization.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -298,7 +313,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c2_data_preparation/some_practice.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c2_data_preparation/scaling_normalization.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -320,65 +335,23 @@
         
               <div>
                 
-  <div class="section" id="some-practice">
-<h1><span class="section-number">11. </span>Some practice<a class="headerlink" href="#some-practice" title="Permalink to this headline">¶</a></h1>
-<p>Now that you have learned techniques in data preparation, why don’t you put them to use in this wonderfully horrifying dataset. Good luck!</p>
+  <div class="section" id="scaling-and-normalization">
+<h1>Scaling and Normalization<a class="headerlink" href="#scaling-and-normalization" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we are going to look into 2 rather mathematical concepts, Scaling and Normalization.
+The idea is that we can scale the values and shape the distribution of feature in our dataset.</p>
+<p>As an example we take a dataset containing samples from a low density polyethylene production process, containing several numerical features such as temperatures, Forces, Pressure,…</p>
+<p>The idea is that by using Scaling and normalization, the ‘range of motion’ for these sensors is equal and we can compare the fluxtuations not only inbetween records, but also inbetween sensors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kaggle_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.kaggle&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">kaggle_dir</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">kaggle_dir</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">kaggle_dir</span><span class="si">}</span><span class="s1">/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;lorenzf&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;7a44a9e99b27e796177d793a3d85b8cf&quot;</span>
-        <span class="p">}</span>
-        <span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">kaggle</span>
-<span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;PromptCloudHQ/us-jobs-on-monstercom&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_25600</span><span class="o">/</span><span class="mf">39646943.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">kaggle</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;PromptCloudHQ/us-jobs-on-monstercom&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;kaggle&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/monster_com-job_sample.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ldpe_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://openmv.net/file/LDPE.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Unnamed: 0&#39;</span><span class="p">])</span>
+<span class="n">ldpe_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -401,113 +374,207 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>country</th>
-      <th>country_code</th>
-      <th>date_added</th>
-      <th>has_expired</th>
-      <th>job_board</th>
-      <th>job_description</th>
-      <th>job_title</th>
-      <th>job_type</th>
-      <th>location</th>
-      <th>organization</th>
-      <th>page_url</th>
-      <th>salary</th>
-      <th>sector</th>
-      <th>uniq_id</th>
+      <th>Tin</th>
+      <th>Tmax1</th>
+      <th>Tout1</th>
+      <th>Tmax2</th>
+      <th>Tout2</th>
+      <th>Tcin1</th>
+      <th>Tcin2</th>
+      <th>z1</th>
+      <th>z2</th>
+      <th>Fi1</th>
+      <th>Fi2</th>
+      <th>Fs1</th>
+      <th>Fs2</th>
+      <th>Press</th>
+      <th>Conv</th>
+      <th>Mn</th>
+      <th>Mw</th>
+      <th>LCB</th>
+      <th>SCB</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>United States of America</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>No</td>
-      <td>jobs.monster.com</td>
-      <td>TeamSoft is seeing an IT Support Specialist to...</td>
-      <td>IT Support Technician Job in Madison</td>
-      <td>Full Time Employee</td>
-      <td>Madison, WI 53702</td>
-      <td>NaN</td>
-      <td>http://jobview.monster.com/it-support-technici...</td>
-      <td>NaN</td>
-      <td>IT/Software Development</td>
-      <td>11d599f229a80023d2f40e7c52cd941e</td>
+      <td>208.17</td>
+      <td>296.35</td>
+      <td>233.81</td>
+      <td>283.41</td>
+      <td>239.05</td>
+      <td>117.14</td>
+      <td>117.20</td>
+      <td>0.029</td>
+      <td>0.581</td>
+      <td>0.4507</td>
+      <td>0.4518</td>
+      <td>666.42</td>
+      <td>248.95</td>
+      <td>3021</td>
+      <td>0.1322</td>
+      <td>27379</td>
+      <td>160326</td>
+      <td>0.781</td>
+      <td>26.11</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>United States of America</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>No</td>
-      <td>jobs.monster.com</td>
-      <td>The Wisconsin State Journal is seeking a flexi...</td>
-      <td>Business Reporter/Editor Job in Madison</td>
-      <td>Full Time</td>
-      <td>Madison, WI 53708</td>
-      <td>Printing and Publishing</td>
-      <td>http://jobview.monster.com/business-reporter-e...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>e4cbb126dabf22159aff90223243ff2a</td>
+      <td>207.26</td>
+      <td>298.26</td>
+      <td>230.88</td>
+      <td>287.55</td>
+      <td>242.55</td>
+      <td>116.39</td>
+      <td>117.23</td>
+      <td>0.028</td>
+      <td>0.574</td>
+      <td>0.4765</td>
+      <td>0.5091</td>
+      <td>658.61</td>
+      <td>246.36</td>
+      <td>3033</td>
+      <td>0.1365</td>
+      <td>27043</td>
+      <td>165044</td>
+      <td>0.819</td>
+      <td>26.29</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>United States of America</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>No</td>
-      <td>jobs.monster.com</td>
-      <td>Report this job About the Job DePuy Synthes Co...</td>
-      <td>Johnson &amp; Johnson Family of Companies Job Appl...</td>
-      <td>Full Time, Employee</td>
-      <td>DePuy Synthes Companies is a member of Johnson...</td>
-      <td>Personal and Household Services</td>
-      <td>http://jobview.monster.com/senior-training-lea...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>839106b353877fa3d896ffb9c1fe01c0</td>
+      <td>205.30</td>
+      <td>296.57</td>
+      <td>235.38</td>
+      <td>284.35</td>
+      <td>245.19</td>
+      <td>117.33</td>
+      <td>118.42</td>
+      <td>0.031</td>
+      <td>0.578</td>
+      <td>0.4744</td>
+      <td>0.4505</td>
+      <td>666.51</td>
+      <td>244.65</td>
+      <td>3004</td>
+      <td>0.1335</td>
+      <td>27344</td>
+      <td>165621</td>
+      <td>0.801</td>
+      <td>26.13</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>United States of America</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>No</td>
-      <td>jobs.monster.com</td>
-      <td>Why Join Altec? If you’re considering a career...</td>
-      <td>Engineer - Quality Job in Dixon</td>
-      <td>Full Time</td>
-      <td>Dixon, CA</td>
-      <td>Altec Industries</td>
-      <td>http://jobview.monster.com/engineer-quality-jo...</td>
-      <td>NaN</td>
-      <td>Experienced (Non-Manager)</td>
-      <td>58435fcab804439efdcaa7ecca0fd783</td>
+      <td>209.29</td>
+      <td>294.11</td>
+      <td>225.61</td>
+      <td>283.31</td>
+      <td>242.04</td>
+      <td>116.15</td>
+      <td>117.94</td>
+      <td>0.030</td>
+      <td>0.581</td>
+      <td>0.4429</td>
+      <td>0.4516</td>
+      <td>667.31</td>
+      <td>242.28</td>
+      <td>2980</td>
+      <td>0.1300</td>
+      <td>27502</td>
+      <td>160497</td>
+      <td>0.778</td>
+      <td>25.92</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>United States of America</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>No</td>
-      <td>jobs.monster.com</td>
-      <td>Position ID#  76162 # Positions  1 State  CT C...</td>
-      <td>Shift Supervisor - Part-Time Job in Camphill</td>
-      <td>Full Time Employee</td>
-      <td>Camphill, PA</td>
-      <td>Retail</td>
-      <td>http://jobview.monster.com/shift-supervisor-pa...</td>
-      <td>NaN</td>
-      <td>Project/Program Management</td>
-      <td>64d0272dc8496abfd9523a8df63c184c</td>
+      <td>206.76</td>
+      <td>295.13</td>
+      <td>230.26</td>
+      <td>283.74</td>
+      <td>244.92</td>
+      <td>116.75</td>
+      <td>118.49</td>
+      <td>0.030</td>
+      <td>0.579</td>
+      <td>0.4394</td>
+      <td>0.4414</td>
+      <td>670.83</td>
+      <td>244.31</td>
+      <td>2997</td>
+      <td>0.1316</td>
+      <td>27518</td>
+      <td>165713</td>
+      <td>0.786</td>
+      <td>26.02</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Need some inspiration? perhaps <a class="reference external" href="https://www.kaggle.com/ankkur13/perfect-dataset-to-get-the-hands-dirty">this</a> might help!</p>
+<p>We can see that our features clearly have different ranges, but lets try to visualise these ranges using a density plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ldpe_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/scaling_normalization_4_1.png" src="../_images/scaling_normalization_4_1.png" />
+</div>
+</div>
+<p>Ouch, this is clearly not working! Because the ‘Mw’ feature is in the range of 150k-175k our plot is so dilluted the rest are pinned to 0.
+We can use the sklearn library to perform a min max scaling, this scaling will shift the distribution of each feature between 0 and 1, but that can also be adjusted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ldpe_df</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ldpe_df</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">ldpe_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/scaling_normalization_7_1.png" src="../_images/scaling_normalization_7_1.png" />
+</div>
+</div>
+<p>That makes a lot more sense, you can now see all of the distribution at once.
+Also there seems to be one (yellow) feature that has some outliers perhaps something weird is going on there…</p>
+<p>Taking it a step further we could also alter the distributions by using a standard scaler instead of a min max scaler, redistributing the values mathematically into a normal distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ldpe_df</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ldpe_df</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">ldpe_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/scaling_normalization_10_1.png" src="../_images/scaling_normalization_10_1.png" />
+</div>
+</div>
+<p>You can see it had some trouble fitting our special feature into the normal distribution but it did work out in the end.
+With this we are ready to perform machine learning algorithms on this data, but first why not try and figure out where those outliers are I mentioned earlier?</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -540,19 +607,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="binning_ranking.html" title="previous page">
+        <a class="left-prev" href="categorical_encoding.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">10. </span>Binning and ranking</p>
+                <p class="prevnext-title">Categorical encoding</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="../c3_data_preprocessing/introduction.html" title="next page">
+        <a class="right-next" href="binning_ranking.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">12. </span>Data Preprocessing</p>
+                <p class="prevnext-title">Binning and ranking</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
