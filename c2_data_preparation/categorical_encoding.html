@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Categorical encoding &#8212; Data Science - A practical Approach</title>
+    <title>8. Categorical encoding &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Scaling and Normalization" href="scaling_normalization.html" />
-    <link rel="prev" title="Datetime operations" href="datetime_operations.html" />
+    <link rel="next" title="10. Scaling and Normalization" href="scaling_normalization.html" />
+    <link rel="prev" title="7. Datetime operations" href="datetime_operations.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,27 +132,27 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="datetime_operations.html">
-   Datetime operations
+   7. Datetime operations
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Categorical encoding
+   8. Categorical encoding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scaling_normalization.html">
-   Scaling and Normalization
+   10. Scaling and Normalization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="binning_ranking.html">
-   Binning and ranking
+   11. Binning and ranking
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="some_practice.html">
-   11. Some practice
+   12. Some practice
   </a>
  </li>
 </ul>
@@ -164,27 +164,27 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   12. Data Preprocessing
+   13. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
-   13. Indexing and slicing
+   14. Indexing and slicing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/merge.html">
-   Merge
+   15. Merge
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
-   Groupby
+   16. Groupby
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
-   Pivot
+   17. Pivot
   </a>
  </li>
 </ul>
@@ -196,7 +196,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   14. Data Exploration
+   18. Data Exploration
   </a>
  </li>
 </ul>
@@ -208,7 +208,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   15. Data Visualisation
+   19. Data Visualisation
   </a>
  </li>
 </ul>
@@ -220,7 +220,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   16. Machine Learning
+   20. Machine Learning
   </a>
  </li>
 </ul>
@@ -334,19 +334,19 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Categorical encoding
+   8. Categorical encoding
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#raw-material-charaterization">
-     Raw Material Charaterization
+     8.1. Raw Material Charaterization
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#restaurant-tips">
-   Restaurant tips
+   9. Restaurant tips
   </a>
  </li>
 </ul>
@@ -361,7 +361,7 @@
               <div>
                 
   <div class="section" id="categorical-encoding">
-<h1>Categorical encoding<a class="headerlink" href="#categorical-encoding" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>Categorical encoding<a class="headerlink" href="#categorical-encoding" title="Permalink to this headline">¶</a></h1>
 <p>Often we deal with categorical data and this kind of data is something computer algorithms are not able to understand.
 On the other hand long categorical features might take up unnecessary memory in our dataset, so converting to a categorical feature is optimal.</p>
 <div class="cell docutils container">
@@ -372,7 +372,7 @@ On the other hand long categorical features might take up unnecessary memory in 
 </div>
 </div>
 <div class="section" id="raw-material-charaterization">
-<h2>Raw Material Charaterization<a class="headerlink" href="#raw-material-charaterization" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1. </span>Raw Material Charaterization<a class="headerlink" href="#raw-material-charaterization" title="Permalink to this headline">¶</a></h2>
 <p>In this dataset, we have a few numerical features describing characteristics of our material, next to that we also have an Outcome feature describing the state of our material in a category.</p>
 <p>Let’s have a look at the data</p>
 <div class="cell docutils container">
@@ -941,7 +941,7 @@ Since we only have 2 categories this is a bit unfortunate, but you should get th
 </div>
 </div>
 <div class="section" id="restaurant-tips">
-<h1>Restaurant tips<a class="headerlink" href="#restaurant-tips" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">9. </span>Restaurant tips<a class="headerlink" href="#restaurant-tips" title="Permalink to this headline">¶</a></h1>
 <p>Now we are going to look at a dataset of tips, here a restaurant tracked the table bills and tips for a few days in the week whilst also noting the gender, smoking habit and time of day.
 This led to a small yet very interesting dataset, let’s have a look!</p>
 <div class="cell docutils container">
@@ -1538,7 +1538,7 @@ The outcome is much more pleasing yet completely the same.</p>
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Datetime operations</p>
+                <p class="prevnext-title"><span class="section-number">7. </span>Datetime operations</p>
             </div>
         </a>
     </div>
@@ -1546,7 +1546,7 @@ The outcome is much more pleasing yet completely the same.</p>
         <a class="right-next" href="scaling_normalization.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Scaling and Normalization</p>
+                <p class="prevnext-title"><span class="section-number">10. </span>Scaling and Normalization</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
