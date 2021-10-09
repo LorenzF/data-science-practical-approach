@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pivot &#8212; Data Science - A practical Approach</title>
+    <title>17. Pivot &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Data Exploration" href="../c4_data_exploration/introduction.html" />
-    <link rel="prev" title="Groupby" href="groupby.html" />
+    <link rel="next" title="18. Data Exploration" href="../c4_data_exploration/introduction.html" />
+    <link rel="prev" title="16. Groupby" href="groupby.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,27 +132,27 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
-   Datetime operations
+   7. Datetime operations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
-   Categorical encoding
+   8. Categorical encoding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
-   Scaling and Normalization
+   10. Scaling and Normalization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
-   10. Binning and ranking
+   11. Binning and ranking
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/some_practice.html">
-   11. Some practice
+   12. Some practice
   </a>
  </li>
 </ul>
@@ -164,27 +164,27 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
-   12. Data Preprocessing
+   13. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indexing_slicing.html">
-   13. Indexing and slicing
+   14. Indexing and slicing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="merge.html">
-   Merge
+   15. Merge
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="groupby.html">
-   Groupby
+   16. Groupby
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Pivot
+   17. Pivot
   </a>
  </li>
 </ul>
@@ -196,7 +196,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   14. Data Exploration
+   18. Data Exploration
   </a>
  </li>
 </ul>
@@ -208,7 +208,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   15. Data Visualisation
+   19. Data Visualisation
   </a>
  </li>
 </ul>
@@ -220,7 +220,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   16. Machine Learning
+   20. Machine Learning
   </a>
  </li>
 </ul>
@@ -336,7 +336,11 @@
               <div>
                 
   <div class="section" id="pivot">
-<h1>Pivot<a class="headerlink" href="#pivot" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">17. </span>Pivot<a class="headerlink" href="#pivot" title="Permalink to this headline">¶</a></h1>
+<p>When using the groupby operation we used 1 categorical variable to seperate/group our data into those categories.
+Here we go a step further and use 2 categories to aggregate our data, resulting in a comparison matrix.</p>
+<p>Aside from that, the pivot operation can in general be used to go from a long data format, to a wide data format.
+To keep things uniform we stick with the same cuisine dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -346,14 +350,8 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
+<span class="n">rating_df</span>
 </pre></div>
 </div>
 </div>
@@ -477,17 +475,20 @@
 <p>1161 rows × 5 columns</p>
 </div></div></div>
 </div>
+<p>And again we merge with the geolocations data, I feel that it becomse obvious here how these operations are very related to eachother.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/geoplaces2.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/geoplaces2.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>A subtle difference between last time is that I did not first group per restaurant, however this leads to a dataframe that has a lot of redundant information!
+Try to look in the merged dataframe and spot the copies of data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">rating_df</span><span class="p">,</span> <span class="n">geo_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span>
-<span class="n">merged_rating_df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">rating_df</span><span class="p">,</span> <span class="n">geo_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span>
+<span class="n">geo_rating_df</span>
 </pre></div>
 </div>
 </div>
@@ -803,17 +804,19 @@
 <p>1161 rows × 25 columns</p>
 </div></div></div>
 </div>
+<p>Now that we have our workable data, we can choose 2 categories and create a comparison matrix using the pivot operation.
+Yet there might be a problem that we still have to resolve, can you figure out the problem reading the error at the end of the stack trace below?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_5491</span><span class="o">/</span><span class="mf">1397663245.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">merged_rating_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_20513</span><span class="o">/</span><span class="mf">1351770208.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">geo_rating_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
 
 <span class="nn">~/git/data-science-practical-approach/venv/lib/python3.8/site-packages/pandas/core/frame.py</span> in <span class="ni">pivot</span><span class="nt">(self, index, columns, values)</span>
 <span class="g g-Whitespace">   </span><span class="mi">7791</span>         <span class="kn">from</span> <span class="nn">pandas.core.reshape.pivot</span> <span class="kn">import</span> <span class="n">pivot</span>
@@ -862,9 +865,12 @@
 </div>
 </div>
 </div>
+<p>It says: ‘Index contains duplicate entries, cannot reshape’ meaning that some combinations of our 2 categories, alcohol and smoking area have duplicates, which is understandable.
+I opted to solve this by grouping over the 2 categories and taking the mean for each combination, then i take this grouped data and pivot by setting the alcohol consumption as index and the smoking are as columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_geo_rating_df</span> <span class="o">=</span> <span class="n">geo_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">])[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span><span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">grouped_geo_rating_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -931,9 +937,11 @@
 </table>
 </div></div></div>
 </div>
+<p>Wonderful! Now we have for each combination an average rating, notice however that not every combination has the same sample size, so comparing might be tricky if you only have a few ratings.</p>
+<p>To figure that out I counted the ratings per combination.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1000,6 +1008,8 @@
 </table>
 </div></div></div>
 </div>
+<p>It seems that there might e a correlation between the 2 categories, as a lot of place where smoking is not permitted/none, there is no alcohol served, which makes sense.
+Comparing the ratings with alcohol allowance for places where smoking is not permitted is not a good idea, the counts are 7, 209 and 9, very unbalanced.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_df</span><span class="o">.</span><span class="n">columns</span>
@@ -1007,8 +1017,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;latitude&#39;, &#39;longitude&#39;, &#39;the_geom_meter&#39;, &#39;name&#39;, &#39;address&#39;, &#39;city&#39;,
-       &#39;state&#39;, &#39;country&#39;, &#39;fax&#39;, &#39;zip&#39;, &#39;alcohol&#39;, &#39;smoking_area&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;placeID&#39;, &#39;latitude&#39;, &#39;longitude&#39;, &#39;the_geom_meter&#39;, &#39;name&#39;, &#39;address&#39;,
+       &#39;city&#39;, &#39;state&#39;, &#39;country&#39;, &#39;fax&#39;, &#39;zip&#39;, &#39;alcohol&#39;, &#39;smoking_area&#39;,
        &#39;dress_code&#39;, &#39;accessibility&#39;, &#39;price&#39;, &#39;url&#39;, &#39;Rambience&#39;, &#39;franchise&#39;,
        &#39;area&#39;, &#39;other_services&#39;],
       dtype=&#39;object&#39;)
@@ -1016,187 +1026,8 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;city&#39;</span><span class="p">,</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;city&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;smoking_area&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>smoking_area</th>
-      <th>none</th>
-      <th>not permitted</th>
-      <th>only at bar</th>
-      <th>permitted</th>
-      <th>section</th>
-    </tr>
-    <tr>
-      <th>city</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>?</th>
-      <td>1.052632</td>
-      <td>1.000000</td>
-      <td>NaN</td>
-      <td>1.833333</td>
-      <td>1.300000</td>
-    </tr>
-    <tr>
-      <th>Cd Victoria</th>
-      <td>0.625000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>Cd. Victoria</th>
-      <td>NaN</td>
-      <td>0.750000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>Ciudad Victoria</th>
-      <td>NaN</td>
-      <td>1.300000</td>
-      <td>NaN</td>
-      <td>0.750000</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>Cuernavaca</th>
-      <td>1.411765</td>
-      <td>1.157895</td>
-      <td>1.555556</td>
-      <td>1.500000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>Jiutepec</th>
-      <td>1.461538</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.166667</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>San Luis Potosi</th>
-      <td>1.211494</td>
-      <td>1.168317</td>
-      <td>1.200000</td>
-      <td>NaN</td>
-      <td>1.273743</td>
-    </tr>
-    <tr>
-      <th>Soledad</th>
-      <td>1.058824</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>cuernavaca</th>
-      <td>NaN</td>
-      <td>1.600000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>s.l.p</th>
-      <td>NaN</td>
-      <td>0.916667</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>s.l.p.</th>
-      <td>1.281250</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>san luis potos</th>
-      <td>2.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>san luis potosi</th>
-      <td>1.272727</td>
-      <td>1.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.500000</td>
-    </tr>
-    <tr>
-      <th>san luis potosi</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.400000</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>slp</th>
-      <td>1.166667</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>victoria</th>
-      <td>1.000000</td>
-      <td>0.600000</td>
-      <td>NaN</td>
-      <td>0.937500</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>victoria</th>
-      <td>0.750000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
+<p>I printed the columns above, perhaps you could figure out a relation between the price category and the (R)ambience of the restaurant?
+Perhaps there are other combinations of which I did not think of, try some out!</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1233,7 +1064,7 @@
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Groupby</p>
+                <p class="prevnext-title"><span class="section-number">16. </span>Groupby</p>
             </div>
         </a>
     </div>
@@ -1241,7 +1072,7 @@
         <a class="right-next" href="../c4_data_exploration/introduction.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">14. </span>Data Exploration</p>
+                <p class="prevnext-title"><span class="section-number">18. </span>Data Exploration</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

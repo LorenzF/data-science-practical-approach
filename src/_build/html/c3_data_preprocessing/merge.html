@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Merge &#8212; Data Science - A practical Approach</title>
+    <title>15. Merge &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Groupby" href="groupby.html" />
-    <link rel="prev" title="13. Indexing and slicing" href="indexing_slicing.html" />
+    <link rel="next" title="16. Groupby" href="groupby.html" />
+    <link rel="prev" title="14. Indexing and slicing" href="indexing_slicing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,27 +132,27 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
-   Datetime operations
+   7. Datetime operations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
-   Categorical encoding
+   8. Categorical encoding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
-   Scaling and Normalization
+   10. Scaling and Normalization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
-   10. Binning and ranking
+   11. Binning and ranking
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/some_practice.html">
-   11. Some practice
+   12. Some practice
   </a>
  </li>
 </ul>
@@ -164,27 +164,27 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
-   12. Data Preprocessing
+   13. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indexing_slicing.html">
-   13. Indexing and slicing
+   14. Indexing and slicing
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Merge
+   15. Merge
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="groupby.html">
-   Groupby
+   16. Groupby
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pivot.html">
-   Pivot
+   17. Pivot
   </a>
  </li>
 </ul>
@@ -196,7 +196,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   14. Data Exploration
+   18. Data Exploration
   </a>
  </li>
 </ul>
@@ -208,7 +208,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   15. Data Visualisation
+   19. Data Visualisation
   </a>
  </li>
 </ul>
@@ -220,7 +220,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   16. Machine Learning
+   20. Machine Learning
   </a>
  </li>
 </ul>
@@ -336,8 +336,12 @@
               <div>
                 
   <div class="section" id="merge">
-<h1>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://www.kaggle.com/uciml/restaurant-data-with-consumer-ratings">https://www.kaggle.com/uciml/restaurant-data-with-consumer-ratings</a></p>
+<h1><span class="section-number">15. </span>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h1>
+<p>When data becomes multi-dimensional - covering multiple aspects of information - it usually happens that a lot of information is redundant.
+Take for example the next dataset, we have collected ratings of restaurants from users, when a single user rates 2 restaurants the information of the user relates to both rows, yet it would be wasteful to keep this info twice.
+The same can happen when we have a restaurant with 2 ratings, the location of the restaurant is kept twice in our data, which is not scalable.</p>
+<p>We solve this problem using relational data, the idea is that we have a common key column in 2 of our tables which we can use to join the data for further processing.</p>
+<p>In our example we use a dataset with consumers, restaurants and ratings between those, you can find more information <a class="reference external" href="https://www.kaggle.com/uciml/restaurant-data-with-consumer-ratings">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -347,14 +351,8 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
+<span class="n">rating_df</span>
 </pre></div>
 </div>
 </div>
@@ -478,9 +476,12 @@
 <p>1161 rows × 5 columns</p>
 </div></div></div>
 </div>
+<p>this first table we read contains the userID from whom the rating came, the placeID is the restaurant he/she rated and the numerical values of the 3 different ratings.</p>
+<p>Perhaps you can find out what the min and max values for the ratings are?</p>
+<p>to know the type of restaurant, we can not read another table</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cuisine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/chefmozcuisine.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cuisine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/chefmozcuisine.csv&#39;</span><span class="p">)</span>
 <span class="n">cuisine_df</span>
 </pre></div>
 </div>
@@ -569,6 +570,8 @@
 <p>916 rows × 2 columns</p>
 </div></div></div>
 </div>
+<p>This table also contains the placeID, so we should be able to merge/join these 2 tables and create a new table with info of both.
+Notice how we specify the ‘on’ parameter where we denote placeID as our common key.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">rating_df</span><span class="p">,</span> <span class="n">cuisine_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;placeID&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
@@ -708,69 +711,63 @@
 <p>1043 rows × 6 columns</p>
 </div></div></div>
 </div>
+<p>Great! now we have more info about the rating that were given, being the type of cuisine that they rated.
+We could figure out which cuisines are available in our dataset and do a comparison, let us count the occurences of each cuisine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mexican             238
+Bar                 140
+Cafeteria           102
+Fast_Food            91
+Seafood              62
+Bar_Pub_Brewery      59
+Pizzeria             51
+Chinese              41
+American             39
+International        37
+Contemporary         32
+Burgers              31
+Japanese             29
+Italian              26
+Family               14
+Cafe-Coffee_Shop     12
+Breakfast-Brunch      9
+Game                  7
+Vietnamese            6
+Bakery                5
+Mediterranean         4
+Armenian              4
+Regional              4
+Name: Rcuisine, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>A lot of mexican, which is not surpising as this dataset comes from Mexico.
+I wonder if there is a difference between ‘Bar’ and ‘Bar_Pub_Brewery’, we can see if the average rating for those 2 differ.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cuisine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Bar&#39;</span><span class="p">,</span> <span class="s1">&#39;Bar_Pub_Brewery&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cuisine</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="n">cuisine</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bar
+rating            1.200000
+food_rating       1.135714
+service_rating    1.085714
+dtype: float64
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>userID</th>
-      <th>placeID</th>
-      <th>rating</th>
-      <th>food_rating</th>
-      <th>service_rating</th>
-      <th>Rcuisine</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Fast_Food&#39;, &#39;Mexican&#39;, &#39;Seafood&#39;, &#39;Pizzeria&#39;, &#39;Regional&#39;,
-       &#39;Armenian&#39;, &#39;Cafeteria&#39;, &#39;American&#39;, &#39;Bar&#39;, &#39;Bar_Pub_Brewery&#39;,
-       &#39;Italian&#39;, &#39;Japanese&#39;, &#39;Contemporary&#39;, &#39;Burgers&#39;, &#39;Mediterranean&#39;,
-       &#39;International&#39;, &#39;Vietnamese&#39;, &#39;Family&#39;, &#39;Chinese&#39;,
-       &#39;Cafe-Coffee_Shop&#39;, &#39;Game&#39;, &#39;Bakery&#39;, &#39;Breakfast-Brunch&#39;],
-      dtype=object)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="s1">&#39;Bar_Pub_Brewery&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.305085
+Bar_Pub_Brewery
+rating            1.305085
 food_rating       1.169492
 service_rating    1.203390
 dtype: float64
@@ -778,21 +775,7 @@ dtype: float64
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="s1">&#39;Bar&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.200000
-food_rating       1.135714
-service_rating    1.085714
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
+<p>just looking at the averages we can deduces that while food ratings do not change a lot, the service seems a lot better at the Brewery.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="o">.</span><span class="n">Rcuisine</span><span class="o">==</span><span class="s1">&#39;Cafeteria&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -823,62 +806,99 @@ dtype: float64
 </div>
 </div>
 </div>
+<p>As easy as it looks, we can now merge information of different tables in our dataset and perform some simple comparisons, in later sections we will see how we can improve on those.</p>
+<p>As an exercise I already read in the table containing the info about which type of payment the user has opted for.
+Could you find out if the type of payment could have an influence on the rating?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_payment_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/userpayment.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">rating_df</span><span class="p">,</span> <span class="n">user_payment_df</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span><span class="o">.</span><span class="n">Upayment</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_payment_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/userpayment.csv&#39;</span><span class="p">)</span>
+<span class="n">user_payment_df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;VISA&#39;, &#39;cash&#39;, &#39;bank_debit_cards&#39;, &#39;MasterCard-Eurocard&#39;,
-       &#39;American_Express&#39;], dtype=object)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span><span class="p">[</span><span class="n">payment_df</span><span class="o">.</span><span class="n">Upayment</span><span class="o">==</span><span class="s1">&#39;cash&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.182815
-food_rating       1.200183
-service_rating    1.080439
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payment_df</span><span class="p">[</span><span class="n">payment_df</span><span class="o">.</span><span class="n">Upayment</span><span class="o">==</span><span class="s1">&#39;bank_debit_cards&#39;</span><span class="p">][[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rating            1.437908
-food_rating       1.562092
-service_rating    1.398693
-dtype: float64
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>Upayment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>U1001</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>U1002</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>U1003</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>U1004</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>U1004</td>
+      <td>bank_debit_cards</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>172</th>
+      <td>U1134</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>173</th>
+      <td>U1135</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>174</th>
+      <td>U1136</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>U1137</td>
+      <td>cash</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>U1138</td>
+      <td>cash</td>
+    </tr>
+  </tbody>
+</table>
+<p>177 rows × 2 columns</p>
+</div></div></div>
 </div>
 </div>
 
@@ -916,7 +936,7 @@ dtype: float64
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">13. </span>Indexing and slicing</p>
+                <p class="prevnext-title"><span class="section-number">14. </span>Indexing and slicing</p>
             </div>
         </a>
     </div>
@@ -924,7 +944,7 @@ dtype: float64
         <a class="right-next" href="groupby.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Groupby</p>
+                <p class="prevnext-title"><span class="section-number">16. </span>Groupby</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

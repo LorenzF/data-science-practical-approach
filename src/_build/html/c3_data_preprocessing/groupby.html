@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Groupby &#8212; Data Science - A practical Approach</title>
+    <title>16. Groupby &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Pivot" href="pivot.html" />
-    <link rel="prev" title="Merge" href="merge.html" />
+    <link rel="next" title="17. Pivot" href="pivot.html" />
+    <link rel="prev" title="15. Merge" href="merge.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,27 +132,27 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
-   Datetime operations
+   7. Datetime operations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
-   Categorical encoding
+   8. Categorical encoding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
-   Scaling and Normalization
+   10. Scaling and Normalization
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
-   10. Binning and ranking
+   11. Binning and ranking
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c2_data_preparation/some_practice.html">
-   11. Some practice
+   12. Some practice
   </a>
  </li>
 </ul>
@@ -164,27 +164,27 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
-   12. Data Preprocessing
+   13. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indexing_slicing.html">
-   13. Indexing and slicing
+   14. Indexing and slicing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="merge.html">
-   Merge
+   15. Merge
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Groupby
+   16. Groupby
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pivot.html">
-   Pivot
+   17. Pivot
   </a>
  </li>
 </ul>
@@ -196,7 +196,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   14. Data Exploration
+   18. Data Exploration
   </a>
  </li>
 </ul>
@@ -208,7 +208,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   15. Data Visualisation
+   19. Data Visualisation
   </a>
  </li>
 </ul>
@@ -220,7 +220,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   16. Machine Learning
+   20. Machine Learning
   </a>
  </li>
 </ul>
@@ -336,7 +336,9 @@
               <div>
                 
   <div class="section" id="groupby">
-<h1>Groupby<a class="headerlink" href="#groupby" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">16. </span>Groupby<a class="headerlink" href="#groupby" title="Permalink to this headline">¶</a></h1>
+<p>In the previous section we saw how to combine information of multiple tables from our dataset.
+Here we are going to build further on that by using the merged information to group on categorical variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -346,11 +348,133 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/rating_final.csv&#39;</span><span class="p">)</span>
+<span class="n">rating_df</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>U1077</td>
+      <td>135085</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>U1077</td>
+      <td>135038</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>U1077</td>
+      <td>132825</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>U1077</td>
+      <td>135060</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>U1068</td>
+      <td>135104</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1156</th>
+      <td>U1043</td>
+      <td>132630</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1157</th>
+      <td>U1011</td>
+      <td>132715</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1158</th>
+      <td>U1068</td>
+      <td>132733</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1159</th>
+      <td>U1068</td>
+      <td>132594</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1160</th>
+      <td>U1068</td>
+      <td>132660</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1161 rows × 5 columns</p>
+</div></div></div>
 </div>
+<p>Again we have our rating data containing the users, places and ratings they gave.
+As a simple example we could just group by the placeID column and take the mean, this would give us the mean rating for each restaurant</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_rating_df</span> <span class="o">=</span> <span class="n">rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
@@ -460,17 +584,370 @@
 <p>130 rows × 3 columns</p>
 </div></div></div>
 </div>
+<p>Keep in mind that this might be tricky, as we do not always have as much records per group, we could count the amount per records using a groupby operation and count.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/geoplaces2.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rating</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>placeID
+132560     4
+132561     4
+132564     4
+132572    15
+132583     4
+          ..
+135088     6
+135104     7
+135106    10
+135108    11
+135109     4
+Name: rating, Length: 130, dtype: int64
 </pre></div>
 </div>
 </div>
 </div>
+<p>Taking an average of 4 ratings might not be ideal, so we should keep in mind that our groups have a good sample size.</p>
+<p>Let’s make things more interesting and insert some location data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">grouped_rating_df</span><span class="p">,</span> <span class="n">geo_df</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">merged_rating_df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/cuisine/geoplaces2.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;placeID&#39;</span><span class="p">)</span>
+<span class="n">geo_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>the_geom_meter</th>
+      <th>name</th>
+      <th>address</th>
+      <th>city</th>
+      <th>state</th>
+      <th>country</th>
+      <th>fax</th>
+      <th>zip</th>
+      <th>alcohol</th>
+      <th>smoking_area</th>
+      <th>dress_code</th>
+      <th>accessibility</th>
+      <th>price</th>
+      <th>url</th>
+      <th>Rambience</th>
+      <th>franchise</th>
+      <th>area</th>
+      <th>other_services</th>
+    </tr>
+    <tr>
+      <th>placeID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>134999</th>
+      <td>18.915421</td>
+      <td>-99.184871</td>
+      <td>0101000020957F000088568DE356715AC138C0A525FC46...</td>
+      <td>Kiku Cuernavaca</td>
+      <td>Revolucion</td>
+      <td>Cuernavaca</td>
+      <td>Morelos</td>
+      <td>Mexico</td>
+      <td>?</td>
+      <td>?</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>no_accessibility</td>
+      <td>medium</td>
+      <td>kikucuernavaca.com.mx</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>132825</th>
+      <td>22.147392</td>
+      <td>-100.983092</td>
+      <td>0101000020957F00001AD016568C4858C1243261274BA5...</td>
+      <td>puesto de tacos</td>
+      <td>esquina santos degollado y leon guzman</td>
+      <td>s.l.p.</td>
+      <td>s.l.p.</td>
+      <td>mexico</td>
+      <td>?</td>
+      <td>78280</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>open</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>135106</th>
+      <td>22.149709</td>
+      <td>-100.976093</td>
+      <td>0101000020957F0000649D6F21634858C119AE9BF528A3...</td>
+      <td>El Rinc�n de San Francisco</td>
+      <td>Universidad 169</td>
+      <td>San Luis Potosi</td>
+      <td>San Luis Potosi</td>
+      <td>Mexico</td>
+      <td>?</td>
+      <td>78000</td>
+      <td>Wine-Beer</td>
+      <td>only at bar</td>
+      <td>informal</td>
+      <td>partially</td>
+      <td>medium</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>open</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>132667</th>
+      <td>23.752697</td>
+      <td>-99.163359</td>
+      <td>0101000020957F00005D67BCDDED8157C1222A2DC8D84D...</td>
+      <td>little pizza Emilio Portes Gil</td>
+      <td>calle emilio portes gil</td>
+      <td>victoria</td>
+      <td>tamaulipas</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>t</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>132613</th>
+      <td>23.752903</td>
+      <td>-99.165076</td>
+      <td>0101000020957F00008EBA2D06DC8157C194E03B7B504E...</td>
+      <td>carnitas_mata</td>
+      <td>lic. Emilio portes gil</td>
+      <td>victoria</td>
+      <td>Tamaulipas</td>
+      <td>Mexico</td>
+      <td>?</td>
+      <td>?</td>
+      <td>No_Alcohol_Served</td>
+      <td>permitted</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>medium</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>t</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>132866</th>
+      <td>22.141220</td>
+      <td>-100.931311</td>
+      <td>0101000020957F000013871838EC4A58C1B5DF74F8E396...</td>
+      <td>Chaires</td>
+      <td>Ricardo B. Anaya</td>
+      <td>San Luis Potosi</td>
+      <td>San Luis Potosi</td>
+      <td>Mexico</td>
+      <td>?</td>
+      <td>?</td>
+      <td>No_Alcohol_Served</td>
+      <td>not permitted</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>medium</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>135072</th>
+      <td>22.149192</td>
+      <td>-101.002936</td>
+      <td>0101000020957F0000E7B79B1DB94758C1D29BC363D8AA...</td>
+      <td>Sushi Itto</td>
+      <td>Venustiano Carranza 1809 C Polanco</td>
+      <td>San Luis Potosi</td>
+      <td>SLP</td>
+      <td>Mexico</td>
+      <td>?</td>
+      <td>78220</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>no_accessibility</td>
+      <td>medium</td>
+      <td>sushi-itto.com.mx</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>135109</th>
+      <td>18.921785</td>
+      <td>-99.235350</td>
+      <td>0101000020957F0000A6BF695F136F5AC1DADF87B20556...</td>
+      <td>Paniroles</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>Wine-Beer</td>
+      <td>not permitted</td>
+      <td>informal</td>
+      <td>no_accessibility</td>
+      <td>medium</td>
+      <td>?</td>
+      <td>quiet</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>Internet</td>
+    </tr>
+    <tr>
+      <th>135019</th>
+      <td>18.875011</td>
+      <td>-99.159422</td>
+      <td>0101000020957F0000B49B2E5C6E785AC12F9D58435241...</td>
+      <td>Restaurant Bar Coty y Pablo</td>
+      <td>Paseo de Las Fuentes 24 Pedregal de Las Fuentes</td>
+      <td>Jiutepec</td>
+      <td>Morelos</td>
+      <td>Mexico</td>
+      <td>?</td>
+      <td>?</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+    <tr>
+      <th>132877</th>
+      <td>22.135364</td>
+      <td>-100.934948</td>
+      <td>0101000020957F000090735015B84B58C1AF0DC0414698...</td>
+      <td>sirloin stockade</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>No_Alcohol_Served</td>
+      <td>none</td>
+      <td>informal</td>
+      <td>completely</td>
+      <td>low</td>
+      <td>?</td>
+      <td>familiar</td>
+      <td>f</td>
+      <td>closed</td>
+      <td>none</td>
+    </tr>
+  </tbody>
+</table>
+<p>130 rows × 20 columns</p>
+</div></div></div>
+</div>
+<p>Here we have for each restaurant information about its location, I mentioned earlier that grouping per restaurant might be dangerous as some restaurants have nearly no reviews.
+By adding information such as city, state and country we have other categorical variables to group by.
+Notice how we use the merge operation from previous section, but this time specify our common key is the index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">grouped_rating_df</span><span class="p">,</span> <span class="n">geo_df</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">geo_rating_df</span>
 </pre></div>
 </div>
 </div>
@@ -810,9 +1287,10 @@
 <p>130 rows × 23 columns</p>
 </div></div></div>
 </div>
+<p>By adding this amount of data, things are getting a bit cluttered, thankfully we can use pandas to get a list of all our columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">columns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
 </div>
 </div>
@@ -826,9 +1304,10 @@
 </div>
 </div>
 </div>
+<p>How about we try and see if we can find a difference between countries for the ratings?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -885,21 +1364,13 @@
 </table>
 </div></div></div>
 </div>
+<p>Ah, it seems we forgot to do some data cleaning here, perhaps you could jump in and fix this string problem, might as well tackle the missing value while we are at it.
+Aside from that, we can see that lower-case Mexico is not doing very well, perhaps the food was so bad they forgot how to write Mexico?</p>
+<p>Jokes aside, do you see the ressemblance between this and our rudimentary approach of comparing different categories?
+We are slowly getting more and more efficient using these operations, how about the difference between alcohol consumption?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">can</span> <span class="n">you</span> <span class="n">fix</span> <span class="n">this</span> <span class="n">string</span> problem<span class="o">?</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Object `problem` not found.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;alcohol&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;alcohol&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -956,9 +1427,12 @@
 </table>
 </div></div></div>
 </div>
+<p>Something we can remark here is that the food rating for no alcohol locations seems to be holding up, whilst the general rating and service rating fall behind.
+This would suggest that the food rating indeed is for the food, where the type of drinks served have no influence.</p>
+<p>As a last we look at the difference between accessibility, does that influences our ratings?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;accessibility&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;accessibility&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1015,9 +1489,11 @@
 </table>
 </div></div></div>
 </div>
+<p>It seems having partial accessibility is the way to go here, performing better than complete accessibility.
+We can however find that is due to a low sample size of 9 restaurants, making it prone to variation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">accessibility</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_rating_df</span><span class="o">.</span><span class="n">accessibility</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1030,89 +1506,10 @@ Name: accessibility, dtype: int64
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_rating_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;food_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;service_rating&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>rating</th>
-      <th>food_rating</th>
-      <th>service_rating</th>
-    </tr>
-    <tr>
-      <th>price</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>high</th>
-      <td>1.258106</td>
-      <td>1.253816</td>
-      <td>1.174754</td>
-    </tr>
-    <tr>
-      <th>low</th>
-      <td>1.063059</td>
-      <td>1.135805</td>
-      <td>0.935632</td>
-    </tr>
-    <tr>
-      <th>medium</th>
-      <td>1.234342</td>
-      <td>1.255871</td>
-      <td>1.161361</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">can</span> <span class="n">you</span> <span class="n">solve</span> <span class="n">the</span> <span class="n">mean</span><span class="o">-</span><span class="n">mean</span> problem<span class="o">?</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Object `problem` not found.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ow">in</span> <span class="n">the</span> <span class="n">merge</span> <span class="n">example</span> <span class="n">we</span> <span class="n">added</span> <span class="n">the</span> <span class="n">cuisine</span> <span class="nb">type</span><span class="p">,</span> <span class="n">could</span> <span class="n">you</span> <span class="n">perform</span> <span class="n">a</span> <span class="n">groupby</span> <span class="n">analysis</span> <span class="n">on</span> this<span class="o">?</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Object `this` not found.
-</pre></div>
-</div>
-</div>
-</div>
+<p>You should get the hang of it by now, perhaps you can play some more with the other categories.</p>
+<p>There is one thing I still would like to address, you perhaps have notices that in the beginning I first took the average rating per restaurant and later again took the average per category.
+This is a bad practice as a bad restaurant with one review has equal influence as a good restaurant with 100 reviews, perhaps you can think of a way to group all reviews from a category instead of the average for each restaurant?</p>
+<p>In the previous section we added the cuisine type, perhaps you could do some groupby operations on that too here?</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1149,7 +1546,7 @@ Name: accessibility, dtype: int64
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Merge</p>
+                <p class="prevnext-title"><span class="section-number">15. </span>Merge</p>
             </div>
         </a>
     </div>
@@ -1157,7 +1554,7 @@ Name: accessibility, dtype: int64
         <a class="right-next" href="pivot.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Pivot</p>
+                <p class="prevnext-title"><span class="section-number">17. </span>Pivot</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

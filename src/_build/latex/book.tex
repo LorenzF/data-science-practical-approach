@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Oct 08, 2021}
+\date{Oct 09, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -3488,17 +3488,22 @@ Sun     NaN  19.630
 \chapter{Merge}
 \label{\detokenize{c3_data_preprocessing/merge:merge}}\label{\detokenize{c3_data_preprocessing/merge::doc}}
 \sphinxAtStartPar
-\sphinxurl{https://www.kaggle.com/uciml/restaurant-data-with-consumer-ratings}
+When data becomes multi\sphinxhyphen{}dimensional \sphinxhyphen{} covering multiple aspects of information \sphinxhyphen{} it usually happens that a lot of information is redundant.
+Take for example the next dataset, we have collected ratings of restaurants from users, when a single user rates 2 restaurants the information of the user relates to both rows, yet it would be wasteful to keep this info twice.
+The same can happen when we have a restaurant with 2 ratings, the location of the restaurant is kept twice in our data, which is not scalable.
+
+\sphinxAtStartPar
+We solve this problem using relational data, the idea is that we have a common key column in 2 of our tables which we can use to join the data for further processing.
+
+\sphinxAtStartPar
+In our example we use a dataset with consumers, restaurants and ratings between those, you can find more information \sphinxhref{https://www.kaggle.com/uciml/restaurant-data-with-consumer-ratings}{here}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/rating\PYGZus{}final.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c3\PYGZus{}data\PYGZus{}preprocessing/data/cuisine/rating\PYGZus{}final.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n}{rating\PYGZus{}df}
 \end{sphinxVerbatim}
 
@@ -3519,8 +3524,17 @@ Sun     NaN  19.630
 [1161 rows x 5 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+this first table we read contains the userID from whom the rating came, the placeID is the restaurant he/she rated and the numerical values of the 3 different ratings.
+
+\sphinxAtStartPar
+Perhaps you can find out what the min and max values for the ratings are?
+
+\sphinxAtStartPar
+to know the type of restaurant, we can not read another table
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{cuisine\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/chefmozcuisine.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{cuisine\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c3\PYGZus{}data\PYGZus{}preprocessing/data/cuisine/chefmozcuisine.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n}{cuisine\PYGZus{}df}
 \end{sphinxVerbatim}
 
@@ -3540,6 +3554,10 @@ Sun     NaN  19.630
 
 [916 rows x 2 columns]
 \end{sphinxVerbatim}
+
+\sphinxAtStartPar
+This table also contains the placeID, so we should be able to merge/join these 2 tables and create a new table with info of both.
+Notice how we specify the ‘on’ parameter where we denote placeID as our common key.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{merged\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{rating\PYGZus{}df}\PYG{p}{,} \PYG{n}{cuisine\PYGZus{}df}\PYG{p}{,} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{how}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{inner}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -3563,50 +3581,68 @@ Sun     NaN  19.630
 [1043 rows x 6 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Great! now we have more info about the rating that were given, being the type of cuisine that they rated.
+We could figure out which cuisines are available in our dataset and do a comparison, let us count the occurences of each cuisine.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{Rcuisine}\PYG{o}{.}\PYG{n}{isna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{]}
+\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{Rcuisine}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Empty DataFrame
-Columns: [userID, placeID, rating, food\PYGZus{}rating, service\PYGZus{}rating, Rcuisine]
-Index: []
+Mexican             238
+Bar                 140
+Cafeteria           102
+Fast\PYGZus{}Food            91
+Seafood              62
+Bar\PYGZus{}Pub\PYGZus{}Brewery      59
+Pizzeria             51
+Chinese              41
+American             39
+International        37
+Contemporary         32
+Burgers              31
+Japanese             29
+Italian              26
+Family               14
+Cafe\PYGZhy{}Coffee\PYGZus{}Shop     12
+Breakfast\PYGZhy{}Brunch      9
+Game                  7
+Vietnamese            6
+Bakery                5
+Mediterranean         4
+Armenian              4
+Regional              4
+Name: Rcuisine, dtype: int64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+A lot of mexican, which is not surpising as this dataset comes from Mexico.
+I wonder if there is a difference between ‘Bar’ and ‘Bar\_Pub\_Brewery’, we can see if the average rating for those 2 differ.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{n}{cuisine} \PYG{o+ow}{in} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bar}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bar\PYGZus{}Pub\PYGZus{}Brewery}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{cuisine}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{Rcuisine}\PYG{o}{==}\PYG{n}{cuisine}\PYG{p}{]}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{Rcuisine}\PYG{o}{.}\PYG{n}{unique}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
+Bar
+rating            1.200000
+food\PYGZus{}rating       1.135714
+service\PYGZus{}rating    1.085714
+dtype: float64
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-array([\PYGZsq{}Fast\PYGZus{}Food\PYGZsq{}, \PYGZsq{}Mexican\PYGZsq{}, \PYGZsq{}Seafood\PYGZsq{}, \PYGZsq{}Pizzeria\PYGZsq{}, \PYGZsq{}Regional\PYGZsq{},
-       \PYGZsq{}Armenian\PYGZsq{}, \PYGZsq{}Cafeteria\PYGZsq{}, \PYGZsq{}American\PYGZsq{}, \PYGZsq{}Bar\PYGZsq{}, \PYGZsq{}Bar\PYGZus{}Pub\PYGZus{}Brewery\PYGZsq{},
-       \PYGZsq{}Italian\PYGZsq{}, \PYGZsq{}Japanese\PYGZsq{}, \PYGZsq{}Contemporary\PYGZsq{}, \PYGZsq{}Burgers\PYGZsq{}, \PYGZsq{}Mediterranean\PYGZsq{},
-       \PYGZsq{}International\PYGZsq{}, \PYGZsq{}Vietnamese\PYGZsq{}, \PYGZsq{}Family\PYGZsq{}, \PYGZsq{}Chinese\PYGZsq{},
-       \PYGZsq{}Cafe\PYGZhy{}Coffee\PYGZus{}Shop\PYGZsq{}, \PYGZsq{}Game\PYGZsq{}, \PYGZsq{}Bakery\PYGZsq{}, \PYGZsq{}Breakfast\PYGZhy{}Brunch\PYGZsq{}],
-      dtype=object)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{Rcuisine}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bar\PYGZus{}Pub\PYGZus{}Brewery}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Bar\PYGZus{}Pub\PYGZus{}Brewery
 rating            1.305085
 food\PYGZus{}rating       1.169492
 service\PYGZus{}rating    1.203390
 dtype: float64
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{Rcuisine}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bar}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-rating            1.200000
-food\PYGZus{}rating       1.135714
-service\PYGZus{}rating    1.085714
-dtype: float64
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+just looking at the averages we can deduces that while food ratings do not change a lot, the service seems a lot better at the Brewery.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{Rcuisine}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Cafeteria}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
@@ -3630,55 +3666,71 @@ service\PYGZus{}rating    1.416667
 dtype: float64
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+As easy as it looks, we can now merge information of different tables in our dataset and perform some simple comparisons, in later sections we will see how we can improve on those.
+
+\sphinxAtStartPar
+As an exercise I already read in the table containing the info about which type of payment the user has opted for.
+Could you find out if the type of payment could have an influence on the rating?
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{user\PYGZus{}payment\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/userpayment.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{user\PYGZus{}payment\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c3\PYGZus{}data\PYGZus{}preprocessing/data/cuisine/userpayment.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{user\PYGZus{}payment\PYGZus{}df}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{payment\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{rating\PYGZus{}df}\PYG{p}{,} \PYG{n}{user\PYGZus{}payment\PYGZus{}df}\PYG{p}{,} \PYG{n}{how}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{inner}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
+    userID          Upayment
+0    U1001              cash
+1    U1002              cash
+2    U1003              cash
+3    U1004              cash
+4    U1004  bank\PYGZus{}debit\PYGZus{}cards
+..     ...               ...
+172  U1134              cash
+173  U1135              cash
+174  U1136              cash
+175  U1137              cash
+176  U1138              cash
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{Upayment}\PYG{o}{.}\PYG{n}{unique}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-array([\PYGZsq{}VISA\PYGZsq{}, \PYGZsq{}cash\PYGZsq{}, \PYGZsq{}bank\PYGZus{}debit\PYGZus{}cards\PYGZsq{}, \PYGZsq{}MasterCard\PYGZhy{}Eurocard\PYGZsq{},
-       \PYGZsq{}American\PYGZus{}Express\PYGZsq{}], dtype=object)
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{payment\PYGZus{}df}\PYG{p}{[}\PYG{n}{payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{Upayment}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cash}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-rating            1.182815
-food\PYGZus{}rating       1.200183
-service\PYGZus{}rating    1.080439
-dtype: float64
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{payment\PYGZus{}df}\PYG{p}{[}\PYG{n}{payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{Upayment}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bank\PYGZus{}debit\PYGZus{}cards}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-rating            1.437908
-food\PYGZus{}rating       1.562092
-service\PYGZus{}rating    1.398693
-dtype: float64
+[177 rows x 2 columns]
 \end{sphinxVerbatim}
 
 
 \chapter{Groupby}
 \label{\detokenize{c3_data_preprocessing/groupby:groupby}}\label{\detokenize{c3_data_preprocessing/groupby::doc}}
+\sphinxAtStartPar
+In the previous section we saw how to combine information of multiple tables from our dataset.
+Here we are going to build further on that by using the merged information to group on categorical variables.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/rating\PYGZus{}final.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c3\PYGZus{}data\PYGZus{}preprocessing/data/cuisine/rating\PYGZus{}final.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{rating\PYGZus{}df}
 \end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+     userID  placeID  rating  food\PYGZus{}rating  service\PYGZus{}rating
+0     U1077   135085       2            2               2
+1     U1077   135038       2            2               1
+2     U1077   132825       2            2               2
+3     U1077   135060       1            2               2
+4     U1068   135104       1            1               2
+...     ...      ...     ...          ...             ...
+1156  U1043   132630       1            1               1
+1157  U1011   132715       1            1               0
+1158  U1068   132733       1            1               0
+1159  U1068   132594       1            1               1
+1160  U1068   132660       0            0               0
+
+[1161 rows x 5 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Again we have our rating data containing the users, places and ratings they gave.
+As a simple example we could just group by the placeID column and take the mean, this would give us the mean rating for each restaurant
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{grouped\PYGZus{}rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -3703,13 +3755,150 @@ placeID
 [130 rows x 3 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Keep in mind that this might be tricky, as we do not always have as much records per group, we could count the amount per records using a groupby operation and count.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{geo\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/geoplaces2.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{rating}\PYG{o}{.}\PYG{n}{count}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{grouped\PYGZus{}rating\PYGZus{}df}\PYG{p}{,} \PYG{n}{geo\PYGZus{}df}\PYG{p}{,} \PYG{n}{left\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{right\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}
+placeID
+132560     4
+132561     4
+132564     4
+132572    15
+132583     4
+          ..
+135088     6
+135104     7
+135106    10
+135108    11
+135109     4
+Name: rating, Length: 130, dtype: int64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Taking an average of 4 ratings might not be ideal, so we should keep in mind that our groups have a good sample size.
+
+\sphinxAtStartPar
+Let’s make things more interesting and insert some location data.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{geo\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/geoplaces2.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}df}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+          latitude   longitude  \PYGZbs{}
+placeID                          
+134999   18.915421  \PYGZhy{}99.184871   
+132825   22.147392 \PYGZhy{}100.983092   
+135106   22.149709 \PYGZhy{}100.976093   
+132667   23.752697  \PYGZhy{}99.163359   
+132613   23.752903  \PYGZhy{}99.165076   
+...            ...         ...   
+132866   22.141220 \PYGZhy{}100.931311   
+135072   22.149192 \PYGZhy{}101.002936   
+135109   18.921785  \PYGZhy{}99.235350   
+135019   18.875011  \PYGZhy{}99.159422   
+132877   22.135364 \PYGZhy{}100.934948   
+
+                                            the\PYGZus{}geom\PYGZus{}meter  \PYGZbs{}
+placeID                                                      
+134999   0101000020957F000088568DE356715AC138C0A525FC46...   
+132825   0101000020957F00001AD016568C4858C1243261274BA5...   
+135106   0101000020957F0000649D6F21634858C119AE9BF528A3...   
+132667   0101000020957F00005D67BCDDED8157C1222A2DC8D84D...   
+132613   0101000020957F00008EBA2D06DC8157C194E03B7B504E...   
+...                                                    ...   
+132866   0101000020957F000013871838EC4A58C1B5DF74F8E396...   
+135072   0101000020957F0000E7B79B1DB94758C1D29BC363D8AA...   
+135109   0101000020957F0000A6BF695F136F5AC1DADF87B20556...   
+135019   0101000020957F0000B49B2E5C6E785AC12F9D58435241...   
+132877   0101000020957F000090735015B84B58C1AF0DC0414698...   
+
+                                   name  \PYGZbs{}
+placeID                                   
+134999                  Kiku Cuernavaca   
+132825                  puesto de tacos   
+135106       El Rinc�n de San Francisco   
+132667   little pizza Emilio Portes Gil   
+132613                    carnitas\PYGZus{}mata   
+...                                 ...   
+132866                          Chaires   
+135072                       Sushi Itto   
+135109                        Paniroles   
+135019      Restaurant Bar Coty y Pablo   
+132877                 sirloin stockade   
+
+                                                 address             city  \PYGZbs{}
+placeID                                                                     
+134999                                        Revolucion       Cuernavaca   
+132825            esquina santos degollado y leon guzman           s.l.p.   
+135106                                   Universidad 169  San Luis Potosi   
+132667                           calle emilio portes gil        victoria    
+132613                            lic. Emilio portes gil         victoria   
+...                                                  ...              ...   
+132866                                  Ricardo B. Anaya  San Luis Potosi   
+135072                Venustiano Carranza 1809 C Polanco  San Luis Potosi   
+135109                                                 ?                ?   
+135019   Paseo de Las Fuentes 24 Pedregal de Las Fuentes         Jiutepec   
+132877                                                 ?                ?   
+
+                   state country fax    zip            alcohol   smoking\PYGZus{}area  \PYGZbs{}
+placeID                                                                         
+134999           Morelos  Mexico   ?      ?  No\PYGZus{}Alcohol\PYGZus{}Served           none   
+132825            s.l.p.  mexico   ?  78280  No\PYGZus{}Alcohol\PYGZus{}Served           none   
+135106   San Luis Potosi  Mexico   ?  78000          Wine\PYGZhy{}Beer    only at bar   
+132667        tamaulipas       ?   ?      ?  No\PYGZus{}Alcohol\PYGZus{}Served           none   
+132613        Tamaulipas  Mexico   ?      ?  No\PYGZus{}Alcohol\PYGZus{}Served      permitted   
+...                  ...     ...  ..    ...                ...            ...   
+132866   San Luis Potosi  Mexico   ?      ?  No\PYGZus{}Alcohol\PYGZus{}Served  not permitted   
+135072               SLP  Mexico   ?  78220  No\PYGZus{}Alcohol\PYGZus{}Served           none   
+135109                 ?       ?   ?      ?          Wine\PYGZhy{}Beer  not permitted   
+135019           Morelos  Mexico   ?      ?  No\PYGZus{}Alcohol\PYGZus{}Served           none   
+132877                 ?       ?   ?      ?  No\PYGZus{}Alcohol\PYGZus{}Served           none   
+
+        dress\PYGZus{}code     accessibility   price                    url Rambience  \PYGZbs{}
+placeID                                                                         
+134999    informal  no\PYGZus{}accessibility  medium  kikucuernavaca.com.mx  familiar   
+132825    informal        completely     low                      ?  familiar   
+135106    informal         partially  medium                      ?  familiar   
+132667    informal        completely     low                      ?  familiar   
+132613    informal        completely  medium                      ?  familiar   
+...            ...               ...     ...                    ...       ...   
+132866    informal        completely  medium                      ?  familiar   
+135072    informal  no\PYGZus{}accessibility  medium      sushi\PYGZhy{}itto.com.mx  familiar   
+135109    informal  no\PYGZus{}accessibility  medium                      ?     quiet   
+135019    informal        completely     low                      ?  familiar   
+132877    informal        completely     low                      ?  familiar   
+
+        franchise    area other\PYGZus{}services  
+placeID                                   
+134999          f  closed           none  
+132825          f    open           none  
+135106          f    open           none  
+132667          t  closed           none  
+132613          t  closed           none  
+...           ...     ...            ...  
+132866          f  closed           none  
+135072          f  closed           none  
+135109          f  closed       Internet  
+135019          f  closed           none  
+132877          f  closed           none  
+
+[130 rows x 20 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Here we have for each restaurant information about its location, I mentioned earlier that grouping per restaurant might be dangerous as some restaurants have nearly no reviews.
+By adding information such as city, state and country we have other categorical variables to group by.
+Notice how we use the merge operation from previous section, but this time specify our common key is the index.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{grouped\PYGZus{}rating\PYGZus{}df}\PYG{p}{,} \PYG{n}{geo\PYGZus{}df}\PYG{p}{,} \PYG{n}{left\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{right\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -3814,8 +4003,11 @@ placeID
 [130 rows x 23 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+By adding this amount of data, things are getting a bit cluttered, thankfully we can use pandas to get a list of all our columns.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -3826,8 +4018,11 @@ Index([\PYGZsq{}rating\PYGZsq{}, \PYGZsq{}food\PYGZus{}rating\PYGZsq{}, \PYGZsq{
       dtype=\PYGZsq{}object\PYGZsq{})
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+How about we try and see if we can find a difference between countries for the ratings?
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{country}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{country}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -3838,16 +4033,16 @@ Mexico   1.200977     1.229093        1.118162
 mexico   1.062660     1.069006        0.900064
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{can} \PYG{n}{you} \PYG{n}{fix} \PYG{n}{this} \PYG{n}{string} problem\PYG{o}{?}
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+Ah, it seems we forgot to do some data cleaning here, perhaps you could jump in and fix this string problem, might as well tackle the missing value while we are at it.
+Aside from that, we can see that lower\sphinxhyphen{}case Mexico is not doing very well, perhaps the food was so bad they forgot how to write Mexico?
+
+\sphinxAtStartPar
+Jokes aside, do you see the ressemblance between this and our rudimentary approach of comparing different categories?
+We are slowly getting more and more efficient using these operations, how about the difference between alcohol consumption?
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Object `problem` not found.
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -3858,8 +4053,15 @@ No\PYGZus{}Alcohol\PYGZus{}Served  1.148075     1.194730        1.042417
 Wine\PYGZhy{}Beer          1.231887     1.261840        1.174437
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Something we can remark here is that the food rating for no alcohol locations seems to be holding up, whilst the general rating and service rating fall behind.
+This would suggest that the food rating indeed is for the food, where the type of drinks served have no influence.
+
+\sphinxAtStartPar
+As a last we look at the difference between accessibility, does that influences our ratings?
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{accessibility}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{accessibility}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -3870,8 +4072,12 @@ no\PYGZus{}accessibility  1.196189     1.206242        1.091278
 partially         1.275356     1.330294        1.219991
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+It seems having partial accessibility is the way to go here, performing better than complete accessibility.
+We can however find that is due to a low sample size of 9 restaurants, making it prone to variation.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{accessibility}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{accessibility}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -3881,46 +4087,33 @@ partially            9
 Name: accessibility, dtype: int64
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{price}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+You should get the hang of it by now, perhaps you can play some more with the other categories.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-          rating  food\PYGZus{}rating  service\PYGZus{}rating
-price                                        
-high    1.258106     1.253816        1.174754
-low     1.063059     1.135805        0.935632
-medium  1.234342     1.255871        1.161361
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+There is one thing I still would like to address, you perhaps have notices that in the beginning I first took the average rating per restaurant and later again took the average per category.
+This is a bad practice as a bad restaurant with one review has equal influence as a good restaurant with 100 reviews, perhaps you can think of a way to group all reviews from a category instead of the average for each restaurant?
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{can} \PYG{n}{you} \PYG{n}{solve} \PYG{n}{the} \PYG{n}{mean}\PYG{o}{\PYGZhy{}}\PYG{n}{mean} problem\PYG{o}{?}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Object `problem` not found.
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o+ow}{in} \PYG{n}{the} \PYG{n}{merge} \PYG{n}{example} \PYG{n}{we} \PYG{n}{added} \PYG{n}{the} \PYG{n}{cuisine} \PYG{n+nb}{type}\PYG{p}{,} \PYG{n}{could} \PYG{n}{you} \PYG{n}{perform} \PYG{n}{a} \PYG{n}{groupby} \PYG{n}{analysis} \PYG{n}{on} this\PYG{o}{?}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-Object `this` not found.
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+In the previous section we added the cuisine type, perhaps you could do some groupby operations on that too here?
 
 
 \chapter{Pivot}
 \label{\detokenize{c3_data_preprocessing/pivot:pivot}}\label{\detokenize{c3_data_preprocessing/pivot::doc}}
+\sphinxAtStartPar
+When using the groupby operation we used 1 categorical variable to seperate/group our data into those categories.
+Here we go a step further and use 2 categories to aggregate our data, resulting in a comparison matrix.
+
+\sphinxAtStartPar
+Aside from that, the pivot operation can in general be used to go from a long data format, to a wide data format.
+To keep things uniform we stick with the same cuisine dataset.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/rating\PYGZus{}final.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c3\PYGZus{}data\PYGZus{}preprocessing/data/cuisine/rating\PYGZus{}final.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n}{rating\PYGZus{}df}
 \end{sphinxVerbatim}
 
@@ -3941,13 +4134,20 @@ Object `this` not found.
 [1161 rows x 5 columns]
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{geo\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/cuisine/geoplaces2.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+And again we merge with the geolocations data, I feel that it becomse obvious here how these operations are very related to eachother.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{rating\PYGZus{}df}\PYG{p}{,} \PYG{n}{geo\PYGZus{}df}\PYG{p}{,} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}
+\PYG{n}{geo\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/LorenzF/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/main/src/c3\PYGZus{}data\PYGZus{}preprocessing/data/cuisine/geoplaces2.csv}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+A subtle difference between last time is that I did not first group per restaurant, however this leads to a dataframe that has a lot of redundant information!
+Try to look in the merged dataframe and spot the copies of data.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{rating\PYGZus{}df}\PYG{p}{,} \PYG{n}{geo\PYGZus{}df}\PYG{p}{,} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{placeID}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -4019,15 +4219,19 @@ Object `this` not found.
 [1161 rows x 25 columns]
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Now that we have our workable data, we can choose 2 categories and create a comparison matrix using the pivot operation.
+Yet there might be a problem that we still have to resolve, can you figure out the problem reading the error at the end of the stack trace below?
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{n+ne}{ValueError}\PYG{g+gWhitespace}{                                }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}5491}\PYG{o}{/}\PYG{l+m+mf}{1397663245.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}20513}\PYG{o}{/}\PYG{l+m+mf}{1351770208.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
 \PYG{n+nn}{\PYGZti{}/git/data\PYGZhy{}science\PYGZhy{}practical\PYGZhy{}approach/venv/lib/python3.8/site\PYGZhy{}packages/pandas/core/frame.py} in \PYG{n+ni}{pivot}\PYG{n+nt}{(self, index, columns, values)}
 \PYG{g+gWhitespace}{   }\PYG{l+m+mi}{7791}         \PYG{k+kn}{from} \PYG{n+nn}{pandas}\PYG{n+nn}{.}\PYG{n+nn}{core}\PYG{n+nn}{.}\PYG{n+nn}{reshape}\PYG{n+nn}{.}\PYG{n+nn}{pivot} \PYG{k+kn}{import} \PYG{n}{pivot}
@@ -4074,8 +4278,13 @@ Object `this` not found.
 \PYG{n+ne}{ValueError}: Index contains duplicate entries, cannot reshape
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+It says: ‘Index contains duplicate entries, cannot reshape’ meaning that some combinations of our 2 categories, alcohol and smoking area have duplicates, which is understandable.
+I opted to solve this by grouping over the 2 categories and taking the mean for each combination, then i take this grouped data and pivot by setting the alcohol consumption as index and the smoking are as columns.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{grouped\PYGZus{}geo\PYGZus{}rating\PYGZus{}df} \PYG{o}{=} \PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{food\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{service\PYGZus{}rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{grouped\PYGZus{}geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -4086,8 +4295,14 @@ No\PYGZus{}Alcohol\PYGZus{}Served  1.186788       1.124402          NaN   1.1142
 Wine\PYGZhy{}Beer          1.217391       1.000000     1.368421   1.300000  1.275000
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+Wonderful! Now we have for each combination an average rating, notice however that not every combination has the same sample size, so comparing might be tricky if you only have a few ratings.
+
+\sphinxAtStartPar
+To figure that out I counted the ratings per combination.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{count}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{geo\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{count}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{alcohol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -4098,43 +4313,25 @@ No\PYGZus{}Alcohol\PYGZus{}Served  439.0          209.0          NaN       35.0 
 Wine\PYGZhy{}Beer          161.0            9.0         19.0       10.0    120.0
 \end{sphinxVerbatim}
 
+\sphinxAtStartPar
+It seems that there might e a correlation between the 2 categories, as a lot of place where smoking is not permitted/none, there is no alcohol served, which makes sense.
+Comparing the ratings with alcohol allowance for places where smoking is not permitted is not a good idea, the counts are 7, 209 and 9, very unbalanced.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{geo\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Index([\PYGZsq{}latitude\PYGZsq{}, \PYGZsq{}longitude\PYGZsq{}, \PYGZsq{}the\PYGZus{}geom\PYGZus{}meter\PYGZsq{}, \PYGZsq{}name\PYGZsq{}, \PYGZsq{}address\PYGZsq{}, \PYGZsq{}city\PYGZsq{},
-       \PYGZsq{}state\PYGZsq{}, \PYGZsq{}country\PYGZsq{}, \PYGZsq{}fax\PYGZsq{}, \PYGZsq{}zip\PYGZsq{}, \PYGZsq{}alcohol\PYGZsq{}, \PYGZsq{}smoking\PYGZus{}area\PYGZsq{},
+Index([\PYGZsq{}placeID\PYGZsq{}, \PYGZsq{}latitude\PYGZsq{}, \PYGZsq{}longitude\PYGZsq{}, \PYGZsq{}the\PYGZus{}geom\PYGZus{}meter\PYGZsq{}, \PYGZsq{}name\PYGZsq{}, \PYGZsq{}address\PYGZsq{},
+       \PYGZsq{}city\PYGZsq{}, \PYGZsq{}state\PYGZsq{}, \PYGZsq{}country\PYGZsq{}, \PYGZsq{}fax\PYGZsq{}, \PYGZsq{}zip\PYGZsq{}, \PYGZsq{}alcohol\PYGZsq{}, \PYGZsq{}smoking\PYGZus{}area\PYGZsq{},
        \PYGZsq{}dress\PYGZus{}code\PYGZsq{}, \PYGZsq{}accessibility\PYGZsq{}, \PYGZsq{}price\PYGZsq{}, \PYGZsq{}url\PYGZsq{}, \PYGZsq{}Rambience\PYGZsq{}, \PYGZsq{}franchise\PYGZsq{},
        \PYGZsq{}area\PYGZsq{}, \PYGZsq{}other\PYGZus{}services\PYGZsq{}],
       dtype=\PYGZsq{}object\PYGZsq{})
 \end{sphinxVerbatim}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{merged\PYGZus{}rating\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{city}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{pivot}\PYG{p}{(}\PYG{n}{index}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{city}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoking\PYGZus{}area}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{values}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-smoking\PYGZus{}area          none  not permitted  only at bar  permitted   section
-city                                                                       
-?                 1.052632       1.000000          NaN   1.833333  1.300000
-Cd Victoria       0.625000            NaN          NaN        NaN       NaN
-Cd. Victoria           NaN       0.750000          NaN        NaN       NaN
-Ciudad Victoria        NaN       1.300000          NaN   0.750000       NaN
-Cuernavaca        1.411765       1.157895     1.555556   1.500000  1.000000
-Jiutepec          1.461538            NaN          NaN   1.166667       NaN
-San Luis Potosi   1.211494       1.168317     1.200000        NaN  1.273743
-Soledad           1.058824            NaN          NaN        NaN       NaN
-cuernavaca             NaN       1.600000          NaN        NaN       NaN
-s.l.p                  NaN       0.916667          NaN        NaN       NaN
-s.l.p.            1.281250            NaN          NaN        NaN       NaN
-san luis potos    2.000000            NaN          NaN        NaN       NaN
-san luis potosi   1.272727       1.000000          NaN        NaN  1.500000
-san luis potosi        NaN            NaN          NaN   1.400000       NaN
-slp               1.166667            NaN          NaN        NaN       NaN
-victoria          1.000000       0.600000          NaN   0.937500       NaN
-victoria          0.750000            NaN          NaN        NaN       NaN
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+I printed the columns above, perhaps you could figure out a relation between the price category and the (R)ambience of the restaurant?
+Perhaps there are other combinations of which I did not think of, try some out!
 
 
 \part{4. Data Exploration}

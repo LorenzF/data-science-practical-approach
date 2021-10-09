@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binning and ranking &#8212; Data Science - A practical Approach</title>
+    <title>11. Binning and ranking &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="11. Some practice" href="some_practice.html" />
-    <link rel="prev" title="Scaling and Normalization" href="scaling_normalization.html" />
+    <link rel="next" title="12. Some practice" href="some_practice.html" />
+    <link rel="prev" title="10. Scaling and Normalization" href="scaling_normalization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,27 +132,27 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="datetime_operations.html">
-   Datetime operations
+   7. Datetime operations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="categorical_encoding.html">
-   Categorical encoding
+   8. Categorical encoding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scaling_normalization.html">
-   Scaling and Normalization
+   10. Scaling and Normalization
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Binning and ranking
+   11. Binning and ranking
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="some_practice.html">
-   11. Some practice
+   12. Some practice
   </a>
  </li>
 </ul>
@@ -164,27 +164,27 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
-   12. Data Preprocessing
+   13. Data Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
-   13. Indexing and slicing
+   14. Indexing and slicing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/merge.html">
-   Merge
+   15. Merge
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
-   Groupby
+   16. Groupby
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
-   Pivot
+   17. Pivot
   </a>
  </li>
 </ul>
@@ -196,7 +196,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_exploration/introduction.html">
-   14. Data Exploration
+   18. Data Exploration
   </a>
  </li>
 </ul>
@@ -208,7 +208,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c5_data_visualisation/introduction.html">
-   15. Data Visualisation
+   19. Data Visualisation
   </a>
  </li>
 </ul>
@@ -220,7 +220,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   16. Machine Learning
+   20. Machine Learning
   </a>
  </li>
 </ul>
@@ -334,12 +334,12 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#binning">
-   Binning
+   11.1. Binning
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ranking">
-   Ranking
+   11.2. Ranking
   </a>
  </li>
 </ul>
@@ -354,7 +354,7 @@
               <div>
                 
   <div class="section" id="binning-and-ranking">
-<h1>Binning and ranking<a class="headerlink" href="#binning-and-ranking" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">11. </span>Binning and ranking<a class="headerlink" href="#binning-and-ranking" title="Permalink to this headline">¶</a></h1>
 <p>When dealing with numerical data the trouble can sometimes be that numbers can have a wide variety.</p>
 <p>Here we apply 2 methods to deal with that, binning and ranking.
 With binning we change the numerical feature into a categorical/ordinal feature.
@@ -809,7 +809,7 @@ Ranking is used when our numerical feature contains a non normal distribution th
 <p>Here you could do some data validity, where we check if all values are between 0 and 100, or we check for missing values.
 I will leave that up to you</p>
 <div class="section" id="binning">
-<h2>Binning<a class="headerlink" href="#binning" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.1. </span>Binning<a class="headerlink" href="#binning" title="Permalink to this headline">¶</a></h2>
 <p>the first thing we want to do is seperate the countries based on their coffee consumption, instead of creating arbitrary values we can perform a quantitative cut.
 This means we create a number of equally sized groups using the qcut function, we give them the labels low, medium and high.</p>
 <div class="cell docutils container">
@@ -1713,7 +1713,7 @@ dtype: float64
 Do you think scaling/normalization might be interesting here? why (not)?</p>
 </div>
 <div class="section" id="ranking">
-<h2>Ranking<a class="headerlink" href="#ranking" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.2. </span>Ranking<a class="headerlink" href="#ranking" title="Permalink to this headline">¶</a></h2>
 <p>In case normalization fails us and we are for some reason not able to get a normal distribution out of a feature, we can still resort to ranking.
 Note that non linear machine learning techniques often use a ranking functionality under the hood, therefore this technique is often not required, yet for educational purposes we are going to use it here anyway.
 Let’s see how the distribution for Real coffee consumption looks like.</p>
@@ -2746,7 +2746,7 @@ When we visualise this distribution we get a uniform distribution, not normal bu
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Scaling and Normalization</p>
+                <p class="prevnext-title"><span class="section-number">10. </span>Scaling and Normalization</p>
             </div>
         </a>
     </div>
@@ -2754,7 +2754,7 @@ When we visualise this distribution we get a uniform distribution, not normal bu
         <a class="right-next" href="some_practice.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">11. </span>Some practice</p>
+                <p class="prevnext-title"><span class="section-number">12. </span>Some practice</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
