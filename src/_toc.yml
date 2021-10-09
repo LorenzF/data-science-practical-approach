@@ -4,9 +4,11 @@ options:
 root: foreword
 parts:
 - caption: 1. Introduction
+  numbered: True
   chapters:
   - file: c1_introduction/introduction
 - caption: 2. Data Preparation
+  numbered: True
   chapters:
   - file: c2_data_preparation/introduction
   - file: c2_data_preparation/missing_data
@@ -19,6 +21,7 @@ parts:
   - file: c2_data_preparation/binning_ranking
   - file: c2_data_preparation/some_practice
 - caption: 3. Data Preprocessing
+  numbered: True
   chapters:
   - file: c3_data_preprocessing/introduction
   - file: c3_data_preprocessing/indexing_slicing
@@ -26,11 +29,14 @@ parts:
   - file: c3_data_preprocessing/groupby
   - file: c3_data_preprocessing/pivot
 - caption: 4. Data Exploration
+  numbered: True
   chapters:
   - file: c4_data_exploration/introduction
 - caption: 5. Data Visualisation
+  numbered: True
   chapters:
   - file: c5_data_visualisation/introduction
 - caption: 6. Machine Learning
+  numbered: True
   chapters:
   - file: c6_machine_learning/introduction
