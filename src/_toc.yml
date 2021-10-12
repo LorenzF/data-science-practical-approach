@@ -28,14 +28,14 @@ parts:
   - file: c3_data_preprocessing/merge
   - file: c3_data_preprocessing/groupby
   - file: c3_data_preprocessing/pivot
-- caption: 4. Data Exploration
+- caption: 4. Data Visualisation
   numbered: True
   chapters:
-  - file: c4_data_exploration/introduction
-- caption: 5. Data Visualisation
+  - file: c4_data_visualisation/introduction
+- caption: 5. Data Exploration
   numbered: True
   chapters:
-  - file: c5_data_visualisation/introduction
+  - file: c5_data_exploration/introduction
 - caption: 6. Machine Learning
   numbered: True
   chapters:
