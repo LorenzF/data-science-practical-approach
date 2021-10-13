@@ -1,0 +1,1123 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>23. Heatmap plot &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="24. Uni-variate analysis" href="../c5_data_exploration/univariate_analysis.html" />
+    <link rel="prev" title="22. Scatter plot" href="scatter.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/outliers.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/string_operations.html">
+   6. String operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
+   7. Datetime operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
+   8. Categorical encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
+   10. Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
+   11. Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/some_practice.html">
+   12. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
+   13. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   14. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/merge.html">
+   15. Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
+   16. Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
+   17. Pivot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Visualisation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   18. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="line.html">
+   19. Line plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="histogram.html">
+   20. Histogram plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="box.html">
+   21. Box plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scatter.html">
+   22. Scatter plot
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   23. Heatmap plot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/univariate_analysis.html">
+   24. Uni-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/bivariate_analysis.html">
+   25. Bi-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/external_data.html">
+   26. New Data Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/cluster_analysis.html">
+   27. Cluster analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/principle_component_analysis.html">
+   28. Principle Component Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   29. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c4_data_visualisation/heatmap.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc4_data_visualisation/heatmap.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c4_data_visualisation/heatmap.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c4_data_visualisation/heatmap.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="heatmap-plot">
+<h1><span class="section-number">23. </span>Heatmap plot<a class="headerlink" href="#heatmap-plot" title="Permalink to this headline">¶</a></h1>
+<p>A heatmap also deals with 2 dimensional data and cares about the relation.
+Here instead of numerical data with dots, we are using categorical data where every combination of the 2 categories has a singular value.</p>
+<p>This results into a matrix that we visualize where each index of the matrix has its own color based on a color gradient.
+This plot got its name as it is used to find ‘hot spots’ between combinations of 2 categorical features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">16</span><span class="p">,</span><span class="mi">12</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To make optimal use of this plot, we are going to take on a rather complex dataset, where we have measurements of brain networks.
+The idea is that we have several networks with several nodes in 2 hemispheres, the content of the data is not as important here, what matters is that we want to find correlations between different nodes in the brain.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brain_df</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;brain_networks&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">brain_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>network</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">2</th>
+      <th colspan="2" halign="left">3</th>
+      <th colspan="2" halign="left">4</th>
+      <th colspan="2" halign="left">5</th>
+      <th>...</th>
+      <th colspan="3" halign="left">16</th>
+      <th colspan="7" halign="left">17</th>
+    </tr>
+    <tr>
+      <th>node</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th>...</th>
+      <th>3</th>
+      <th colspan="2" halign="left">4</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">2</th>
+      <th colspan="2" halign="left">3</th>
+      <th>4</th>
+    </tr>
+    <tr>
+      <th>hemi</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>...</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>56.055744</td>
+      <td>92.031036</td>
+      <td>3.391576</td>
+      <td>38.659683</td>
+      <td>26.203819</td>
+      <td>-49.715569</td>
+      <td>47.461037</td>
+      <td>26.746613</td>
+      <td>-35.898861</td>
+      <td>-1.889181</td>
+      <td>...</td>
+      <td>0.607904</td>
+      <td>-70.270546</td>
+      <td>77.365776</td>
+      <td>-21.734550</td>
+      <td>1.028253</td>
+      <td>7.791784</td>
+      <td>68.903725</td>
+      <td>-10.520872</td>
+      <td>120.490463</td>
+      <td>-39.686432</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>55.547253</td>
+      <td>43.690075</td>
+      <td>-65.495987</td>
+      <td>-13.974523</td>
+      <td>-28.274963</td>
+      <td>-39.050129</td>
+      <td>-1.210660</td>
+      <td>-19.012897</td>
+      <td>19.568010</td>
+      <td>15.902983</td>
+      <td>...</td>
+      <td>57.495071</td>
+      <td>-76.393219</td>
+      <td>127.261360</td>
+      <td>-13.035799</td>
+      <td>46.381824</td>
+      <td>-15.752450</td>
+      <td>31.000332</td>
+      <td>-39.607521</td>
+      <td>24.764011</td>
+      <td>-36.771008</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>60.997768</td>
+      <td>63.438793</td>
+      <td>-51.108582</td>
+      <td>-13.561346</td>
+      <td>-18.842947</td>
+      <td>-1.214659</td>
+      <td>-65.575806</td>
+      <td>-85.777428</td>
+      <td>19.247454</td>
+      <td>37.209419</td>
+      <td>...</td>
+      <td>28.317369</td>
+      <td>9.063977</td>
+      <td>45.493263</td>
+      <td>26.033442</td>
+      <td>34.212200</td>
+      <td>1.326110</td>
+      <td>-22.580757</td>
+      <td>12.985169</td>
+      <td>-75.027451</td>
+      <td>6.434262</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>18.514868</td>
+      <td>12.657158</td>
+      <td>-34.576603</td>
+      <td>-32.665958</td>
+      <td>-7.420454</td>
+      <td>17.119448</td>
+      <td>-41.800869</td>
+      <td>-58.610184</td>
+      <td>32.896915</td>
+      <td>11.199619</td>
+      <td>...</td>
+      <td>71.439629</td>
+      <td>65.842979</td>
+      <td>-10.697547</td>
+      <td>55.297466</td>
+      <td>4.255006</td>
+      <td>-2.420144</td>
+      <td>12.098393</td>
+      <td>-15.819172</td>
+      <td>-37.361431</td>
+      <td>-4.650954</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-2.527392</td>
+      <td>-63.104668</td>
+      <td>-13.814151</td>
+      <td>-15.837989</td>
+      <td>-45.216927</td>
+      <td>3.483550</td>
+      <td>-62.613335</td>
+      <td>-49.076508</td>
+      <td>18.396759</td>
+      <td>3.219077</td>
+      <td>...</td>
+      <td>95.597565</td>
+      <td>50.960453</td>
+      <td>-23.197300</td>
+      <td>43.067562</td>
+      <td>52.219875</td>
+      <td>28.232882</td>
+      <td>-11.719750</td>
+      <td>5.453649</td>
+      <td>5.169828</td>
+      <td>87.809135</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 62 columns</p>
+</div></div></div>
+</div>
+<p>luckily for us, the pandas library has an easy method of finding out what the correlation is between different columns of numerical data.
+These correlations are denoted between -1 (completely opposite) to 1 (completely related).
+Take a minute to understand how the columns and index changed using the operation, you can see that a node in a network and hemisphere has a correlation of 1.00 with itself.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brain_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>network</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">2</th>
+      <th colspan="2" halign="left">3</th>
+      <th colspan="2" halign="left">4</th>
+      <th colspan="2" halign="left">5</th>
+      <th>...</th>
+      <th colspan="3" halign="left">16</th>
+      <th colspan="7" halign="left">17</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>node</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">1</th>
+      <th>...</th>
+      <th>3</th>
+      <th colspan="2" halign="left">4</th>
+      <th colspan="2" halign="left">1</th>
+      <th colspan="2" halign="left">2</th>
+      <th colspan="2" halign="left">3</th>
+      <th>4</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>hemi</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>...</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+      <th>rh</th>
+      <th>lh</th>
+    </tr>
+    <tr>
+      <th>network</th>
+      <th>node</th>
+      <th>hemi</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th rowspan="2" valign="top">1</th>
+      <th>lh</th>
+      <td>1.000000</td>
+      <td>0.881516</td>
+      <td>-0.042699</td>
+      <td>-0.074437</td>
+      <td>-0.342849</td>
+      <td>-0.169498</td>
+      <td>-0.373050</td>
+      <td>-0.361726</td>
+      <td>0.431619</td>
+      <td>0.418708</td>
+      <td>...</td>
+      <td>-0.106642</td>
+      <td>-0.162254</td>
+      <td>-0.232501</td>
+      <td>-0.099781</td>
+      <td>-0.161649</td>
+      <td>-0.206379</td>
+      <td>-0.212601</td>
+      <td>-0.142770</td>
+      <td>-0.204326</td>
+      <td>-0.219283</td>
+    </tr>
+    <tr>
+      <th>rh</th>
+      <td>0.881516</td>
+      <td>1.000000</td>
+      <td>0.013073</td>
+      <td>0.033733</td>
+      <td>-0.351509</td>
+      <td>-0.162006</td>
+      <td>-0.333244</td>
+      <td>-0.337476</td>
+      <td>0.431953</td>
+      <td>0.519916</td>
+      <td>...</td>
+      <td>-0.173530</td>
+      <td>-0.224436</td>
+      <td>-0.277954</td>
+      <td>-0.212964</td>
+      <td>-0.262915</td>
+      <td>-0.273370</td>
+      <td>-0.266456</td>
+      <td>-0.174222</td>
+      <td>-0.223572</td>
+      <td>-0.273626</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">2</th>
+      <th rowspan="2" valign="top">1</th>
+      <th>lh</th>
+      <td>-0.042699</td>
+      <td>0.013073</td>
+      <td>1.000000</td>
+      <td>0.813394</td>
+      <td>-0.006940</td>
+      <td>-0.039375</td>
+      <td>-0.019773</td>
+      <td>0.007099</td>
+      <td>-0.147374</td>
+      <td>-0.104164</td>
+      <td>...</td>
+      <td>-0.215429</td>
+      <td>-0.239876</td>
+      <td>-0.093679</td>
+      <td>-0.240455</td>
+      <td>-0.190721</td>
+      <td>-0.151724</td>
+      <td>-0.124508</td>
+      <td>-0.179912</td>
+      <td>-0.044706</td>
+      <td>-0.209557</td>
+    </tr>
+    <tr>
+      <th>rh</th>
+      <td>-0.074437</td>
+      <td>0.033733</td>
+      <td>0.813394</td>
+      <td>1.000000</td>
+      <td>-0.027324</td>
+      <td>-0.023608</td>
+      <td>-0.017577</td>
+      <td>-0.014632</td>
+      <td>-0.173501</td>
+      <td>-0.094717</td>
+      <td>...</td>
+      <td>-0.184458</td>
+      <td>-0.244956</td>
+      <td>-0.061151</td>
+      <td>-0.255101</td>
+      <td>-0.169402</td>
+      <td>-0.224447</td>
+      <td>-0.172704</td>
+      <td>-0.250455</td>
+      <td>-0.090798</td>
+      <td>-0.216674</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>1</th>
+      <th>lh</th>
+      <td>-0.342849</td>
+      <td>-0.351509</td>
+      <td>-0.006940</td>
+      <td>-0.027324</td>
+      <td>1.000000</td>
+      <td>0.553183</td>
+      <td>0.528787</td>
+      <td>0.503403</td>
+      <td>-0.157154</td>
+      <td>-0.185008</td>
+      <td>...</td>
+      <td>-0.146451</td>
+      <td>-0.033931</td>
+      <td>-0.156972</td>
+      <td>-0.015964</td>
+      <td>-0.149944</td>
+      <td>0.026579</td>
+      <td>-0.089109</td>
+      <td>-0.012675</td>
+      <td>-0.024644</td>
+      <td>0.013747</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">17</th>
+      <th rowspan="2" valign="top">2</th>
+      <th>lh</th>
+      <td>-0.206379</td>
+      <td>-0.273370</td>
+      <td>-0.151724</td>
+      <td>-0.224447</td>
+      <td>0.026579</td>
+      <td>-0.056687</td>
+      <td>0.020064</td>
+      <td>0.084837</td>
+      <td>-0.359879</td>
+      <td>-0.394522</td>
+      <td>...</td>
+      <td>0.173117</td>
+      <td>0.478606</td>
+      <td>0.258958</td>
+      <td>0.499351</td>
+      <td>0.319184</td>
+      <td>1.000000</td>
+      <td>0.597620</td>
+      <td>0.601382</td>
+      <td>0.319382</td>
+      <td>0.517481</td>
+    </tr>
+    <tr>
+      <th>rh</th>
+      <td>-0.212601</td>
+      <td>-0.266456</td>
+      <td>-0.124508</td>
+      <td>-0.172704</td>
+      <td>-0.089109</td>
+      <td>-0.144020</td>
+      <td>0.007278</td>
+      <td>0.029909</td>
+      <td>-0.299152</td>
+      <td>-0.295150</td>
+      <td>...</td>
+      <td>0.299440</td>
+      <td>0.204444</td>
+      <td>0.453497</td>
+      <td>0.272868</td>
+      <td>0.440901</td>
+      <td>0.597620</td>
+      <td>1.000000</td>
+      <td>0.345253</td>
+      <td>0.456019</td>
+      <td>0.256544</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">3</th>
+      <th>lh</th>
+      <td>-0.142770</td>
+      <td>-0.174222</td>
+      <td>-0.179912</td>
+      <td>-0.250455</td>
+      <td>-0.012675</td>
+      <td>-0.047434</td>
+      <td>0.070114</td>
+      <td>0.100063</td>
+      <td>-0.245179</td>
+      <td>-0.303354</td>
+      <td>...</td>
+      <td>-0.055529</td>
+      <td>0.259191</td>
+      <td>0.046663</td>
+      <td>0.454838</td>
+      <td>0.188905</td>
+      <td>0.601382</td>
+      <td>0.345253</td>
+      <td>1.000000</td>
+      <td>0.379705</td>
+      <td>0.264381</td>
+    </tr>
+    <tr>
+      <th>rh</th>
+      <td>-0.204326</td>
+      <td>-0.223572</td>
+      <td>-0.044706</td>
+      <td>-0.090798</td>
+      <td>-0.024644</td>
+      <td>-0.103875</td>
+      <td>0.101791</td>
+      <td>0.128318</td>
+      <td>-0.302654</td>
+      <td>-0.277378</td>
+      <td>...</td>
+      <td>0.079460</td>
+      <td>0.005291</td>
+      <td>0.296318</td>
+      <td>0.087061</td>
+      <td>0.224760</td>
+      <td>0.319382</td>
+      <td>0.456019</td>
+      <td>0.379705</td>
+      <td>1.000000</td>
+      <td>0.090302</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <th>lh</th>
+      <td>-0.219283</td>
+      <td>-0.273626</td>
+      <td>-0.209557</td>
+      <td>-0.216674</td>
+      <td>0.013747</td>
+      <td>-0.058838</td>
+      <td>-0.069100</td>
+      <td>-0.031653</td>
+      <td>-0.282767</td>
+      <td>-0.279381</td>
+      <td>...</td>
+      <td>0.418857</td>
+      <td>0.603491</td>
+      <td>0.172167</td>
+      <td>0.589364</td>
+      <td>0.451264</td>
+      <td>0.517481</td>
+      <td>0.256544</td>
+      <td>0.264381</td>
+      <td>0.090302</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>62 rows × 62 columns</p>
+</div></div></div>
+</div>
+<p>This result is way to much to see a pattern, yet if we add a color scale and give each a gradation, we can see some correlations.</p>
+<p>Can you see how nodes from the same network are related with a more whitish color?
+The heatmap might be fairly intimidating at first but is a powerful tool when handling bigger datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">brain_df</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;network-node-hemi&#39;, ylabel=&#39;network-node-hemi&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/heatmap_7_1.png" src="../_images/heatmap_7_1.png" />
+</div>
+</div>
+<p>Without going into the medical details we can also apply some machine learning to it and create a clustermap.
+This map is a way to group nodes from similar networks into clusters, an advances technique!</p>
+<p>Gaze over the colors and look at the axi, notice how the computer figured out how to group the most similar nodes from networks.
+Also, I did not create this by myself, so don’t give me credit for this!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a subset of the networks</span>
+<span class="n">used_networks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">]</span>
+<span class="n">used_columns</span> <span class="o">=</span> <span class="p">(</span><span class="n">brain_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">)</span>
+                          <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+                          <span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">used_networks</span><span class="p">))</span>
+<span class="n">brain_df</span> <span class="o">=</span> <span class="n">brain_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">used_columns</span><span class="p">]</span>
+
+<span class="c1"># Create a categorical palette to identify the networks</span>
+<span class="n">network_pal</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">husl_palette</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">.45</span><span class="p">)</span>
+<span class="n">network_lut</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">used_networks</span><span class="p">),</span> <span class="n">network_pal</span><span class="p">))</span>
+
+<span class="c1"># Convert the palette to vectors that will be drawn on the side of the matrix</span>
+<span class="n">networks</span> <span class="o">=</span> <span class="n">brain_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">)</span>
+<span class="n">network_colors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">brain_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">network_lut</span><span class="p">)</span>
+
+<span class="c1"># Draw the full plot</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">brain_df</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;vlag&quot;</span><span class="p">,</span>
+                   <span class="n">row_colors</span><span class="o">=</span><span class="n">network_colors</span><span class="p">,</span> <span class="n">col_colors</span><span class="o">=</span><span class="n">network_colors</span><span class="p">,</span>
+                   <span class="n">dendrogram_ratio</span><span class="o">=</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">),</span>
+                   <span class="n">cbar_pos</span><span class="o">=</span><span class="p">(</span><span class="mf">.02</span><span class="p">,</span> <span class="mf">.32</span><span class="p">,</span> <span class="mf">.03</span><span class="p">,</span> <span class="mf">.2</span><span class="p">),</span>
+                   <span class="n">linewidths</span><span class="o">=</span><span class="mf">.75</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">ax_row_dendrogram</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/heatmap_9_0.png" src="../_images/heatmap_9_0.png" />
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c4_data_visualisation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="scatter.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">22. </span>Scatter plot</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../c5_data_exploration/univariate_analysis.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">24. </span>Uni-variate analysis</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
