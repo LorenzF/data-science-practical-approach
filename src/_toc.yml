@@ -32,10 +32,23 @@ parts:
   numbered: True
   chapters:
   - file: c4_data_visualisation/introduction
+  - file: c4_data_visualisation/line
+  - file: c4_data_visualisation/histogram
+  - file: c4_data_visualisation/box
+  - file: c4_data_visualisation/scatter
+  - file: c4_data_visualisation/heatmap
 - caption: 5. Data Exploration
   numbered: True
   chapters:
   - file: c5_data_exploration/introduction
+  - file: c5_data_exploration/variable_identification
+  - file: c5_data_exploration/univariate_analysis
+  - file: c5_data_exploration/bivariate_analysis
+  - file: c5_data_exploration/external_data
+  - file: c5_data_exploration/feature_engineering
+  - file: c5_data_exploration/cluster_analysis
+  - file: c5_data_exploration/variance_inflation
+  - file: c5_data_exploration/principle_component_analysis
 - caption: 6. Machine Learning
   numbered: True
   chapters:
