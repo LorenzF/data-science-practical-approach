@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>19. Line plot &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="20. Histogram plot" href="histogram.html" />
+    <link rel="prev" title="18. Introduction" href="introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/outliers.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/string_operations.html">
+   6. String operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
+   7. Datetime operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
+   8. Categorical encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
+   10. Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
+   11. Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/some_practice.html">
+   12. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
+   13. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   14. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/merge.html">
+   15. Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
+   16. Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
+   17. Pivot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Visualisation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   18. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   19. Line plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="histogram.html">
+   20. Histogram plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="box.html">
+   21. Box plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scatter.html">
+   22. Scatter plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heatmap.html">
+   23. Heatmap plot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/univariate_analysis.html">
+   24. Uni-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/bivariate_analysis.html">
+   25. Bi-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/external_data.html">
+   26. New Data Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/cluster_analysis.html">
+   27. Cluster analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/principle_component_analysis.html">
+   28. Principle Component Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   29. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c4_data_visualisation/line.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc4_data_visualisation/line.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c4_data_visualisation/line.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c4_data_visualisation/line.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="line-plot">
+<h1><span class="section-number">19. </span>Line plot<a class="headerlink" href="#line-plot" title="Permalink to this headline">¶</a></h1>
+<p>The most straight-forward yet very useful plotting graph is the line plot.
+With the line plot we achieve the visualisation of a single feature organized in a usually time based reference.</p>
+<p>The line plot is ideal if you want to achieve a time critical pattern residing within your data.
+In this example we use the prepared taxi dataframe that comes with our plotting library seaborn.</p>
+<p>From all possible plotting libraries in Python we opted for the seaborn as it has an optimal combination of simplicity and beaty, yet other libraries are equally powerful.</p>
+<p>We begin by importing our neccesary libraries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For aestetic reasons we change the figure size to something a bit larger</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">16</span><span class="p">,</span><span class="mi">12</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We load our dataset, this dataset contains the trip of taxi’s in regions of New York City with timestamps of pickup and dropoff.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">taxi_df</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;taxis&#39;</span><span class="p">)</span>
+<span class="n">taxi_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pickup</th>
+      <th>dropoff</th>
+      <th>passengers</th>
+      <th>distance</th>
+      <th>fare</th>
+      <th>tip</th>
+      <th>tolls</th>
+      <th>total</th>
+      <th>color</th>
+      <th>payment</th>
+      <th>pickup_zone</th>
+      <th>dropoff_zone</th>
+      <th>pickup_borough</th>
+      <th>dropoff_borough</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-03-23 20:21:09</td>
+      <td>2019-03-23 20:27:24</td>
+      <td>1</td>
+      <td>1.60</td>
+      <td>7.0</td>
+      <td>2.15</td>
+      <td>0.0</td>
+      <td>12.95</td>
+      <td>yellow</td>
+      <td>credit card</td>
+      <td>Lenox Hill West</td>
+      <td>UN/Turtle Bay South</td>
+      <td>Manhattan</td>
+      <td>Manhattan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-03-04 16:11:55</td>
+      <td>2019-03-04 16:19:00</td>
+      <td>1</td>
+      <td>0.79</td>
+      <td>5.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>9.30</td>
+      <td>yellow</td>
+      <td>cash</td>
+      <td>Upper West Side South</td>
+      <td>Upper West Side South</td>
+      <td>Manhattan</td>
+      <td>Manhattan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-03-27 17:53:01</td>
+      <td>2019-03-27 18:00:25</td>
+      <td>1</td>
+      <td>1.37</td>
+      <td>7.5</td>
+      <td>2.36</td>
+      <td>0.0</td>
+      <td>14.16</td>
+      <td>yellow</td>
+      <td>credit card</td>
+      <td>Alphabet City</td>
+      <td>West Village</td>
+      <td>Manhattan</td>
+      <td>Manhattan</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-03-10 01:23:59</td>
+      <td>2019-03-10 01:49:51</td>
+      <td>1</td>
+      <td>7.70</td>
+      <td>27.0</td>
+      <td>6.15</td>
+      <td>0.0</td>
+      <td>36.95</td>
+      <td>yellow</td>
+      <td>credit card</td>
+      <td>Hudson Sq</td>
+      <td>Yorkville West</td>
+      <td>Manhattan</td>
+      <td>Manhattan</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-03-30 13:27:42</td>
+      <td>2019-03-30 13:37:14</td>
+      <td>3</td>
+      <td>2.16</td>
+      <td>9.0</td>
+      <td>1.10</td>
+      <td>0.0</td>
+      <td>13.40</td>
+      <td>yellow</td>
+      <td>credit card</td>
+      <td>Midtown East</td>
+      <td>Yorkville West</td>
+      <td>Manhattan</td>
+      <td>Manhattan</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As we saw earlier, it is important to prepare the data, due to storage specification they did not parse the dates into a datetime format, which we do here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">taxi_df</span><span class="o">.</span><span class="n">pickup</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">taxi_df</span><span class="o">.</span><span class="n">pickup</span><span class="p">)</span>
+<span class="n">taxi_df</span><span class="o">.</span><span class="n">dropoff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">taxi_df</span><span class="o">.</span><span class="n">dropoff</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before we can do anything with this dataset, we need to format it into a proper format, for our first graph I would like to view the total amount of passengers per day.
+This means we have to take our data and resample on the pickup date, taking the sum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_df</span> <span class="o">=</span> <span class="n">taxi_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;pickup&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">pass_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>passengers</th>
+      <th>distance</th>
+      <th>fare</th>
+      <th>tip</th>
+      <th>tolls</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>pickup</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-02-28</th>
+      <td>1</td>
+      <td>0.90</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>6.30</td>
+    </tr>
+    <tr>
+      <th>2019-03-01</th>
+      <td>370</td>
+      <td>640.29</td>
+      <td>2946.97</td>
+      <td>442.47</td>
+      <td>60.34</td>
+      <td>4213.83</td>
+    </tr>
+    <tr>
+      <th>2019-03-02</th>
+      <td>310</td>
+      <td>548.70</td>
+      <td>2358.00</td>
+      <td>333.97</td>
+      <td>28.80</td>
+      <td>3319.02</td>
+    </tr>
+    <tr>
+      <th>2019-03-03</th>
+      <td>264</td>
+      <td>554.04</td>
+      <td>2187.89</td>
+      <td>307.47</td>
+      <td>34.56</td>
+      <td>3027.32</td>
+    </tr>
+    <tr>
+      <th>2019-03-04</th>
+      <td>267</td>
+      <td>583.81</td>
+      <td>2335.74</td>
+      <td>334.98</td>
+      <td>63.36</td>
+      <td>3269.08</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You can almost see the plot here, we have an index of dates and a feature ‘passengers’, these two will make the backbone of our visualisation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">pass_df</span><span class="o">.</span><span class="n">passengers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;pickup&#39;, ylabel=&#39;passengers&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/line_11_1.png" src="../_images/line_11_1.png" />
+</div>
+</div>
+<p>Looks about right, however I don’t like the start of it, the data started late on that first day, resampling shows we only have 1 passenger for that day.
+This is not representable, so we remove that record.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_df</span> <span class="o">=</span> <span class="n">pass_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2019-03-01&#39;</span><span class="p">:]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">pass_df</span><span class="o">.</span><span class="n">passengers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_13_0.png" src="../_images/line_13_0.png" />
+</div>
+</div>
+<p>Much better, however the plot feels like there is a lot of fluctuations, so it would be practical to apply a rolling sum or mean.
+This rolling operation takes the last x values and applies an operation (sum, mean,…) to it, creating a smoother graph and is visually more sensitive to trends.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rolling_pass_df</span> <span class="o">=</span> <span class="n">pass_df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">passengers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_15_0.png" src="../_images/line_15_0.png" />
+</div>
+</div>
+<p>By applying a rolling mean, we can see that the average amount of passengers per day is decreasing.
+I feel there is no need to panick, as this is only 1 month of data and seasonal fluxtuations do happen.</p>
+<p>Something else that triggers my curiosity is the amount these passengers paid, can we perhaps see a trend there?
+It would be ideal to plot these together so the comparison is simple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">passengers</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">fare</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_17_0.png" src="../_images/line_17_0.png" />
+</div>
+</div>
+<p>As we only have a few passengers per trip, yet trips can be costly the ranges of these 2 features are completely different.
+Before we think about scaling, we actually do want to know the scale here, we just cant fit them in the same graph.</p>
+<p>A first approach would be to use a secondary axis, where the right side of the y-axis is used to show the fare scale.
+You can see that the graph is already getting more complicated code-wise, this is where using the right library is key as they usually have built in features for that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">passengers</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;passengers&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">rolling_pass_df</span><span class="o">.</span><span class="n">fare</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fare&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc9f08c1fd0&gt;
+</pre></div>
+</div>
+<img alt="../_images/line_19_1.png" src="../_images/line_19_1.png" />
+</div>
+</div>
+<p>Interesting! It shows that there was a period where they did not follow eachother perfect, yet the trend is almost exact for these features.</p>
+<p>Another method where you can compare them would require feature engineering, where we calculate the fare per passenger per day, apply the rolling window and plot.
+Perhaps you could figure that out? create a new feature that divides the fare by the passengers, recreate the rolling dataframe and use seaborn to plot the results.</p>
+<p>At the start we used the sum of passengers per day, however we could also visualise the average amount of passengers per ride.
+The reason why I would like to do this is because earlier I saw a difference in trend for the fare and the amount of passengers, an explanation for this could be that the average amount of passengers dropped, resulting in lower passengers, yet the total expenditure of fares would remain constant.</p>
+<p>Let us figure this out, we here calculate the average (mean) of the passengers per day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_pass_df</span> <span class="o">=</span> <span class="n">taxi_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;pickup&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">avg_pass_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>passengers</th>
+      <th>distance</th>
+      <th>fare</th>
+      <th>tip</th>
+      <th>tolls</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>pickup</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-02-28</th>
+      <td>1.000000</td>
+      <td>0.900000</td>
+      <td>5.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>6.300000</td>
+    </tr>
+    <tr>
+      <th>2019-03-01</th>
+      <td>1.535270</td>
+      <td>2.656805</td>
+      <td>12.228091</td>
+      <td>1.835975</td>
+      <td>0.250373</td>
+      <td>17.484772</td>
+    </tr>
+    <tr>
+      <th>2019-03-02</th>
+      <td>1.565657</td>
+      <td>2.771212</td>
+      <td>11.909091</td>
+      <td>1.686717</td>
+      <td>0.145455</td>
+      <td>16.762727</td>
+    </tr>
+    <tr>
+      <th>2019-03-03</th>
+      <td>1.562130</td>
+      <td>3.278343</td>
+      <td>12.946095</td>
+      <td>1.819349</td>
+      <td>0.204497</td>
+      <td>17.913136</td>
+    </tr>
+    <tr>
+      <th>2019-03-04</th>
+      <td>1.561404</td>
+      <td>3.414094</td>
+      <td>13.659298</td>
+      <td>1.958947</td>
+      <td>0.370526</td>
+      <td>19.117427</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Doing more or less exactly the same we can create a simple plot with the average amount of passengers in a taxi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_pass_df</span> <span class="o">=</span> <span class="n">avg_pass_df</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">avg_pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">avg_pass_df</span><span class="o">.</span><span class="n">passengers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_25_0.png" src="../_images/line_25_0.png" />
+</div>
+</div>
+<p>For the same reasons, this plot is not suitable as it has too much variance.
+We apply a rolling mean of 7 days and re-evaluate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rolling_avg_pass_df</span> <span class="o">=</span> <span class="n">avg_pass_df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rolling_avg_pass_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">rolling_avg_pass_df</span><span class="o">.</span><span class="n">passengers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_27_0.png" src="../_images/line_27_0.png" />
+</div>
+</div>
+<p>We find a dip in passengers per ride that looks to be in the same time interval, therefore we could conclude here that fares did not get more expensive, rather the sharing of cabs was less.
+You could try and find a method to add the data of these two graphs together, yet this is already advanced visualisation.</p>
+<p>Another question that I have for you, do you think that the dip is relevant? Not specifically from a business point of view, rather from a statistical view, Perhaps if you look at the range of the y-axis you might feel that our plot is a bit magnified. This is a good example of how you can use ranges of your axi to make data more dramatic. Be weary of these malpractices!</p>
+<p>We are not done yet, as our dataset contains much more information.
+Harnessing the powers of the preprocessing we learned, we could include other (mostly categorical) feature into our line plot.</p>
+<p>Here we take the payment option (either cash or card) and use it to create 2 time series in long format (2 datasets below each other).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_payment_df</span> <span class="o">=</span> <span class="n">taxi_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;payment&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;pickup&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">pass_payment_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>passengers</th>
+      <th>distance</th>
+      <th>fare</th>
+      <th>tip</th>
+      <th>tolls</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>payment</th>
+      <th>pickup</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">cash</th>
+      <th>2019-02-28</th>
+      <td>1</td>
+      <td>0.90</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>6.30</td>
+    </tr>
+    <tr>
+      <th>2019-03-01</th>
+      <td>104</td>
+      <td>112.31</td>
+      <td>571.50</td>
+      <td>0.00</td>
+      <td>5.76</td>
+      <td>748.76</td>
+    </tr>
+    <tr>
+      <th>2019-03-02</th>
+      <td>86</td>
+      <td>159.46</td>
+      <td>690.50</td>
+      <td>0.00</td>
+      <td>5.76</td>
+      <td>863.96</td>
+    </tr>
+    <tr>
+      <th>2019-03-03</th>
+      <td>67</td>
+      <td>172.34</td>
+      <td>641.50</td>
+      <td>0.00</td>
+      <td>17.28</td>
+      <td>782.18</td>
+    </tr>
+    <tr>
+      <th>2019-03-04</th>
+      <td>71</td>
+      <td>130.60</td>
+      <td>571.50</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>710.95</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">credit card</th>
+      <th>2019-03-27</th>
+      <td>263</td>
+      <td>532.61</td>
+      <td>2260.64</td>
+      <td>485.63</td>
+      <td>69.12</td>
+      <td>3342.29</td>
+    </tr>
+    <tr>
+      <th>2019-03-28</th>
+      <td>227</td>
+      <td>403.41</td>
+      <td>1886.07</td>
+      <td>404.45</td>
+      <td>40.32</td>
+      <td>2802.94</td>
+    </tr>
+    <tr>
+      <th>2019-03-29</th>
+      <td>211</td>
+      <td>404.61</td>
+      <td>1831.98</td>
+      <td>410.13</td>
+      <td>23.04</td>
+      <td>2747.85</td>
+    </tr>
+    <tr>
+      <th>2019-03-30</th>
+      <td>268</td>
+      <td>540.71</td>
+      <td>2211.10</td>
+      <td>487.97</td>
+      <td>78.62</td>
+      <td>3249.49</td>
+    </tr>
+    <tr>
+      <th>2019-03-31</th>
+      <td>202</td>
+      <td>376.78</td>
+      <td>1632.93</td>
+      <td>345.83</td>
+      <td>29.16</td>
+      <td>2408.42</td>
+    </tr>
+  </tbody>
+</table>
+<p>63 rows × 6 columns</p>
+</div></div></div>
+</div>
+<p>Seaborn does not like this long format type, therefore we unstack the first index and create a wide format.
+For those wo are punctilious, you can notice we created a missing value, with wat should we fill it? (Our luck that seaborn can handle missing values!)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_payment_df</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">passengers</th>
+      <th colspan="2" halign="left">distance</th>
+      <th colspan="2" halign="left">fare</th>
+      <th colspan="2" halign="left">tip</th>
+      <th colspan="2" halign="left">tolls</th>
+      <th colspan="2" halign="left">total</th>
+    </tr>
+    <tr>
+      <th>payment</th>
+      <th>cash</th>
+      <th>credit card</th>
+      <th>cash</th>
+      <th>credit card</th>
+      <th>cash</th>
+      <th>credit card</th>
+      <th>cash</th>
+      <th>credit card</th>
+      <th>cash</th>
+      <th>credit card</th>
+      <th>cash</th>
+      <th>credit card</th>
+    </tr>
+    <tr>
+      <th>pickup</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-02-28</th>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>0.90</td>
+      <td>NaN</td>
+      <td>5.0</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>0.00</td>
+      <td>NaN</td>
+      <td>6.30</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2019-03-01</th>
+      <td>104.0</td>
+      <td>264.0</td>
+      <td>112.31</td>
+      <td>527.08</td>
+      <td>571.5</td>
+      <td>2363.97</td>
+      <td>0.0</td>
+      <td>442.47</td>
+      <td>5.76</td>
+      <td>54.58</td>
+      <td>748.76</td>
+      <td>3446.47</td>
+    </tr>
+    <tr>
+      <th>2019-03-02</th>
+      <td>86.0</td>
+      <td>222.0</td>
+      <td>159.46</td>
+      <td>377.74</td>
+      <td>690.5</td>
+      <td>1651.50</td>
+      <td>0.0</td>
+      <td>333.97</td>
+      <td>5.76</td>
+      <td>23.04</td>
+      <td>863.96</td>
+      <td>2430.36</td>
+    </tr>
+    <tr>
+      <th>2019-03-03</th>
+      <td>67.0</td>
+      <td>196.0</td>
+      <td>172.34</td>
+      <td>381.60</td>
+      <td>641.5</td>
+      <td>1526.39</td>
+      <td>0.0</td>
+      <td>307.47</td>
+      <td>17.28</td>
+      <td>17.28</td>
+      <td>782.18</td>
+      <td>2224.34</td>
+    </tr>
+    <tr>
+      <th>2019-03-04</th>
+      <td>71.0</td>
+      <td>196.0</td>
+      <td>130.60</td>
+      <td>453.21</td>
+      <td>571.5</td>
+      <td>1764.24</td>
+      <td>0.0</td>
+      <td>334.98</td>
+      <td>0.00</td>
+      <td>63.36</td>
+      <td>710.95</td>
+      <td>2558.13</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Same data, different structure, now seaborn understands the format and we can go back to visualisation.</p>
+<p>For simplicity we start with a simple passengers line plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pass_payment_df</span><span class="o">.</span><span class="n">passengers</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_35_0.png" src="../_images/line_35_0.png" />
+</div>
+</div>
+<p>You can see that there are generally more people paying by card, which is more convenient in such an occasion.
+Note that here we should not use a seperate y-axis as we are comparing 2 sets of data that are similar by origin.</p>
+<p>We do the same for fares.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pass_payment_df</span><span class="o">.</span><span class="n">fare</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_37_0.png" src="../_images/line_37_0.png" />
+</div>
+</div>
+<p>This is more or less a no-brainer, as more people pay by card, the fares by card are also more.
+So we can’t really compare fares with this plot, we have to be creative.</p>
+<p>I opted to go for an average fare per passenger, as this is in my opinion more relevant than the amount of rides</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_payment_df</span><span class="p">[</span><span class="s1">&#39;fare_pass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pass_payment_df</span><span class="o">.</span><span class="n">fare</span><span class="o">/</span><span class="n">pass_payment_df</span><span class="o">.</span><span class="n">passengers</span>
+<span class="n">pass_payment_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>passengers</th>
+      <th>distance</th>
+      <th>fare</th>
+      <th>tip</th>
+      <th>tolls</th>
+      <th>total</th>
+      <th>fare_pass</th>
+    </tr>
+    <tr>
+      <th>payment</th>
+      <th>pickup</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">cash</th>
+      <th>2019-02-28</th>
+      <td>1</td>
+      <td>0.90</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>6.30</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>2019-03-01</th>
+      <td>104</td>
+      <td>112.31</td>
+      <td>571.5</td>
+      <td>0.0</td>
+      <td>5.76</td>
+      <td>748.76</td>
+      <td>5.495192</td>
+    </tr>
+    <tr>
+      <th>2019-03-02</th>
+      <td>86</td>
+      <td>159.46</td>
+      <td>690.5</td>
+      <td>0.0</td>
+      <td>5.76</td>
+      <td>863.96</td>
+      <td>8.029070</td>
+    </tr>
+    <tr>
+      <th>2019-03-03</th>
+      <td>67</td>
+      <td>172.34</td>
+      <td>641.5</td>
+      <td>0.0</td>
+      <td>17.28</td>
+      <td>782.18</td>
+      <td>9.574627</td>
+    </tr>
+    <tr>
+      <th>2019-03-04</th>
+      <td>71</td>
+      <td>130.60</td>
+      <td>571.5</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>710.95</td>
+      <td>8.049296</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We created a new feature both containing info of fares and passengers, using this we create a new visualisations.</p>
+<p>In this visualisation we show for both payment options the average fare amount per passenger in the cab.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pass_payment_df</span><span class="o">.</span><span class="n">fare_pass</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/line_41_0.png" src="../_images/line_41_0.png" />
+</div>
+</div>
+<p>We can conclude that the average amount that has to be paid per person is lower for cash, indicating that people jump to their debit card as soon as the amount gets too high.</p>
+<p>As a last I would like to emphasise that the x-axis, being time does not have to be linear.
+To illustrate this we create a weekly passenger rate and impose each week over the others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pass_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day_name</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">passengers</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pickup
+2019-03-03    AxesSubplot(0.125,0.125;0.775x0.755)
+2019-03-10    AxesSubplot(0.125,0.125;0.775x0.755)
+2019-03-17    AxesSubplot(0.125,0.125;0.775x0.755)
+2019-03-24    AxesSubplot(0.125,0.125;0.775x0.755)
+2019-03-31    AxesSubplot(0.125,0.125;0.775x0.755)
+Freq: W-SUN, dtype: object
+</pre></div>
+</div>
+<img alt="../_images/line_43_1.png" src="../_images/line_43_1.png" />
+</div>
+</div>
+<p>Here we can see there is a weekly trend occuring, where Sundays and Mondays are usually less busy days.
+The origin of this is hard to argue, as it might be less traffic, less taxi drivers working,…</p>
+<p>Perhaps you could complete this visualisation by investigating the distance and/or tips?</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c4_data_visualisation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="introduction.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">18. </span>Introduction</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="histogram.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">20. </span>Histogram plot</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

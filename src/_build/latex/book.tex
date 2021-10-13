@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Oct 09, 2021}
+\date{Oct 13, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -4334,22 +4334,2762 @@ I printed the columns above, perhaps you could figure out a relation between the
 Perhaps there are other combinations of which I did not think of, try some out!
 
 
-\part{4. Data Exploration}
+\part{4. Data Visualisation}
 
 
-\chapter{Data Exploration}
-\label{\detokenize{c4_data_exploration/introduction:data-exploration}}\label{\detokenize{c4_data_exploration/introduction::doc}}
+\chapter{Introduction}
+\label{\detokenize{c4_data_visualisation/introduction:introduction}}\label{\detokenize{c4_data_visualisation/introduction::doc}}
 \sphinxAtStartPar
 this is an introduction
 
 
-\part{5. Data Visualisation}
+\chapter{Line plot}
+\label{\detokenize{c4_data_visualisation/line:line-plot}}\label{\detokenize{c4_data_visualisation/line::doc}}
+\sphinxAtStartPar
+The most straight\sphinxhyphen{}forward yet very useful plotting graph is the line plot.
+With the line plot we achieve the visualisation of a single feature organized in a usually time based reference.
+
+\sphinxAtStartPar
+The line plot is ideal if you want to achieve a time critical pattern residing within your data.
+In this example we use the prepared taxi dataframe that comes with our plotting library seaborn.
+
+\sphinxAtStartPar
+From all possible plotting libraries in Python we opted for the seaborn as it has an optimal combination of simplicity and beaty, yet other libraries are equally powerful.
+
+\sphinxAtStartPar
+We begin by importing our neccesary libraries
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}theme}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+For aestetic reasons we change the figure size to something a bit larger
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We load our dataset, this dataset contains the trip of taxi’s in regions of New York City with timestamps of pickup and dropoff.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{taxi\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{taxis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+                pickup              dropoff  passengers  distance  fare   tip  \PYGZbs{}
+0  2019\PYGZhy{}03\PYGZhy{}23 20:21:09  2019\PYGZhy{}03\PYGZhy{}23 20:27:24           1      1.60   7.0  2.15   
+1  2019\PYGZhy{}03\PYGZhy{}04 16:11:55  2019\PYGZhy{}03\PYGZhy{}04 16:19:00           1      0.79   5.0  0.00   
+2  2019\PYGZhy{}03\PYGZhy{}27 17:53:01  2019\PYGZhy{}03\PYGZhy{}27 18:00:25           1      1.37   7.5  2.36   
+3  2019\PYGZhy{}03\PYGZhy{}10 01:23:59  2019\PYGZhy{}03\PYGZhy{}10 01:49:51           1      7.70  27.0  6.15   
+4  2019\PYGZhy{}03\PYGZhy{}30 13:27:42  2019\PYGZhy{}03\PYGZhy{}30 13:37:14           3      2.16   9.0  1.10   
+
+   tolls  total   color      payment            pickup\PYGZus{}zone  \PYGZbs{}
+0    0.0  12.95  yellow  credit card        Lenox Hill West   
+1    0.0   9.30  yellow         cash  Upper West Side South   
+2    0.0  14.16  yellow  credit card          Alphabet City   
+3    0.0  36.95  yellow  credit card              Hudson Sq   
+4    0.0  13.40  yellow  credit card           Midtown East   
+
+            dropoff\PYGZus{}zone pickup\PYGZus{}borough dropoff\PYGZus{}borough  
+0    UN/Turtle Bay South      Manhattan       Manhattan  
+1  Upper West Side South      Manhattan       Manhattan  
+2           West Village      Manhattan       Manhattan  
+3         Yorkville West      Manhattan       Manhattan  
+4         Yorkville West      Manhattan       Manhattan  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+As we saw earlier, it is important to prepare the data, due to storage specification they did not parse the dates into a datetime format, which we do here.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{pickup} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}datetime}\PYG{p}{(}\PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{pickup}\PYG{p}{)}
+\PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{dropoff} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}datetime}\PYG{p}{(}\PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{dropoff}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Before we can do anything with this dataset, we need to format it into a proper format, for our first graph I would like to view the total amount of passengers per day.
+This means we have to take our data and resample on the pickup date, taking the sum.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pass\PYGZus{}df} \PYG{o}{=} \PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pickup}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{resample}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+            passengers  distance     fare     tip  tolls    total
+pickup                                                           
+2019\PYGZhy{}02\PYGZhy{}28           1      0.90     5.00    0.00   0.00     6.30
+2019\PYGZhy{}03\PYGZhy{}01         370    640.29  2946.97  442.47  60.34  4213.83
+2019\PYGZhy{}03\PYGZhy{}02         310    548.70  2358.00  333.97  28.80  3319.02
+2019\PYGZhy{}03\PYGZhy{}03         264    554.04  2187.89  307.47  34.56  3027.32
+2019\PYGZhy{}03\PYGZhy{}04         267    583.81  2335.74  334.98  63.36  3269.08
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+You can almost see the plot here, we have an index of dates and a feature ‘passengers’, these two will make the backbone of our visualisation.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}pickup\PYGZsq{}, ylabel=\PYGZsq{}passengers\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_11_1}.png}
+
+\sphinxAtStartPar
+Looks about right, however I don’t like the start of it, the data started late on that first day, resampling shows we only have 1 passenger for that day.
+This is not representable, so we remove that record.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pass\PYGZus{}df} \PYG{o}{=} \PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2019\PYGZhy{}03\PYGZhy{}01}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{]}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_13_0}.png}
+
+\sphinxAtStartPar
+Much better, however the plot feels like there is a lot of fluctuations, so it would be practical to apply a rolling sum or mean.
+This rolling operation takes the last x values and applies an operation (sum, mean,…) to it, creating a smoother graph and is visually more sensitive to trends.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df} \PYG{o}{=} \PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{rolling}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_15_0}.png}
+
+\sphinxAtStartPar
+By applying a rolling mean, we can see that the average amount of passengers per day is decreasing.
+I feel there is no need to panick, as this is only 1 month of data and seasonal fluxtuations do happen.
+
+\sphinxAtStartPar
+Something else that triggers my curiosity is the amount these passengers paid, can we perhaps see a trend there?
+It would be ideal to plot these together so the comparison is simple.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{)}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{,} \PYG{n}{ax}\PYG{o}{=}\PYG{n}{ax}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_17_0}.png}
+
+\sphinxAtStartPar
+As we only have a few passengers per trip, yet trips can be costly the ranges of these 2 features are completely different.
+Before we think about scaling, we actually do want to know the scale here, we just cant fit them in the same graph.
+
+\sphinxAtStartPar
+A first approach would be to use a secondary axis, where the right side of the y\sphinxhyphen{}axis is used to show the fare scale.
+You can see that the graph is already getting more complicated code\sphinxhyphen{}wise, this is where using the right library is key as they usually have built in features for that.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{passengers}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{legend}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{n}{ax2} \PYG{o}{=} \PYG{n}{ax}\PYG{o}{.}\PYG{n}{twinx}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{,} \PYG{n}{ax}\PYG{o}{=}\PYG{n}{ax2}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{r}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{legend}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{figure}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.legend.Legend at 0x7fc9f08c1fd0\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_19_1}.png}
+
+\sphinxAtStartPar
+Interesting! It shows that there was a period where they did not follow eachother perfect, yet the trend is almost exact for these features.
+
+\sphinxAtStartPar
+Another method where you can compare them would require feature engineering, where we calculate the fare per passenger per day, apply the rolling window and plot.
+Perhaps you could figure that out? create a new feature that divides the fare by the passengers, recreate the rolling dataframe and use seaborn to plot the results.
+
+\sphinxAtStartPar
+At the start we used the sum of passengers per day, however we could also visualise the average amount of passengers per ride.
+The reason why I would like to do this is because earlier I saw a difference in trend for the fare and the amount of passengers, an explanation for this could be that the average amount of passengers dropped, resulting in lower passengers, yet the total expenditure of fares would remain constant.
+
+\sphinxAtStartPar
+Let us figure this out, we here calculate the average (mean) of the passengers per day.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{avg\PYGZus{}pass\PYGZus{}df} \PYG{o}{=} \PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pickup}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{resample}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{avg\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+            passengers  distance       fare       tip     tolls      total
+pickup                                                                    
+2019\PYGZhy{}02\PYGZhy{}28    1.000000  0.900000   5.000000  0.000000  0.000000   6.300000
+2019\PYGZhy{}03\PYGZhy{}01    1.535270  2.656805  12.228091  1.835975  0.250373  17.484772
+2019\PYGZhy{}03\PYGZhy{}02    1.565657  2.771212  11.909091  1.686717  0.145455  16.762727
+2019\PYGZhy{}03\PYGZhy{}03    1.562130  3.278343  12.946095  1.819349  0.204497  17.913136
+2019\PYGZhy{}03\PYGZhy{}04    1.561404  3.414094  13.659298  1.958947  0.370526  19.117427
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Doing more or less exactly the same we can create a simple plot with the average amount of passengers in a taxi.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{avg\PYGZus{}pass\PYGZus{}df} \PYG{o}{=} \PYG{n}{avg\PYGZus{}pass\PYGZus{}df}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{p}{]}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{avg\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{avg\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_25_0}.png}
+
+\sphinxAtStartPar
+For the same reasons, this plot is not suitable as it has too much variance.
+We apply a rolling mean of 7 days and re\sphinxhyphen{}evaluate.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{rolling\PYGZus{}avg\PYGZus{}pass\PYGZus{}df} \PYG{o}{=} \PYG{n}{avg\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{rolling}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}avg\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{rolling\PYGZus{}avg\PYGZus{}pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_27_0}.png}
+
+\sphinxAtStartPar
+We find a dip in passengers per ride that looks to be in the same time interval, therefore we could conclude here that fares did not get more expensive, rather the sharing of cabs was less.
+You could try and find a method to add the data of these two graphs together, yet this is already advanced visualisation.
+
+\sphinxAtStartPar
+Another question that I have for you, do you think that the dip is relevant? Not specifically from a business point of view, rather from a statistical view, Perhaps if you look at the range of the y\sphinxhyphen{}axis you might feel that our plot is a bit magnified. This is a good example of how you can use ranges of your axi to make data more dramatic. Be weary of these malpractices!
+
+\sphinxAtStartPar
+We are not done yet, as our dataset contains much more information.
+Harnessing the powers of the preprocessing we learned, we could include other (mostly categorical) feature into our line plot.
+
+\sphinxAtStartPar
+Here we take the payment option (either cash or card) and use it to create 2 time series in long format (2 datasets below each other).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pass\PYGZus{}payment\PYGZus{}df} \PYG{o}{=} \PYG{n}{taxi\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{payment}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{apply}\PYG{p}{(}
+    \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pickup}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{resample}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}
+\PYG{p}{)}
+\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+                        passengers  distance     fare     tip  tolls    total
+payment     pickup                                                           
+cash        2019\PYGZhy{}02\PYGZhy{}28           1      0.90     5.00    0.00   0.00     6.30
+            2019\PYGZhy{}03\PYGZhy{}01         104    112.31   571.50    0.00   5.76   748.76
+            2019\PYGZhy{}03\PYGZhy{}02          86    159.46   690.50    0.00   5.76   863.96
+            2019\PYGZhy{}03\PYGZhy{}03          67    172.34   641.50    0.00  17.28   782.18
+            2019\PYGZhy{}03\PYGZhy{}04          71    130.60   571.50    0.00   0.00   710.95
+...                            ...       ...      ...     ...    ...      ...
+credit card 2019\PYGZhy{}03\PYGZhy{}27         263    532.61  2260.64  485.63  69.12  3342.29
+            2019\PYGZhy{}03\PYGZhy{}28         227    403.41  1886.07  404.45  40.32  2802.94
+            2019\PYGZhy{}03\PYGZhy{}29         211    404.61  1831.98  410.13  23.04  2747.85
+            2019\PYGZhy{}03\PYGZhy{}30         268    540.71  2211.10  487.97  78.62  3249.49
+            2019\PYGZhy{}03\PYGZhy{}31         202    376.78  1632.93  345.83  29.16  2408.42
+
+[63 rows x 6 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Seaborn does not like this long format type, therefore we unstack the first index and create a wide format.
+For those wo are punctilious, you can notice we created a missing value, with wat should we fill it? (Our luck that seaborn can handle missing values!)
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+           passengers             distance               fare              \PYGZbs{}
+payment          cash credit card     cash credit card   cash credit card   
+pickup                                                                      
+2019\PYGZhy{}02\PYGZhy{}28        1.0         NaN     0.90         NaN    5.0         NaN   
+2019\PYGZhy{}03\PYGZhy{}01      104.0       264.0   112.31      527.08  571.5     2363.97   
+2019\PYGZhy{}03\PYGZhy{}02       86.0       222.0   159.46      377.74  690.5     1651.50   
+2019\PYGZhy{}03\PYGZhy{}03       67.0       196.0   172.34      381.60  641.5     1526.39   
+2019\PYGZhy{}03\PYGZhy{}04       71.0       196.0   130.60      453.21  571.5     1764.24   
+
+            tip              tolls               total              
+payment    cash credit card   cash credit card    cash credit card  
+pickup                                                              
+2019\PYGZhy{}02\PYGZhy{}28  0.0         NaN   0.00         NaN    6.30         NaN  
+2019\PYGZhy{}03\PYGZhy{}01  0.0      442.47   5.76       54.58  748.76     3446.47  
+2019\PYGZhy{}03\PYGZhy{}02  0.0      333.97   5.76       23.04  863.96     2430.36  
+2019\PYGZhy{}03\PYGZhy{}03  0.0      307.47  17.28       17.28  782.18     2224.34  
+2019\PYGZhy{}03\PYGZhy{}04  0.0      334.98   0.00       63.36  710.95     2558.13  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Same data, different structure, now seaborn understands the format and we can go back to visualisation.
+
+\sphinxAtStartPar
+For simplicity we start with a simple passengers line plot
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_35_0}.png}
+
+\sphinxAtStartPar
+You can see that there are generally more people paying by card, which is more convenient in such an occasion.
+Note that here we should not use a seperate y\sphinxhyphen{}axis as we are comparing 2 sets of data that are similar by origin.
+
+\sphinxAtStartPar
+We do the same for fares.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_37_0}.png}
+
+\sphinxAtStartPar
+This is more or less a no\sphinxhyphen{}brainer, as more people pay by card, the fares by card are also more.
+So we can’t really compare fares with this plot, we have to be creative.
+
+\sphinxAtStartPar
+I opted to go for an average fare per passenger, as this is in my opinion more relevant than the amount of rides
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare\PYGZus{}pass}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{/}\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{passengers}
+\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+                    passengers  distance   fare  tip  tolls   total  fare\PYGZus{}pass
+payment pickup                                                                
+cash    2019\PYGZhy{}02\PYGZhy{}28           1      0.90    5.0  0.0   0.00    6.30   5.000000
+        2019\PYGZhy{}03\PYGZhy{}01         104    112.31  571.5  0.0   5.76  748.76   5.495192
+        2019\PYGZhy{}03\PYGZhy{}02          86    159.46  690.5  0.0   5.76  863.96   8.029070
+        2019\PYGZhy{}03\PYGZhy{}03          67    172.34  641.5  0.0  17.28  782.18   9.574627
+        2019\PYGZhy{}03\PYGZhy{}04          71    130.60  571.5  0.0   0.00  710.95   8.049296
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We created a new feature both containing info of fares and passengers, using this we create a new visualisations.
+
+\sphinxAtStartPar
+In this visualisation we show for both payment options the average fare amount per passenger in the cab.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{pass\PYGZus{}payment\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare\PYGZus{}pass}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{rolling}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,} \PYG{n}{min\PYGZus{}periods}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_41_0}.png}
+
+\sphinxAtStartPar
+We can conclude that the average amount that has to be paid per person is lower for cash, indicating that people jump to their debit card as soon as the amount gets too high.
+
+\sphinxAtStartPar
+As a last I would like to emphasise that the x\sphinxhyphen{}axis, being time does not have to be linear.
+To illustrate this we create a weekly passenger rate and impose each week over the others.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pass\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{n}{pd}\PYG{o}{.}\PYG{n}{Grouper}\PYG{p}{(}\PYG{n}{freq}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{W}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{apply}\PYG{p}{(}
+    \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{x}\PYG{o}{.}\PYG{n}{index}\PYG{o}{.}\PYG{n}{day\PYGZus{}name}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{x}\PYG{o}{.}\PYG{n}{passengers}\PYG{p}{)}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+pickup
+2019\PYGZhy{}03\PYGZhy{}03    AxesSubplot(0.125,0.125;0.775x0.755)
+2019\PYGZhy{}03\PYGZhy{}10    AxesSubplot(0.125,0.125;0.775x0.755)
+2019\PYGZhy{}03\PYGZhy{}17    AxesSubplot(0.125,0.125;0.775x0.755)
+2019\PYGZhy{}03\PYGZhy{}24    AxesSubplot(0.125,0.125;0.775x0.755)
+2019\PYGZhy{}03\PYGZhy{}31    AxesSubplot(0.125,0.125;0.775x0.755)
+Freq: W\PYGZhy{}SUN, dtype: object
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{line_43_1}.png}
+
+\sphinxAtStartPar
+Here we can see there is a weekly trend occuring, where Sundays and Mondays are usually less busy days.
+The origin of this is hard to argue, as it might be less traffic, less taxi drivers working,…
+
+\sphinxAtStartPar
+Perhaps you could complete this visualisation by investigating the distance and/or tips?
 
 
-\chapter{Data Visualisation}
-\label{\detokenize{c5_data_visualisation/introduction:data-visualisation}}\label{\detokenize{c5_data_visualisation/introduction::doc}}
+\chapter{Histogram plot}
+\label{\detokenize{c4_data_visualisation/histogram:histogram-plot}}\label{\detokenize{c4_data_visualisation/histogram::doc}}
+\sphinxAtStartPar
+When visualising one dimensional data without relating it to other information an option would be histograms.
+Histograms are used when describing distributions in your data, it is not the values itself you are visualising, rather the counts/frequencies of each value.
+
+\sphinxAtStartPar
+We again start with importing our libraries
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}theme}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+For this example we will be using the prepared dataset from seaborn containing mileages of several cars.
+Information about the cars is also given.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mpg\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{mpg\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+    mpg  cylinders  displacement  horsepower  weight  acceleration  \PYGZbs{}
+0  18.0          8         307.0       130.0    3504          12.0   
+1  15.0          8         350.0       165.0    3693          11.5   
+2  18.0          8         318.0       150.0    3436          11.0   
+3  16.0          8         304.0       150.0    3433          12.0   
+4  17.0          8         302.0       140.0    3449          10.5   
+
+   model\PYGZus{}year origin                       name  
+0          70    usa  chevrolet chevelle malibu  
+1          70    usa          buick skylark 320  
+2          70    usa         plymouth satellite  
+3          70    usa              amc rebel sst  
+4          70    usa                ford torino  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We start of simple by plotting the distribution of horsepower in our dataset.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{mpg\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{horsepower}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}horsepower\PYGZsq{}, ylabel=\PYGZsq{}Count\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{histogram_5_1}.png}
+
+\sphinxAtStartPar
+A first thing that is visible is that our feature is not normally distributed, we have a long tail to the higer end.
+
+\sphinxAtStartPar
+For histograms we can specify the amount of bins in which we seperate the counts, seaborn selects a suitable number yet we can change this.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{mpg\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{horsepower}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{bins}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}horsepower\PYGZsq{}, ylabel=\PYGZsq{}Count\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{histogram_7_1}.png}
+
+\sphinxAtStartPar
+As you can see, the previous option looks a lot better.
+Taking the right amount of bins is important.
+
+\sphinxAtStartPar
+In order to add more information to our plot, we can use categorical data to split our data into multiple histograms.
+Here we used the origin of the cars to split into 3 categories, notice how each of them has their own area, japan and europe are on the lower end whilst usa is centered in higher horsepower.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{mpg\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{horsepower}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{origin}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{bins}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{multiple}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{stack}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}horsepower\PYGZsq{}, ylabel=\PYGZsq{}Count\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{histogram_9_1}.png}
+
+\sphinxAtStartPar
+A neat feature of seaborn is that it can join histograms and scatter plots (in the next section) together.
+
+\sphinxAtStartPar
+Here we see how the visualisations of 2 one dimensional histograms perfectly combine together into a scatter plot, where 2 dimensional data is shown (both mileage and horsepower).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{jointplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{mpg\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{horsepower}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}seaborn.axisgrid.JointGrid at 0x7ff9e42c8fa0\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{histogram_11_1}.png}
+
+\sphinxAtStartPar
+Histograms are a really powerfull tool when it comes to validating your data, we can easily the distribution of each feature, see if they are normally distributed and visualise distributions of subgroups.
+
+\sphinxAtStartPar
+Yet for final visualisations they are often not interesting enough.
+
+
+\chapter{Box plot}
+\label{\detokenize{c4_data_visualisation/box:box-plot}}\label{\detokenize{c4_data_visualisation/box::doc}}
+\sphinxAtStartPar
+In the previous section we looked into visualising the distributions of 1 dimensional data.
+We used histograms for this, but there is a second more statistical option for this, the Boxplot.
+
+\sphinxAtStartPar
+To be brief, the boxplot shows a box containing the InterQuartile Data that we already talked about and also has 2 whiskers, showing the threshold for outliers.
+Actual outliers are then printed seperately, making this plot ideal for outlier detection aswel as distributions.
+
+\sphinxAtStartPar
+I personally think this option is more suited for multiple categories compared to histograms, yet your mileage may vary.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}theme}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+For this section we will look into the discovery of extrasolar planets, or planets that are ourside our own solar system.
+For each planet they listed the method of discovery, orbital period, mass, distance and year of discovery.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{planet\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{planets}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{planet\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+            method  number  orbital\PYGZus{}period   mass  distance  year
+0  Radial Velocity       1         269.300   7.10     77.40  2006
+1  Radial Velocity       1         874.774   2.21     56.95  2008
+2  Radial Velocity       1         763.000   2.60     19.84  2011
+3  Radial Velocity       1         326.030  19.40    110.62  2007
+4  Radial Velocity       1         516.220  10.50    119.47  2009
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Let’s say we would like to show the distances of each discovery method, if we would use a bar plot, the results might be hard to interpret.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{barplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{planet\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{distance}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{method}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{xscale}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+[None]
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{box_5_1}.png}
+
+\sphinxAtStartPar
+Whilst bar plots can be a good idea, here they are not.
+
+\sphinxAtStartPar
+Only use bar plots when visualising singular data points who are related to zero, not aggregations of multiple data points.
+Bar plots do not work if:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+your datapoints have no relation to zero
+
+\item {} 
+\sphinxAtStartPar
+your categories are related with different intervals
+
+\item {} 
+\sphinxAtStartPar
+you are dealing with groups of datapoints, not single datapoints (this case)
+
+\end{itemize}
+
+\sphinxAtStartPar
+anyway, we could use a histogram similar to previous section, let’s see how that turns out.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{planet\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{distance}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{method}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{multiple}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{stack}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{log\PYGZus{}scale}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{box_7_0}.png}
+
+\sphinxAtStartPar
+The histogram seems to be working, yet the methods with lower count are suppressed.
+A boxplot can overcome this and we can also compare medians of each method with eachother.
+
+\sphinxAtStartPar
+Take a few minutes to understand the next plot, at first it is very confusing, yet when adapted this is the most powerful visualisation of data exploration.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{planet\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{distance}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{method}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{xscale}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+[None]
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{box_9_1}.png}
+
+\sphinxAtStartPar
+Can you see now why the bar plot here is a bad idea?
+Some methods have a broader distribution and relating our data to zero makes no real sense.
+With financial data this is different as budgets always start with 0.
+
+\sphinxAtStartPar
+Here we can conclude that some methods of detecting a planet requires a further or closer distance.
+You could say that if you want to discover a far extrasolar plant pick one of the last methods
+
+\sphinxAtStartPar
+An addition to the boxplot, where we focus more on distribution instead of statistics, would be the violin plot.
+Can you see why they would call it like that?
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{violinplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{planet\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{year}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{method}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}year\PYGZsq{}, ylabel=\PYGZsq{}method\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{box_11_1}.png}
+
+\sphinxAtStartPar
+As an exercise calculate the median, Q1 and Q3 of the distance per method and see if you come to the same conclusion as the boxplot
+
+
+\chapter{Scatter plot}
+\label{\detokenize{c4_data_visualisation/scatter:scatter-plot}}\label{\detokenize{c4_data_visualisation/scatter::doc}}
+\sphinxAtStartPar
+Thus far we dealt with one dimensional data in our visualisations, sometimes adding a category to divide our data.
+Here we take it a step further, scatter plots are to visualise the relation between 2 numerical features.
+
+\sphinxAtStartPar
+One remark that I would like to make here is that discrete numerical features (age, n\_persons,…) are possible to use, yet when dealing with a small range (e.g. 0\sphinxhyphen{}10) the results are skewed.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}theme}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+For scatter plots I opted to use a dataset containing tips from a restaurant, the tips are divided in gender, smoker, time of day and day of week.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tips\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tips}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{tips\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+   total\PYGZus{}bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The most simple scatter plot we can make would be showing the relation between the total bill and the tip, we would assume the tip is proportional to the size of the bill.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{tips\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{total\PYGZus{}bill}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tip}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{scatter_5_0}.png}
+
+\sphinxAtStartPar
+Just as expected, when the total bill rises, the tip grows too, we have some generous persons, and some less generous, but nothing out of the ordinary.
+
+\sphinxAtStartPar
+To get a better idea of the tipping habits we could calculate the tip per person in the bill, which is noted by size.
+We divide the tip by the amount of people and plot again.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tips\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tip\PYGZus{}per\PYGZus{}person}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{tips\PYGZus{}df}\PYG{o}{.}\PYG{n}{tip}\PYG{o}{/}\PYG{n}{tips\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{size}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{tips\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{total\PYGZus{}bill}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tip\PYGZus{}per\PYGZus{}person}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{scatter_7_0}.png}
+
+\sphinxAtStartPar
+It is much harder to see a relation now, so we could argue that depending of the service everyone gives a specific amount.
+So it is not the size of the bill that is defining the tip, rather the amount of persons (although this is very similar) in the bill.
+
+\sphinxAtStartPar
+Aside from feature engineering, we can also add categorical features, using different colors for each feature.
+Here we added if they smoked or not.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{tips\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{total\PYGZus{}bill}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tip}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{smoker}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{scatter_9_0}.png}
+
+\sphinxAtStartPar
+It is hard to see if smoking had an effect on either the bill or the tip, which indicates that your plot is not that useful.
+This is not true if you wanted to prove that there is no effect of smoking obviously!
+
+\sphinxAtStartPar
+We can also add a numerical feature into the scatter plot, by using sizes of our dots in the scatter plot.
+The size of the group now influences the size of our dots.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{tips\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{total\PYGZus{}bill}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tip}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{size}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{size}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{scatter_11_0}.png}
+
+\sphinxAtStartPar
+Whilst it might not be really visible because of the linear nature of the size \sphinxhyphen{} it is only going from 1 to 6 \sphinxhyphen{} the relation is not obvious.
+Perhaps you could do some feature engineering where you artificially increase the size by taking the square?
+You could argue if that is still representable, but for the sake of the exercise let’s say it is.
+
+\sphinxAtStartPar
+In the beginning I talked about numerical features with a low range, the size of our group is one of them.
+See what happens when i would use it in a scatter plot.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{tips\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{size}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tip}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{scatter_15_0}.png}
+
+\sphinxAtStartPar
+It clearly shows that a higher size means statistical higher tips, up to a cut\sphinxhyphen{}off of 5 appearantly.
+Yet do you feel this is an aesthetically satisfying plot?
+
+\sphinxAtStartPar
+Not going to much in the field of machine learning, seaborn has an interesting feature built\sphinxhyphen{}in.
+They offer a regression plot, where a linear regression is draw with a confidence interval (the light blue area).
+Not wanting to give mathematical number it shows what it thinks is the relation between the 2 variables.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{regplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{tips\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{total\PYGZus{}bill}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tip}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{scatter_17_0}.png}
+
+\sphinxAtStartPar
+It seems to be very confident about the relation, how about where we corrected for group size?
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{regplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{tips\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{total\PYGZus{}bill}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{tip\PYGZus{}per\PYGZus{}person}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{scatter_19_0}.png}
+
+\sphinxAtStartPar
+Less confident, less appearent.
+Keep in mind that it will always see a relations, the question is how confident!
+
+
+\chapter{Heatmap plot}
+\label{\detokenize{c4_data_visualisation/heatmap:heatmap-plot}}\label{\detokenize{c4_data_visualisation/heatmap::doc}}
+\sphinxAtStartPar
+A heatmap also deals with 2 dimensional data and cares about the relation.
+Here instead of numerical data with dots, we are using categorical data where every combination of the 2 categories has a singular value.
+
+\sphinxAtStartPar
+This results into a matrix that we visualize where each index of the matrix has its own color based on a color gradient.
+This plot got its name as it is used to find ‘hot spots’ between combinations of 2 categorical features.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}theme}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+To make optimal use of this plot, we are going to take on a rather complex dataset, where we have measurements of brain networks.
+The idea is that we have several networks with several nodes in 2 hemispheres, the content of the data is not as important here, what matters is that we want to find correlations between different nodes in the brain.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{brain\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{brain\PYGZus{}networks}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{header}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n}{index\PYGZus{}col}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+network          1                     2                     3             \PYGZbs{}
+node             1                     1                     1              
+hemi            lh         rh         lh         rh         lh         rh   
+0        56.055744  92.031036   3.391576  38.659683  26.203819 \PYGZhy{}49.715569   
+1        55.547253  43.690075 \PYGZhy{}65.495987 \PYGZhy{}13.974523 \PYGZhy{}28.274963 \PYGZhy{}39.050129   
+2        60.997768  63.438793 \PYGZhy{}51.108582 \PYGZhy{}13.561346 \PYGZhy{}18.842947  \PYGZhy{}1.214659   
+3        18.514868  12.657158 \PYGZhy{}34.576603 \PYGZhy{}32.665958  \PYGZhy{}7.420454  17.119448   
+4        \PYGZhy{}2.527392 \PYGZhy{}63.104668 \PYGZhy{}13.814151 \PYGZhy{}15.837989 \PYGZhy{}45.216927   3.483550   
+
+network          4                     5             ...         16  \PYGZbs{}
+node             1                     1             ...          3   
+hemi            lh         rh         lh         rh  ...         rh   
+0        47.461037  26.746613 \PYGZhy{}35.898861  \PYGZhy{}1.889181  ...   0.607904   
+1        \PYGZhy{}1.210660 \PYGZhy{}19.012897  19.568010  15.902983  ...  57.495071   
+2       \PYGZhy{}65.575806 \PYGZhy{}85.777428  19.247454  37.209419  ...  28.317369   
+3       \PYGZhy{}41.800869 \PYGZhy{}58.610184  32.896915  11.199619  ...  71.439629   
+4       \PYGZhy{}62.613335 \PYGZhy{}49.076508  18.396759   3.219077  ...  95.597565   
+
+network                                17                                   \PYGZbs{}
+node             4                      1                     2              
+hemi            lh          rh         lh         rh         lh         rh   
+0       \PYGZhy{}70.270546   77.365776 \PYGZhy{}21.734550   1.028253   7.791784  68.903725   
+1       \PYGZhy{}76.393219  127.261360 \PYGZhy{}13.035799  46.381824 \PYGZhy{}15.752450  31.000332   
+2         9.063977   45.493263  26.033442  34.212200   1.326110 \PYGZhy{}22.580757   
+3        65.842979  \PYGZhy{}10.697547  55.297466   4.255006  \PYGZhy{}2.420144  12.098393   
+4        50.960453  \PYGZhy{}23.197300  43.067562  52.219875  28.232882 \PYGZhy{}11.719750   
+
+network                                    
+node             3                      4  
+hemi            lh          rh         lh  
+0       \PYGZhy{}10.520872  120.490463 \PYGZhy{}39.686432  
+1       \PYGZhy{}39.607521   24.764011 \PYGZhy{}36.771008  
+2        12.985169  \PYGZhy{}75.027451   6.434262  
+3       \PYGZhy{}15.819172  \PYGZhy{}37.361431  \PYGZhy{}4.650954  
+4         5.453649    5.169828  87.809135  
+
+[5 rows x 62 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+luckily for us, the pandas library has an easy method of finding out what the correlation is between different columns of numerical data.
+These correlations are denoted between \sphinxhyphen{}1 (completely opposite) to 1 (completely related).
+Take a minute to understand how the columns and index changed using the operation, you can see that a node in a network and hemisphere has a correlation of 1.00 with itself.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{corr}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+network                   1                   2                   3            \PYGZbs{}
+node                      1                   1                   1             
+hemi                     lh        rh        lh        rh        lh        rh   
+network node hemi                                                               
+1       1    lh    1.000000  0.881516 \PYGZhy{}0.042699 \PYGZhy{}0.074437 \PYGZhy{}0.342849 \PYGZhy{}0.169498   
+             rh    0.881516  1.000000  0.013073  0.033733 \PYGZhy{}0.351509 \PYGZhy{}0.162006   
+2       1    lh   \PYGZhy{}0.042699  0.013073  1.000000  0.813394 \PYGZhy{}0.006940 \PYGZhy{}0.039375   
+             rh   \PYGZhy{}0.074437  0.033733  0.813394  1.000000 \PYGZhy{}0.027324 \PYGZhy{}0.023608   
+3       1    lh   \PYGZhy{}0.342849 \PYGZhy{}0.351509 \PYGZhy{}0.006940 \PYGZhy{}0.027324  1.000000  0.553183   
+...                     ...       ...       ...       ...       ...       ...   
+17      2    lh   \PYGZhy{}0.206379 \PYGZhy{}0.273370 \PYGZhy{}0.151724 \PYGZhy{}0.224447  0.026579 \PYGZhy{}0.056687   
+             rh   \PYGZhy{}0.212601 \PYGZhy{}0.266456 \PYGZhy{}0.124508 \PYGZhy{}0.172704 \PYGZhy{}0.089109 \PYGZhy{}0.144020   
+        3    lh   \PYGZhy{}0.142770 \PYGZhy{}0.174222 \PYGZhy{}0.179912 \PYGZhy{}0.250455 \PYGZhy{}0.012675 \PYGZhy{}0.047434   
+             rh   \PYGZhy{}0.204326 \PYGZhy{}0.223572 \PYGZhy{}0.044706 \PYGZhy{}0.090798 \PYGZhy{}0.024644 \PYGZhy{}0.103875   
+        4    lh   \PYGZhy{}0.219283 \PYGZhy{}0.273626 \PYGZhy{}0.209557 \PYGZhy{}0.216674  0.013747 \PYGZhy{}0.058838   
+
+network                   4                   5            ...        16  \PYGZbs{}
+node                      1                   1            ...         3   
+hemi                     lh        rh        lh        rh  ...        rh   
+network node hemi                                          ...             
+1       1    lh   \PYGZhy{}0.373050 \PYGZhy{}0.361726  0.431619  0.418708  ... \PYGZhy{}0.106642   
+             rh   \PYGZhy{}0.333244 \PYGZhy{}0.337476  0.431953  0.519916  ... \PYGZhy{}0.173530   
+2       1    lh   \PYGZhy{}0.019773  0.007099 \PYGZhy{}0.147374 \PYGZhy{}0.104164  ... \PYGZhy{}0.215429   
+             rh   \PYGZhy{}0.017577 \PYGZhy{}0.014632 \PYGZhy{}0.173501 \PYGZhy{}0.094717  ... \PYGZhy{}0.184458   
+3       1    lh    0.528787  0.503403 \PYGZhy{}0.157154 \PYGZhy{}0.185008  ... \PYGZhy{}0.146451   
+...                     ...       ...       ...       ...  ...       ...   
+17      2    lh    0.020064  0.084837 \PYGZhy{}0.359879 \PYGZhy{}0.394522  ...  0.173117   
+             rh    0.007278  0.029909 \PYGZhy{}0.299152 \PYGZhy{}0.295150  ...  0.299440   
+        3    lh    0.070114  0.100063 \PYGZhy{}0.245179 \PYGZhy{}0.303354  ... \PYGZhy{}0.055529   
+             rh    0.101791  0.128318 \PYGZhy{}0.302654 \PYGZhy{}0.277378  ...  0.079460   
+        4    lh   \PYGZhy{}0.069100 \PYGZhy{}0.031653 \PYGZhy{}0.282767 \PYGZhy{}0.279381  ...  0.418857   
+
+network                                      17                                \PYGZbs{}
+node                      4                   1                   2             
+hemi                     lh        rh        lh        rh        lh        rh   
+network node hemi                                                               
+1       1    lh   \PYGZhy{}0.162254 \PYGZhy{}0.232501 \PYGZhy{}0.099781 \PYGZhy{}0.161649 \PYGZhy{}0.206379 \PYGZhy{}0.212601   
+             rh   \PYGZhy{}0.224436 \PYGZhy{}0.277954 \PYGZhy{}0.212964 \PYGZhy{}0.262915 \PYGZhy{}0.273370 \PYGZhy{}0.266456   
+2       1    lh   \PYGZhy{}0.239876 \PYGZhy{}0.093679 \PYGZhy{}0.240455 \PYGZhy{}0.190721 \PYGZhy{}0.151724 \PYGZhy{}0.124508   
+             rh   \PYGZhy{}0.244956 \PYGZhy{}0.061151 \PYGZhy{}0.255101 \PYGZhy{}0.169402 \PYGZhy{}0.224447 \PYGZhy{}0.172704   
+3       1    lh   \PYGZhy{}0.033931 \PYGZhy{}0.156972 \PYGZhy{}0.015964 \PYGZhy{}0.149944  0.026579 \PYGZhy{}0.089109   
+...                     ...       ...       ...       ...       ...       ...   
+17      2    lh    0.478606  0.258958  0.499351  0.319184  1.000000  0.597620   
+             rh    0.204444  0.453497  0.272868  0.440901  0.597620  1.000000   
+        3    lh    0.259191  0.046663  0.454838  0.188905  0.601382  0.345253   
+             rh    0.005291  0.296318  0.087061  0.224760  0.319382  0.456019   
+        4    lh    0.603491  0.172167  0.589364  0.451264  0.517481  0.256544   
+
+network                                          
+node                      3                   4  
+hemi                     lh        rh        lh  
+network node hemi                                
+1       1    lh   \PYGZhy{}0.142770 \PYGZhy{}0.204326 \PYGZhy{}0.219283  
+             rh   \PYGZhy{}0.174222 \PYGZhy{}0.223572 \PYGZhy{}0.273626  
+2       1    lh   \PYGZhy{}0.179912 \PYGZhy{}0.044706 \PYGZhy{}0.209557  
+             rh   \PYGZhy{}0.250455 \PYGZhy{}0.090798 \PYGZhy{}0.216674  
+3       1    lh   \PYGZhy{}0.012675 \PYGZhy{}0.024644  0.013747  
+...                     ...       ...       ...  
+17      2    lh    0.601382  0.319382  0.517481  
+             rh    0.345253  0.456019  0.256544  
+        3    lh    1.000000  0.379705  0.264381  
+             rh    0.379705  1.000000  0.090302  
+        4    lh    0.264381  0.090302  1.000000  
+
+[62 rows x 62 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+This result is way to much to see a pattern, yet if we add a color scale and give each a gradation, we can see some correlations.
+
+\sphinxAtStartPar
+Can you see how nodes from the same network are related with a more whitish color?
+The heatmap might be fairly intimidating at first but is a powerful tool when handling bigger datasets.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{heatmap}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{corr}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}network\PYGZhy{}node\PYGZhy{}hemi\PYGZsq{}, ylabel=\PYGZsq{}network\PYGZhy{}node\PYGZhy{}hemi\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{heatmap_7_1}.png}
+
+\sphinxAtStartPar
+Without going into the medical details we can also apply some machine learning to it and create a clustermap.
+This map is a way to group nodes from similar networks into clusters, an advances technique!
+
+\sphinxAtStartPar
+Gaze over the colors and look at the axi, notice how the computer figured out how to group the most similar nodes from networks.
+Also, I did not create this by myself, so don’t give me credit for this!
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Select a subset of the networks}
+\PYG{n}{used\PYGZus{}networks} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+m+mi}{12}\PYG{p}{,} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{l+m+mi}{17}\PYG{p}{]}
+\PYG{n}{used\PYGZus{}columns} \PYG{o}{=} \PYG{p}{(}\PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}\PYG{o}{.}\PYG{n}{get\PYGZus{}level\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{network}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+                          \PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n+nb}{int}\PYG{p}{)}
+                          \PYG{o}{.}\PYG{n}{isin}\PYG{p}{(}\PYG{n}{used\PYGZus{}networks}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{brain\PYGZus{}df} \PYG{o}{=} \PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{p}{:}\PYG{p}{,} \PYG{n}{used\PYGZus{}columns}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Create a categorical palette to identify the networks}
+\PYG{n}{network\PYGZus{}pal} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{husl\PYGZus{}palette}\PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,} \PYG{n}{s}\PYG{o}{=}\PYG{l+m+mf}{.45}\PYG{p}{)}
+\PYG{n}{network\PYGZus{}lut} \PYG{o}{=} \PYG{n+nb}{dict}\PYG{p}{(}\PYG{n+nb}{zip}\PYG{p}{(}\PYG{n+nb}{map}\PYG{p}{(}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{used\PYGZus{}networks}\PYG{p}{)}\PYG{p}{,} \PYG{n}{network\PYGZus{}pal}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Convert the palette to vectors that will be drawn on the side of the matrix}
+\PYG{n}{networks} \PYG{o}{=} \PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}\PYG{o}{.}\PYG{n}{get\PYGZus{}level\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{network}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{network\PYGZus{}colors} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{n}{networks}\PYG{p}{,} \PYG{n}{index}\PYG{o}{=}\PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{)}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}\PYG{n}{network\PYGZus{}lut}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Draw the full plot}
+\PYG{n}{g} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{clustermap}\PYG{p}{(}\PYG{n}{brain\PYGZus{}df}\PYG{o}{.}\PYG{n}{corr}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{center}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{cmap}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{vlag}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+                   \PYG{n}{row\PYGZus{}colors}\PYG{o}{=}\PYG{n}{network\PYGZus{}colors}\PYG{p}{,} \PYG{n}{col\PYGZus{}colors}\PYG{o}{=}\PYG{n}{network\PYGZus{}colors}\PYG{p}{,}
+                   \PYG{n}{dendrogram\PYGZus{}ratio}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{.1}\PYG{p}{,} \PYG{l+m+mf}{.2}\PYG{p}{)}\PYG{p}{,}
+                   \PYG{n}{cbar\PYGZus{}pos}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{.02}\PYG{p}{,} \PYG{l+m+mf}{.32}\PYG{p}{,} \PYG{l+m+mf}{.03}\PYG{p}{,} \PYG{l+m+mf}{.2}\PYG{p}{)}\PYG{p}{,}
+                   \PYG{n}{linewidths}\PYG{o}{=}\PYG{l+m+mf}{.75}\PYG{p}{,} \PYG{n}{figsize}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{,} \PYG{l+m+mi}{13}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{ax\PYGZus{}row\PYGZus{}dendrogram}\PYG{o}{.}\PYG{n}{remove}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{heatmap_9_0}.png}
+
+
+\part{5. Data Exploration}
+
+
+\chapter{Introduction}
+\label{\detokenize{c5_data_exploration/introduction:introduction}}\label{\detokenize{c5_data_exploration/introduction::doc}}
 \sphinxAtStartPar
 this is an introduction
+
+
+\chapter{Variable identification}
+\label{\detokenize{c5_data_exploration/variable_identification:variable-identification}}\label{\detokenize{c5_data_exploration/variable_identification::doc}}
+\sphinxAtStartPar
+in this notebook we are going to look into a few simple but interesting techniques about getting to know more about what is inside the dataset you are given. Whenever you start out on a new project these steps are usually the first that are performed in order to know how to proceed.
+
+\sphinxAtStartPar
+We start out by loading the titanic dataset from seaborn
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n}{titanic\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{titanic}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}theme}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\section{description}
+\label{\detokenize{c5_data_exploration/variable_identification:description}}
+\sphinxAtStartPar
+Let us start out simple and retrieve information about each column, using the .info method we can get non\sphinxhyphen{}null counts (giving us an idea if there are nans) and the type of each column (to see if we need to change types).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}class \PYGZsq{}pandas.core.frame.DataFrame\PYGZsq{}\PYGZgt{}
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 15 columns):
+ \PYGZsh{}   Column       Non\PYGZhy{}Null Count  Dtype   
+\PYGZhy{}\PYGZhy{}\PYGZhy{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}       \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}   
+ 0   survived     891 non\PYGZhy{}null    int64   
+ 1   pclass       891 non\PYGZhy{}null    int64   
+ 2   sex          891 non\PYGZhy{}null    object  
+ 3   age          714 non\PYGZhy{}null    float64 
+ 4   sibsp        891 non\PYGZhy{}null    int64   
+ 5   parch        891 non\PYGZhy{}null    int64   
+ 6   fare         891 non\PYGZhy{}null    float64 
+ 7   embarked     889 non\PYGZhy{}null    object  
+ 8   class        891 non\PYGZhy{}null    category
+ 9   who          891 non\PYGZhy{}null    object  
+ 10  adult\PYGZus{}male   891 non\PYGZhy{}null    bool    
+ 11  deck         203 non\PYGZhy{}null    category
+ 12  embark\PYGZus{}town  889 non\PYGZhy{}null    object  
+ 13  alive        891 non\PYGZhy{}null    object  
+ 14  alone        891 non\PYGZhy{}null    bool    
+dtypes: bool(2), category(2), float64(2), int64(4), object(5)
+memory usage: 80.7+ KB
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+it looks like all types are already correctlyaddressed, but we can see a lot of nans are present for age and deck, this might be a problem!
+
+\sphinxAtStartPar
+For numerical columns we can get a bunch of information using the .describe method. this can also be used for categories but has less info
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{describe}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+         survived      pclass         age       sibsp       parch        fare
+count  891.000000  891.000000  714.000000  891.000000  891.000000  891.000000
+mean     0.383838    2.308642   29.699118    0.523008    0.381594   32.204208
+std      0.486592    0.836071   14.526497    1.102743    0.806057   49.693429
+min      0.000000    1.000000    0.420000    0.000000    0.000000    0.000000
+25\PYGZpc{}      0.000000    2.000000   20.125000    0.000000    0.000000    7.910400
+50\PYGZpc{}      0.000000    3.000000   28.000000    0.000000    0.000000   14.454200
+75\PYGZpc{}      1.000000    3.000000   38.000000    1.000000    0.000000   31.000000
+max      1.000000    3.000000   80.000000    8.000000    6.000000  512.329200
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{describe}\PYG{p}{(}\PYG{n}{include}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{category}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{object}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+         sex embarked  class  who deck  embark\PYGZus{}town alive
+count    891      889    891  891  203          889   891
+unique     2        3      3    3    7            3     2
+top     male        S  Third  man    C  Southampton    no
+freq     577      644    491  537   59          644   549
+\end{sphinxVerbatim}
+
+
+\section{Uniques, frequencies and ranges}
+\label{\detokenize{c5_data_exploration/variable_identification:uniques-frequencies-and-ranges}}
+\sphinxAtStartPar
+the describe method is a bit lacklusting for categorical features, so we use some good old data wrangling to get more info, asking for unique values gives us all the possible values for a column. Aside from the uniques, we can also  get the value counts or frequencies and the range of a column.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{unique}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+array([\PYGZsq{}Southampton\PYGZsq{}, \PYGZsq{}Cherbourg\PYGZsq{}, \PYGZsq{}Queenstown\PYGZsq{}, nan], dtype=object)
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Southampton    644
+Cherbourg      168
+Queenstown      77
+Name: embark\PYGZus{}town, dtype: int64
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{min}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{max}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(0.42, 80.0)
+\end{sphinxVerbatim}
+
+
+\section{mean and deviation}
+\label{\detokenize{c5_data_exploration/variable_identification:mean-and-deviation}}
+\sphinxAtStartPar
+to get more information about a numerical range, we calculate the mean and deviation. Note that these statistics imply that our column is normally distributed!
+
+\sphinxAtStartPar
+You can also see that I applied the dropna method, this because the calculations cannot handle nan values, but this means our outcome might be distorted from the truth, thread carefuly.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{statistics}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+29.69911764705882
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+28.0
+\end{sphinxVerbatim}
+
+
+\section{median and interquantile range}
+\label{\detokenize{c5_data_exploration/variable_identification:median-and-interquantile-range}}
+\sphinxAtStartPar
+When our distribution is not normal, using the median and IQR is advised.
+First we apply the shapiro wilk test and it has a very low p\sphinxhyphen{}value (the second value) which means we can reject the null\sphinxhyphen{}hypothesis that there is a normal distribution. more info about shapiro\sphinxhyphen{}wilk can be found on \sphinxhref{https://en.wikipedia.org/wiki/Shapiro\%E2\%80\%93Wilk\_test}{wikipedia}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{scipy}\PYG{n+nn}{.}\PYG{n+nn}{stats} \PYG{k+kn}{import} \PYG{n}{shapiro}
+\PYG{n}{shapiro}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+ShapiroResult(statistic=0.9814548492431641, pvalue=7.322165629375377e\PYGZhy{}08)
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+28.0
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{scipy}\PYG{n+nn}{.}\PYG{n+nn}{stats} \PYG{k+kn}{import} \PYG{n}{iqr}
+\PYG{n}{iqr}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+17.875
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{scipy}\PYG{n+nn}{.}\PYG{n+nn}{stats}\PYG{n+nn}{.}\PYG{n+nn}{mstats} \PYG{k+kn}{import} \PYG{n}{mquantiles}
+\PYG{n}{mquantiles}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+array([20., 28., 38.])
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Appearently the average of 29.70 is fairly higher than the median at 28, meaning that there is a shift towards older people.
+You can also see this on the following plot, where we note the mean, median and mode.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{axvline}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{age}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cyan}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{axvline}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{age}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{magenta}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{axvline}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{age}\PYG{o}{.}\PYG{n}{mode}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yellow}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.lines.Line2D at 0x7fa1b3657e50\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{variable_identification_21_1}.png}
+
+
+\section{modes and frequencies}
+\label{\detokenize{c5_data_exploration/variable_identification:modes-and-frequencies}}
+\sphinxAtStartPar
+When we don’t have numerical data we can still find some interesting results, here we use the mode ( most frequent value) and the proporties of each value to deduce the proporties of people that embarked in the 3 different towns. Nearly 3/4 people embarked in one harbour.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mode}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+0    Southampton
+dtype: object
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{o}{/}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Southampton    0.722783
+Cherbourg      0.188552
+Queenstown     0.086420
+Name: embark\PYGZus{}town, dtype: float64
+\end{sphinxVerbatim}
+
+
+\chapter{Uni\sphinxhyphen{}variate analysis}
+\label{\detokenize{c5_data_exploration/univariate_analysis:uni-variate-analysis}}\label{\detokenize{c5_data_exploration/univariate_analysis::doc}}
+\sphinxAtStartPar
+In this notebook we will go a bit deeper into the analysis of a single column or variable of our dataset. This means we will be looking into how visualisations might be useful to attain more information. We start out again by loading the titanic dataset and obtaining the same info as before.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n}{titanic\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{titanic}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}style}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}class \PYGZsq{}pandas.core.frame.DataFrame\PYGZsq{}\PYGZgt{}
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 15 columns):
+ \PYGZsh{}   Column       Non\PYGZhy{}Null Count  Dtype   
+\PYGZhy{}\PYGZhy{}\PYGZhy{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}       \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}   
+ 0   survived     891 non\PYGZhy{}null    int64   
+ 1   pclass       891 non\PYGZhy{}null    int64   
+ 2   sex          891 non\PYGZhy{}null    object  
+ 3   age          714 non\PYGZhy{}null    float64 
+ 4   sibsp        891 non\PYGZhy{}null    int64   
+ 5   parch        891 non\PYGZhy{}null    int64   
+ 6   fare         891 non\PYGZhy{}null    float64 
+ 7   embarked     889 non\PYGZhy{}null    object  
+ 8   class        891 non\PYGZhy{}null    category
+ 9   who          891 non\PYGZhy{}null    object  
+ 10  adult\PYGZus{}male   891 non\PYGZhy{}null    bool    
+ 11  deck         203 non\PYGZhy{}null    category
+ 12  embark\PYGZus{}town  889 non\PYGZhy{}null    object  
+ 13  alive        891 non\PYGZhy{}null    object  
+ 14  alone        891 non\PYGZhy{}null    bool    
+dtypes: bool(2), category(2), float64(2), int64(4), object(5)
+memory usage: 80.7+ KB
+\end{sphinxVerbatim}
+
+
+\section{Nominal data}
+\label{\detokenize{c5_data_exploration/univariate_analysis:nominal-data}}
+\sphinxAtStartPar
+Lets take a look into a norminal column, the embark town has 3 different options and we already saw how to count the values and calculate proportions.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Southampton    644
+Cherbourg      168
+Queenstown      77
+Name: embark\PYGZus{}town, dtype: int64
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{o}{/}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Southampton    0.722783
+Cherbourg      0.188552
+Queenstown     0.086420
+Name: embark\PYGZus{}town, dtype: float64
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{statistics}
+\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{mode}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZsq{}Southampton\PYGZsq{}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n+ne}{TypeError}\PYG{g+gWhitespace}{                                 }Traceback (most recent call last)
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}11541}\PYG{o}{/}\PYG{l+m+mf}{1735617235.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{n}{statistics}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+
+\PYG{n+nn}{/usr/lib/python3.8/statistics.py} in \PYG{n+ni}{median}\PYG{n+nt}{(data)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{425} 
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{426}     \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{427}\PYG{l+s+s2}{     data = sorted(data)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{428}\PYG{l+s+s2}{     n = len(data)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{429}\PYG{l+s+s2}{     if n == 0:}
+
+\PYG{n+ne}{TypeError}: \PYGZsq{}\PYGZlt{}\PYGZsq{} not supported between instances of \PYGZsq{}float\PYGZsq{} and \PYGZsq{}str\PYGZsq{}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Hmmm, it seems we can not take the median because python does not know the order of the categories. Let’s kick it up a notch and use some plots to make these proportions more clear, we’ll use a bar chart to do this.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{countplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7f61d100\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_9_1}.png}
+
+\sphinxAtStartPar
+Something important that I would like to mention here is that this serves as a method to validate sample size, if e.g. only a handful persons would embark on a location, the statistics in this group will have a high variance which will not always shot in your visualisations.
+Be mindful to check sample sizes of categories when applying statistics.
+
+\sphinxAtStartPar
+The bar chart is ideal to compare the values to eachother, yet if we would like to visualise the proportions to eachother, we need a pie plot.
+Here we use the ‘who’ feature containing information about the person itself, we have 3 categories: man, woman, child.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{who}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{plot}\PYG{o}{.}\PYG{n}{pie}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7d2ca430\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_11_1}.png}
+
+\sphinxAtStartPar
+The saying goes ‘Woman and children first’ which would mean the survivors are mainly those 2 groups, let us confirm that by subselecting only the survivors and recreate the pie plot.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{survived}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{who}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{plot}\PYG{o}{.}\PYG{n}{pie}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7d285dc0\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_13_1}.png}
+
+\sphinxAtStartPar
+You can see that the groups are now reversed, where men are proportionally less represented.
+By using a pie plot we circumvent the problem where we have a bias towards size of our dataset, the pie plot applies scaling by itself.
+
+
+\section{Ordinal data}
+\label{\detokenize{c5_data_exploration/univariate_analysis:ordinal-data}}
+\sphinxAtStartPar
+Whilst there was no order in the town where passengers embarked, there is in the class of the ticket they bought. So we need to keep this in mind when exploring. We can not just say they belonged to any class as there is a difference in these classes! However the same statistics apply, but with a different twist.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Third     491
+First     216
+Second    184
+Name: class, dtype: int64
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{o}{/}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Third     0.551066
+First     0.242424
+Second    0.206510
+Name: class, dtype: float64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+it seems more people travelled on the titanic in first class than second class! nothing you would see nowadays.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{mode}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZsq{}Third\PYGZsq{}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZsq{}Third\PYGZsq{}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Here we can use the median, as there is an order in the classes! By using a bar plot we can visualise the distribution, because the graphing library knows the order of the categories, they will also be properly displayed, how convenient.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{countplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7d250580\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_22_1}.png}
+
+\sphinxAtStartPar
+You could however also create a line plot with this, as there is a relation between the classes, as shown below.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{First}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Second}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Third}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7d224370\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_24_1}.png}
+
+\sphinxAtStartPar
+This plot feels underwhelming with only 3 points, but we could make it more interesting, we divide our data on who survived and count the amount of persons per class that survived or not. It is clear to say the a higher class meant higher chances of survival.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{alive}\PYG{p}{)}\PYG{o}{.}\PYG{n}{apply}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reindex}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{First}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Second}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Third}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7d1f9550\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_26_1}.png}
+
+\sphinxAtStartPar
+Personally as there is no time related factor in our x\sphinxhyphen{}axis, the line or parallel plot here is not as convenient.
+Since we have a situation where there is a confinement that the amount of survived can not be more that the total, I would opt for a bar plot, which is show below.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{countplot}\PYG{p}{(}\PYG{n}{x} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{data} \PYG{o}{=} \PYG{n}{titanic\PYGZus{}df}\PYG{p}{,} \PYG{n}{color} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{red}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{countplot}\PYG{p}{(}\PYG{n}{x} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{data} \PYG{o}{=} \PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{survived}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{color} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{blue}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7d278b50\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_28_1}.png}
+
+
+\section{Continuous data}
+\label{\detokenize{c5_data_exploration/univariate_analysis:continuous-data}}
+\sphinxAtStartPar
+After categories which are discrete we also have continuous data, which is by nature always ordered. Here we can perform all the other statistical methods along with the mean, but again keep in mind that using the mean does come with a lot of responsibility.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{mode}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+24.0
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+28.0
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+29.699117647058824
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+A very potent method of showing the distribution is a histogram or distribution plot as shown below, here we can see the long tail on the right which we correctly predicted earlier when we saw that the mean was slightly higher than the median.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7ce39f10\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_34_1}.png}
+
+\sphinxAtStartPar
+going into more mathematical calculations, we can calculate the interquartile ranges, the upper and lower bounds and therefore find any outliers
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{q1}\PYG{p}{,} \PYG{n}{q3} \PYG{o}{=} \PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mf}{0.25}\PYG{p}{,} \PYG{l+m+mf}{0.75}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{q3}\PYG{o}{\PYGZhy{}}\PYG{n}{q1}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+17.875
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lower\PYGZus{}bound} \PYG{o}{=} \PYG{n}{q1} \PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{l+m+mf}{1.5} \PYG{o}{*} \PYG{n}{q1}\PYG{p}{)}
+\PYG{n}{upper\PYGZus{}bound} \PYG{o}{=} \PYG{n}{q3} \PYG{o}{+} \PYG{p}{(}\PYG{l+m+mf}{1.5} \PYG{o}{*} \PYG{n}{q3}\PYG{p}{)}
+\PYG{n}{lower\PYGZus{}bound}\PYG{p}{,} \PYG{n}{upper\PYGZus{}bound}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(\PYGZhy{}10.0625, 95.0)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+It seems that for age, no outliers have been found, which is not really suprising as you don’t have any control over your age, unfortunately…
+
+\sphinxAtStartPar
+Another numerical feature they had control over was the fare, we give a visualisation of the distrubition here.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7cddbf10\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_39_1}.png}
+
+\sphinxAtStartPar
+This distribution looks horrific, we could also look at the mean and median differences to see this tremendous shift towards higher fares.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{median}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mean}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+median
+14.4542
+mean
+32.204207968574636
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Perhaps you can use the outlier detection of above to find the upper outlier treshold?
+
+\sphinxAtStartPar
+Let us assume that the upper bound for fares is about 50, which is lower than some tickets.
+By removing these values we can correct our distribution and get a more evened out result.
+This is especially useful in cases of machine learning where we would not not our algorithm to be biased due to a few extraordinary values, we would have to seperate these specific cases to ensure higher accuracy.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{50}\PYG{p}{]}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}matplotlib.axes.\PYGZus{}subplots.AxesSubplot at 0x7f4e7cbf1220\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{univariate_analysis_45_1}.png}
+
+\sphinxAtStartPar
+Much better, here we can clearly see our values, keep the records with outliers seperate for other purposes.
+Again looking at the new mean and median we see a lot less difference, indicating a better distribution.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{median}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{50}\PYG{p}{]}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mean}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{50}\PYG{p}{]}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+median
+11.1333
+mean
+15.500598493150687
+\end{sphinxVerbatim}
+
+
+\chapter{Bi\sphinxhyphen{}variate analysis}
+\label{\detokenize{c5_data_exploration/bivariate_analysis:bi-variate-analysis}}\label{\detokenize{c5_data_exploration/bivariate_analysis::doc}}
+\sphinxAtStartPar
+In this notebook we are going to look at correlations between two columns in our dataset, this is were it becomes interesting as it opens more opportunities to explore our dataset. We start out by importing necessary libraries and loading the titanic dataset.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{from} \PYG{n+nn}{scipy} \PYG{k+kn}{import} \PYG{n}{stats}
+\PYG{n}{titanic\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{titanic}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set\PYGZus{}style}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{rc}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{figure.figsize}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{l+m+mi}{12}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}class \PYGZsq{}pandas.core.frame.DataFrame\PYGZsq{}\PYGZgt{}
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 15 columns):
+ \PYGZsh{}   Column       Non\PYGZhy{}Null Count  Dtype   
+\PYGZhy{}\PYGZhy{}\PYGZhy{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}       \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}   
+ 0   survived     891 non\PYGZhy{}null    int64   
+ 1   pclass       891 non\PYGZhy{}null    int64   
+ 2   sex          891 non\PYGZhy{}null    object  
+ 3   age          714 non\PYGZhy{}null    float64 
+ 4   sibsp        891 non\PYGZhy{}null    int64   
+ 5   parch        891 non\PYGZhy{}null    int64   
+ 6   fare         891 non\PYGZhy{}null    float64 
+ 7   embarked     889 non\PYGZhy{}null    object  
+ 8   class        891 non\PYGZhy{}null    category
+ 9   who          891 non\PYGZhy{}null    object  
+ 10  adult\PYGZus{}male   891 non\PYGZhy{}null    bool    
+ 11  deck         203 non\PYGZhy{}null    category
+ 12  embark\PYGZus{}town  889 non\PYGZhy{}null    object  
+ 13  alive        891 non\PYGZhy{}null    object  
+ 14  alone        891 non\PYGZhy{}null    bool    
+dtypes: bool(2), category(2), float64(2), int64(4), object(5)
+memory usage: 80.7+ KB
+\end{sphinxVerbatim}
+
+
+\section{Categorical vs categorical}
+\label{\detokenize{c5_data_exploration/bivariate_analysis:categorical-vs-categorical}}
+\sphinxAtStartPar
+The first comparison we can do is between 2 categorical variables, in this dataset we can use the class of the passenger and the town they embarked the titanic, let’s make a contingency table first.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{contingency\PYGZus{}table} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{crosstab}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{contingency\PYGZus{}table}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+class        First  Second  Third
+embark\PYGZus{}town                      
+Cherbourg       85      17     66
+Queenstown       2       3     72
+Southampton    127     164    353
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+With all these numbers it is fairly hard to find if there is a correlation between these 2 variables. Let statistics do the work and get the chi squared test involved, we do not apply a continuity correction as the embarkment is a nominal variable.
+
+\sphinxAtStartPar
+The results of the Cramer V test (simplified chi squared test).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chi}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{dof}\PYG{p}{,} \PYG{n}{exp} \PYG{o}{=} \PYG{n}{stats}\PYG{o}{.}\PYG{n}{chi2\PYGZus{}contingency}\PYG{p}{(}\PYG{n}{contingency\PYGZus{}table}\PYG{p}{,} \PYG{n}{correction}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{n}{chi}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{dof}\PYG{p}{,} \PYG{n}{exp}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(123.75190952951289,
+ 8.435267819894384e\PYGZhy{}26,
+ 4,
+ array([[ 40.44094488,  34.77165354,  92.78740157],
+        [ 18.53543307,  15.93700787,  42.52755906],
+        [155.02362205, 133.29133858, 355.68503937]]))
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+in order of appearance:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+the test statistic chi is very high, indicating a correlation
+
+\item {} 
+\sphinxAtStartPar
+the p value is low, so this is definitely not by chance
+
+\item {} 
+\sphinxAtStartPar
+there are 4 ‘degrees of freedom’
+
+\item {} 
+\sphinxAtStartPar
+the expected frequency table shows what it thinks the proporties should look like
+
+\end{itemize}
+
+\sphinxAtStartPar
+What we could do now is create a heatmap with the contingency table but subtract the expected non\sphinxhyphen{}biased values and scale using the expected values (real \sphinxhyphen{} expected)/expected.
+This gives us the biggest changes in respect with ‘random’ values.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{heatmap}\PYG{p}{(}
+    \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}\PYG{p}{(}\PYG{n}{contingency\PYGZus{}table}\PYG{o}{\PYGZhy{}}\PYG{n}{exp}\PYG{p}{)}\PYG{o}{/}\PYG{n}{exp}\PYG{p}{,} \PYG{n}{index}\PYG{o}{=}\PYG{n}{contingency\PYGZus{}table}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{n}{contingency\PYGZus{}table}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{)}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}class\PYGZsq{}, ylabel=\PYGZsq{}embark\PYGZus{}town\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{bivariate_analysis_8_1}.png}
+
+\sphinxAtStartPar
+There seems to be much more people from first class that have embarked in Cherbourg, and the lower classes are more represented from Queenstown.
+The population from southampton only sees a positive deviation in second class.
+
+\sphinxAtStartPar
+To demonstrate that there can also be no correlation we now calculate the proportions of survival for each town and class combination.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{survived\PYGZus{}df} \PYG{o}{=} \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{embark\PYGZus{}town}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{survived}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{/}\PYG{n}{contingency\PYGZus{}table}
+\PYG{n}{survived\PYGZus{}df}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+class           First    Second     Third
+embark\PYGZus{}town                              
+Cherbourg    0.694118  0.529412  0.378788
+Queenstown   0.500000  0.666667  0.375000
+Southampton  0.582677  0.463415  0.189802
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+If we would do a Cramer V test now, we assume there would be no significance, as it would not make sense that the embarked town has no influence on the chances (proportion of survived persons) of survival.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chi}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{dof}\PYG{p}{,} \PYG{n}{exp} \PYG{o}{=} \PYG{n}{stats}\PYG{o}{.}\PYG{n}{chi2\PYGZus{}contingency}\PYG{p}{(}\PYG{n}{survived\PYGZus{}df}\PYG{p}{,} \PYG{n}{correction}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{n}{p}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+0.9989353452702686
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+As you can see, the p value is 0.99, indicating that the differences in embarkment are purely coincidental!
+
+
+\section{Categorical vs continuous}
+\label{\detokenize{c5_data_exploration/bivariate_analysis:categorical-vs-continuous}}
+\sphinxAtStartPar
+The most interesting exploration (in my opinion) happens when we combine categorical and continuous data, as more graphing opportunities are present.
+When doing this comparison, we usually use the student t\sphinxhyphen{}test or Z\sphinxhyphen{}test, you can spend hours arguing the difference and which to use, yet I will stick for simplicity with the t\sphinxhyphen{}test for robuustness.
+
+\sphinxAtStartPar
+we can use the t\sphinxhyphen{}test to check if a continuous variable changes between 2 categories of a categorical variable.
+
+\sphinxAtStartPar
+let us seperate the men from the women and see if they had to pay a different fare amount
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{t}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{stats}\PYG{o}{.}\PYG{n}{ttest\PYGZus{}ind}\PYG{p}{(}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{who}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{man}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{who}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{woman}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{t}\PYG{p}{,} \PYG{n}{p}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(\PYGZhy{}5.817465335062089, 8.614583735152227e\PYGZhy{}09)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Our p\sphinxhyphen{}value again is very low, indicating there is a difference in the groups.
+The t statistic is \sphinxhyphen{}5.82, meaning that the second group (women) are paying more for fares.
+
+\sphinxAtStartPar
+We print out the means to verify
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mean male fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{who}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{man}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mean female fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{who}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{woman}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+mean male fare
+24.864181750465548
+mean female fare
+46.570711070110704
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+By the looks of this, the fares are heavily gender biased.
+To put this into more detail, we pivot the means of each group including class into a table, as female might be more in the upper classes.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{who}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+class       First     Second      Third
+who                                    
+child  139.382633  28.323905  23.220190
+man     65.951086  19.054124  11.340213
+woman  104.317995  20.868624  15.354351
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+This already makes more sense, it is mainly the first class difference that drives up the prices, yet the difference seems to be still present.
+
+\sphinxAtStartPar
+Can you perform a t\sphinxhyphen{}test on the gender fare gap in the third class, is it still significant?
+
+\sphinxAtStartPar
+A t\sphinxhyphen{}test is ideal if you would like to compare 2 groups, yet often we have multiple groups.
+For this we can use a (one\_way) ANOVA or ANalysis Of VAriance.
+
+\sphinxAtStartPar
+We seperate on class and check if the fare is significantly different.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{F}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{stats}\PYG{o}{.}\PYG{n}{f\PYGZus{}oneway}\PYG{p}{(}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{pclass}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{pclass}\PYG{o}{==}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{pclass}\PYG{o}{==}\PYG{l+m+mi}{3}\PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{F}\PYG{p}{,} \PYG{n}{p}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(242.34415651744814, 1.0313763209141171e\PYGZhy{}84)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+This was more or less a no\sphinxhyphen{}brainer, as it is advertised that higher classes come with a higher pricetag.
+We can use a nice histogram to show this division of class.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{!=}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{log\PYGZus{}scale}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{multiple}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{stack}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{bins}\PYG{o}{=}\PYG{l+m+mi}{25}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}fare\PYGZsq{}, ylabel=\PYGZsq{}Count\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{bivariate_analysis_26_1}.png}
+
+\sphinxAtStartPar
+A less cluttered plot would be to use a boxplot, containing less information about the distribution, yet still showing simple statistics.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{!=}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{class}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}yscale}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{log}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{bivariate_analysis_28_0}.png}
+
+\sphinxAtStartPar
+We could do something similar, but taking the age instead of the fare, giving us the following result.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{F}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{stats}\PYG{o}{.}\PYG{n}{f\PYGZus{}oneway}\PYG{p}{(}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{age}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{pclass}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{age}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{pclass}\PYG{o}{==}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
+    \PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{age}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{pclass}\PYG{o}{==}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}
+\PYG{p}{)}
+\PYG{n}{F}\PYG{p}{,} \PYG{n}{p}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(57.443484340676214, 7.487984171959904e\PYGZhy{}24)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The p value indicates there is surely a difference in age between classes, how about we look at the means for each class.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pclass}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{age}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+pclass
+1    38.233441
+2    29.877630
+3    25.140620
+Name: age, dtype: float64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+What about any statistical significant differences in ages for the groups that survived and didn’t, could you perform this analysis?
+Report your findings in a histogram.
+
+
+\section{Continuous vs continuous}
+\label{\detokenize{c5_data_exploration/bivariate_analysis:continuous-vs-continuous}}
+\sphinxAtStartPar
+A thirds option to explore the interactions within your dataset is by comparing 2 continuous variables.
+
+\sphinxAtStartPar
+Seaborn has a nice functionality where can perform a jointplot that not only shows us the scatter plot but also the distributions,
+When we perform this plot we notice the inbalanced distribution of the fares.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{jointplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}seaborn.axisgrid.JointGrid at 0x7f9fa6f080d0\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{bivariate_analysis_36_1}.png}
+
+\sphinxAtStartPar
+What we could do is remove outliers, if I recall correclty we set a upper bound of 77.5, let’s do that here and replot.
+I’ve also added the type of person as a color, you can here see that women and children pay more as we saw earlier.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{jointplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{\PYGZlt{}}\PYG{l+m+mf}{77.5}\PYG{p}{]}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{who}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}seaborn.axisgrid.JointGrid at 0x7f9fa6ac27f0\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{bivariate_analysis_38_1}.png}
+
+\sphinxAtStartPar
+To make this more mathematically sound, we are using the spearman rank correlation test, not the pearson as we are dealing with non normal data. You could check that with a shapiro wilk test but i’ll leave that up to you!
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{corr}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{stats}\PYG{o}{.}\PYG{n}{spearmanr}\PYG{p}{(}\PYG{n}{a}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{corr}\PYG{p}{,} \PYG{n}{p}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(0.1350512177342878, 0.00029580903243060916)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+with a p\sphinxhyphen{}value of only 0.000296 we can safely reject the null\sphinxhyphen{}hypothesis, meaning there is a correlation.
+The correlation coefficient here is only 0.135, meaning for any person each year of age would make their fare about 0.135 dollars more expensive on average, which in that time was a fair amount of money.
+
+\sphinxAtStartPar
+To make this more visual, I added a lmplot that performs a linear regression, you can see how the line goes up in fare as the age goes up.
+I had to use a logarithmic y\sphinxhyphen{}scale as the distribution is still not normal.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{lmplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{yscale}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{log}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}seaborn.axisgrid.FacetGrid at 0x7f9fa4916100\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{bivariate_analysis_42_1}.png}
+
+\sphinxAtStartPar
+Now this correlation of 0.135 dollar is relevant for ANY person, man, female, child, first class, second,…
+
+\sphinxAtStartPar
+Perhaps we could find several subgroups with a higher or lower correlation, I will perform the correlation with the outliers removed.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{corr}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{stats}\PYG{o}{.}\PYG{n}{spearmanr}\PYG{p}{(}\PYG{n}{a}\PYG{o}{=}\PYG{n}{titanic\PYGZus{}df}\PYG{p}{[}\PYG{n}{titanic\PYGZus{}df}\PYG{o}{.}\PYG{n}{fare}\PYG{o}{\PYGZlt{}}\PYG{l+m+mf}{77.5}\PYG{p}{]}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{age}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fare}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{corr}\PYG{p}{,} \PYG{n}{p}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(0.09269934275477329, 0.019762193968013368)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+When we remove outliers, we have a less strong correlations, indicating that the outliers \sphinxhyphen{} with high fares \sphinxhyphen{} are in general older persons.
+
+\sphinxAtStartPar
+Try to experiment with subsetting the data and find a group where age matters more for the correlation.
+
+
+\chapter{New Data Sources}
+\label{\detokenize{c5_data_exploration/external_data:new-data-sources}}\label{\detokenize{c5_data_exploration/external_data::doc}}
+\sphinxAtStartPar
+In this notebook we are going to look into adding new data to your dataset.
+We start out with a taxi dataset describing all pickup points from taxis in a specific date interval, notice that the dataset is divided up into months. Each month has their specific csv file saved in an AWS location.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{k+kn}{from} \PYG{n+nn}{urllib}\PYG{n+nn}{.}\PYG{n+nn}{request} \PYG{k+kn}{import} \PYG{n}{urlopen}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{data\PYGZus{}url\PYGZus{}files} \PYG{o}{=} \PYG{n}{urlopen}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/toddwschneider/nyc\PYGZhy{}taxi\PYGZhy{}data/master/setup\PYGZus{}files/raw\PYGZus{}data\PYGZus{}urls.txt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{data\PYGZus{}urls} \PYG{o}{=} \PYG{n}{data\PYGZus{}url\PYGZus{}files}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{utf\PYGZhy{}8}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{data\PYGZus{}urls}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{l+m+mi}{12}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+[\PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}01.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}02.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}03.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}04.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}05.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}06.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}07.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}08.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}09.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}10.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}11.csv\PYGZsq{},
+ \PYGZsq{}https://s3.amazonaws.com/nyc\PYGZhy{}tlc/trip+data/fhv\PYGZus{}tripdata\PYGZus{}2015\PYGZhy{}12.csv\PYGZsq{}]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Due to slow parsing of data we will here only parse the uber data from jan\sphinxhyphen{}mar 2015
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{datasets} \PYG{o}{=} \PYG{p}{[}\PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{n}{url}\PYG{p}{)} \PYG{k}{for} \PYG{n}{url} \PYG{o+ow}{in} \PYG{n}{data\PYGZus{}urls}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cab\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{(}\PYG{n}{datasets}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shape: }\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{cab\PYGZus{}df}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{cab\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+shape: (9153861, 3)
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+  Dispatching\PYGZus{}base\PYGZus{}num          Pickup\PYGZus{}date  locationID
+0               B00013  2015\PYGZhy{}01\PYGZhy{}01 00:30:00         NaN
+1               B00013  2015\PYGZhy{}01\PYGZhy{}01 01:22:00         NaN
+2               B00013  2015\PYGZhy{}01\PYGZhy{}01 01:23:00         NaN
+3               B00013  2015\PYGZhy{}01\PYGZhy{}01 01:44:00         NaN
+4               B00013  2015\PYGZhy{}01\PYGZhy{}01 02:00:00         NaN
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We would like to find out how many uber rides were performed each day so we:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+parse the date string to a datetime format
+
+\item {} 
+\sphinxAtStartPar
+set the date as index
+
+\item {} 
+\sphinxAtStartPar
+resample to ‘1D’ or one day (and chose count as aggregation)
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cab\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{datetime}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}datetime}\PYG{p}{(}\PYG{n}{cab\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Pickup\PYGZus{}date}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{Y/}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{m/}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{ }\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{H:}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{M:}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{S}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cab\PYGZus{}df} \PYG{o}{=} \PYG{n}{cab\PYGZus{}df}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{datetime}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cab\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+                    Dispatching\PYGZus{}base\PYGZus{}num          Pickup\PYGZus{}date  locationID
+datetime                                                                 
+2015\PYGZhy{}01\PYGZhy{}01 00:30:00               B00013  2015\PYGZhy{}01\PYGZhy{}01 00:30:00         NaN
+2015\PYGZhy{}01\PYGZhy{}01 01:22:00               B00013  2015\PYGZhy{}01\PYGZhy{}01 01:22:00         NaN
+2015\PYGZhy{}01\PYGZhy{}01 01:23:00               B00013  2015\PYGZhy{}01\PYGZhy{}01 01:23:00         NaN
+2015\PYGZhy{}01\PYGZhy{}01 01:44:00               B00013  2015\PYGZhy{}01\PYGZhy{}01 01:44:00         NaN
+2015\PYGZhy{}01\PYGZhy{}01 02:00:00               B00013  2015\PYGZhy{}01\PYGZhy{}01 02:00:00         NaN
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cabs\PYGZus{}taken} \PYG{o}{=} \PYG{n}{cab\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Dispatching\PYGZus{}base\PYGZus{}num}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{resample}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{count}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{rename}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cabs\PYGZus{}taken}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{cabs\PYGZus{}taken}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+datetime
+2015\PYGZhy{}01\PYGZhy{}01    77789
+2015\PYGZhy{}01\PYGZhy{}02    61832
+2015\PYGZhy{}01\PYGZhy{}03    81955
+2015\PYGZhy{}01\PYGZhy{}04    62691
+2015\PYGZhy{}01\PYGZhy{}05    71063
+Freq: D, Name: cabs\PYGZus{}taken, dtype: int64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+great! now we have an idea on how many ubers were taken each day, let us use a simple line plot to show the results.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{lineplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{cabs\PYGZus{}taken}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}datetime\PYGZsq{}, ylabel=\PYGZsq{}cabs\PYGZus{}taken\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{external_data_13_1}.png}
+
+\sphinxAtStartPar
+This dataset is nice, but by itself pretty useless, why don’t we look up some weather information to see if this influences our traffic.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{url} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{https://raw.githubusercontent.com/toddwschneider/nyc\PYGZhy{}taxi\PYGZhy{}data/master/data/central\PYGZus{}park\PYGZus{}weather.csv}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{n}{weather} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{n}{url}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{weather}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+       STATION                         NAME        DATE   AWND  PRCP  SNOW  \PYGZbs{}
+0  USW00094728  NY CITY CENTRAL PARK, NY US  2009\PYGZhy{}01\PYGZhy{}01  11.18   0.0   0.0   
+1  USW00094728  NY CITY CENTRAL PARK, NY US  2009\PYGZhy{}01\PYGZhy{}02   6.26   0.0   0.0   
+2  USW00094728  NY CITY CENTRAL PARK, NY US  2009\PYGZhy{}01\PYGZhy{}03  10.07   0.0   0.0   
+3  USW00094728  NY CITY CENTRAL PARK, NY US  2009\PYGZhy{}01\PYGZhy{}04   7.61   0.0   0.0   
+4  USW00094728  NY CITY CENTRAL PARK, NY US  2009\PYGZhy{}01\PYGZhy{}05   6.93   0.0   0.0   
+
+   SNWD  TMAX  TMIN  
+0   0.0    26    15  
+1   0.0    34    23  
+2   0.0    38    29  
+3   0.0    42    25  
+4   0.0    43    38  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+you can see a variaty of information, more info on the column names can be found \sphinxhref{https://docs.opendata.aws/noaa-ghcn-pds/readme.html}{here}again we need to:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+parse the date
+
+\item {} 
+\sphinxAtStartPar
+set it to the index
+
+\item {} 
+\sphinxAtStartPar
+resampling is not needed as it is already in day\sphinxhyphen{}to\sphinxhyphen{}day intervals
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{weather}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DATE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=}  \PYG{n}{pd}\PYG{o}{.}\PYG{n}{to\PYGZus{}datetime}\PYG{p}{(}\PYG{n}{weather}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DATE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{Y/}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{m/}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{weather} \PYG{o}{=} \PYG{n}{weather}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DATE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{weather}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+                STATION                         NAME   AWND  PRCP  SNOW  SNWD  \PYGZbs{}
+DATE                                                                            
+2009\PYGZhy{}01\PYGZhy{}01  USW00094728  NY CITY CENTRAL PARK, NY US  11.18   0.0   0.0   0.0   
+2009\PYGZhy{}01\PYGZhy{}02  USW00094728  NY CITY CENTRAL PARK, NY US   6.26   0.0   0.0   0.0   
+2009\PYGZhy{}01\PYGZhy{}03  USW00094728  NY CITY CENTRAL PARK, NY US  10.07   0.0   0.0   0.0   
+2009\PYGZhy{}01\PYGZhy{}04  USW00094728  NY CITY CENTRAL PARK, NY US   7.61   0.0   0.0   0.0   
+2009\PYGZhy{}01\PYGZhy{}05  USW00094728  NY CITY CENTRAL PARK, NY US   6.93   0.0   0.0   0.0   
+
+            TMAX  TMIN  
+DATE                    
+2009\PYGZhy{}01\PYGZhy{}01    26    15  
+2009\PYGZhy{}01\PYGZhy{}02    34    23  
+2009\PYGZhy{}01\PYGZhy{}03    38    29  
+2009\PYGZhy{}01\PYGZhy{}04    42    25  
+2009\PYGZhy{}01\PYGZhy{}05    43    38  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Having 2 dataset, now we need to merge them. Since we already prepared the date as index, this should be easy.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{merged\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{cabs\PYGZus{}taken}\PYG{p}{,} \PYG{n}{weather}\PYG{p}{,} \PYG{n}{left\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{right\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{merged\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+            cabs\PYGZus{}taken      STATION                         NAME   AWND  PRCP  \PYGZbs{}
+2015\PYGZhy{}01\PYGZhy{}01       77789  USW00094728  NY CITY CENTRAL PARK, NY US   7.16  0.00   
+2015\PYGZhy{}01\PYGZhy{}02       61832  USW00094728  NY CITY CENTRAL PARK, NY US   7.16  0.00   
+2015\PYGZhy{}01\PYGZhy{}03       81955  USW00094728  NY CITY CENTRAL PARK, NY US   6.49  0.71   
+2015\PYGZhy{}01\PYGZhy{}04       62691  USW00094728  NY CITY CENTRAL PARK, NY US   6.49  0.30   
+2015\PYGZhy{}01\PYGZhy{}05       71063  USW00094728  NY CITY CENTRAL PARK, NY US  10.51  0.00   
+
+            SNOW  SNWD  TMAX  TMIN  
+2015\PYGZhy{}01\PYGZhy{}01   0.0   0.0    39    27  
+2015\PYGZhy{}01\PYGZhy{}02   0.0   0.0    42    35  
+2015\PYGZhy{}01\PYGZhy{}03   0.0   0.0    42    33  
+2015\PYGZhy{}01\PYGZhy{}04   0.0   0.0    56    41  
+2015\PYGZhy{}01\PYGZhy{}05   0.0   0.0    49    21  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+One would assume that when it is a rainy day, people would use more cabs. so let us seperate based on precipitation.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{rained} \PYG{o}{=} \PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PRCP}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{]}
+\PYG{n}{no\PYGZus{}rain} \PYG{o}{=} \PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{n}{merged\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PRCP}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average uber rides on a rainy day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{rained}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cabs\PYGZus{}taken}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average uber rides on a dry day}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{no\PYGZus{}rain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cabs\PYGZus{}taken}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+average uber rides on a rainy day
+99837.29411764706
+average uber rides on a dry day
+102846.30357142857
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+ouch! it looks like the average new yorker doesn’t mind getting wet, or they take a cab any day…using a regression plot we can see it more clear
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{regplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{merged\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PRCP}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cabs\PYGZus{}taken}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}PRCP\PYGZsq{}, ylabel=\PYGZsq{}cabs\PYGZus{}taken\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{external_data_27_1}.png}
+
+\sphinxAtStartPar
+Ok, here we see that it might just be because a lot of days are dry and the dataset is skewed. Not reliable info.What about temperatures, can we see a difference if the lowest temperature changes?
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{regplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{merged\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TMIN}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cabs\PYGZus{}taken}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}TMIN\PYGZsq{}, ylabel=\PYGZsq{}cabs\PYGZus{}taken\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{external_data_29_1}.png}
+
+\sphinxAtStartPar
+Appearantly when the temperature lowers, yorkers seem to be taking more cab rides. So global warming might be disastrous for capitalism after all?
+
+
+\chapter{Feature Enhancing}
+\label{\detokenize{c5_data_exploration/feature_engineering:feature-enhancing}}\label{\detokenize{c5_data_exploration/feature_engineering::doc}}
+\sphinxAtStartPar
+This rather simple notebook is a small illustration how feature enhancing might work in specific cases, we have a dataset containing cars and their fuel efficiency. What we will try to illustrate here is that sometimes combinations or formulas using the original data might display patterns not visible with the previous data.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{k+kn}{from} \PYG{n+nn}{scipy}\PYG{n+nn}{.}\PYG{n+nn}{stats} \PYG{k+kn}{import} \PYG{n}{spearmanr}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+we load the mpg dataset and have a look at it.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mpg} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mpg}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+    mpg  cylinders  displacement  horsepower  weight  acceleration  \PYGZbs{}
+0  18.0          8         307.0       130.0    3504          12.0   
+1  15.0          8         350.0       165.0    3693          11.5   
+2  18.0          8         318.0       150.0    3436          11.0   
+3  16.0          8         304.0       150.0    3433          12.0   
+4  17.0          8         302.0       140.0    3449          10.5   
+
+   model\PYGZus{}year origin                       name  
+0          70    usa  chevrolet chevelle malibu  
+1          70    usa          buick skylark 320  
+2          70    usa         plymouth satellite  
+3          70    usa              amc rebel sst  
+4          70    usa                ford torino  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We’ll try to explore our dataset by printing out some regression plots between features of the car and the mileage per gallon.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{regplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{acceleration}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{corr}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{spearmanr}\PYG{p}{(}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{acceleration}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{acceleration correlation: }\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{o}{*}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+acceleration correlation: 43.87\PYGZpc{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{feature_engineering_6_1}.png}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{regplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{corr}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{spearmanr}\PYG{p}{(}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight correlation: }\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{o}{*}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+weight correlation: \PYGZhy{}87.49\PYGZpc{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{feature_engineering_7_1}.png}
+
+\sphinxAtStartPar
+We can see that the acceleration has a positive influence on the miles per gallon, whilst the weight has a negative influence, what about the acceleration per weight?
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{new\PYGZus{}feature}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{acceleration}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{/}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mpg}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+    mpg  cylinders  displacement  horsepower  weight  acceleration  \PYGZbs{}
+0  18.0          8         307.0       130.0    3504          12.0   
+1  15.0          8         350.0       165.0    3693          11.5   
+2  18.0          8         318.0       150.0    3436          11.0   
+3  16.0          8         304.0       150.0    3433          12.0   
+4  17.0          8         302.0       140.0    3449          10.5   
+
+   model\PYGZus{}year origin                       name  new\PYGZus{}feature  
+0          70    usa  chevrolet chevelle malibu     0.003425  
+1          70    usa          buick skylark 320     0.003114  
+2          70    usa         plymouth satellite     0.003201  
+3          70    usa              amc rebel sst     0.003495  
+4          70    usa                ford torino     0.003044  
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{regplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{new\PYGZus{}feature}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{corr}\PYG{p}{,} \PYG{n}{p} \PYG{o}{=} \PYG{n}{spearmanr}\PYG{p}{(}\PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{mpg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{new\PYGZus{}feature}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{new feature correlation: }\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{o}{*}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{)} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+new feature correlation: 84.19\PYGZpc{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{feature_engineering_11_1}.png}
+
+\sphinxAtStartPar
+It seems we are not able to create a new feature with even more correlation, not every story has to be a success. We can report this to our boss and explain the results.
+
+
+\chapter{Cluster analysis}
+\label{\detokenize{c5_data_exploration/cluster_analysis:cluster-analysis}}\label{\detokenize{c5_data_exploration/cluster_analysis::doc}}
+\sphinxAtStartPar
+Before starting this notebook I would like to state that what is explained here will be elaborated later in the course and might look complicated at this point. If you do not feel familiar with these concepts that is perfectly fine.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We will load a digits dataset from sklearn, the machine learning library, these are 8x8 pixel images showing handwritten digits with the correct answer.In the dataset there are 1797 images giving the dataset a dimension of (1797, 8*8)
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{datasets} \PYG{k+kn}{import} \PYG{n}{load\PYGZus{}digits}
+\PYG{n}{digits} \PYG{o}{=} \PYG{n}{load\PYGZus{}digits}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{digits}\PYG{o}{.}\PYG{n}{data}\PYG{o}{.}\PYG{n}{shape}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(1797, 64)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Before we start, let’s print out a few of them, the following cell will do that.
+Again, plotting is not yet seen, so the following cells might be overwhelming.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib}\PYG{n+nn}{.}\PYG{n+nn}{pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
+
+\PYG{n}{fig}\PYG{p}{,} \PYG{n}{axes} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{subplots}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{figsize}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,} \PYG{l+m+mi}{16}\PYG{p}{)}\PYG{p}{,}
+                         \PYG{n}{subplot\PYGZus{}kw}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{xticks}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{[}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yticks}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{[}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+                         \PYG{n}{gridspec\PYGZus{}kw}\PYG{o}{=}\PYG{n+nb}{dict}\PYG{p}{(}\PYG{n}{hspace}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,} \PYG{n}{wspace}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{k}{for} \PYG{n}{i}\PYG{p}{,} \PYG{n}{ax} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{axes}\PYG{o}{.}\PYG{n}{flat}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{ax}\PYG{o}{.}\PYG{n}{imshow}\PYG{p}{(}\PYG{n}{digits}\PYG{o}{.}\PYG{n}{images}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{,} \PYG{n}{cmap}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{binary}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{interpolation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nearest}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{ax}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{l+m+mf}{0.05}\PYG{p}{,} \PYG{l+m+mf}{0.05}\PYG{p}{,} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{digits}\PYG{o}{.}\PYG{n}{target}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
+            \PYG{n}{transform}\PYG{o}{=}\PYG{n}{ax}\PYG{o}{.}\PYG{n}{transAxes}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{green}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{cluster_analysis_5_0}.png}
+
+\sphinxAtStartPar
+In cluster analysis we will try to figure out clusters within the dataset, keep in mind that these cluster are constructed without knowning the correct answer.
+Here we use the Isomap algorithm to create clusters, by using fit and transform methods we can create the clusters
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{cluster} \PYG{k+kn}{import} \PYG{n}{KMeans}
+\PYG{n}{kmeans} \PYG{o}{=} \PYG{n}{KMeans}\PYG{p}{(}\PYG{n}{n\PYGZus{}clusters}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n}{clusters} \PYG{o}{=} \PYG{n}{kmeans}\PYG{o}{.}\PYG{n}{fit\PYGZus{}predict}\PYG{p}{(}\PYG{n}{digits}\PYG{o}{.}\PYG{n}{data}\PYG{p}{)}
+\PYG{n}{kmeans}\PYG{o}{.}\PYG{n}{cluster\PYGZus{}centers\PYGZus{}}\PYG{o}{.}\PYG{n}{shape}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+(10, 64)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Now that the algorithm seperated the dataset into 10 clusters, we can ask it to print the center of each cluster.This gives us an idea how the average digit in that cluster looks like.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{fig}\PYG{p}{,} \PYG{n}{ax} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{subplots}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{figsize}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{centers} \PYG{o}{=} \PYG{n}{kmeans}\PYG{o}{.}\PYG{n}{cluster\PYGZus{}centers\PYGZus{}}\PYG{o}{.}\PYG{n}{reshape}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{)}
+\PYG{k}{for} \PYG{n}{axi}\PYG{p}{,} \PYG{n}{center} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{ax}\PYG{o}{.}\PYG{n}{flat}\PYG{p}{,} \PYG{n}{centers}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{axi}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{xticks}\PYG{o}{=}\PYG{p}{[}\PYG{p}{]}\PYG{p}{,} \PYG{n}{yticks}\PYG{o}{=}\PYG{p}{[}\PYG{p}{]}\PYG{p}{)}
+    \PYG{n}{axi}\PYG{o}{.}\PYG{n}{imshow}\PYG{p}{(}\PYG{n}{center}\PYG{p}{,} \PYG{n}{interpolation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nearest}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{cmap}\PYG{o}{=}\PYG{n}{plt}\PYG{o}{.}\PYG{n}{cm}\PYG{o}{.}\PYG{n}{binary}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{cluster_analysis_9_0}.png}
+
+\sphinxAtStartPar
+Those look similar to the actual numbers, confirming that arabic numbers have good visual seperation inbetween.Aside from the centers we can also print a few examples from the clusters.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{fig}\PYG{p}{,} \PYG{n}{axes} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{subplots}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{figsize}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{)}\PYG{p}{,}
+                         \PYG{n}{subplot\PYGZus{}kw}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{xticks}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{[}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{yticks}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{p}{[}\PYG{p}{]}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+                         \PYG{n}{gridspec\PYGZus{}kw}\PYG{o}{=}\PYG{n+nb}{dict}\PYG{p}{(}\PYG{n}{hspace}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,} \PYG{n}{wspace}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{k}{for} \PYG{n}{i}\PYG{p}{,} \PYG{n}{ax} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{axes}\PYG{o}{.}\PYG{n}{flat}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{ax}\PYG{o}{.}\PYG{n}{imshow}\PYG{p}{(}\PYG{n}{digits}\PYG{o}{.}\PYG{n}{images}\PYG{p}{[}\PYG{n}{clusters}\PYG{o}{==}\PYG{n}{i}\PYG{o}{\PYGZpc{}}\PYG{k}{10}][int(i/10)], cmap=\PYGZsq{}binary\PYGZsq{}, interpolation=\PYGZsq{}nearest\PYGZsq{})
+    \PYG{n}{ax}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{l+m+mf}{0.05}\PYG{p}{,} \PYG{l+m+mf}{0.05}\PYG{p}{,} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{i}\PYG{o}{\PYGZpc{}}\PYG{k}{10}),
+            \PYG{n}{transform}\PYG{o}{=}\PYG{n}{ax}\PYG{o}{.}\PYG{n}{transAxes}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{green}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{cluster_analysis_11_0}.png}
+
+\sphinxAtStartPar
+You can see that the cluster number does not match the actual number, that’s because our algorithm does not understand which numbers there are.It does however understand the differences between the numbers!
+This technique can also be used for other datasets where no outcome is given, but we would like to separate our dataset into clusters.
+
+\sphinxAtStartPar
+To make this more visible we will use another example of a dataset about the leafs of 3 types of iris flowers.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{iris\PYGZus{}df} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{iris}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{iris\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+   sepal\PYGZus{}length  sepal\PYGZus{}width  petal\PYGZus{}length  petal\PYGZus{}width species
+0           5.1          3.5           1.4          0.2  setosa
+1           4.9          3.0           1.4          0.2  setosa
+2           4.7          3.2           1.3          0.2  setosa
+3           4.6          3.1           1.5          0.2  setosa
+4           5.0          3.6           1.4          0.2  setosa
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+What we could do here is ask the algorithm to create 3 clusters of records, as the dataset contains 3 types of iris flowers.
+
+\sphinxAtStartPar
+We do not supply the algorithm with the information of the species, yet it has to figure out by itself how to seperate the records.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kmeans} \PYG{o}{=} \PYG{n}{KMeans}\PYG{p}{(}\PYG{n}{n\PYGZus{}clusters}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n}{iris\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cluster}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{kmeans}\PYG{o}{.}\PYG{n}{fit\PYGZus{}predict}\PYG{p}{(}\PYG{n}{iris\PYGZus{}df}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{species}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{iris\PYGZus{}df}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+   sepal\PYGZus{}length  sepal\PYGZus{}width  petal\PYGZus{}length  petal\PYGZus{}width species  cluster
+0           5.1          3.5           1.4          0.2  setosa        1
+1           4.9          3.0           1.4          0.2  setosa        1
+2           4.7          3.2           1.3          0.2  setosa        1
+3           4.6          3.1           1.5          0.2  setosa        1
+4           5.0          3.6           1.4          0.2  setosa        1
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We can see our data now has an additional feature cluster which contains either 0, 1 or 2.
+If the clustering has been performed as expected, the clusters should coincide with the species.
+Using a plot we can find out.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{iris\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sepal\PYGZus{}length}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{petal\PYGZus{}width}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{species}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}sepal\PYGZus{}length\PYGZsq{}, ylabel=\PYGZsq{}petal\PYGZus{}width\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{cluster_analysis_17_1}.png}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{iris\PYGZus{}df}\PYG{p}{,} \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sepal\PYGZus{}length}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{petal\PYGZus{}width}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cluster}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}sepal\PYGZus{}length\PYGZsq{}, ylabel=\PYGZsq{}petal\PYGZus{}width\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{cluster_analysis_18_1}.png}
+
+\sphinxAtStartPar
+For some reason seaborn thinks it is useful to change color scheme, yet you can see that there is an uncanny similarity between the clusters and the species, the algorithm was succesful in finding the different species.
+
+\sphinxAtStartPar
+Without giving the information we were able to cluster the different species of iris flowers yet we have no idea which cluster belongs to which species.
+It is the reasers responsibility to take conclusion in what the different clusters mean!
+
+
+\chapter{VIF: Variance Inflation Factor}
+\label{\detokenize{c5_data_exploration/variance_inflation:vif-variance-inflation-factor}}\label{\detokenize{c5_data_exploration/variance_inflation::doc}}
+\sphinxAtStartPar
+in this notebook we will investigate the variance inflation which can occur in a dataset. As an example here, we will use the ‘Mile Per Gallon’ dataset contianing a set of cars and their fuel efficiency. Some columns in the dataset might
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{k+kn}{from} \PYG{n+nn}{statsmodels}\PYG{n+nn}{.}\PYG{n+nn}{stats}\PYG{n+nn}{.}\PYG{n+nn}{outliers\PYGZus{}influence} \PYG{k+kn}{import} \PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}
+\PYG{n}{mpg} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n+ne}{ModuleNotFoundError}\PYG{g+gWhitespace}{                       }Traceback (most recent call last)
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}13569}\PYG{o}{/}\PYG{l+m+mf}{3881140987.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{1} \PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{2} \PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{3} \PYG{k+kn}{from} \PYG{n+nn}{statsmodels}\PYG{n+nn}{.}\PYG{n+nn}{stats}\PYG{n+nn}{.}\PYG{n+nn}{outliers\PYGZus{}influence} \PYG{k+kn}{import} \PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{4} \PYG{n}{mpg} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{n+ne}{ModuleNotFoundError}: No module named \PYGZsq{}statsmodels\PYGZsq{}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mpg}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+    mpg  cylinders  displacement  horsepower  weight  acceleration  \PYGZbs{}
+0  18.0          8         307.0       130.0    3504          12.0   
+1  15.0          8         350.0       165.0    3693          11.5   
+2  18.0          8         318.0       150.0    3436          11.0   
+3  16.0          8         304.0       150.0    3433          12.0   
+4  17.0          8         302.0       140.0    3449          10.5   
+
+   model\PYGZus{}year origin                       name  
+0          70    usa  chevrolet chevelle malibu  
+1          70    usa          buick skylark 320  
+2          70    usa         plymouth satellite  
+3          70    usa              amc rebel sst  
+4          70    usa                ford torino  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+as you can see, we also imported a function ‘variance\_inflation\_factor’ which will help us calculate this, more information can be found on \sphinxhref{https://en.wikipedia.org/wiki/Variance\_inflation\_factor}{wikipedia}.
+
+\sphinxAtStartPar
+to use the function, we refer to the \sphinxhref{https://www.statsmodels.org/stable/generated/statsmodels.stats.outliers\_influence.variance\_inflation\_factor.html}{documentation}. The function is a bit stubborn and requires the following:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+only numerical values (so we to drop the categories)
+
+\item {} 
+\sphinxAtStartPar
+no nan values (dropping nans)
+
+\item {} 
+\sphinxAtStartPar
+as a numpy array instead of a pandas dataframe
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cols\PYGZus{}to\PYGZus{}keep} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cylinders}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{displacement}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{horsepower}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{acceleration}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{model\PYGZus{}year}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{n}{vif\PYGZus{}compatible\PYGZus{}df} \PYG{o}{=} \PYG{n}{mpg}\PYG{p}{[}\PYG{n}{cols\PYGZus{}to\PYGZus{}keep}\PYG{p}{]}
+\PYG{n}{vif\PYGZus{}compatible\PYGZus{}df} \PYG{o}{=} \PYG{n}{vif\PYGZus{}compatible\PYGZus{}df}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{index}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{vif\PYGZus{}compatible\PYGZus{}df} \PYG{o}{=} \PYG{n}{vif\PYGZus{}compatible\PYGZus{}df}\PYG{o}{.}\PYG{n}{values}
+\PYG{n}{vif\PYGZus{}compatible\PYGZus{}df}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+array([[   8. ,  307. ,  130. , 3504. ,   12. ,   70. ],
+       [   8. ,  350. ,  165. , 3693. ,   11.5,   70. ],
+       [   8. ,  318. ,  150. , 3436. ,   11. ,   70. ],
+       ...,
+       [   4. ,  135. ,   84. , 2295. ,   11.6,   82. ],
+       [   4. ,  120. ,   79. , 2625. ,   18.6,   82. ],
+       [   4. ,  119. ,   82. , 2720. ,   19.4,   82. ]])
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+this looks a lot different! we don’t know anymore what all of that means, but the computer does, now we run it through the function.
+Notice how we have to specify a specific column, the resulting inflation factor is that for the chosen column
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} we pick column 0 which is \PYGZsq{}cylinders\PYGZsq{} according to cols\PYGZus{}to\PYGZus{}keep}
+\PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}\PYG{p}{(}\PYG{n}{vif\PYGZus{}compatible\PYGZus{}df}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+115.97777160980726
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{n}{idx}\PYG{p}{,} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{cols\PYGZus{}to\PYGZus{}keep}\PYG{p}{)}\PYG{p}{:}
+  \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{col} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}\PYG{p}{(}\PYG{n}{vif\PYGZus{}compatible\PYGZus{}df}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+cylinders: 	115.97777160980726
+displacement: 	86.48595590611876
+horsepower: 	60.25657462146676
+weight: 	137.4717563697324
+acceleration: 	69.40087667701684
+model\PYGZus{}year: 	109.3200159587966
+\end{sphinxVerbatim}
+
+
+\section{TODO}
+\label{\detokenize{c5_data_exploration/variance_inflation:todo}}
+\sphinxAtStartPar
+The variance inflation gives a numerical value to how little variation there is between one column and the others in a dataset, you will see how the numbers will gradually go down as you remove more and more columns.This way we have a quantifyable method of removing data from our dataset in case there is too much ‘duplicate’ information.There is no real cut\sphinxhyphen{}off value that specifies of a column should or should not be removed, so make sure you can argument your decision.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+experiment with removing columns in the cols\_to\_keep list
+
+\item {} 
+\sphinxAtStartPar
+What do you think would be the ideal dataset here? we would like to predict the fuel economy (mpg) of a car.
+
+\end{itemize}
+
+
+\chapter{Principle Component Analysis}
+\label{\detokenize{c5_data_exploration/principle_component_analysis:principle-component-analysis}}\label{\detokenize{c5_data_exploration/principle_component_analysis::doc}}
+\sphinxAtStartPar
+In this notebook we will not try to remove data from our dataset, but transform the variation in our features (columns) into less features.We will do this using the concept of PCA (principle component analysis).
+The dataset we will be using here is about the dimensions of iris flowers, in total 150 flowers were measured of 3 species.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{decomposition} \PYG{k+kn}{import} \PYG{n}{PCA}
+\PYG{n}{iris} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{iris}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+you can see that we imported a function PCA from sklearn, this will do the calculations for us, but we still need to specify some parameters.Before we do that, let us use the first 2 columns of the dataset to plot a scatter and see if we can distinguish the different species of flowers.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{iris}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+   sepal\PYGZus{}length  sepal\PYGZus{}width  petal\PYGZus{}length  petal\PYGZus{}width species
+0           5.1          3.5           1.4          0.2  setosa
+1           4.9          3.0           1.4          0.2  setosa
+2           4.7          3.2           1.3          0.2  setosa
+3           4.6          3.1           1.5          0.2  setosa
+4           5.0          3.6           1.4          0.2  setosa
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{iris}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sepal\PYGZus{}length}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{iris}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sepal\PYGZus{}width}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{n}{iris}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{species}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:xlabel=\PYGZsq{}sepal\PYGZus{}length\PYGZsq{}, ylabel=\PYGZsq{}sepal\PYGZus{}width\PYGZsq{}\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{principle_component_analysis_4_1}.png}
+
+\sphinxAtStartPar
+That already looks pretty good, but versicolor and virginica are still hard to differentiate. Let’s see if we can compress the variation of all 4 columns into 2 axi.We do this by creating a PCA transformer and specifying we want only 2 output components
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pca} \PYG{o}{=} \PYG{n}{PCA}\PYG{p}{(}\PYG{n}{n\PYGZus{}components}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We also need to prepare our dataframe, we do this by only dropping our outcome (that which we do not need for the transform)
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{X} \PYG{o}{=} \PYG{n}{iris}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{species}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{X}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+   sepal\PYGZus{}length  sepal\PYGZus{}width  petal\PYGZus{}length  petal\PYGZus{}width
+0           5.1          3.5           1.4          0.2
+1           4.9          3.0           1.4          0.2
+2           4.7          3.2           1.3          0.2
+3           4.6          3.1           1.5          0.2
+4           5.0          3.6           1.4          0.2
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{iris\PYGZus{}pca} \PYG{o}{=} \PYG{n}{pca}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}
+\PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}\PYG{n}{iris\PYGZus{}pca}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PC1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PC2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+          PC1       PC2
+0   \PYGZhy{}2.684126  0.319397
+1   \PYGZhy{}2.714142 \PYGZhy{}0.177001
+2   \PYGZhy{}2.888991 \PYGZhy{}0.144949
+3   \PYGZhy{}2.745343 \PYGZhy{}0.318299
+4   \PYGZhy{}2.728717  0.326755
+..        ...       ...
+145  1.944110  0.187532
+146  1.527167 \PYGZhy{}0.375317
+147  1.764346  0.078859
+148  1.900942  0.116628
+149  1.390189 \PYGZhy{}0.282661
+
+[150 rows x 2 columns]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Running it through the PCA transformer using the fit\_transform function gives us a numpy 2 dimensional array (which is similar to a pandas dataframe) with 2 columns.When inserted into a scatter plot they show us (nearly) all variance of 4 columns compressed into a 2 dimensional plot.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{scatterplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{iris\PYGZus{}pca}\PYG{p}{[}\PYG{p}{:}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{iris\PYGZus{}pca}\PYG{p}{[}\PYG{p}{:}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{hue}\PYG{o}{=}\PYG{n}{iris}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{species}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZlt{}AxesSubplot:\PYGZgt{}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{principle_component_analysis_11_1}.png}
+
+
+\section{TODO}
+\label{\detokenize{c5_data_exploration/principle_component_analysis:todo}}
+\sphinxAtStartPar
+it is clear that this function is very potent concerning data visualisation, do you think you can improve on the mpg dataset?
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+experiment with the PCA transformer using the mpg dataset
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mpg} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{load\PYGZus{}dataset}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mpg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{mpg}\PYG{o}{.}\PYG{n}{head}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+    mpg  cylinders  displacement  horsepower  weight  acceleration  \PYGZbs{}
+0  18.0          8         307.0       130.0    3504          12.0   
+1  15.0          8         350.0       165.0    3693          11.5   
+2  18.0          8         318.0       150.0    3436          11.0   
+3  16.0          8         304.0       150.0    3433          12.0   
+4  17.0          8         302.0       140.0    3449          10.5   
+
+   model\PYGZus{}year origin                       name  
+0          70    usa  chevrolet chevelle malibu  
+1          70    usa          buick skylark 320  
+2          70    usa         plymouth satellite  
+3          70    usa              amc rebel sst  
+4          70    usa                ford torino  
+\end{sphinxVerbatim}
 
 
 \part{6. Machine Learning}
