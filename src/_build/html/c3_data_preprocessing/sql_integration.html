@@ -1,0 +1,2142 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>18. Using SQL &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19. Introduction" href="../c4_data_visualisation/introduction.html" />
+    <link rel="prev" title="17. Pivot" href="pivot.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/outliers.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/string_operations.html">
+   6. String operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
+   7. Datetime operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
+   8. Categorical encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
+   10. Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
+   11. Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/some_practice.html">
+   12. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   13. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexing_slicing.html">
+   14. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="merge.html">
+   15. Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="groupby.html">
+   16. Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pivot.html">
+   17. Pivot
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   18. Using SQL
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/introduction.html">
+   19. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/line.html">
+   20. Line plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/histogram.html">
+   21. Histogram plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/box.html">
+   22. Box plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/scatter.html">
+   23. Scatter plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/heatmap.html">
+   24. Heatmap plot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/introduction.html">
+   25. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/variable_identification.html">
+   26. Variable identification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/univariate_analysis.html">
+   27. Uni-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/bivariate_analysis.html">
+   28. Bi-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/external_data.html">
+   29. New Data Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/feature_engineering.html">
+   30. Feature Enhancing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/cluster_analysis.html">
+   31. Cluster analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/variance_inflation.html">
+   32. VIF: Variance Inflation Factor
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/principle_component_analysis.html">
+   33. Principle Component Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   34. Machine Learning
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c3_data_preprocessing/sql_integration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc3_data_preprocessing/sql_integration.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c3_data_preprocessing/sql_integration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c3_data_preprocessing/sql_integration.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="using-sql">
+<h1><span class="section-number">18. </span>Using SQL<a class="headerlink" href="#using-sql" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we are going to do things different, instead of using python and pandas for data wrangling/processing we outsource them to the SQL, a language used for databases.</p>
+<p>As it would be complicated to setup a complete SQL server, I opted to create a local database using SQLite which is built-in the sqlalchemy library used by python to interact with a database.</p>
+<p>We start by importing or necessary libraries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sqlalchemy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As mentioned we are going to create a local SQL database and dump it to a .db file. In order to do that we first have to read our data from comma seperated value (CSV) files that were provided within the repository.</p>
+<p>We use pandas to read them and collect them into an object data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ratings&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/rating_final.csv&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;cuisine&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/chefmozcuisine.csv&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;parking&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/chefmozparking.csv&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;user_cuisine&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/usercuisine.csv&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;user_payment&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/userpayment.csv&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;user_profile&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/LorenzF/data-science-practical-approach/main/src/c3_data_preprocessing/data/cuisine/userprofile.csv&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before we can act with our database we need to create an engine by setting up the connection. In a more complex situation this would need an url to the server running the database, a userid and password for loging and some other configurations.</p>
+<p>In this case we only need the location of our .db file, which i will put in the same location as the notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///ratings.db&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great! we now have an engine that can run our SQL queries, yet for now our database is empty, let us fill it with all the data we collected earlier!</p>
+<p>We use the .to_sql method of pandas to easily convert the pandas dataframe to a table in our database, each name in our data object will be a table with the corresponding data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And with this our migration to SQL has been completed, we now have a SQL server running locally that has several tables containing data.
+Instead of using python to do the processing we can instruct our server to handle this, usually resulting is faster compute times, yet results may vary!</p>
+<p>Let’s start with a simple example, I saw that we have a table with ratings, to see how it looks by selecting all columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT * FROM ratings</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>U1077</td>
+      <td>135085</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>U1077</td>
+      <td>135038</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>U1077</td>
+      <td>132825</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>U1077</td>
+      <td>135060</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>U1068</td>
+      <td>135104</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1156</th>
+      <td>1156</td>
+      <td>U1043</td>
+      <td>132630</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1157</th>
+      <td>1157</td>
+      <td>U1011</td>
+      <td>132715</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1158</th>
+      <td>1158</td>
+      <td>U1068</td>
+      <td>132733</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1159</th>
+      <td>1159</td>
+      <td>U1068</td>
+      <td>132594</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1160</th>
+      <td>1160</td>
+      <td>U1068</td>
+      <td>132660</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1161 rows × 6 columns</p>
+</div></div></div>
+</div>
+<p>It looks that an index has been copied too, we skipped preparation and it already shows. For now we are going to ignore these steps yet we should clean that later.
+If you want to save some time, you can LIMIT your search to a number of rows, next I put a limit of 5 to only retrieve the first 5 results</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT * FROM ratings</span>
+<span class="sd">    LIMIT 5</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+      <th>food_rating</th>
+      <th>service_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>U1077</td>
+      <td>135085</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>U1077</td>
+      <td>135038</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>U1077</td>
+      <td>132825</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>U1077</td>
+      <td>135060</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>U1068</td>
+      <td>135104</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Great! Here it does not matter as our database is local and not at all large in size, but this trick might save you a lot of time when exploring.</p>
+<p>Next we would like to only select specific columns, by changing the asterisk to the wanted columns the server knowns which columns to retrieve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT userID, rating FROM ratings</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>U1077</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>U1077</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>U1077</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>U1077</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>U1068</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Aside from less traffic, this tidies up your data as usually most columns are not needed.</p>
+<p>Just like columns, entries can also be filtered, in the next example we use an equation to filter only the ratings with a general rating of 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT userID, rating FROM ratings</span>
+<span class="sd">    WHERE ratings.rating = 2</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>U1077</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>U1077</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>U1077</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>U1067</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>U1103</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Similarly you can also filter based on text fields, for this example I retrieve data from another table, cuisine.
+No particular columns are selected yet we want to only retrieve the entries where the column Rcuisine contains a text ending on ‘food’ the percent sign is a wildcard indicating that any text can be present here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT * FROM cuisine</span>
+<span class="sd">    WHERE Rcuisine LIKE &#39;%food&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>placeID</th>
+      <th>Rcuisine</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>135105</td>
+      <td>Fast_Food</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8</td>
+      <td>135103</td>
+      <td>Fast_Food</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>40</td>
+      <td>135089</td>
+      <td>Seafood</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>43</td>
+      <td>135086</td>
+      <td>Fast_Food</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>44</td>
+      <td>135085</td>
+      <td>Fast_Food</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>It looks that the server has found 2 types of entries that satisfy my filter, both ‘Fast_Food’ and ‘Seafood’ were results as they both end in ‘food’, the percent sign in this case filled for ‘Fast_’ and ‘Sea’.</p>
+<p>A third method of filtering entries can be a range of numbers, using the BETWEEN and AND statements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT userID, placeID, rating FROM ratings</span>
+<span class="sd">    WHERE placeID BETWEEN 132000 AND 135000</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>U1077</td>
+      <td>132825</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>U1068</td>
+      <td>132740</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>U1068</td>
+      <td>132663</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>U1068</td>
+      <td>132732</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>U1068</td>
+      <td>132630</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Another method would be to use the IN statement and supply a list/tuple of possible entries, in the example we filter on 2 users that placed ratings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT userID, placeID, rating FROM ratings</span>
+<span class="sd">    WHERE userID IN (&#39;U1077&#39;, &#39;U1103&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>userID</th>
+      <th>placeID</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>U1077</td>
+      <td>135085</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>U1077</td>
+      <td>135038</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>U1077</td>
+      <td>132825</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>U1077</td>
+      <td>135060</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>U1103</td>
+      <td>132584</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>It is also possible to filter on NULL values (NaN or missing values in SQL), this way we can easily see we again forgot to do our data preparation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT * FROM user_profile</span>
+<span class="sd">    WHERE smoker is NULL</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>userID</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>smoker</th>
+      <th>drink_level</th>
+      <th>dress_preference</th>
+      <th>ambience</th>
+      <th>transport</th>
+      <th>marital_status</th>
+      <th>hijos</th>
+      <th>birth_year</th>
+      <th>interest</th>
+      <th>personality</th>
+      <th>religion</th>
+      <th>activity</th>
+      <th>color</th>
+      <th>weight</th>
+      <th>budget</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>23</td>
+      <td>U1024</td>
+      <td>22.154021</td>
+      <td>-100.976028</td>
+      <td>None</td>
+      <td>abstemious</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1930</td>
+      <td>none</td>
+      <td>hard-worker</td>
+      <td>none</td>
+      <td>None</td>
+      <td>yellow</td>
+      <td>40</td>
+      <td>None</td>
+      <td>1.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>121</td>
+      <td>U1122</td>
+      <td>22.169601</td>
+      <td>-100.991821</td>
+      <td>None</td>
+      <td>abstemious</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1930</td>
+      <td>none</td>
+      <td>hard-worker</td>
+      <td>none</td>
+      <td>None</td>
+      <td>yellow</td>
+      <td>40</td>
+      <td>None</td>
+      <td>1.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>129</td>
+      <td>U1130</td>
+      <td>23.733000</td>
+      <td>-99.133000</td>
+      <td>None</td>
+      <td>abstemious</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1989</td>
+      <td>none</td>
+      <td>hard-worker</td>
+      <td>none</td>
+      <td>None</td>
+      <td>yellow</td>
+      <td>40</td>
+      <td>None</td>
+      <td>1.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can quickly fix this by just removing all users that have missing values for smoker, as there are only 3.
+The syntax is a bit different as we are not using pandas, but the idea is the same, we just dont parse the result into pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    DELETE FROM user_profile</span>
+<span class="sd">    WHERE smoker is NULL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sqlalchemy.engine.cursor.LegacyCursorResult at 0x7fc53609e1c0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before we check if they are removed, think about the impact of removing users, do you think we can just do this without consequences? what about the ratings they gave? Perhaps you could remove them too here? Is it still possible?</p>
+<p>We do a quick check to see if the users with missing values are gone.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT * FROM user_profile</span>
+<span class="sd">    WHERE smoker is NULL</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>userID</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>smoker</th>
+      <th>drink_level</th>
+      <th>dress_preference</th>
+      <th>ambience</th>
+      <th>transport</th>
+      <th>marital_status</th>
+      <th>hijos</th>
+      <th>birth_year</th>
+      <th>interest</th>
+      <th>personality</th>
+      <th>religion</th>
+      <th>activity</th>
+      <th>color</th>
+      <th>weight</th>
+      <th>budget</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Thus far we used 2 tables, ratings and cuisine, yet always seperate.
+Here we combine the information of both by joining them on a common column; the placeID.</p>
+<p>Using the JOIN keyword together with the ON keyword we here perform an inner join.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT ratings.placeID, cuisine.Rcuisine, ratings.rating</span>
+<span class="sd">    FROM ratings JOIN cuisine</span>
+<span class="sd">    ON ratings.placeID == cuisine.placeID</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>placeID</th>
+      <th>Rcuisine</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>135085</td>
+      <td>Fast_Food</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>132825</td>
+      <td>Mexican</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>135060</td>
+      <td>Seafood</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>135104</td>
+      <td>Mexican</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>132740</td>
+      <td>Mexican</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we can see per rating, not only which placeID is related but also the cuisine of that place.
+This way we can create new views on our data without having overly complicated structures with redundant data.</p>
+<p>Next to joining we can also aggregate data, here I created a query that counts the ratings in the ratings table, giving us the total amount of ratings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT COUNT(rating) FROM ratings</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">count_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>COUNT(rating)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1161</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The strengh of aggregation becomes useful when using the GROUP BY keyword, where we can group our data based on columns.
+The next query calculates the average rating from the rating table grouped on the placeID, note when using grouping all other selected columns need to have an aggregation function in order to work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT placeID, AVG(rating) FROM ratings</span>
+<span class="sd">    GROUP BY placeID</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">avg_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>placeID</th>
+      <th>AVG(rating)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>132560</td>
+      <td>0.50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>132561</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>132564</td>
+      <td>1.25</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>132572</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>132583</td>
+      <td>1.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can go further and combine joining and grouping, with this we can join the cuisine type from the cuisine table and group on that column, we then take both average and count of ratings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cuisine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT cuisine.Rcuisine, AVG(ratings.rating), COUNT(ratings.rating)</span>
+<span class="sd">    FROM ratings JOIN cuisine</span>
+<span class="sd">    ON ratings.placeID == cuisine.placeID</span>
+<span class="sd">    GROUP BY cuisine.Rcuisine</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">cuisine_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rcuisine</th>
+      <th>AVG(ratings.rating)</th>
+      <th>COUNT(ratings.rating)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>American</td>
+      <td>1.153846</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Armenian</td>
+      <td>1.250000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bakery</td>
+      <td>1.400000</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bar</td>
+      <td>1.200000</td>
+      <td>140</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bar_Pub_Brewery</td>
+      <td>1.305085</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Breakfast-Brunch</td>
+      <td>1.000000</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Burgers</td>
+      <td>1.032258</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Cafe-Coffee_Shop</td>
+      <td>1.583333</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Cafeteria</td>
+      <td>1.205882</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Chinese</td>
+      <td>1.219512</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Contemporary</td>
+      <td>1.250000</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Family</td>
+      <td>1.571429</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Fast_Food</td>
+      <td>1.164835</td>
+      <td>91</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Game</td>
+      <td>1.428571</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>International</td>
+      <td>1.513514</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Italian</td>
+      <td>1.038462</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Japanese</td>
+      <td>1.344828</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Mediterranean</td>
+      <td>1.750000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Mexican</td>
+      <td>1.189076</td>
+      <td>238</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Pizzeria</td>
+      <td>1.117647</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Regional</td>
+      <td>0.500000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Seafood</td>
+      <td>1.241935</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Vietnamese</td>
+      <td>1.166667</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For an American cuisine we have an average rating of 1.15 and a count of 39 ratings.
+Keeping track of the count makes sure we known how many ratings are behind the average score.</p>
+<p>Let’s say we want to know the type with the highest average rating, we could use the ORDER BY keyword to order our results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cuisine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT cuisine.Rcuisine, AVG(ratings.rating), COUNT(ratings.rating)</span>
+<span class="sd">    FROM ratings JOIN cuisine</span>
+<span class="sd">    ON ratings.placeID == cuisine.placeID</span>
+<span class="sd">    GROUP BY cuisine.Rcuisine</span>
+<span class="sd">    ORDER BY AVG(ratings.rating) DESC</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">cuisine_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rcuisine</th>
+      <th>AVG(ratings.rating)</th>
+      <th>COUNT(ratings.rating)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mediterranean</td>
+      <td>1.750000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Cafe-Coffee_Shop</td>
+      <td>1.583333</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Family</td>
+      <td>1.571429</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>International</td>
+      <td>1.513514</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Game</td>
+      <td>1.428571</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Bakery</td>
+      <td>1.400000</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Japanese</td>
+      <td>1.344828</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Bar_Pub_Brewery</td>
+      <td>1.305085</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Contemporary</td>
+      <td>1.250000</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Armenian</td>
+      <td>1.250000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Seafood</td>
+      <td>1.241935</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Chinese</td>
+      <td>1.219512</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Cafeteria</td>
+      <td>1.205882</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Bar</td>
+      <td>1.200000</td>
+      <td>140</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Mexican</td>
+      <td>1.189076</td>
+      <td>238</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Vietnamese</td>
+      <td>1.166667</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Fast_Food</td>
+      <td>1.164835</td>
+      <td>91</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>American</td>
+      <td>1.153846</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Pizzeria</td>
+      <td>1.117647</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Italian</td>
+      <td>1.038462</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Burgers</td>
+      <td>1.032258</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Breakfast-Brunch</td>
+      <td>1.000000</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Regional</td>
+      <td>0.500000</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>So, mediterranean cuisine has the highest rating, yet only 4 ratings are present, not a representable amount.
+What we could do is create a query that filters all the places with 5 or more ratings, we can use the HAVING keyword to filter groups whilst performing a GROUP BY operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">place_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT placeID, COUNT(rating)</span>
+<span class="sd">    FROM ratings </span>
+<span class="sd">    GROUP BY ratings.placeID</span>
+<span class="sd">    HAVING COUNT(rating) &gt; 4</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">place_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>placeID</th>
+      <th>COUNT(rating)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>132572</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>132584</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>132594</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>132608</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>132609</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>With this query qe only keep the places with 5 or more ratings, as we chosen 5 as an arbitrary value of statistical significance here.</p>
+<p>As a last query I would like to combine the last 2, where we use the filter as a subquery in our query to find the average of each cuisine type.
+This means that we take the average of each cuisine type, but only take into account places with 5 or more reviews.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cuisine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SELECT cuisine.Rcuisine, AVG(ratings.rating), COUNT(ratings.rating)</span>
+<span class="sd">    FROM ratings JOIN cuisine</span>
+<span class="sd">    ON ratings.placeID == cuisine.placeID</span>
+<span class="sd">    WHERE ratings.placeID in (</span>
+<span class="sd">        SELECT placeID</span>
+<span class="sd">        FROM ratings </span>
+<span class="sd">        GROUP BY ratings.placeID</span>
+<span class="sd">        HAVING COUNT(rating) &gt; 4</span>
+<span class="sd">    )</span>
+<span class="sd">    GROUP BY cuisine.Rcuisine</span>
+<span class="sd">    ORDER BY AVG(ratings.rating) DESC</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">engine</span>
+<span class="p">)</span>
+<span class="n">cuisine_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rcuisine</th>
+      <th>AVG(ratings.rating)</th>
+      <th>COUNT(ratings.rating)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Family</td>
+      <td>1.600000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Cafe-Coffee_Shop</td>
+      <td>1.583333</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>International</td>
+      <td>1.513514</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Game</td>
+      <td>1.428571</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Japanese</td>
+      <td>1.423077</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Bakery</td>
+      <td>1.400000</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Bar_Pub_Brewery</td>
+      <td>1.290909</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Seafood</td>
+      <td>1.241935</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Chinese</td>
+      <td>1.216216</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Cafeteria</td>
+      <td>1.205882</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Bar</td>
+      <td>1.181818</td>
+      <td>132</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Mexican</td>
+      <td>1.181395</td>
+      <td>215</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Contemporary</td>
+      <td>1.178571</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>American</td>
+      <td>1.171429</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Vietnamese</td>
+      <td>1.166667</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Fast_Food</td>
+      <td>1.159091</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Pizzeria</td>
+      <td>1.117647</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Breakfast-Brunch</td>
+      <td>1.000000</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Burgers</td>
+      <td>0.925926</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Italian</td>
+      <td>0.857143</td>
+      <td>14</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You can see that Mediterranean now is missing as it only had 4 ratings, yet the Family cuisine still has 10 out of 12 reviews and it’s average even increased.</p>
+<p>Although we used SQL which can only perform simple mathematics we were able to manipulate our dataset before even going into the data exploration phase.
+When dealing with larger datasets using SQL can drastically improve your data analytical experience and is therefore an essential tool for a data scientist</p>
+<p>I’ll leave a blank cell here for you to experiment, for more inspiration you could also check out this <a class="reference external" href="https://learnsql.com/blog/sql-basics-cheat-sheet/sql-basics-cheat-sheet-a4.pdf">cheat sheet</a></p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c3_data_preprocessing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="pivot.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">17. </span>Pivot</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../c4_data_visualisation/introduction.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">19. </span>Introduction</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

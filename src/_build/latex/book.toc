@@ -49,35 +49,36 @@
 \contentsline {chapter}{\numberline {15}Merge}{83}{chapter.15}%
 \contentsline {chapter}{\numberline {16}Groupby}{87}{chapter.16}%
 \contentsline {chapter}{\numberline {17}Pivot}{95}{chapter.17}%
-\contentsline {part}{IV\hspace {1em}4. Data Visualisation}{101}{part.4}%
-\contentsline {chapter}{\numberline {18}Introduction}{103}{chapter.18}%
-\contentsline {chapter}{\numberline {19}Line plot}{105}{chapter.19}%
-\contentsline {chapter}{\numberline {20}Histogram plot}{119}{chapter.20}%
-\contentsline {chapter}{\numberline {21}Box plot}{123}{chapter.21}%
-\contentsline {chapter}{\numberline {22}Scatter plot}{129}{chapter.22}%
-\contentsline {chapter}{\numberline {23}Heatmap plot}{135}{chapter.23}%
-\contentsline {part}{V\hspace {1em}5. Data Exploration}{141}{part.5}%
-\contentsline {chapter}{\numberline {24}Introduction}{143}{chapter.24}%
-\contentsline {chapter}{\numberline {25}Variable identification}{145}{chapter.25}%
-\contentsline {section}{\numberline {25.1}description}{145}{section.25.1}%
-\contentsline {section}{\numberline {25.2}Uniques, frequencies and ranges}{146}{section.25.2}%
-\contentsline {section}{\numberline {25.3}mean and deviation}{147}{section.25.3}%
-\contentsline {section}{\numberline {25.4}median and interquantile range}{147}{section.25.4}%
-\contentsline {section}{\numberline {25.5}modes and frequencies}{148}{section.25.5}%
-\contentsline {chapter}{\numberline {26}Uni\sphinxhyphen {}variate analysis}{149}{chapter.26}%
-\contentsline {section}{\numberline {26.1}Nominal data}{150}{section.26.1}%
-\contentsline {section}{\numberline {26.2}Ordinal data}{153}{section.26.2}%
-\contentsline {section}{\numberline {26.3}Continuous data}{158}{section.26.3}%
-\contentsline {chapter}{\numberline {27}Bi\sphinxhyphen {}variate analysis}{163}{chapter.27}%
-\contentsline {section}{\numberline {27.1}Categorical vs categorical}{164}{section.27.1}%
-\contentsline {section}{\numberline {27.2}Categorical vs continuous}{166}{section.27.2}%
-\contentsline {section}{\numberline {27.3}Continuous vs continuous}{169}{section.27.3}%
-\contentsline {chapter}{\numberline {28}New Data Sources}{173}{chapter.28}%
-\contentsline {chapter}{\numberline {29}Feature Enhancing}{179}{chapter.29}%
-\contentsline {chapter}{\numberline {30}Cluster analysis}{183}{chapter.30}%
-\contentsline {chapter}{\numberline {31}VIF: Variance Inflation Factor}{189}{chapter.31}%
-\contentsline {section}{\numberline {31.1}TODO}{190}{section.31.1}%
-\contentsline {chapter}{\numberline {32}Principle Component Analysis}{191}{chapter.32}%
-\contentsline {section}{\numberline {32.1}TODO}{193}{section.32.1}%
-\contentsline {part}{VI\hspace {1em}6. Machine Learning}{195}{part.6}%
-\contentsline {chapter}{\numberline {33}Machine Learning}{197}{chapter.33}%
+\contentsline {chapter}{\numberline {18}Using SQL}{101}{chapter.18}%
+\contentsline {part}{IV\hspace {1em}4. Data Visualisation}{111}{part.4}%
+\contentsline {chapter}{\numberline {19}Introduction}{113}{chapter.19}%
+\contentsline {chapter}{\numberline {20}Line plot}{115}{chapter.20}%
+\contentsline {chapter}{\numberline {21}Histogram plot}{129}{chapter.21}%
+\contentsline {chapter}{\numberline {22}Box plot}{133}{chapter.22}%
+\contentsline {chapter}{\numberline {23}Scatter plot}{139}{chapter.23}%
+\contentsline {chapter}{\numberline {24}Heatmap plot}{145}{chapter.24}%
+\contentsline {part}{V\hspace {1em}5. Data Exploration}{151}{part.5}%
+\contentsline {chapter}{\numberline {25}Introduction}{153}{chapter.25}%
+\contentsline {chapter}{\numberline {26}Variable identification}{155}{chapter.26}%
+\contentsline {section}{\numberline {26.1}description}{155}{section.26.1}%
+\contentsline {section}{\numberline {26.2}Uniques, frequencies and ranges}{156}{section.26.2}%
+\contentsline {section}{\numberline {26.3}mean and deviation}{157}{section.26.3}%
+\contentsline {section}{\numberline {26.4}median and interquantile range}{157}{section.26.4}%
+\contentsline {section}{\numberline {26.5}modes and frequencies}{158}{section.26.5}%
+\contentsline {chapter}{\numberline {27}Uni\sphinxhyphen {}variate analysis}{159}{chapter.27}%
+\contentsline {section}{\numberline {27.1}Nominal data}{160}{section.27.1}%
+\contentsline {section}{\numberline {27.2}Ordinal data}{163}{section.27.2}%
+\contentsline {section}{\numberline {27.3}Continuous data}{168}{section.27.3}%
+\contentsline {chapter}{\numberline {28}Bi\sphinxhyphen {}variate analysis}{173}{chapter.28}%
+\contentsline {section}{\numberline {28.1}Categorical vs categorical}{174}{section.28.1}%
+\contentsline {section}{\numberline {28.2}Categorical vs continuous}{176}{section.28.2}%
+\contentsline {section}{\numberline {28.3}Continuous vs continuous}{179}{section.28.3}%
+\contentsline {chapter}{\numberline {29}New Data Sources}{183}{chapter.29}%
+\contentsline {chapter}{\numberline {30}Feature Enhancing}{189}{chapter.30}%
+\contentsline {chapter}{\numberline {31}Cluster analysis}{193}{chapter.31}%
+\contentsline {chapter}{\numberline {32}VIF: Variance Inflation Factor}{199}{chapter.32}%
+\contentsline {section}{\numberline {32.1}TODO}{200}{section.32.1}%
+\contentsline {chapter}{\numberline {33}Principle Component Analysis}{201}{chapter.33}%
+\contentsline {section}{\numberline {33.1}TODO}{203}{section.33.1}%
+\contentsline {part}{VI\hspace {1em}6. Machine Learning}{205}{part.6}%
+\contentsline {chapter}{\numberline {34}Machine Learning}{207}{chapter.34}%

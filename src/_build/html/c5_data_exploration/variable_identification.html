@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>25. Variable identification &#8212; Data Science - A practical Approach</title>
+    <title>26. Variable identification &#8212; Data Science - A practical Approach</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="26. Uni-variate analysis" href="univariate_analysis.html" />
-    <link rel="prev" title="24. Introduction" href="introduction.html" />
+    <link rel="next" title="27. Uni-variate analysis" href="univariate_analysis.html" />
+    <link rel="prev" title="25. Introduction" href="introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -187,6 +187,11 @@
    17. Pivot
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/sql_integration.html">
+   18. Using SQL
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -196,32 +201,32 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_visualisation/introduction.html">
-   18. Introduction
+   19. Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_visualisation/line.html">
-   19. Line plot
+   20. Line plot
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_visualisation/histogram.html">
-   20. Histogram plot
+   21. Histogram plot
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_visualisation/box.html">
-   21. Box plot
+   22. Box plot
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_visualisation/scatter.html">
-   22. Scatter plot
+   23. Scatter plot
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../c4_data_visualisation/heatmap.html">
-   23. Heatmap plot
+   24. Heatmap plot
   </a>
  </li>
 </ul>
@@ -233,47 +238,47 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
-   24. Introduction
+   25. Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   25. Variable identification
+   26. Variable identification
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="univariate_analysis.html">
-   26. Uni-variate analysis
+   27. Uni-variate analysis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bivariate_analysis.html">
-   27. Bi-variate analysis
+   28. Bi-variate analysis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="external_data.html">
-   28. New Data Sources
+   29. New Data Sources
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="feature_engineering.html">
-   29. Feature Enhancing
+   30. Feature Enhancing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cluster_analysis.html">
-   30. Cluster analysis
+   31. Cluster analysis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="variance_inflation.html">
-   31. VIF: Variance Inflation Factor
+   32. VIF: Variance Inflation Factor
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="principle_component_analysis.html">
-   32. Principle Component Analysis
+   33. Principle Component Analysis
   </a>
  </li>
 </ul>
@@ -285,7 +290,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../c6_machine_learning/introduction.html">
-   33. Machine Learning
+   34. Machine Learning
   </a>
  </li>
 </ul>
@@ -399,27 +404,27 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#description">
-   25.1. description
+   26.1. description
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#uniques-frequencies-and-ranges">
-   25.2. Uniques, frequencies and ranges
+   26.2. Uniques, frequencies and ranges
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#mean-and-deviation">
-   25.3. mean and deviation
+   26.3. mean and deviation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#median-and-interquantile-range">
-   25.4. median and interquantile range
+   26.4. median and interquantile range
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#modes-and-frequencies">
-   25.5. modes and frequencies
+   26.5. modes and frequencies
   </a>
  </li>
 </ul>
@@ -434,7 +439,7 @@
               <div>
                 
   <div class="section" id="variable-identification">
-<h1><span class="section-number">25. </span>Variable identification<a class="headerlink" href="#variable-identification" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">26. </span>Variable identification<a class="headerlink" href="#variable-identification" title="Permalink to this headline">¶</a></h1>
 <p>in this notebook we are going to look into a few simple but interesting techniques about getting to know more about what is inside the dataset you are given. Whenever you start out on a new project these steps are usually the first that are performed in order to know how to proceed.</p>
 <p>We start out by loading the titanic dataset from seaborn</p>
 <div class="cell docutils container">
@@ -448,7 +453,7 @@
 </div>
 </div>
 <div class="section" id="description">
-<h2><span class="section-number">25.1. </span>description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.1. </span>description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>Let us start out simple and retrieve information about each column, using the .info method we can get non-null counts (giving us an idea if there are nans) and the type of each column (to see if we need to change types).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -676,7 +681,7 @@ memory usage: 80.7+ KB
 </div>
 </div>
 <div class="section" id="uniques-frequencies-and-ranges">
-<h2><span class="section-number">25.2. </span>Uniques, frequencies and ranges<a class="headerlink" href="#uniques-frequencies-and-ranges" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.2. </span>Uniques, frequencies and ranges<a class="headerlink" href="#uniques-frequencies-and-ranges" title="Permalink to this headline">¶</a></h2>
 <p>the describe method is a bit lacklusting for categorical features, so we use some good old data wrangling to get more info, asking for unique values gives us all the possible values for a column. Aside from the uniques, we can also  get the value counts or frequencies and the range of a column.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -719,7 +724,7 @@ Name: embark_town, dtype: int64
 </div>
 </div>
 <div class="section" id="mean-and-deviation">
-<h2><span class="section-number">25.3. </span>mean and deviation<a class="headerlink" href="#mean-and-deviation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.3. </span>mean and deviation<a class="headerlink" href="#mean-and-deviation" title="Permalink to this headline">¶</a></h2>
 <p>to get more information about a numerical range, we calculate the mean and deviation. Note that these statistics imply that our column is normally distributed!</p>
 <p>You can also see that I applied the dropna method, this because the calculations cannot handle nan values, but this means our outcome might be distorted from the truth, thread carefuly.</p>
 <div class="cell docutils container">
@@ -755,7 +760,7 @@ Name: embark_town, dtype: int64
 </div>
 </div>
 <div class="section" id="median-and-interquantile-range">
-<h2><span class="section-number">25.4. </span>median and interquantile range<a class="headerlink" href="#median-and-interquantile-range" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.4. </span>median and interquantile range<a class="headerlink" href="#median-and-interquantile-range" title="Permalink to this headline">¶</a></h2>
 <p>When our distribution is not normal, using the median and IQR is advised.
 First we apply the shapiro wilk test and it has a very low p-value (the second value) which means we can reject the null-hypothesis that there is a normal distribution. more info about shapiro-wilk can be found on <a class="reference external" href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">wikipedia</a></p>
 <div class="cell docutils container">
@@ -830,7 +835,7 @@ You can also see this on the following plot, where we note the mean, median and 
 </div>
 </div>
 <div class="section" id="modes-and-frequencies">
-<h2><span class="section-number">25.5. </span>modes and frequencies<a class="headerlink" href="#modes-and-frequencies" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.5. </span>modes and frequencies<a class="headerlink" href="#modes-and-frequencies" title="Permalink to this headline">¶</a></h2>
 <p>When we don’t have numerical data we can still find some interesting results, here we use the mode ( most frequent value) and the proporties of each value to deduce the proporties of people that embarked in the 3 different towns. Nearly 3/4 people embarked in one harbour.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -897,7 +902,7 @@ Name: embark_town, dtype: float64
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">24. </span>Introduction</p>
+                <p class="prevnext-title"><span class="section-number">25. </span>Introduction</p>
             </div>
         </a>
     </div>
@@ -905,7 +910,7 @@ Name: embark_town, dtype: float64
         <a class="right-next" href="univariate_analysis.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">26. </span>Uni-variate analysis</p>
+                <p class="prevnext-title"><span class="section-number">27. </span>Uni-variate analysis</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
