@@ -28,6 +28,7 @@ parts:
   - file: c3_data_preprocessing/merge
   - file: c3_data_preprocessing/groupby
   - file: c3_data_preprocessing/pivot
+  - file: c3_data_preprocessing/sql_integration
 - caption: 4. Data Visualisation
   numbered: True
   chapters:
