@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages/nbclient/client.py", line 1117, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages/nbclient/util.py", line 78, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages/nbclient/util.py", line 57, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages/nbclient/client.py", line 558, in async_execute
+    await self.async_execute_cell(
+  File "/home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages/nbclient/client.py", line 862, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/lorenzf/git/data-science-practical-approach/venv/lib/python3.8/site-packages/nbclient/client.py", line 765, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+if not os.path.exists("/root/.kaggle"):
+    os.mkdir("/root/.kaggle")
+
+with open('/root/.kaggle/kaggle.json', 'w') as f:
+    json.dump(
+        {
+            "username":"lorenzf",
+            "key":"7a44a9e99b27e796177d793a3d85b8cf"
+        }
+        , f)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mPermissionError[0m                           Traceback (most recent call last)
+[0;32m/tmp/ipykernel_13954/3113012040.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mif[0m [0;32mnot[0m [0mos[0m[0;34m.[0m[0mpath[0m[0;34m.[0m[0mexists[0m[0;34m([0m[0;34m"/root/.kaggle"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m     [0mos[0m[0;34m.[0m[0mmkdir[0m[0;34m([0m[0;34m"/root/.kaggle"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;34m[0m[0m
+[1;32m      4[0m [0;32mwith[0m [0mopen[0m[0;34m([0m[0;34m'/root/.kaggle/kaggle.json'[0m[0;34m,[0m [0;34m'w'[0m[0;34m)[0m [0;32mas[0m [0mf[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m     json.dump(
+
+[0;31mPermissionError[0m: [Errno 13] Permission denied: '/root/.kaggle'
+PermissionError: [Errno 13] Permission denied: '/root/.kaggle'
+

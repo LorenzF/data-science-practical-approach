@@ -1,0 +1,2276 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>37. Case Study: Olympic medals &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="38. Case Study: User survey" href="UserSurvey.html" />
+    <link rel="prev" title="36. Case Study: Olympic medals" href="Churn.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/outliers.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/string_operations.html">
+   6. String operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
+   7. Datetime operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
+   8. Categorical encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
+   10. Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
+   11. Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/some_practice.html">
+   12. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
+   13. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   14. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/merge.html">
+   15. Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
+   16. Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
+   17. Pivot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/sql_integration.html">
+   18. Using SQL
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/introduction.html">
+   19. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/line.html">
+   20. Line plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/histogram.html">
+   21. Histogram plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/box.html">
+   22. Box plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/scatter.html">
+   23. Scatter plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/heatmap.html">
+   24. Heatmap plot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/introduction.html">
+   25. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/variable_identification.html">
+   26. Variable identification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/univariate_analysis.html">
+   27. Uni-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/bivariate_analysis.html">
+   28. Bi-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/external_data.html">
+   29. New Data Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/feature_engineering.html">
+   30. Feature Enhancing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/cluster_analysis.html">
+   31. Cluster analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/variance_inflation.html">
+   32. VIF: Variance Inflation Factor
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/principle_component_analysis.html">
+   33. Principle Component Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   34. Machine Learning
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  7. Case Studies
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Olist.html">
+   35. Data Exploration and Visualization: Case study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Churn.html">
+   36. Case Study: Olympic medals
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   37. Case Study: Olympic medals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="UserSurvey.html">
+   38. Case Study: User survey
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Jokes.html">
+   39. Case Study: Jokes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c7_case_studies/Olympics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc7_case_studies/Olympics.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c7_case_studies/Olympics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c7_case_studies/Olympics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#goals">
+   37.1. Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parsing">
+   37.2. Parsing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparation">
+   37.3. Preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-types">
+     37.3.1. Data Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#missing-values">
+     37.3.2. Missing values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#duplicates">
+     37.3.3. Duplicates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexing">
+     37.3.4. Indexing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#processing">
+   37.4. Processing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#medals-per-country-per-sport">
+     37.4.1. Medals per country per sport
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#average-statistics-per-year-country-and-sport">
+     37.4.2. average statistics per year, country and sport
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploration">
+   37.5. Exploration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   37.6. Visualization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   37.7. Summary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="case-study-olympic-medals">
+<h1><span class="section-number">37. </span>Case Study: Olympic medals<a class="headerlink" href="#case-study-olympic-medals" title="Permalink to this headline">¶</a></h1>
+<p>In this case study we explore the history of medals in the summer and winter olympics</p>
+<p>The case study is divided into several parts:</p>
+<ul class="simple">
+<li><p>Goals</p></li>
+<li><p>Parsing</p></li>
+<li><p>Preparation (cleaning)</p></li>
+<li><p>Processing</p></li>
+<li><p>Exploration</p></li>
+<li><p>Visualization</p></li>
+<li><p>Conclusion</p></li>
+</ul>
+<div class="section" id="goals">
+<h2><span class="section-number">37.1. </span>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h2>
+<p>In this section we define questions that will be our guideline througout the case study</p>
+<ul class="simple">
+<li><p>Which countries are over-/underperforming?</p></li>
+<li><p>Are some countries exceptional in some sports?</p></li>
+<li><p>Do physical traits have an influence on some sports?</p></li>
+</ul>
+<p>We’ll (try to) keep these question in mind when performing the case study.</p>
+</div>
+<div class="section" id="parsing">
+<h2><span class="section-number">37.2. </span>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h2>
+<p>we start out by importing all necessary libraries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13954/4057771804.py:10: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`
+  set_matplotlib_formats(&#39;svg&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>in order to download datasets from kaggle, we need an API key to access their API, we’ll make that here</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;lorenzf&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;7a44a9e99b27e796177d793a3d85b8cf&quot;</span>
+        <span class="p">}</span>
+        <span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">PermissionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_13954</span><span class="o">/</span><span class="mf">3113012040.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
+
+<span class="ne">PermissionError</span>: [Errno 13] Permission denied: &#39;/root/.kaggle&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>now we can import kaggle too and download the datasets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">kaggle</span>
+<span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;heesoo37/120-years-of-olympic-history-athletes-and-results&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run &#39;chmod 600 /root/.kaggle/kaggle.json&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>the csv files are now in the ‘./data’ folder, we can now read them using pandas, here is the list of all csv files in our folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;noc_regions.csv&#39;, &#39;athlete_events.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The file of our interest is ‘athlete_events.csv’, it contains every contestant in every sport since 1896. Let’s print out the top 5 events.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/athlete_events.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">athlete_events</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (271116, 15)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>A Dijiang</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>180.0</td>
+      <td>80.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>A Lamusi</td>
+      <td>M</td>
+      <td>23.0</td>
+      <td>170.0</td>
+      <td>60.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>2012 Summer</td>
+      <td>2012</td>
+      <td>Summer</td>
+      <td>London</td>
+      <td>Judo</td>
+      <td>Judo Men's Extra-Lightweight</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Gunnar Nielsen Aaby</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark</td>
+      <td>DEN</td>
+      <td>1920 Summer</td>
+      <td>1920</td>
+      <td>Summer</td>
+      <td>Antwerpen</td>
+      <td>Football</td>
+      <td>Football Men's Football</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Edgar Lindenau Aabye</td>
+      <td>M</td>
+      <td>34.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark/Sweden</td>
+      <td>DEN</td>
+      <td>1900 Summer</td>
+      <td>1900</td>
+      <td>Summer</td>
+      <td>Paris</td>
+      <td>Tug-Of-War</td>
+      <td>Tug-Of-War Men's Tug-Of-War</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1988 Winter</td>
+      <td>1988</td>
+      <td>Winter</td>
+      <td>Calgary</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Seems we have a name, gender, age, height and weight of the contestant, as wel as the country they represent, the games they attended located in which city. The last 3 columns specify the sport, event within the sport and a possible medal. Presumably the keeping of their score would have been difficult as different sports use different score metrics which would be hard to compare.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noc_regions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/noc_regions.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">noc_regions</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">noc_regions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (230, 3)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NOC</th>
+      <th>region</th>
+      <th>notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AHO</td>
+      <td>Curacao</td>
+      <td>Netherlands Antilles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ALB</td>
+      <td>Albania</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ALG</td>
+      <td>Algeria</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AND</td>
+      <td>Andorra</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="preparation">
+<h2><span class="section-number">37.3. </span>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>here we perform tasks to prepare the data in a more pleasing format.</p>
+<div class="section" id="data-types">
+<h3><span class="section-number">37.3.1. </span>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
+<p>Before we do anything with our data, it is good to see if our data types are in order</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 271116 entries, 0 to 271115
+Data columns (total 15 columns):
+ #   Column  Non-Null Count   Dtype  
+---  ------  --------------   -----  
+ 0   ID      271116 non-null  int64  
+ 1   Name    271116 non-null  object 
+ 2   Sex     271116 non-null  object 
+ 3   Age     261642 non-null  float64
+ 4   Height  210945 non-null  float64
+ 5   Weight  208241 non-null  float64
+ 6   Team    271116 non-null  object 
+ 7   NOC     271116 non-null  object 
+ 8   Games   271116 non-null  object 
+ 9   Year    271116 non-null  int64  
+ 10  Season  271116 non-null  object 
+ 11  City    271116 non-null  object 
+ 12  Sport   271116 non-null  object 
+ 13  Event   271116 non-null  object 
+ 14  Medal   39783 non-null   object 
+dtypes: float64(3), int64(2), object(10)
+memory usage: 31.0+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="p">[[</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Season&#39;</span><span class="p">,</span> <span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;Sport&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">athlete_events</span><span class="p">[[</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Season&#39;</span><span class="p">,</span> <span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;Sport&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">athlete_events</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 271116 entries, 0 to 271115
+Data columns (total 15 columns):
+ #   Column  Non-Null Count   Dtype   
+---  ------  --------------   -----   
+ 0   ID      271116 non-null  int64   
+ 1   Name    271116 non-null  object  
+ 2   Sex     271116 non-null  category
+ 3   Age     261642 non-null  float64 
+ 4   Height  210945 non-null  float64 
+ 5   Weight  208241 non-null  float64 
+ 6   Team    271116 non-null  category
+ 7   NOC     271116 non-null  object  
+ 8   Games   271116 non-null  object  
+ 9   Year    271116 non-null  int64   
+ 10  Season  271116 non-null  category
+ 11  City    271116 non-null  category
+ 12  Sport   271116 non-null  category
+ 13  Event   271116 non-null  category
+ 14  Medal   39783 non-null   object  
+dtypes: category(6), float64(3), int64(2), object(4)
+memory usage: 20.8+ MB
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="missing-values">
+<h3><span class="section-number">37.3.2. </span>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline">¶</a></h3>
+<p>for each dataframe we apply a few checks in order to see the quality of data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ID         0.000000
+Name       0.000000
+Sex        0.000000
+Age        3.494445
+Height    22.193821
+Weight    23.191180
+Team       0.000000
+NOC        0.000000
+Games      0.000000
+Year       0.000000
+Season     0.000000
+City       0.000000
+Sport      0.000000
+Event      0.000000
+Medal     85.326207
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Age, 3.5% missing:</p>
+<p>Here we can’t do much about it, we could impute using mean or median by looking at other contestants from the same sport/event, however I  have a feeling that missing ages might be prevalent in the same sports.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year
+1948    1176
+1924    1142
+1928     963
+1920     845
+1900     790
+1906     743
+1908     649
+1956     638
+1932     330
+1952     277
+1904     274
+1960     221
+1984     216
+1936     213
+1980     187
+1896     163
+1912     156
+1968     118
+1988     110
+1972      96
+1964      56
+1976      52
+1992      44
+1996       8
+1994       2
+Name: Age, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Sport&#39;</span><span class="p">)[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sport
+Gymnastics           1179
+Athletics            1117
+Shooting              821
+Fencing               715
+Cycling               678
+Rowing                526
+Swimming              524
+Art Competitions      507
+Wrestling             491
+Football              375
+Boxing                318
+Sailing               285
+Weightlifting         206
+Hockey                204
+Water Polo            200
+Equestrianism         193
+Basketball            186
+Tennis                124
+Diving                121
+Archery                80
+Alpine Skiing          78
+Bobsleigh              72
+Modern Pentathlon      53
+Rugby                  48
+Tug-Of-War             44
+Name: Age, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although some sports and years are more problematic, we cannot pinpoint a specific group where ages are missing. Imputing with mean or median would drasticly influence the distribution and standard deviation later on. I opt to leave the missing values as is and drop rows with NaN’s when using age in calculations.</p>
+<p>Height &amp; Weight, 22 &amp; 23 % missing:</p>
+<p>Similar to the Age, yet much more are missing, to a point where dropping would become problematic. Let’s see if we can find a hotspot of missing data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)[[</span><span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Height</th>
+      <th>Weight</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1952</th>
+      <td>7170</td>
+      <td>7171</td>
+    </tr>
+    <tr>
+      <th>1948</th>
+      <td>6311</td>
+      <td>6329</td>
+    </tr>
+    <tr>
+      <th>1936</th>
+      <td>6209</td>
+      <td>6414</td>
+    </tr>
+    <tr>
+      <th>1924</th>
+      <td>4719</td>
+      <td>5003</td>
+    </tr>
+    <tr>
+      <th>1928</th>
+      <td>4599</td>
+      <td>4856</td>
+    </tr>
+    <tr>
+      <th>1956</th>
+      <td>3748</td>
+      <td>3754</td>
+    </tr>
+    <tr>
+      <th>1920</th>
+      <td>3525</td>
+      <td>3821</td>
+    </tr>
+    <tr>
+      <th>1912</th>
+      <td>3319</td>
+      <td>3444</td>
+    </tr>
+    <tr>
+      <th>1992</th>
+      <td>3175</td>
+      <td>3157</td>
+    </tr>
+    <tr>
+      <th>1908</th>
+      <td>2626</td>
+      <td>2618</td>
+    </tr>
+    <tr>
+      <th>1932</th>
+      <td>2108</td>
+      <td>2771</td>
+    </tr>
+    <tr>
+      <th>1996</th>
+      <td>1871</td>
+      <td>1821</td>
+    </tr>
+    <tr>
+      <th>1900</th>
+      <td>1820</td>
+      <td>1857</td>
+    </tr>
+    <tr>
+      <th>1906</th>
+      <td>1476</td>
+      <td>1528</td>
+    </tr>
+    <tr>
+      <th>1904</th>
+      <td>1088</td>
+      <td>1154</td>
+    </tr>
+    <tr>
+      <th>1960</th>
+      <td>961</td>
+      <td>1048</td>
+    </tr>
+    <tr>
+      <th>1988</th>
+      <td>933</td>
+      <td>928</td>
+    </tr>
+    <tr>
+      <th>1976</th>
+      <td>876</td>
+      <td>920</td>
+    </tr>
+    <tr>
+      <th>1964</th>
+      <td>681</td>
+      <td>708</td>
+    </tr>
+    <tr>
+      <th>1984</th>
+      <td>598</td>
+      <td>603</td>
+    </tr>
+    <tr>
+      <th>1980</th>
+      <td>588</td>
+      <td>596</td>
+    </tr>
+    <tr>
+      <th>1896</th>
+      <td>334</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>1972</th>
+      <td>301</td>
+      <td>389</td>
+    </tr>
+    <tr>
+      <th>1994</th>
+      <td>187</td>
+      <td>189</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>176</td>
+      <td>223</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Sport&#39;</span><span class="p">)[[</span><span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Height</th>
+      <th>Weight</th>
+    </tr>
+    <tr>
+      <th>Sport</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Gymnastics</th>
+      <td>8045</td>
+      <td>8372</td>
+    </tr>
+    <tr>
+      <th>Athletics</th>
+      <td>5717</td>
+      <td>6023</td>
+    </tr>
+    <tr>
+      <th>Swimming</th>
+      <td>4045</td>
+      <td>4391</td>
+    </tr>
+    <tr>
+      <th>Shooting</th>
+      <td>3779</td>
+      <td>4148</td>
+    </tr>
+    <tr>
+      <th>Fencing</th>
+      <td>3773</td>
+      <td>4195</td>
+    </tr>
+    <tr>
+      <th>Art Competitions</th>
+      <td>3519</td>
+      <td>3523</td>
+    </tr>
+    <tr>
+      <th>Cycling</th>
+      <td>2883</td>
+      <td>3029</td>
+    </tr>
+    <tr>
+      <th>Rowing</th>
+      <td>2675</td>
+      <td>2662</td>
+    </tr>
+    <tr>
+      <th>Alpine Skiing</th>
+      <td>2435</td>
+      <td>2479</td>
+    </tr>
+    <tr>
+      <th>Football</th>
+      <td>2098</td>
+      <td>2212</td>
+    </tr>
+    <tr>
+      <th>Wrestling</th>
+      <td>1808</td>
+      <td>1849</td>
+    </tr>
+    <tr>
+      <th>Equestrianism</th>
+      <td>1742</td>
+      <td>1791</td>
+    </tr>
+    <tr>
+      <th>Sailing</th>
+      <td>1647</td>
+      <td>1716</td>
+    </tr>
+    <tr>
+      <th>Boxing</th>
+      <td>1469</td>
+      <td>1497</td>
+    </tr>
+    <tr>
+      <th>Cross Country Skiing</th>
+      <td>1464</td>
+      <td>1596</td>
+    </tr>
+    <tr>
+      <th>Hockey</th>
+      <td>1102</td>
+      <td>1150</td>
+    </tr>
+    <tr>
+      <th>Speed Skating</th>
+      <td>1090</td>
+      <td>1192</td>
+    </tr>
+    <tr>
+      <th>Water Polo</th>
+      <td>1058</td>
+      <td>1122</td>
+    </tr>
+    <tr>
+      <th>Weightlifting</th>
+      <td>929</td>
+      <td>134</td>
+    </tr>
+    <tr>
+      <th>Ice Hockey</th>
+      <td>905</td>
+      <td>923</td>
+    </tr>
+    <tr>
+      <th>Tennis</th>
+      <td>820</td>
+      <td>854</td>
+    </tr>
+    <tr>
+      <th>Bobsleigh</th>
+      <td>786</td>
+      <td>846</td>
+    </tr>
+    <tr>
+      <th>Diving</th>
+      <td>764</td>
+      <td>828</td>
+    </tr>
+    <tr>
+      <th>Basketball</th>
+      <td>655</td>
+      <td>858</td>
+    </tr>
+    <tr>
+      <th>Figure Skating</th>
+      <td>631</td>
+      <td>786</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Again, no hotspots. For the same reason (distribution) we will not be imputing values, although for machine learning reasons this might be useful to increase the training pool. We will drop the rows with missing values whenever we use the height/weight columns. It would be wise here to inform our audience that conclusions on this data might be skewed by a possible bias - there might be a reason the data is missing - which might in turn cause us to make a wrongful conclusion!</p>
+<p>Medal, 85% Missing:</p>
+<p>Lastly we see that most are missing the medal, this is obviously that they did not win one. We could boldly assume that since each event has 3 medals, there must be an average of 20 contestants (17/20 = 85%). But this might be deviating over time and sport.</p>
+</div>
+<div class="section" id="duplicates">
+<h3><span class="section-number">37.3.3. </span>Duplicates<a class="headerlink" href="#duplicates" title="Permalink to this headline">¶</a></h3>
+<p>For any reason, our dataset might be containing duplicates that would be counted twice and will introduce a bias we would not want. On the other hand, duplicates can be subjected to interpretation, here we would say that if 2 records share a name, gender, NOC, Games and event, the rows would be identical.
+This would mean that the person would have performed twice in the same event for the same games under the same flag. The illustration below demonstrates a duplicate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="p">[</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">Name</span> <span class="o">==</span> <span class="s1">&#39;Jacques Doucet&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>57956</th>
+      <td>29661</td>
+      <td>Jacques Doucet</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Favorite-17</td>
+      <td>FRA</td>
+      <td>1900 Summer</td>
+      <td>1900</td>
+      <td>Summer</td>
+      <td>Paris</td>
+      <td>Sailing</td>
+      <td>Sailing Mixed Open</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>57957</th>
+      <td>29661</td>
+      <td>Jacques Doucet</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Favorite-1</td>
+      <td>FRA</td>
+      <td>1900 Summer</td>
+      <td>1900</td>
+      <td>Summer</td>
+      <td>Paris</td>
+      <td>Sailing</td>
+      <td>Sailing Mixed 2-3 Ton</td>
+      <td>Silver</td>
+    </tr>
+    <tr>
+      <th>57958</th>
+      <td>29661</td>
+      <td>Jacques Doucet</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Favorite-1</td>
+      <td>FRA</td>
+      <td>1900 Summer</td>
+      <td>1900</td>
+      <td>Summer</td>
+      <td>Paris</td>
+      <td>Sailing</td>
+      <td>Sailing Mixed 2-3 Ton</td>
+      <td>Silver</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can se that Jacques for some reason is listed twice for the Sailing Mixed 2-3 Ton event. He won silver, but coming in second is no excused to be listed a second time! Perhaps we can find out where things went wrong by investigating in which year the duplicates appear.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duplicate_events</span> <span class="o">=</span> <span class="n">athlete_events</span><span class="p">[</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="s1">&#39;Games&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">])]</span>
+<span class="n">duplicate_events</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Year&#39;</span><span class="p">])[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year
+1900    110
+1908     35
+1924    126
+1928    347
+1932    504
+1936    258
+1948    100
+1968      2
+1996      2
+1998      3
+2002      3
+2012      1
+Name: Name, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Seems most of them happen before 1948, perhaps due to errors in manual entries, it feels safe to delete them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span> <span class="o">=</span> <span class="n">athlete_events</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="s1">&#39;Games&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="indexing">
+<h3><span class="section-number">37.3.4. </span>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h3>
+<p>It is more convenient to work with an index, our dataset already contains an id which we can use as index</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span> <span class="o">=</span> <span class="n">athlete_events</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
+<span class="n">athlete_events</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>A Dijiang</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>180.0</td>
+      <td>80.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A Lamusi</td>
+      <td>M</td>
+      <td>23.0</td>
+      <td>170.0</td>
+      <td>60.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>2012 Summer</td>
+      <td>2012</td>
+      <td>Summer</td>
+      <td>London</td>
+      <td>Judo</td>
+      <td>Judo Men's Extra-Lightweight</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Gunnar Nielsen Aaby</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark</td>
+      <td>DEN</td>
+      <td>1920 Summer</td>
+      <td>1920</td>
+      <td>Summer</td>
+      <td>Antwerpen</td>
+      <td>Football</td>
+      <td>Football Men's Football</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Edgar Lindenau Aabye</td>
+      <td>M</td>
+      <td>34.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark/Sweden</td>
+      <td>DEN</td>
+      <td>1900 Summer</td>
+      <td>1900</td>
+      <td>Summer</td>
+      <td>Paris</td>
+      <td>Tug-Of-War</td>
+      <td>Tug-Of-War Men's Tug-Of-War</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1988 Winter</td>
+      <td>1988</td>
+      <td>Winter</td>
+      <td>Calgary</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="processing">
+<h2><span class="section-number">37.4. </span>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="medals-per-country-per-sport">
+<h3><span class="section-number">37.4.1. </span>Medals per country per sport<a class="headerlink" href="#medals-per-country-per-sport" title="Permalink to this headline">¶</a></h3>
+<p>To find out which country (NOC) performs the best, we would like to have a dataframe with 3 columns [‘Gold’, ‘Silver’, ‘Bronze’] containing the count of each, as row index, we would have the games and the NOC, thus a multiindex.
+An important detail is that team sports are given multiple medals, as indicated by the exampe below. Be careful as bias might not always as visible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">athlete_events</span><span class="p">[(</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">Event</span> <span class="o">==</span> <span class="s2">&quot;Basketball Men&#39;s Basketball&quot;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">Games</span><span class="o">==</span><span class="s1">&#39;1992 Summer&#39;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">athlete_events</span><span class="o">.</span><span class="n">Medal</span><span class="o">==</span><span class="s1">&#39;Gold&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7901</th>
+      <td>Charles Wade Barkley</td>
+      <td>M</td>
+      <td>29.0</td>
+      <td>198.0</td>
+      <td>114.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>11668</th>
+      <td>Larry Joe Bird</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>205.0</td>
+      <td>100.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>30009</th>
+      <td>Clyde Austin Drexler</td>
+      <td>M</td>
+      <td>30.0</td>
+      <td>200.0</td>
+      <td>101.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>33553</th>
+      <td>Patrick Aloysius Ewing</td>
+      <td>M</td>
+      <td>29.0</td>
+      <td>213.0</td>
+      <td>109.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>55424</th>
+      <td>Earvin "Magic" Johnson, Jr.</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>205.0</td>
+      <td>100.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>55881</th>
+      <td>Michael Jeffrey Jordan</td>
+      <td>M</td>
+      <td>29.0</td>
+      <td>198.0</td>
+      <td>90.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>65809</th>
+      <td>Christian Donald Laettner</td>
+      <td>M</td>
+      <td>22.0</td>
+      <td>211.0</td>
+      <td>107.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>74176</th>
+      <td>Karl Malone</td>
+      <td>M</td>
+      <td>29.0</td>
+      <td>205.0</td>
+      <td>116.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>83179</th>
+      <td>Christopher Paul "Chris" Mullin</td>
+      <td>M</td>
+      <td>28.0</td>
+      <td>200.0</td>
+      <td>98.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>95105</th>
+      <td>Scottie Maurice Pippen</td>
+      <td>M</td>
+      <td>26.0</td>
+      <td>200.0</td>
+      <td>102.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>101428</th>
+      <td>David Maurice Robinson</td>
+      <td>M</td>
+      <td>26.0</td>
+      <td>216.0</td>
+      <td>107.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>115325</th>
+      <td>John Houston Stockton</td>
+      <td>M</td>
+      <td>30.0</td>
+      <td>185.0</td>
+      <td>79.0</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>Gold</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The preprocessing for this dataframe seem complex but is combination of several operations:</p>
+<ul class="simple">
+<li><p>drop all records with no medals</p></li>
+<li><p>drop duplicates based on ‘Games’, ‘NOC’ , ‘Event’, ‘Medal’ to correct for team sports</p></li>
+<li><p>group per ‘Games’, ‘NOC’ , ‘Medal’</p></li>
+<li><p>aggregate groups by calculating their size</p></li>
+</ul>
+<p>At this point, we have a single column containing the amount of medals and 3 indices: ‘Games’ , ‘NOC’ and ‘Medal’</p>
+<ul class="simple">
+<li><p>unstack the ‘Medal’ column to obtain 3 columns ‘Gold’, ‘Silver’, ‘Bronze’</p></li>
+<li><p>make sure the order of columns is ‘Gold’, ‘Silver’, ‘Bronze’</p></li>
+<li><p>drop rows where no medals are won, as we do not need those rows</p></li>
+</ul>
+<p>This operation looks like the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">medals_country_df</span> <span class="o">=</span> <span class="n">athlete_events</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Medal&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s1">&#39;Games&#39;</span><span class="p">,</span> <span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Games&#39;</span><span class="p">,</span> <span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="s1">&#39;Medal&#39;</span><span class="p">,</span> <span class="s1">&#39;Sport&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s1">&#39;Medal&#39;</span><span class="p">)[[</span><span class="s1">&#39;Gold&#39;</span><span class="p">,</span> <span class="s1">&#39;Silver&#39;</span><span class="p">,</span> <span class="s1">&#39;Bronze&#39;</span><span class="p">]]</span><span class="c1">#.dropna(how=&#39;all&#39;)#.fillna(0)</span>
+<span class="n">medals_country_df</span> <span class="o">=</span> <span class="n">medals_country_df</span><span class="p">[</span><span class="n">medals_country_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">medals_country_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Medal</th>
+      <th>Gold</th>
+      <th>Silver</th>
+      <th>Bronze</th>
+    </tr>
+    <tr>
+      <th>Games</th>
+      <th>NOC</th>
+      <th>Sport</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">1896 Summer</th>
+      <th rowspan="2" valign="top">AUS</th>
+      <th>Athletics</th>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Tennis</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">AUT</th>
+      <th>Cycling</th>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Swimming</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>DEN</th>
+      <th>Fencing</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">2016 Summer</th>
+      <th>UZB</th>
+      <th>Wrestling</th>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">VEN</th>
+      <th>Athletics</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Boxing</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Cycling</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>VIE</th>
+      <th>Shooting</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>6915 rows × 3 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="average-statistics-per-year-country-and-sport">
+<h3><span class="section-number">37.4.2. </span>average statistics per year, country and sport<a class="headerlink" href="#average-statistics-per-year-country-and-sport" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_stats_df</span> <span class="o">=</span> <span class="n">athlete_events</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="s1">&#39;NOC&#39;</span><span class="p">,</span> <span class="s1">&#39;Games&#39;</span><span class="p">,</span> <span class="s1">&#39;Sport&#39;</span><span class="p">])[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">avg_stats_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Sport</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">F</th>
+      <th rowspan="5" valign="top">AFG</th>
+      <th rowspan="2" valign="top">2004 Summer</th>
+      <th>Athletics</th>
+      <td>18.0</td>
+      <td>180.0</td>
+      <td>56.0</td>
+    </tr>
+    <tr>
+      <th>Judo</th>
+      <td>18.0</td>
+      <td>165.0</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>2008 Summer</th>
+      <th>Athletics</th>
+      <td>22.0</td>
+      <td>180.0</td>
+      <td>56.0</td>
+    </tr>
+    <tr>
+      <th>2012 Summer</th>
+      <th>Athletics</th>
+      <td>23.0</td>
+      <td>160.0</td>
+      <td>52.0</td>
+    </tr>
+    <tr>
+      <th>2016 Summer</th>
+      <th>Athletics</th>
+      <td>20.0</td>
+      <td>165.0</td>
+      <td>55.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">M</th>
+      <th rowspan="5" valign="top">ZIM</th>
+      <th rowspan="5" valign="top">2016 Summer</th>
+      <th>Archery</th>
+      <td>37.0</td>
+      <td>186.0</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>Athletics</th>
+      <td>29.6</td>
+      <td>167.6</td>
+      <td>63.2</td>
+    </tr>
+    <tr>
+      <th>Rowing</th>
+      <td>27.0</td>
+      <td>191.0</td>
+      <td>87.0</td>
+    </tr>
+    <tr>
+      <th>Shooting</th>
+      <td>42.0</td>
+      <td>182.0</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>Swimming</th>
+      <td>22.0</td>
+      <td>181.0</td>
+      <td>84.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>31329 rows × 3 columns</p>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="exploration">
+<h2><span class="section-number">37.5. </span>Exploration<a class="headerlink" href="#exploration" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="visualization">
+<h2><span class="section-number">37.6. </span>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="summary">
+<h2><span class="section-number">37.7. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c7_case_studies"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Churn.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">36. </span>Case Study: Olympic medals</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="UserSurvey.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">38. </span>Case Study: User survey</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
