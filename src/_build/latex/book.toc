@@ -82,3 +82,85 @@
 \contentsline {section}{\numberline {33.1}TODO}{203}{section.33.1}%
 \contentsline {part}{VI\hspace {1em}6. Machine Learning}{205}{part.6}%
 \contentsline {chapter}{\numberline {34}Machine Learning}{207}{chapter.34}%
+\contentsline {part}{VII\hspace {1em}7. Case Studies}{209}{part.7}%
+\contentsline {chapter}{\numberline {35}Case study: Olist}{211}{chapter.35}%
+\contentsline {section}{\numberline {35.1}Goals}{211}{section.35.1}%
+\contentsline {section}{\numberline {35.2}Parsing}{212}{section.35.2}%
+\contentsline {section}{\numberline {35.3}Preparation}{215}{section.35.3}%
+\contentsline {subsection}{\numberline {35.3.1}Data Types}{215}{subsection.35.3.1}%
+\contentsline {subsection}{\numberline {35.3.2}Missing values}{217}{subsection.35.3.2}%
+\contentsline {subsection}{\numberline {35.3.3}Duplicates}{219}{subsection.35.3.3}%
+\contentsline {subsection}{\numberline {35.3.4}Indexing}{219}{subsection.35.3.4}%
+\contentsline {subsection}{\numberline {35.3.5}Translation}{220}{subsection.35.3.5}%
+\contentsline {section}{\numberline {35.4}Processing}{221}{section.35.4}%
+\contentsline {subsection}{\numberline {35.4.1}Product pricing}{221}{subsection.35.4.1}%
+\contentsline {subsection}{\numberline {35.4.2}grouped per category}{222}{subsection.35.4.2}%
+\contentsline {subsection}{\numberline {35.4.3}seller reviews}{222}{subsection.35.4.3}%
+\contentsline {section}{\numberline {35.5}Exploration}{224}{section.35.5}%
+\contentsline {subsection}{\numberline {35.5.1}Product pricing}{224}{subsection.35.5.1}%
+\contentsline {subsubsection}{normal distribution}{225}{subsubsection*.3}%
+\contentsline {subsubsection}{Numerical correlation}{225}{subsubsection*.4}%
+\contentsline {subsubsection}{Variance inflation}{226}{subsubsection*.5}%
+\contentsline {subsubsection}{Categorical correlation}{226}{subsubsection*.6}%
+\contentsline {subsubsection}{Grouping by category}{227}{subsubsection*.7}%
+\contentsline {subsubsection}{Dealing with small subsets in data}{230}{subsubsection*.8}%
+\contentsline {section}{\numberline {35.6}Visualization}{232}{section.35.6}%
+\contentsline {subsection}{\numberline {35.6.1}Product pricing}{232}{subsection.35.6.1}%
+\contentsline {subsubsection}{Normal distribution}{232}{subsubsection*.9}%
+\contentsline {subsubsection}{Numerical correlation}{233}{subsubsection*.10}%
+\contentsline {subsubsection}{Variance Inflation}{233}{subsubsection*.11}%
+\contentsline {subsubsection}{Categorical correlation}{234}{subsubsection*.12}%
+\contentsline {subsubsection}{Grouping by category}{234}{subsubsection*.13}%
+\contentsline {section}{\numberline {35.7}Summary}{236}{section.35.7}%
+\contentsline {subsection}{\numberline {35.7.1}Product pricing}{236}{subsection.35.7.1}%
+\contentsline {section}{\numberline {35.8}Playground}{236}{section.35.8}%
+\contentsline {chapter}{\numberline {36}Case Study: Olympic medals}{239}{chapter.36}%
+\contentsline {section}{\numberline {36.1}Goals}{239}{section.36.1}%
+\contentsline {section}{\numberline {36.2}Parsing}{239}{section.36.2}%
+\contentsline {section}{\numberline {36.3}Preparation}{241}{section.36.3}%
+\contentsline {subsection}{\numberline {36.3.1}Data Types}{241}{subsection.36.3.1}%
+\contentsline {subsection}{\numberline {36.3.2}Missing values}{244}{subsection.36.3.2}%
+\contentsline {subsection}{\numberline {36.3.3}Duplicates}{245}{subsection.36.3.3}%
+\contentsline {subsection}{\numberline {36.3.4}Indexing}{245}{subsection.36.3.4}%
+\contentsline {section}{\numberline {36.4}Processing}{246}{section.36.4}%
+\contentsline {subsection}{\numberline {36.4.1}Churn vs no churn}{246}{subsection.36.4.1}%
+\contentsline {subsection}{\numberline {36.4.2}one hot encoding}{248}{subsection.36.4.2}%
+\contentsline {subsection}{\numberline {36.4.3}correlation}{249}{subsection.36.4.3}%
+\contentsline {chapter}{\numberline {37}Case Study: Olympic medals}{251}{chapter.37}%
+\contentsline {section}{\numberline {37.1}Goals}{251}{section.37.1}%
+\contentsline {section}{\numberline {37.2}Parsing}{251}{section.37.2}%
+\contentsline {section}{\numberline {37.3}Preparation}{253}{section.37.3}%
+\contentsline {subsection}{\numberline {37.3.1}Data Types}{253}{subsection.37.3.1}%
+\contentsline {subsection}{\numberline {37.3.2}Missing values}{254}{subsection.37.3.2}%
+\contentsline {subsection}{\numberline {37.3.3}Duplicates}{257}{subsection.37.3.3}%
+\contentsline {subsection}{\numberline {37.3.4}Indexing}{258}{subsection.37.3.4}%
+\contentsline {section}{\numberline {37.4}Processing}{259}{section.37.4}%
+\contentsline {subsection}{\numberline {37.4.1}Medals per country per sport}{259}{subsection.37.4.1}%
+\contentsline {subsection}{\numberline {37.4.2}average statistics per year, country and sport}{260}{subsection.37.4.2}%
+\contentsline {section}{\numberline {37.5}Exploration}{260}{section.37.5}%
+\contentsline {section}{\numberline {37.6}Visualization}{260}{section.37.6}%
+\contentsline {section}{\numberline {37.7}Summary}{260}{section.37.7}%
+\contentsline {chapter}{\numberline {38}Case Study: User survey}{261}{chapter.38}%
+\contentsline {section}{\numberline {38.1}Goals}{261}{section.38.1}%
+\contentsline {section}{\numberline {38.2}Parsing}{261}{section.38.2}%
+\contentsline {section}{\numberline {38.3}Preparation}{265}{section.38.3}%
+\contentsline {subsection}{\numberline {38.3.1}Data Types}{265}{subsection.38.3.1}%
+\contentsline {subsection}{\numberline {38.3.2}Missing values}{268}{subsection.38.3.2}%
+\contentsline {subsection}{\numberline {38.3.3}Duplicates}{270}{subsection.38.3.3}%
+\contentsline {section}{\numberline {38.4}Processing}{271}{section.38.4}%
+\contentsline {subsection}{\numberline {38.4.1}One hot encoding questions}{271}{subsection.38.4.1}%
+\contentsline {subsection}{\numberline {38.4.2}Mean choice Matrix}{273}{subsection.38.4.2}%
+\contentsline {subsection}{\numberline {38.4.3}Count matrix}{275}{subsection.38.4.3}%
+\contentsline {chapter}{\numberline {39}Case Study: Jokes}{277}{chapter.39}%
+\contentsline {section}{\numberline {39.1}Goals}{277}{section.39.1}%
+\contentsline {section}{\numberline {39.2}Parsing}{277}{section.39.2}%
+\contentsline {section}{\numberline {39.3}Preparation}{279}{section.39.3}%
+\contentsline {subsection}{\numberline {39.3.1}Cleanup}{279}{subsection.39.3.1}%
+\contentsline {subsection}{\numberline {39.3.2}Data Types}{280}{subsection.39.3.2}%
+\contentsline {subsection}{\numberline {39.3.3}Missing values}{281}{subsection.39.3.3}%
+\contentsline {subsection}{\numberline {39.3.4}Duplicates}{282}{subsection.39.3.4}%
+\contentsline {subsection}{\numberline {39.3.5}Text formatting}{282}{subsection.39.3.5}%
+\contentsline {section}{\numberline {39.4}Processing}{283}{section.39.4}%
+\contentsline {subsection}{\numberline {39.4.1}Timing of joke}{283}{subsection.39.4.1}%
+\contentsline {subsection}{\numberline {39.4.2}Bag of words}{284}{subsection.39.4.2}%
+\contentsline {subsection}{\numberline {39.4.3}Term Frequency \sphinxhyphen {} Inverse Document Frequency}{285}{subsection.39.4.3}%

@@ -1,0 +1,2126 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>39. Case Study: Jokes &#8212; Data Science - A practical Approach</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="38. Case Study: User survey" href="UserSurvey.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science - A practical Approach</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foreword.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c1_introduction/introduction.html">
+   1. Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2. Data Preparation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/introduction.html">
+   2. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/missing_data.html">
+   3. Missing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/concatenation_deduplication.html">
+   4. Concatenation and deduplication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/outliers.html">
+   5. Outliers and validity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/string_operations.html">
+   6. String operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/datetime_operations.html">
+   7. Datetime operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/categorical_encoding.html">
+   8. Categorical encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/scaling_normalization.html">
+   10. Scaling and Normalization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/binning_ranking.html">
+   11. Binning and ranking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c2_data_preparation/some_practice.html">
+   12. Some practice
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3. Data Preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/introduction.html">
+   13. Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/indexing_slicing.html">
+   14. Indexing and slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/merge.html">
+   15. Merge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/groupby.html">
+   16. Groupby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/pivot.html">
+   17. Pivot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c3_data_preprocessing/sql_integration.html">
+   18. Using SQL
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  4. Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/introduction.html">
+   19. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/line.html">
+   20. Line plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/histogram.html">
+   21. Histogram plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/box.html">
+   22. Box plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/scatter.html">
+   23. Scatter plot
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c4_data_visualisation/heatmap.html">
+   24. Heatmap plot
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  5. Data Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/introduction.html">
+   25. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/variable_identification.html">
+   26. Variable identification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/univariate_analysis.html">
+   27. Uni-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/bivariate_analysis.html">
+   28. Bi-variate analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/external_data.html">
+   29. New Data Sources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/feature_engineering.html">
+   30. Feature Enhancing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/cluster_analysis.html">
+   31. Cluster analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/variance_inflation.html">
+   32. VIF: Variance Inflation Factor
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c5_data_exploration/principle_component_analysis.html">
+   33. Principle Component Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  6. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../c6_machine_learning/introduction.html">
+   34. Machine Learning
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  7. Case Studies
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Olist.html">
+   35. Data Exploration and Visualization: Case study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Churn.html">
+   36. Case Study: Olympic medals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Olympics.html">
+   37. Case Study: Olympic medals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="UserSurvey.html">
+   38. Case Study: User survey
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   39. Case Study: Jokes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/c7_case_studies/Jokes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/LorenzF/data-science-practical-approach"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/LorenzF/data-science-practical-approach/issues/new?title=Issue%20on%20page%20%2Fc7_case_studies/Jokes.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/LorenzF/data-science-practical-approach/master?urlpath=tree/src/c7_case_studies/Jokes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/LorenzF/data-science-practical-approach/blob/master/src/c7_case_studies/Jokes.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#goals">
+   39.1. Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parsing">
+   39.2. Parsing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparation">
+   39.3. Preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cleanup">
+     39.3.1. Cleanup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-types">
+     39.3.2. Data Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#missing-values">
+     39.3.3. Missing values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#duplicates">
+     39.3.4. Duplicates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#text-formatting">
+     39.3.5. Text formatting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#processing">
+   39.4. Processing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#timing-of-joke">
+     39.4.1. Timing of joke
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bag-of-words">
+     39.4.2. Bag of words
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#term-frequency-inverse-document-frequency">
+     39.4.3. Term Frequency - Inverse Document Frequency
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="case-study-jokes">
+<h1><span class="section-number">39. </span>Case Study: Jokes<a class="headerlink" href="#case-study-jokes" title="Permalink to this headline">¶</a></h1>
+<p>In this case study we find out if we can make ourselves funnier by analysing jokes from a database.</p>
+<p>The case study is divided into several parts:</p>
+<ul class="simple">
+<li><p>Goals</p></li>
+<li><p>Parsing</p></li>
+<li><p>Preparation (cleaning)</p></li>
+<li><p>Processing</p></li>
+<li><p>Exploration</p></li>
+<li><p>Visualization</p></li>
+<li><p>Conclusion</p></li>
+</ul>
+<div class="section" id="goals">
+<h2><span class="section-number">39.1. </span>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h2>
+<p>In this section we define questions that will be our guideline througout the case study</p>
+<ul class="simple">
+<li><p>What jokes are funny?</p></li>
+<li><p>Can we find types of jokes?</p></li>
+<li><p>Would a joke recommender work?</p></li>
+</ul>
+<p>We’ll (try to) keep these question in mind when performing the case study.</p>
+</div>
+<div class="section" id="parsing">
+<h2><span class="section-number">39.2. </span>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h2>
+<p>we start out by importing all necessary libraries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13889/4057771804.py:10: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`
+  set_matplotlib_formats(&#39;svg&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>in order to download datasets from kaggle, we need an API key to access their API, we’ll make that here</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;lorenzf&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;7a44a9e99b27e796177d793a3d85b8cf&quot;</span>
+        <span class="p">}</span>
+        <span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">PermissionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_13889</span><span class="o">/</span><span class="mf">3113012040.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
+
+<span class="ne">PermissionError</span>: [Errno 13] Permission denied: &#39;/root/.kaggle&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>now we can import kaggle too and download the datasets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">kaggle</span>
+<span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;pavellexyr/one-million-reddit-jokes&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run &#39;chmod 600 /root/.kaggle/kaggle.json&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>the csv files are now in the ‘./data’ folder, we can now read them using pandas, here is the list of all csv files in our folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;one-million-reddit-jokes.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With only one file in the dataset, we import it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/one-million-reddit-jokes.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (1000000, 12)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>id</th>
+      <th>subreddit.id</th>
+      <th>subreddit.name</th>
+      <th>subreddit.nsfw</th>
+      <th>created_utc</th>
+      <th>permalink</th>
+      <th>domain</th>
+      <th>url</th>
+      <th>selftext</th>
+      <th>title</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>post</td>
+      <td>ftbp1i</td>
+      <td>2qh72</td>
+      <td>jokes</td>
+      <td>False</td>
+      <td>1585785543</td>
+      <td>https://old.reddit.com/r/Jokes/comments/ftbp1i...</td>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>My corona is covered with foreskin so it is no...</td>
+      <td>I am soooo glad I'm not circumcised!</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>post</td>
+      <td>ftboup</td>
+      <td>2qh72</td>
+      <td>jokes</td>
+      <td>False</td>
+      <td>1585785522</td>
+      <td>https://old.reddit.com/r/Jokes/comments/ftboup...</td>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>It's called Google Sheets.</td>
+      <td>Did you know Google now has a platform for rec...</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>post</td>
+      <td>ftbopj</td>
+      <td>2qh72</td>
+      <td>jokes</td>
+      <td>False</td>
+      <td>1585785508</td>
+      <td>https://old.reddit.com/r/Jokes/comments/ftbopj...</td>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>The vacuum doesn't snore after sex.\n\n&amp;amp;#x...</td>
+      <td>What is the difference between my wife and my ...</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>post</td>
+      <td>ftbnxh</td>
+      <td>2qh72</td>
+      <td>jokes</td>
+      <td>False</td>
+      <td>1585785428</td>
+      <td>https://old.reddit.com/r/Jokes/comments/ftbnxh...</td>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>[removed]</td>
+      <td>My last joke for now.</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>post</td>
+      <td>ftbjpg</td>
+      <td>2qh72</td>
+      <td>jokes</td>
+      <td>False</td>
+      <td>1585785009</td>
+      <td>https://old.reddit.com/r/Jokes/comments/ftbjpg...</td>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>[removed]</td>
+      <td>The Nintendo 64 turns 18 this week...</td>
+      <td>134</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Already we can see a lot of unnecessary information, so cleanup is important. It seems the joke is divided in a title and selftext where often the punchline is present.</p>
+</div>
+<div class="section" id="preparation">
+<h2><span class="section-number">39.3. </span>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>here we perform tasks to prepare the data in a more pleasing format.</p>
+<div class="section" id="cleanup">
+<h3><span class="section-number">39.3.1. </span>Cleanup<a class="headerlink" href="#cleanup" title="Permalink to this headline">¶</a></h3>
+<p>First thing I would like to do see which columns are useless, by printing the amount of unique values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">reddit_jokes_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+  <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type
+1
+
+id
+1000000
+
+subreddit.id
+1
+
+subreddit.name
+1
+
+subreddit.nsfw
+1
+
+created_utc
+996373
+
+permalink
+1000000
+
+domain
+364
+
+url
+4410
+
+selftext
+520567
+
+title
+861254
+
+score
+8913
+</pre></div>
+</div>
+</div>
+</div>
+<p>a few columns only have 1 value, also the links are not important for our case, so we drop them too.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;subreddit.id&#39;</span><span class="p">,</span> <span class="s1">&#39;subreddit.name&#39;</span><span class="p">,</span> <span class="s1">&#39;subreddit.nsfw&#39;</span><span class="p">,</span> <span class="s1">&#39;permalink&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">])</span>
+<span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>created_utc</th>
+      <th>domain</th>
+      <th>selftext</th>
+      <th>title</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1585785543</td>
+      <td>self.jokes</td>
+      <td>My corona is covered with foreskin so it is no...</td>
+      <td>I am soooo glad I'm not circumcised!</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1585785522</td>
+      <td>self.jokes</td>
+      <td>It's called Google Sheets.</td>
+      <td>Did you know Google now has a platform for rec...</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1585785508</td>
+      <td>self.jokes</td>
+      <td>The vacuum doesn't snore after sex.\n\n&amp;amp;#x...</td>
+      <td>What is the difference between my wife and my ...</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1585785428</td>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>My last joke for now.</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1585785009</td>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>The Nintendo 64 turns 18 this week...</td>
+      <td>134</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>much cleaner already!</p>
+</div>
+<div class="section" id="data-types">
+<h3><span class="section-number">39.3.2. </span>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
+<p>Before we do anything with our data, it is good to see if our data types are in order</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000000 entries, 0 to 999999
+Data columns (total 5 columns):
+ #   Column       Non-Null Count    Dtype 
+---  ------       --------------    ----- 
+ 0   created_utc  1000000 non-null  int64 
+ 1   domain       1000000 non-null  object
+ 2   selftext     995525 non-null   object
+ 3   title        1000000 non-null  object
+ 4   score        1000000 non-null  int64 
+dtypes: int64(2), object(3)
+memory usage: 38.1+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>the created_utc feature is encoded in an unix timestamp, it would be more usefull to transform it to a timestamp</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">reddit_jokes_df</span><span class="p">[</span><span class="s1">&#39;created_utc&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">reddit_jokes_df</span><span class="p">[</span><span class="s1">&#39;created_utc&#39;</span><span class="p">]</span>
+<span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>domain</th>
+      <th>selftext</th>
+      <th>title</th>
+      <th>score</th>
+      <th>created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>self.jokes</td>
+      <td>My corona is covered with foreskin so it is no...</td>
+      <td>I am soooo glad I'm not circumcised!</td>
+      <td>2</td>
+      <td>2020-04-01 23:59:03</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>self.jokes</td>
+      <td>It's called Google Sheets.</td>
+      <td>Did you know Google now has a platform for rec...</td>
+      <td>9</td>
+      <td>2020-04-01 23:58:42</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>self.jokes</td>
+      <td>The vacuum doesn't snore after sex.\n\n&amp;amp;#x...</td>
+      <td>What is the difference between my wife and my ...</td>
+      <td>15</td>
+      <td>2020-04-01 23:58:28</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>My last joke for now.</td>
+      <td>9</td>
+      <td>2020-04-01 23:57:08</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>The Nintendo 64 turns 18 this week...</td>
+      <td>134</td>
+      <td>2020-04-01 23:50:09</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="missing-values">
+<h3><span class="section-number">39.3.3. </span>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline">¶</a></h3>
+<p>for each dataframe we apply a few checks in order to see the quality of data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>domain      0.0000
+selftext    0.4475
+title       0.0000
+score       0.0000
+created     0.0000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>it looks like some jokes are missing the selftext field, we show a few here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span><span class="p">[</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">selftext</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>domain</th>
+      <th>selftext</th>
+      <th>title</th>
+      <th>score</th>
+      <th>created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>625315</th>
+      <td>imgur.com</td>
+      <td>NaN</td>
+      <td>The funniest /r/jokes has ever been</td>
+      <td>67950</td>
+      <td>2017-05-20 15:41:28</td>
+    </tr>
+    <tr>
+      <th>971313</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>Ellen Pao's career</td>
+      <td>36918</td>
+      <td>2015-07-03 15:41:05</td>
+    </tr>
+    <tr>
+      <th>942471</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>If a woman sleeps with a bunch of guys, she's ...</td>
+      <td>17486</td>
+      <td>2015-10-05 16:09:09</td>
+    </tr>
+    <tr>
+      <th>926550</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>One in every 2 and a half men is HIV positive.</td>
+      <td>17456</td>
+      <td>2015-11-18 04:29:54</td>
+    </tr>
+    <tr>
+      <th>919422</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>Accordion to a recent survey, replacing words ...</td>
+      <td>12580</td>
+      <td>2015-12-07 18:55:27</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>929807</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>9gag</td>
+      <td>0</td>
+      <td>2015-11-09 03:33:22</td>
+    </tr>
+    <tr>
+      <th>959394</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>Like flaming globes of Sigmund</td>
+      <td>0</td>
+      <td>2015-08-14 13:40:21</td>
+    </tr>
+    <tr>
+      <th>929809</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>On a scale of 10 to 10, how good am I at givin...</td>
+      <td>0</td>
+      <td>2015-11-09 03:26:55</td>
+    </tr>
+    <tr>
+      <th>959338</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>Who is Julius Caesar's favorite singer? Mark A...</td>
+      <td>0</td>
+      <td>2015-08-14 17:03:55</td>
+    </tr>
+    <tr>
+      <th>999984</th>
+      <td>self.jokes</td>
+      <td>NaN</td>
+      <td>One direction should be renamed 0.8 Direction</td>
+      <td>0</td>
+      <td>2015-03-26 19:57:54</td>
+    </tr>
+  </tbody>
+</table>
+<p>4475 rows × 5 columns</p>
+</div></div></div>
+</div>
+<p>as far as I can see here the jokes are so short they are only one sentence, so we can fill in the missing values with an empty text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">selftext</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">selftext</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This does not mean we are done, earlier I noticed the words [removed] and [deleted] in the selftext feature, indicating the joke was removed or deleted, these are missing values!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span><span class="p">[</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">selftext</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;[removed]&#39;</span><span class="p">,</span> <span class="s1">&#39;[deleted]&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>domain</th>
+      <th>selftext</th>
+      <th>title</th>
+      <th>score</th>
+      <th>created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>My last joke for now.</td>
+      <td>9</td>
+      <td>2020-04-01 23:57:08</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>The Nintendo 64 turns 18 this week...</td>
+      <td>134</td>
+      <td>2020-04-01 23:50:09</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>Sex with teacher.</td>
+      <td>1</td>
+      <td>2020-04-01 23:49:55</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>Another long one.</td>
+      <td>8</td>
+      <td>2020-04-01 23:44:11</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>self.jokes</td>
+      <td>[removed]</td>
+      <td>A Priest takes a walk down to the docks one day</td>
+      <td>88</td>
+      <td>2020-04-01 23:39:27</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>I am going to remove these jokes as they are not complete anymore, it might have been that these jokes have been removed as they have already been posted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="p">[</span><span class="o">~</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">selftext</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;[removed]&#39;</span><span class="p">,</span> <span class="s1">&#39;[deleted]&#39;</span><span class="p">])]</span>
+<span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(578637, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>seems we have kept about 578k jokes, not bad!</p>
+</div>
+<div class="section" id="duplicates">
+<h3><span class="section-number">39.3.4. </span>Duplicates<a class="headerlink" href="#duplicates" title="Permalink to this headline">¶</a></h3>
+<p>As formatting of text might be different i’m not expecting a lot of duplicates, let’s see what we can find.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span><span class="p">[</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;selftext&#39;</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>domain</th>
+      <th>selftext</th>
+      <th>title</th>
+      <th>score</th>
+      <th>created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>211</th>
+      <td>self.jokes</td>
+      <td>An academia nut..</td>
+      <td>What do you call a nut that gets good grades?</td>
+      <td>5</td>
+      <td>2020-04-01 18:54:06</td>
+    </tr>
+    <tr>
+      <th>4452</th>
+      <td>self.jokes</td>
+      <td>Repossssssssst</td>
+      <td>If a snake who is on reddit has to comment a r...</td>
+      <td>0</td>
+      <td>2020-03-27 09:16:20</td>
+    </tr>
+    <tr>
+      <th>6349</th>
+      <td>self.jokes</td>
+      <td>“To Japan,” replies her husband. \n\n“Oh my! T...</td>
+      <td>A woman asks her husband where he’s taking the...</td>
+      <td>4</td>
+      <td>2020-03-25 00:48:09</td>
+    </tr>
+    <tr>
+      <th>6881</th>
+      <td>self.jokes</td>
+      <td>Fortunately, I belong to the 1% of intelligent...</td>
+      <td>99.9% of people are idiots.</td>
+      <td>45135</td>
+      <td>2020-03-24 09:40:14</td>
+    </tr>
+    <tr>
+      <th>8299</th>
+      <td>self.jokes</td>
+      <td>You tell it a shitty joke.</td>
+      <td>How do you get a toilet to laugh?</td>
+      <td>0</td>
+      <td>2020-03-22 07:49:45</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>999779</th>
+      <td>self.jokes</td>
+      <td>Dam.</td>
+      <td>What did the fish say when he hit the wall?</td>
+      <td>25</td>
+      <td>2015-03-27 10:33:12</td>
+    </tr>
+    <tr>
+      <th>999851</th>
+      <td>self.jokes</td>
+      <td>He tractor down.</td>
+      <td>How did the farmer find his wife?</td>
+      <td>58</td>
+      <td>2015-03-27 02:42:29</td>
+    </tr>
+    <tr>
+      <th>999882</th>
+      <td>self.jokes</td>
+      <td></td>
+      <td>women's rights</td>
+      <td>0</td>
+      <td>2015-03-27 00:48:36</td>
+    </tr>
+    <tr>
+      <th>999936</th>
+      <td>self.jokes</td>
+      <td>Don't be stupid, feminists can't change anything</td>
+      <td>How many feminists does it take to change a li...</td>
+      <td>24</td>
+      <td>2015-03-26 22:00:06</td>
+    </tr>
+    <tr>
+      <th>999979</th>
+      <td>self.jokes</td>
+      <td>Smoke</td>
+      <td>What do you call a flying Jew?</td>
+      <td>0</td>
+      <td>2015-03-26 20:16:34</td>
+    </tr>
+  </tbody>
+</table>
+<p>12867 rows × 5 columns</p>
+</div></div></div>
+</div>
+<p>A fair amount of jokes are reposted, so we keep the ones with the highest score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="n">reddit_jokes_df</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;score&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;selftext&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="text-formatting">
+<h3><span class="section-number">39.3.5. </span>Text formatting<a class="headerlink" href="#text-formatting" title="Permalink to this headline">¶</a></h3>
+<p>Before we can analyze the text in the jokes we have to format it. We can do this by removing all special character and changing it all to lowercase</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;selftext&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">]:</span>
+  <span class="n">reddit_jokes_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="s2">&quot;[^a-zA-Z,.!? ]&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>domain</th>
+      <th>selftext</th>
+      <th>title</th>
+      <th>score</th>
+      <th>created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>630580</td>
+      <td>self.jokes</td>
+      <td>those who need closure,</td>
+      <td>there are two kinds of people in the world.</td>
+      <td>0</td>
+      <td>2017-05-12 17:01:44</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>187066</td>
+      <td>self.jokes</td>
+      <td>so when someone asks you can say its .</td>
+      <td>set your wifi password to</td>
+      <td>0</td>
+      <td>2019-05-28 00:30:46</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>437464</td>
+      <td>self.jokes</td>
+      <td>tooth hurty!</td>
+      <td>at what time do you see your dentist?</td>
+      <td>0</td>
+      <td>2018-03-28 10:17:26</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>714598</td>
+      <td>self.jokes</td>
+      <td>where did you get a phone that works in spaini...</td>
+      <td>john and juan are on lunch break when juans ph...</td>
+      <td>0</td>
+      <td>2017-01-13 02:37:59</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>187072</td>
+      <td>self.jokes</td>
+      <td>me how many am i allowed?guy only one me well ...</td>
+      <td>a guy is handing out free fake mustaches on th...</td>
+      <td>0</td>
+      <td>2019-05-28 00:20:01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Next we create a single joke by combining the title and selftext, this makes it easier to operate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_df</span><span class="p">[</span><span class="s1">&#39;joke&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">selftext</span>
+<span class="n">reddit_jokes_df</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;selftext&#39;</span><span class="p">])</span>
+<span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>domain</th>
+      <th>score</th>
+      <th>created</th>
+      <th>joke</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>630580</td>
+      <td>self.jokes</td>
+      <td>0</td>
+      <td>2017-05-12 17:01:44</td>
+      <td>there are two kinds of people in the world. th...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>187066</td>
+      <td>self.jokes</td>
+      <td>0</td>
+      <td>2019-05-28 00:30:46</td>
+      <td>set your wifi password to  so when someone ask...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>437464</td>
+      <td>self.jokes</td>
+      <td>0</td>
+      <td>2018-03-28 10:17:26</td>
+      <td>at what time do you see your dentist? tooth hu...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>714598</td>
+      <td>self.jokes</td>
+      <td>0</td>
+      <td>2017-01-13 02:37:59</td>
+      <td>john and juan are on lunch break when juans ph...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>187072</td>
+      <td>self.jokes</td>
+      <td>0</td>
+      <td>2019-05-28 00:20:01</td>
+      <td>a guy is handing out free fake mustaches on th...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="processing">
+<h2><span class="section-number">39.4. </span>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="timing-of-joke">
+<h3><span class="section-number">39.4.1. </span>Timing of joke<a class="headerlink" href="#timing-of-joke" title="Permalink to this headline">¶</a></h3>
+<p>I would like to know if the timing of the jokes makes an impact on how funny the joke is, so i grouped based on both the weekday as well as the hour of day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_weekday</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">created</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">weekday</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">])</span>
+<span class="n">reddit_jokes_weekday</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>created</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>226.871773</td>
+      <td>79866</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>228.808886</td>
+      <td>82940</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>222.802165</td>
+      <td>84793</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>215.771594</td>
+      <td>84932</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>222.888666</td>
+      <td>82634</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>232.752534</td>
+      <td>75089</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>241.322581</td>
+      <td>75516</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reddit_jokes_hour</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">created</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">])</span>
+<span class="n">reddit_jokes_hour</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>created</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>189.177767</td>
+      <td>25646</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>189.383726</td>
+      <td>25440</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>172.406772</td>
+      <td>25368</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>140.741126</td>
+      <td>23637</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>144.066960</td>
+      <td>21162</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>137.355467</td>
+      <td>19006</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>168.542319</td>
+      <td>16671</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>214.903014</td>
+      <td>15198</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>271.710558</td>
+      <td>14217</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>398.431366</td>
+      <td>14009</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>456.262600</td>
+      <td>15952</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>446.946555</td>
+      <td>18056</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>404.759640</td>
+      <td>21447</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>318.348451</td>
+      <td>24342</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>263.100078</td>
+      <td>26899</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>227.382529</td>
+      <td>28322</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>204.701879</td>
+      <td>29327</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>185.274719</td>
+      <td>29623</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>210.557595</td>
+      <td>29369</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>194.320871</td>
+      <td>29342</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>194.809965</td>
+      <td>29063</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>179.245679</td>
+      <td>29099</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>198.723083</td>
+      <td>27817</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>179.602399</td>
+      <td>26758</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="bag-of-words">
+<h3><span class="section-number">39.4.2. </span>Bag of words<a class="headerlink" href="#bag-of-words" title="Permalink to this headline">¶</a></h3>
+<p>To be able to work with the words in our joke, we create a bag of words dataframe, where for each word and joke combination a count is kept of how many times the word is present in that joke. Notice that stopwords are removed.</p>
+<p>First we split each joke up in words</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joke_words</span> <span class="o">=</span> <span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">joke</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">joke_words</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    [there, are, two, kinds, of, people, in, the, ...
+1    [set, your, wifi, password, to, , so, when, so...
+2    [at, what, time, do, you, see, your, dentist?,...
+3    [john, and, juan, are, on, lunch, break, when,...
+4    [a, guy, is, handing, out, free, fake, mustach...
+Name: joke, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we use the nltk toolkit to get a list of english stopwords.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;i&#39;, &#39;me&#39;, &#39;my&#39;, &#39;myself&#39;, &#39;we&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We remove all the stopwords from the jokes, now the jokes have a handicapped grammar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joke_words</span> <span class="o">=</span> <span class="n">joke_words</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)])</span>
+<span class="n">joke_words</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0         [two, kinds, people, world., need, closure,]
+1       [set, wifi, password, , someone, asks, say, .]
+2                 [time, see, dentist?, tooth, hurty!]
+3    [john, juan, lunch, break, juans, phone, rings...
+4    [guy, handing, free, fake, mustaches, street, ...
+Name: joke, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally we are going to use sklearn and the CountVectorizer to create the BoW vector, this is a sparse matrix as most words are not appearing in most jokes.
+This means we cannot visualise the matrix, or our computer would explode.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">cnt_vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">),</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span> 
+
+<span class="n">bow_jokes</span> <span class="o">=</span> <span class="n">cnt_vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">joke</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bow_jokes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;565770x20000 sparse matrix of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
+	with 9101120 stored elements in Compressed Sparse Row format&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we can fetch the vocabulary of our bag, which starts with a lot of weird words, indicating we might have chosen too many features</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cnt_vect</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;aa&#39;, &#39;aaa&#39;, &#39;aaah&#39;, &#39;aah&#39;, &#39;aardvark&#39;, &#39;aaron&#39;, &#39;ab&#39;, &#39;aback&#39;,
+       &#39;abacus&#39;, &#39;abandon&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="term-frequency-inverse-document-frequency">
+<h3><span class="section-number">39.4.3. </span>Term Frequency - Inverse Document Frequency<a class="headerlink" href="#term-frequency-inverse-document-frequency" title="Permalink to this headline">¶</a></h3>
+<p>Another interesting method is the tf-idf matrix, where each occurence is weighted by the overall frequency of that word. If a word is used often over all jokes, it won’t be as important, but if a word is used infrequent it is more important.</p>
+<p>Again we use sklearn to vectorize our jokes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="n">tfidf_vect</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_jokes</span> <span class="o">=</span> <span class="n">tfidf_vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">reddit_jokes_df</span><span class="o">.</span><span class="n">joke</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">tfidf_jokes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;565770x196601 sparse matrix of type &#39;&lt;class &#39;numpy.float64&#39;&gt;&#39;
+	with 15153814 stored elements in Compressed Sparse Row format&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>we can create a quick dataframe to interpret the result, for each word in our dataset we retrieve the inverse document frequency, a high idf means a unique word.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="s1">&#39;term&#39;</span><span class="p">:</span> <span class="n">tfidf_vect</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(),</span>
+      <span class="s1">&#39;idf&#39;</span><span class="p">:</span> <span class="n">tfidf_vect</span><span class="o">.</span><span class="n">idf_</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">idf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>term</th>
+      <th>idf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>aa</td>
+      <td>10.026437</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>aaa</td>
+      <td>10.275653</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>aaaa</td>
+      <td>12.454185</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>aaaaa</td>
+      <td>13.147332</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>aaaaaa</td>
+      <td>13.552798</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>When we sort them by idf we can find the most unique words, yet it doesn’t seem to be useful at the moment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;idf&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>term</th>
+      <th>idf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>196600</th>
+      <td>zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzthe</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110080</th>
+      <td>misterunderstanding</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110074</th>
+      <td>misterectomy</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110075</th>
+      <td>misterious</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110076</th>
+      <td>misterjmyers</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110077</th>
+      <td>misterlee</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110078</th>
+      <td>misterogyny</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110079</th>
+      <td>misters</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110081</th>
+      <td>misterunderstood</td>
+      <td>13.552798</td>
+    </tr>
+    <tr>
+      <th>110072</th>
+      <td>misterapproximate</td>
+      <td>13.552798</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./c7_case_studies"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="UserSurvey.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">38. </span>Case Study: User survey</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Lorenz Feyen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
