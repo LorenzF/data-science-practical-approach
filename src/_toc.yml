@@ -54,3 +54,11 @@ parts:
   numbered: True
   chapters:
   - file: c6_machine_learning/introduction
+- caption: 7. Case Studies
+  numbered: True
+  chapters:
+  - file: c7_case_studies/Olist
+  - file: c7_case_studies/Churn
+  - file: c7_case_studies/Olympics
+  - file: c7_case_studies/UserSurvey
+  - file: c7_case_studies/Jokes
