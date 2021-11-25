@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex book.idx"] 1611012182 "book.idx" "book.ind" "book" 1637794027
-  "book.idx" 1637794021 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex book.idx"] 1611012182 "book.idx" "book.ind" "book" 1637835042
+  "book.idx" 1637835036 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "book.ind"
   "book.ilg"
-["pdflatex"] 1637794020 "book.tex" "book.pdf" "book" 1637794027
+  "book.ind"
+["pdflatex"] 1637835035 "book.tex" "book.pdf" "book" 1637835042
   "/etc/texmf/web2c/texmf.cnf" 1611012054 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -245,11 +245,11 @@
   "bivariate_analysis_38_1.png" 1634131710 54206 1f8c61358bffc53f44c02c7396e2c505 ""
   "bivariate_analysis_42_1.png" 1634131710 29476 c4f7cabdb48250cf2cb7416c3d673304 ""
   "bivariate_analysis_8_1.png" 1634131710 18742 aecf1138f686c4065bcdd3ea964ebf3e ""
-  "book.aux" 1637794027 43508 da3eb95ec7ffcc1630b2e4c565e8aaec "pdflatex"
+  "book.aux" 1637835042 43472 52e13c632b89f9a5eaa3663ee53e9b92 "pdflatex"
   "book.ind" 1611012182 0 d41d8cd98f00b204e9800998ecf8427e "makeindex book.idx"
-  "book.out" 1637794027 6398 36bb5add69d113b9dec3f25f67cf7288 "pdflatex"
-  "book.tex" 1637794011 755234 c7a3fd01ab6b07f0f3173cd0e3b43d87 ""
-  "book.toc" 1637794027 13186 9ec13860f10e1ee550083a229f82d111 "pdflatex"
+  "book.out" 1637835042 6386 f525266f9d29a90d91e9c37334a685e3 "pdflatex"
+  "book.tex" 1637835028 755214 f5b7a81743b6336c98e7d32da42bd0f6 ""
+  "book.toc" 1637835042 13177 a80cca4a395555571c4f14e4ca672aa9 "pdflatex"
   "box_11_1.png" 1634057108 54713 808be7d96ed383cace0679501da49acf ""
   "box_5_1.png" 1634057108 24414 e14908e11582b091760cfe98facc440d ""
   "box_7_0.png" 1634057108 29610 ba526a83fc58e4b0a815ca80c909854f ""
@@ -300,9 +300,9 @@
   "scatter_7_0.png" 1634057125 21474 6d45984c9c1c051287073bfddb245cd0 ""
   "scatter_9_0.png" 1634057125 39565 07e121bae4194413e3520a54feaa81c5 ""
   "sphinx.sty" 1629926798 91458 532cd893425be1ee8212ce283449999c ""
-  "sphinxhighlight.sty" 1637794006 6615 02ef3c01e6bb67d3cc0658d354509680 ""
+  "sphinxhighlight.sty" 1637835024 6615 02ef3c01e6bb67d3cc0658d354509680 ""
   "sphinxmanual.cls" 1611011187 4236 124cd90deb92742b5d3922bfc2cd70c0 ""
-  "sphinxmessages.sty" 1637794011 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1637835028 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1611011187 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "timeliness.png" 1632861593 28579 5cf78eaf46c441d957726109edd436b6 ""
   "univariate_analysis_11_1.png" 1634129220 26109 2501a2ae228beaeacd813780dcc1cfb6 ""
@@ -318,8 +318,8 @@
   "variable_identification_21_1.png" 1634131010 11555 b2c2b39aaadba1347ad7bcf5c4fff9d6 ""
   (generated)
   "book.idx"
-  "book.out"
-  "book.toc"
-  "book.pdf"
   "book.aux"
+  "book.toc"
   "book.log"
+  "book.out"
+  "book.pdf"

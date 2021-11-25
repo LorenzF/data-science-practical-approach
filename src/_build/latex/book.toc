@@ -114,7 +114,7 @@
 \contentsline {section}{\numberline {35.7}Summary}{236}{section.35.7}%
 \contentsline {subsection}{\numberline {35.7.1}Product pricing}{236}{subsection.35.7.1}%
 \contentsline {section}{\numberline {35.8}Playground}{236}{section.35.8}%
-\contentsline {chapter}{\numberline {36}Case Study: Olympic medals}{239}{chapter.36}%
+\contentsline {chapter}{\numberline {36}Case Study: Churn}{239}{chapter.36}%
 \contentsline {section}{\numberline {36.1}Goals}{239}{section.36.1}%
 \contentsline {section}{\numberline {36.2}Parsing}{239}{section.36.2}%
 \contentsline {section}{\numberline {36.3}Preparation}{241}{section.36.3}%

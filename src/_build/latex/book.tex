@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Nov 24, 2021}
+\date{Nov 25, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -9388,8 +9388,8 @@ revenue  0.850416 \PYGZhy{}0.109698  1.000000
 \end{sphinxVerbatim}
 
 
-\chapter{Case Study: Olympic medals}
-\label{\detokenize{c7_case_studies/Churn:case-study-olympic-medals}}\label{\detokenize{c7_case_studies/Churn::doc}}
+\chapter{Case Study: Churn}
+\label{\detokenize{c7_case_studies/Churn:case-study-churn}}\label{\detokenize{c7_case_studies/Churn::doc}}
 \sphinxAtStartPar
 In this case study we try to create an answer why customers have left our service, a telecom operator.
 
@@ -9465,7 +9465,7 @@ we start out by importing all libraries
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\PYGZus{}13857/4057771804.py:10: DeprecationWarning: `set\PYGZus{}matplotlib\PYGZus{}formats` is deprecated since IPython 7.23, directly use `matplotlib\PYGZus{}inline.backend\PYGZus{}inline.set\PYGZus{}matplotlib\PYGZus{}formats()`
+/tmp/ipykernel\PYGZus{}5355/4057771804.py:10: DeprecationWarning: `set\PYGZus{}matplotlib\PYGZus{}formats` is deprecated since IPython 7.23, directly use `matplotlib\PYGZus{}inline.backend\PYGZus{}inline.set\PYGZus{}matplotlib\PYGZus{}formats()`
   set\PYGZus{}matplotlib\PYGZus{}formats(\PYGZsq{}svg\PYGZsq{})
 \end{sphinxVerbatim}
 
@@ -9488,7 +9488,7 @@ in order to download datasets from kaggle, we need an API key to access their AP
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{n+ne}{PermissionError}\PYG{g+gWhitespace}{                           }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}13857}\PYG{o}{/}\PYG{l+m+mf}{3113012040.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}5355}\PYG{o}{/}\PYG{l+m+mf}{3113012040.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
 \PYG{g+gWhitespace}{      }\PYG{l+m+mi}{1} \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
 \PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{2}     \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \PYG{g+gWhitespace}{      }\PYG{l+m+mi}{3} 

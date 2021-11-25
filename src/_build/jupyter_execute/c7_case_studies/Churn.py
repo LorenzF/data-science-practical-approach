@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Case Study: Olympic medals
+# # Case Study: Churn
 # 
 # In this case study we try to create an answer why customers have left our service, a telecom operator.
 # 
