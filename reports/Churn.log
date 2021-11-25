@@ -31,7 +31,7 @@ with open('/root/.kaggle/kaggle.json', 'w') as f:
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mPermissionError[0m                           Traceback (most recent call last)
-[0;32m/tmp/ipykernel_13857/3113012040.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_5355/3113012040.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;32mif[0m [0;32mnot[0m [0mos[0m[0;34m.[0m[0mpath[0m[0;34m.[0m[0mexists[0m[0;34m([0m[0;34m"/root/.kaggle"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 2[0;31m     [0mos[0m[0;34m.[0m[0mmkdir[0m[0;34m([0m[0;34m"/root/.kaggle"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      3[0m [0;34m[0m[0m
