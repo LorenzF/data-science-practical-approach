@@ -17,27 +17,16 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-if not os.path.exists("/root/.kaggle"):
-    os.mkdir("/root/.kaggle")
-
-with open('/root/.kaggle/kaggle.json', 'w') as f:
-    json.dump(
-        {
-            "username":"lorenzf",
-            "key":"7a44a9e99b27e796177d793a3d85b8cf"
-        }
-        , f)
+import kaggle
+kaggle.api.dataset_download_files(dataset='blastchar/telco-customer-churn', path='./data', unzip=True)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mPermissionError[0m                           Traceback (most recent call last)
-[0;32m/tmp/ipykernel_5355/3113012040.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;32mif[0m [0;32mnot[0m [0mos[0m[0;34m.[0m[0mpath[0m[0;34m.[0m[0mexists[0m[0;34m([0m[0;34m"/root/.kaggle"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 2[0;31m     [0mos[0m[0;34m.[0m[0mmkdir[0m[0;34m([0m[0;34m"/root/.kaggle"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      3[0m [0;34m[0m[0m
-[1;32m      4[0m [0;32mwith[0m [0mopen[0m[0;34m([0m[0;34m'/root/.kaggle/kaggle.json'[0m[0;34m,[0m [0;34m'w'[0m[0;34m)[0m [0;32mas[0m [0mf[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m     json.dump(
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m/tmp/ipykernel_6913/3288988394.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mimport[0m [0mkaggle[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mkaggle[0m[0;34m.[0m[0mapi[0m[0;34m.[0m[0mdataset_download_files[0m[0;34m([0m[0mdataset[0m[0;34m=[0m[0;34m'blastchar/telco-customer-churn'[0m[0;34m,[0m [0mpath[0m[0;34m=[0m[0;34m'./data'[0m[0;34m,[0m [0munzip[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mPermissionError[0m: [Errno 13] Permission denied: '/root/.kaggle'
-PermissionError: [Errno 13] Permission denied: '/root/.kaggle'
+[0;31mModuleNotFoundError[0m: No module named 'kaggle'
+ModuleNotFoundError: No module named 'kaggle'
 

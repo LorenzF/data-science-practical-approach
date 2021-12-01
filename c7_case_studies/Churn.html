@@ -493,6 +493,70 @@
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploration">
+   36.5. Exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-distribution">
+     36.5.1. Normal distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#categorical-correlations">
+     36.5.2. Categorical correlations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-vs-categorical-correlation">
+     36.5.3. Numerical vs Categorical correlation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unsupervised-clustering">
+     36.5.4. unsupervised clustering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nearest-neighbour-classification">
+     36.5.5. Nearest Neighbour classification
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation">
+   36.6. Visualisation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#categorical-correlation">
+     36.6.1. Categorical correlation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     36.6.2. Numerical vs Categorical correlation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     36.6.3. Unsupervised clustering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-nearest-neighbours">
+     36.6.4. K Nearest Neighbours
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary">
+     36.6.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
             </nav>
@@ -537,16 +601,10 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5355/4057771804.py:10: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`
-  set_matplotlib_formats(&#39;svg&#39;)
 </pre></div>
 </div>
 </div>
@@ -554,30 +612,16 @@
 <p>in order to download datasets from kaggle, we need an API key to access their API, we’ll make that here</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.kaggle&#39;</span><span class="p">)):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.kaggle&#39;</span><span class="p">))</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.kaggle/kaggle.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
         <span class="p">{</span>
             <span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;lorenzf&quot;</span><span class="p">,</span>
             <span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;7a44a9e99b27e796177d793a3d85b8cf&quot;</span>
         <span class="p">}</span>
         <span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">PermissionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_5355</span><span class="o">/</span><span class="mf">3113012040.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
-
-<span class="ne">PermissionError</span>: [Errno 13] Permission denied: &#39;/root/.kaggle&#39;
 </pre></div>
 </div>
 </div>
@@ -591,7 +635,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run &#39;chmod 600 /root/.kaggle/kaggle.json&#39;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_6913</span><span class="o">/</span><span class="mf">3288988394.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">kaggle</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;blastchar/telco-customer-churn&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;kaggle&#39;
 </pre></div>
 </div>
 </div>
@@ -650,7 +700,7 @@
       <th>MultipleLines</th>
       <th>InternetService</th>
       <th>OnlineSecurity</th>
-      <th>OnlineBackup</th>
+      <th>...</th>
       <th>DeviceProtection</th>
       <th>TechSupport</th>
       <th>StreamingTV</th>
@@ -676,7 +726,7 @@
       <td>No phone service</td>
       <td>DSL</td>
       <td>No</td>
-      <td>Yes</td>
+      <td>...</td>
       <td>No</td>
       <td>No</td>
       <td>No</td>
@@ -700,7 +750,7 @@
       <td>No</td>
       <td>DSL</td>
       <td>Yes</td>
-      <td>No</td>
+      <td>...</td>
       <td>Yes</td>
       <td>No</td>
       <td>No</td>
@@ -724,7 +774,7 @@
       <td>No</td>
       <td>DSL</td>
       <td>Yes</td>
-      <td>Yes</td>
+      <td>...</td>
       <td>No</td>
       <td>No</td>
       <td>No</td>
@@ -748,7 +798,7 @@
       <td>No phone service</td>
       <td>DSL</td>
       <td>Yes</td>
-      <td>No</td>
+      <td>...</td>
       <td>Yes</td>
       <td>Yes</td>
       <td>No</td>
@@ -772,7 +822,7 @@
       <td>No</td>
       <td>Fiber optic</td>
       <td>No</td>
-      <td>No</td>
+      <td>...</td>
       <td>No</td>
       <td>No</td>
       <td>No</td>
@@ -786,6 +836,7 @@
     </tr>
   </tbody>
 </table>
+<p>5 rows × 21 columns</p>
 </div></div></div>
 </div>
 <p>Looks like there is some personal info and the configuration of the service, such as if they had an internet service, with or without options such as security, backup,…
@@ -873,7 +924,7 @@ Data columns (total 21 columns):
  19  TotalCharges      7043 non-null   object  
  20  Churn             7043 non-null   category
 dtypes: category(17), float64(1), int64(1), object(2)
-memory usage: 338.9+ KB
+memory usage: 339.4+ KB
 </pre></div>
 </div>
 </div>
@@ -890,46 +941,67 @@ I’m going to make them floating numbers</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-8-0ae90e86afc5&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_6003</span><span class="o">/</span><span class="mf">2494845660.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">churn_df</span><span class="p">[[</span><span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">churn_df</span><span class="p">[[</span><span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 
-<span class="nn">/usr/local/lib/python3.7/dist-packages/pandas/core/generic.py</span> in <span class="ni">astype</span><span class="nt">(self, dtype, copy, errors)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5546</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">5547</span>             <span class="c1"># else, only a single dtype is given</span>
-<span class="ne">-&gt; </span><span class="mi">5548</span>             <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5549</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructor</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;astype&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5550</span> 
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">astype</span><span class="nt">(self, dtype, copy, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5813</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">5814</span>             <span class="c1"># else, only a single dtype is given</span>
+<span class="ne">-&gt; </span><span class="mi">5815</span>             <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5816</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructor</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;astype&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5817</span> 
 
-<span class="nn">/usr/local/lib/python3.7/dist-packages/pandas/core/internals/managers.py</span> in <span class="ni">astype</span><span class="nt">(self, dtype, copy, errors)</span>
-<span class="g g-Whitespace">    </span><span class="mi">602</span>         <span class="bp">self</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">errors</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">603</span>     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;BlockManager&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">604</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;astype&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">605</span> 
-<span class="g g-Whitespace">    </span><span class="mi">606</span>     <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">astype</span><span class="nt">(self, dtype, copy, errors)</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span> 
+<span class="g g-Whitespace">    </span><span class="mi">417</span>     <span class="k">def</span> <span class="nf">astype</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">errors</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">418</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;astype&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">419</span> 
+<span class="g g-Whitespace">    </span><span class="mi">420</span>     <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span>
 
-<span class="nn">/usr/local/lib/python3.7/dist-packages/pandas/core/internals/managers.py</span> in <span class="ni">apply</span><span class="nt">(self, f, align_keys, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">407</span>                 <span class="n">applied</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span>             <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">409</span>                 <span class="n">applied</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">410</span>             <span class="n">result_blocks</span> <span class="o">=</span> <span class="n">_extend_blocks</span><span class="p">(</span><span class="n">applied</span><span class="p">,</span> <span class="n">result_blocks</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">411</span> 
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">apply</span><span class="nt">(self, f, align_keys, ignore_failures, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span>                     <span class="n">applied</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span>                 <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">327</span>                     <span class="n">applied</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">328</span>             <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">329</span>                 <span class="k">if</span> <span class="ow">not</span> <span class="n">ignore_failures</span><span class="p">:</span>
 
-<span class="nn">/usr/local/lib/python3.7/dist-packages/pandas/core/internals/blocks.py</span> in <span class="ni">astype</span><span class="nt">(self, dtype, copy, errors)</span>
-<span class="g g-Whitespace">    </span><span class="mi">593</span>             <span class="n">vals1d</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">594</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">595</span>                 <span class="n">values</span> <span class="o">=</span> <span class="n">astype_nansafe</span><span class="p">(</span><span class="n">vals1d</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">596</span>             <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">597</span>                 <span class="c1"># e.g. astype_nansafe can fail on object-dtype of strings</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/internals/blocks.py</span> in <span class="ni">astype</span><span class="nt">(self, dtype, copy, errors)</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span>         <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span> 
+<span class="ne">--&gt; </span><span class="mi">592</span>         <span class="n">new_values</span> <span class="o">=</span> <span class="n">astype_array_safe</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">593</span> 
+<span class="g g-Whitespace">    </span><span class="mi">594</span>         <span class="n">new_values</span> <span class="o">=</span> <span class="n">maybe_coerce_values</span><span class="p">(</span><span class="n">new_values</span><span class="p">)</span>
 
-<span class="nn">/usr/local/lib/python3.7/dist-packages/pandas/core/dtypes/cast.py</span> in <span class="ni">astype_nansafe</span><span class="nt">(arr, dtype, copy, skipna)</span>
-<span class="g g-Whitespace">    </span><span class="mi">995</span>     <span class="k">if</span> <span class="n">copy</span> <span class="ow">or</span> <span class="n">is_object_dtype</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_object_dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">996</span>         <span class="c1"># Explicit copy, or required since NumPy can&#39;t view from / to object.</span>
-<span class="ne">--&gt; </span><span class="mi">997</span>         <span class="k">return</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">998</span> 
-<span class="g g-Whitespace">    </span><span class="mi">999</span>     <span class="k">return</span> <span class="n">arr</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/dtypes/cast.py</span> in <span class="ni">astype_array_safe</span><span class="nt">(values, dtype, copy, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1307</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1308</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1309</span>         <span class="n">new_values</span> <span class="o">=</span> <span class="n">astype_array</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1310</span>     <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1311</span>         <span class="c1"># e.g. astype_nansafe can fail on object-dtype of strings</span>
 
-<span class="ne">ValueError</span>: could not convert string to float: 
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/dtypes/cast.py</span> in <span class="ni">astype_array</span><span class="nt">(values, dtype, copy)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1255</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1256</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1257</span>         <span class="n">values</span> <span class="o">=</span> <span class="n">astype_nansafe</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1258</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1259</span>     <span class="c1"># in pandas we don&#39;t store numpy str dtypes, so convert to object</span>
+
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/dtypes/cast.py</span> in <span class="ni">astype_nansafe</span><span class="nt">(arr, dtype, copy, skipna)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span>     <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span>         <span class="n">flat</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1095</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">astype_nansafe</span><span class="p">(</span><span class="n">flat</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span>         <span class="c1"># error: Item &quot;ExtensionArray&quot; of &quot;Union[ExtensionArray, ndarray]&quot; has no</span>
+<span class="g g-Whitespace">   </span><span class="mi">1097</span>         <span class="c1"># attribute &quot;reshape&quot;</span>
+
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/dtypes/cast.py</span> in <span class="ni">astype_nansafe</span><span class="nt">(arr, dtype, copy, skipna)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1199</span>     <span class="k">if</span> <span class="n">copy</span> <span class="ow">or</span> <span class="n">is_object_dtype</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_object_dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1200</span>         <span class="c1"># Explicit copy, or required since NumPy can&#39;t view from / to object.</span>
+<span class="ne">-&gt; </span><span class="mi">1201</span>         <span class="k">return</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1202</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1203</span>     <span class="k">return</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: could not convert string to float: &#39;&#39;
 </pre></div>
 </div>
 </div>
@@ -971,7 +1043,7 @@ We print out the rows that create an error and observe.</p>
       <th>MultipleLines</th>
       <th>InternetService</th>
       <th>OnlineSecurity</th>
-      <th>OnlineBackup</th>
+      <th>...</th>
       <th>DeviceProtection</th>
       <th>TechSupport</th>
       <th>StreamingTV</th>
@@ -997,7 +1069,7 @@ We print out the rows that create an error and observe.</p>
       <td>No phone service</td>
       <td>DSL</td>
       <td>Yes</td>
-      <td>No</td>
+      <td>...</td>
       <td>Yes</td>
       <td>Yes</td>
       <td>Yes</td>
@@ -1021,7 +1093,7 @@ We print out the rows that create an error and observe.</p>
       <td>No</td>
       <td>No</td>
       <td>No internet service</td>
-      <td>No internet service</td>
+      <td>...</td>
       <td>No internet service</td>
       <td>No internet service</td>
       <td>No internet service</td>
@@ -1045,7 +1117,7 @@ We print out the rows that create an error and observe.</p>
       <td>No</td>
       <td>DSL</td>
       <td>Yes</td>
-      <td>Yes</td>
+      <td>...</td>
       <td>Yes</td>
       <td>No</td>
       <td>Yes</td>
@@ -1069,7 +1141,7 @@ We print out the rows that create an error and observe.</p>
       <td>Yes</td>
       <td>No</td>
       <td>No internet service</td>
-      <td>No internet service</td>
+      <td>...</td>
       <td>No internet service</td>
       <td>No internet service</td>
       <td>No internet service</td>
@@ -1093,7 +1165,7 @@ We print out the rows that create an error and observe.</p>
       <td>No phone service</td>
       <td>DSL</td>
       <td>Yes</td>
-      <td>Yes</td>
+      <td>...</td>
       <td>Yes</td>
       <td>Yes</td>
       <td>Yes</td>
@@ -1117,7 +1189,7 @@ We print out the rows that create an error and observe.</p>
       <td>No</td>
       <td>No</td>
       <td>No internet service</td>
-      <td>No internet service</td>
+      <td>...</td>
       <td>No internet service</td>
       <td>No internet service</td>
       <td>No internet service</td>
@@ -1141,7 +1213,7 @@ We print out the rows that create an error and observe.</p>
       <td>Yes</td>
       <td>No</td>
       <td>No internet service</td>
-      <td>No internet service</td>
+      <td>...</td>
       <td>No internet service</td>
       <td>No internet service</td>
       <td>No internet service</td>
@@ -1165,7 +1237,7 @@ We print out the rows that create an error and observe.</p>
       <td>No</td>
       <td>No</td>
       <td>No internet service</td>
-      <td>No internet service</td>
+      <td>...</td>
       <td>No internet service</td>
       <td>No internet service</td>
       <td>No internet service</td>
@@ -1189,7 +1261,7 @@ We print out the rows that create an error and observe.</p>
       <td>No</td>
       <td>No</td>
       <td>No internet service</td>
-      <td>No internet service</td>
+      <td>...</td>
       <td>No internet service</td>
       <td>No internet service</td>
       <td>No internet service</td>
@@ -1213,7 +1285,7 @@ We print out the rows that create an error and observe.</p>
       <td>Yes</td>
       <td>DSL</td>
       <td>No</td>
-      <td>Yes</td>
+      <td>...</td>
       <td>Yes</td>
       <td>Yes</td>
       <td>Yes</td>
@@ -1237,7 +1309,7 @@ We print out the rows that create an error and observe.</p>
       <td>Yes</td>
       <td>DSL</td>
       <td>Yes</td>
-      <td>Yes</td>
+      <td>...</td>
       <td>No</td>
       <td>Yes</td>
       <td>No</td>
@@ -1251,6 +1323,7 @@ We print out the rows that create an error and observe.</p>
     </tr>
   </tbody>
 </table>
+<p>11 rows × 21 columns</p>
 </div></div></div>
 </div>
 <p>Seems that there are some customers being so new they have no total charges, for convenience i’m going to change the space to a 0.</p>
@@ -1296,7 +1369,7 @@ Data columns (total 21 columns):
  19  TotalCharges      7043 non-null   float64 
  20  Churn             7043 non-null   category
 dtypes: category(17), float64(2), int64(1), object(1)
-memory usage: 338.9+ KB
+memory usage: 339.4+ KB
 </pre></div>
 </div>
 </div>
@@ -1561,7 +1634,7 @@ By using functions I keep things dynamic without having to store a dataframe for
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_matrix</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span>
-  <span class="k">return</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span> <span class="n">col_name</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span> <span class="n">col_name</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1623,8 +1696,8 @@ By using functions I keep things dynamic without having to store a dataframe for
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mean_matrix</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span>
-  <span class="n">df</span> <span class="o">=</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span> <span class="n">col_name</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
-  <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span> <span class="n">col_name</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1668,15 +1741,15 @@ By using functions I keep things dynamic without having to store a dataframe for
   <tbody>
     <tr>
       <th>No</th>
-      <td>0.364128</td>
-      <td>0.273096</td>
-      <td>0.362775</td>
+      <td>0.608724</td>
+      <td>0.92595</td>
+      <td>0.774979</td>
     </tr>
     <tr>
       <th>Yes</th>
-      <td>0.647940</td>
-      <td>0.060460</td>
-      <td>0.291600</td>
+      <td>0.391276</td>
+      <td>0.07405</td>
+      <td>0.225021</td>
     </tr>
   </tbody>
 </table>
@@ -1694,104 +1767,137 @@ By using functions I keep things dynamic without having to store a dataframe for
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gender    Female      Male
 Churn                     
-No      0.492656  0.507344
-Yes     0.502408  0.497592
+No      0.730791  0.738397
+Yes     0.269209  0.261603
 
 SeniorCitizen        No       Yes
 Churn                            
-No             0.871279  0.128721
-Yes            0.745318  0.254682
+No             0.763938  0.583187
+Yes            0.236062  0.416813
 
-Partner        No       Yes
-Churn                      
-No       0.471782  0.528218
-Yes      0.642055  0.357945
+Partner       No       Yes
+Churn                     
+No       0.67042  0.803351
+Yes      0.32958  0.196649
 
 Dependents        No       Yes
 Churn                         
-No          0.655199  0.344801
-Yes         0.825575  0.174425
+No          0.687209  0.845498
+Yes         0.312791  0.154502
 
-tenure        0         1         2   ...        70        71        72
-Churn                                 ...                              
-No      0.002126  0.045033  0.022227  ...  0.020874  0.031697  0.068806
-Yes     0.000000  0.203317  0.065811  ...  0.005886  0.003210  0.003210
+tenure   0         1         2     3         4         5         6         7   \
+Churn                                                                           
+No      1.0  0.380098  0.483193  0.53  0.528409  0.518797  0.636364  0.610687   
+Yes     0.0  0.619902  0.516807  0.47  0.471591  0.481203  0.363636  0.389313   
+
+tenure        8         9   ...        63    64        65        66        67  \
+Churn                       ...                                                 
+No      0.658537  0.613445  ...  0.944444  0.95  0.881579  0.853933  0.897959   
+Yes     0.341463  0.386555  ...  0.055556  0.05  0.118421  0.146067  0.102041   
+
+tenure    68        69        70        71        72  
+Churn                                                 
+No      0.91  0.915789  0.907563  0.964706  0.983425  
+Yes     0.09  0.084211  0.092437  0.035294  0.016575  
 
 [2 rows x 73 columns]
 
 PhoneService        No       Yes
 Churn                           
-No            0.098956  0.901044
-Yes           0.090958  0.909042
+No            0.750733  0.732904
+Yes           0.249267  0.267096
 
 MultipleLines        No  No phone service       Yes
 Churn                                              
-No             0.491109          0.098956  0.409934
-Yes            0.454254          0.090958  0.454789
+No             0.749558          0.750733  0.713901
+Yes            0.250442          0.249267  0.286099
 
-InternetService       DSL  Fiber optic        No
-Churn                                           
-No               0.379204     0.347700  0.273096
-Yes              0.245586     0.693954  0.060460
+InternetService       DSL  Fiber optic       No
+Churn                                          
+No               0.810409     0.581072  0.92595
+Yes              0.189591     0.418928  0.07405
 
 OnlineSecurity        No  No internet service       Yes
 Churn                                                  
-No              0.393699             0.273096  0.333204
-Yes             0.781701             0.060460  0.157838
+No              0.582333              0.92595  0.853888
+Yes             0.417667              0.07405  0.146112
 
 OnlineBackup        No  No internet service       Yes
 Churn                                                
-No            0.358523             0.273096  0.368380
-Yes           0.659711             0.060460  0.279829
+No            0.600712              0.92595  0.784685
+Yes           0.399288              0.07405  0.215315
 
 DeviceProtection        No  No internet service       Yes
 Churn                                                    
-No                0.364128             0.273096  0.362775
-Yes               0.647940             0.060460  0.291600
+No                0.608724              0.92595  0.774979
+Yes               0.391276              0.07405  0.225021
 
 TechSupport        No  No internet service       Yes
 Churn                                               
-No           0.391767             0.273096  0.335137
-Yes          0.773676             0.060460  0.165864
+No           0.583645              0.92595  0.848337
+Yes          0.416355              0.07405  0.151663
 
 StreamingTV        No  No internet service       Yes
 Churn                                               
-No           0.361036             0.273096  0.365868
-Yes          0.504013             0.060460  0.435527
+No           0.664769              0.92595  0.699298
+Yes          0.335231              0.07405  0.300702
 
 StreamingMovies        No  No internet service       Yes
 Churn                                                   
-No               0.356977             0.273096  0.369927
-Yes              0.501873             0.060460  0.437667
+No               0.663196              0.92595  0.700586
+Yes              0.336804              0.07405  0.299414
 
 Contract  Month-to-month  One year  Two year
 Churn                                       
-No              0.429068  0.252609  0.318322
-Yes             0.885500  0.088818  0.025682
+No              0.572903  0.887305  0.971681
+Yes             0.427097  0.112695  0.028319
 
 PaperlessBilling        No       Yes
 Churn                               
-No                0.464438  0.535562
-Yes               0.250936  0.749064
+No                0.836699  0.664349
+Yes               0.163301  0.335651
 
-PaymentMethod  Bank transfer (automatic)  ...  Mailed check
-Churn                                     ...              
-No                              0.248550  ...      0.252029
-Yes                             0.138042  ...      0.164794
+PaymentMethod  Bank transfer (automatic)  Credit card (automatic)  \
+Churn                                                               
+No                              0.832902                 0.847569   
+Yes                             0.167098                 0.152431   
 
-[2 rows x 4 columns]
+PaymentMethod  Electronic check  Mailed check  
+Churn                                          
+No                     0.547146      0.808933  
+Yes                    0.452854      0.191067  
 
-MonthlyCharges    18.25     18.40     18.55   ...    118.60    118.65    118.75
-Churn                                         ...                              
-No              0.000193  0.000193  0.000193  ...  0.000387  0.000193  0.000193
-Yes             0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000
+MonthlyCharges  18.25   18.40   18.55   18.70   18.75   18.80   18.85   \
+Churn                                                                    
+No                 1.0     1.0     1.0     1.0     1.0     1.0     0.8   
+Yes                0.0     0.0     0.0     0.0     0.0     0.0     0.2   
+
+MonthlyCharges  18.90     18.95     19.00   ...  117.35  117.45  117.50  \
+Churn                                       ...                           
+No                 1.0  0.833333  0.857143  ...     1.0     0.0     1.0   
+Yes                0.0  0.166667  0.142857  ...     0.0     1.0     0.0   
+
+MonthlyCharges  117.60  117.80  118.20  118.35  118.60  118.65  118.75  
+Churn                                                                   
+No                 1.0     0.0     1.0     0.0     1.0     1.0     1.0  
+Yes                0.0     1.0     0.0     1.0     0.0     0.0     0.0  
 
 [2 rows x 1585 columns]
 
-TotalCharges   0.00      18.80     18.85    ...   8670.10   8672.45   8684.80
-Churn                                       ...                              
-No            0.002126  0.000193  0.000193  ...  0.000193  0.000193  0.000000
-Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
+TotalCharges  0.00     18.80    18.85    18.90    19.00    19.05     19.10    \
+Churn                                                                          
+No                1.0      1.0      0.5      1.0      1.0      1.0  0.666667   
+Yes               0.0      0.0      0.5      0.0      0.0      0.0  0.333333   
+
+TotalCharges  19.15    19.20     19.25    ...  8477.70  8496.70  8529.50  \
+Churn                                     ...                              
+No                1.0      1.0  0.666667  ...      1.0      1.0      1.0   
+Yes               0.0      0.0  0.333333  ...      0.0      0.0      0.0   
+
+TotalCharges  8543.25  8547.15  8564.75  8594.40  8670.10  8672.45  8684.80  
+Churn                                                                        
+No                1.0      1.0      1.0      1.0      1.0      1.0      0.0  
+Yes               0.0      0.0      0.0      0.0      0.0      0.0      1.0  
 
 [2 rows x 6531 columns]
 </pre></div>
@@ -1844,33 +1950,7 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
       <th>Partner_No</th>
       <th>Partner_Yes</th>
       <th>Dependents_No</th>
-      <th>Dependents_Yes</th>
-      <th>PhoneService_No</th>
-      <th>PhoneService_Yes</th>
-      <th>MultipleLines_No</th>
-      <th>MultipleLines_No phone service</th>
-      <th>MultipleLines_Yes</th>
-      <th>InternetService_DSL</th>
-      <th>InternetService_Fiber optic</th>
-      <th>InternetService_No</th>
-      <th>OnlineSecurity_No</th>
-      <th>OnlineSecurity_No internet service</th>
-      <th>OnlineSecurity_Yes</th>
-      <th>OnlineBackup_No</th>
-      <th>OnlineBackup_No internet service</th>
-      <th>OnlineBackup_Yes</th>
-      <th>DeviceProtection_No</th>
-      <th>DeviceProtection_No internet service</th>
-      <th>DeviceProtection_Yes</th>
-      <th>TechSupport_No</th>
-      <th>TechSupport_No internet service</th>
-      <th>TechSupport_Yes</th>
-      <th>StreamingTV_No</th>
-      <th>StreamingTV_No internet service</th>
-      <th>StreamingTV_Yes</th>
-      <th>StreamingMovies_No</th>
-      <th>StreamingMovies_No internet service</th>
-      <th>StreamingMovies_Yes</th>
+      <th>...</th>
       <th>Contract_Month-to-month</th>
       <th>Contract_One year</th>
       <th>Contract_Two year</th>
@@ -1884,32 +1964,6 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
     </tr>
     <tr>
       <th>customerID</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -1946,33 +2000,7 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
       <td>0</td>
       <td>1</td>
       <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
+      <td>...</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1996,33 +2024,7 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
       <td>1</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
+      <td>...</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -2046,33 +2048,7 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
       <td>1</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
+      <td>...</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -2096,33 +2072,7 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
       <td>1</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
+      <td>...</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -2146,33 +2096,7 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
       <td>1</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
+      <td>...</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -2186,6 +2110,7 @@ Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
     </tr>
   </tbody>
 </table>
+<p>5 rows × 47 columns</p>
 </div></div></div>
 </div>
 </div>
@@ -2256,6 +2181,1643 @@ Name: Churn, dtype: float64
 <p>We can see that complementary categories show an inverse correlation, indicating that we are dealing with a excess of information.
 Logical as when option A is not chosen, option B is.
 However in this case, as some categoricals have 3 options I opt to keep all info, although it would be a good idea to remove 1 option for each category, this should become appearent in data exploration.</p>
+</div>
+</div>
+<div class="section" id="exploration">
+<h2><span class="section-number">36.5. </span>Exploration<a class="headerlink" href="#exploration" title="Permalink to this headline">¶</a></h2>
+<p>Here we start with the exploration of our dataset, we look into normal distribution of numerical data, categorical correlations, numerical and categorical correlation, cluster results, and a simple machine learning implementation.</p>
+<div class="section" id="normal-distribution">
+<h3><span class="section-number">36.5.1. </span>Normal distribution<a class="headerlink" href="#normal-distribution" title="Permalink to this headline">¶</a></h3>
+<p>As a precaution I will check the normality of our numerical data.
+Although most probably not essential for further analysis it might be useful later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">churn_df</span><span class="p">[[</span><span class="s1">&#39;tenure&#39;</span><span class="p">,</span> <span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">dropna</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tenure
+ShapiroResult(statistic=0.9037491083145142, pvalue=0.0)
+MonthlyCharges
+ShapiroResult(statistic=0.9208902716636658, pvalue=0.0)
+TotalCharges
+ShapiroResult(statistic=0.8601524233818054, pvalue=0.0)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/lorenzf/.local/lib/python3.8/site-packages/scipy/stats/morestats.py:1760: UserWarning: p-value may not be accurate for N &gt; 5000.
+  warnings.warn(&quot;p-value may not be accurate for N &gt; 5000.&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is clear that our numerical data is not normally distributed, as mentioned not essential, therefore I will not be transforming the data and keeping it as it is. This is useful later because we keep the meaning of the values.</p>
+</div>
+<div class="section" id="categorical-correlations">
+<h3><span class="section-number">36.5.2. </span>Categorical correlations<a class="headerlink" href="#categorical-correlations" title="Permalink to this headline">¶</a></h3>
+<p>We have a lot of categorical features that could correlate with our Churn parameter, for each of those we would like to know how strong their correlation is. We can use the count_matrix function we created earlier for this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_matrix</span><span class="p">(</span><span class="s1">&#39;DeviceProtection&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>DeviceProtection</th>
+      <th>No</th>
+      <th>No internet service</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>1884</td>
+      <td>1413</td>
+      <td>1877</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>1211</td>
+      <td>113</td>
+      <td>545</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Using the Chi Squared Contingency test we can find out if any category of the chosen feature correlates with our Churn feature. it returns the test statistic F (strength of correlation), the p-value (chance of correlation) and expected values if no correlation is present.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">count_matrix</span><span class="p">(</span><span class="s1">&#39;DeviceProtection&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Something I find interesting is to subtract the expected values from the true values, this case we see where the surplusses are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_matrix</span><span class="p">(</span><span class="s1">&#39;DeviceProtection&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">exp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>DeviceProtection</th>
+      <th>No</th>
+      <th>No internet service</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>-389.68025</td>
+      <td>291.954423</td>
+      <td>97.725827</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>389.68025</td>
+      <td>-291.954423</td>
+      <td>-97.725827</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>To make our lives simpler, we extract all the categorical columns that we want to test against the Churn feature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_cols</span> <span class="o">=</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span> <span class="s1">&#39;tenure&#39;</span><span class="p">,</span> <span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">])</span>
+<span class="n">cat_cols</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;gender&#39;, &#39;SeniorCitizen&#39;, &#39;Partner&#39;, &#39;Dependents&#39;, &#39;PhoneService&#39;,
+       &#39;MultipleLines&#39;, &#39;InternetService&#39;, &#39;OnlineSecurity&#39;, &#39;OnlineBackup&#39;,
+       &#39;DeviceProtection&#39;, &#39;TechSupport&#39;, &#39;StreamingTV&#39;, &#39;StreamingMovies&#39;,
+       &#39;Contract&#39;, &#39;PaperlessBilling&#39;, &#39;PaymentMethod&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here I’ve written a small script that for each of those columns performs the Chi Squared test and writes the results down.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">significant_cols</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">chi2_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_cols</span><span class="p">:</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">count_matrix</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">F</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">&lt;</span><span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">significant_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="n">chi2_results</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="n">F</span><span class="p">,</span>
+            <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span>
+            <span class="s1">&#39;real&#39;</span><span class="p">:</span> <span class="n">counts</span><span class="p">,</span>
+            <span class="s1">&#39;exp&#39;</span><span class="p">:</span> <span class="n">exp</span><span class="p">,</span>
+            <span class="s1">&#39;diff&#39;</span><span class="p">:</span> <span class="n">counts</span> <span class="o">-</span> <span class="n">exp</span><span class="p">,</span>
+        <span class="p">}</span>
+            
+<span class="c1"># sort in descending F value</span>
+<span class="n">chi2_results</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">chi2_results</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;F&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The features that are significant have a p-value less than 0.05, indicating only a 5% chance that this occurs randomly. We list them here</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">significant_cols</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;SeniorCitizen&#39;,
+ &#39;Partner&#39;,
+ &#39;Dependents&#39;,
+ &#39;MultipleLines&#39;,
+ &#39;InternetService&#39;,
+ &#39;OnlineSecurity&#39;,
+ &#39;OnlineBackup&#39;,
+ &#39;DeviceProtection&#39;,
+ &#39;TechSupport&#39;,
+ &#39;StreamingTV&#39;,
+ &#39;StreamingMovies&#39;,
+ &#39;Contract&#39;,
+ &#39;PaperlessBilling&#39;,
+ &#39;PaymentMethod&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets zoom into one of them, here we print the difference of the true values and the expected</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi2_results</span><span class="p">[</span><span class="s1">&#39;SeniorCitizen&#39;</span><span class="p">][</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>SeniorCitizen</th>
+      <th>No</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>172.947608</td>
+      <td>-172.947608</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>-172.947608</td>
+      <td>172.947608</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can see that there are about 173 persons more in the group of SeniorCitizen that have Churned than was expected. Perhaps the provided service was not Senior friendly?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_matrix</span><span class="p">(</span><span class="s1">&#39;SeniorCitizen&#39;</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>SeniorCitizen</th>
+      <th>No</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>76.393832</td>
+      <td>58.318739</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>23.606168</td>
+      <td>41.681261</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can see the same pattern in our mean matrix, from the Senior Citizens about 18% more have churned than the non SeniorCitizen group! To make things more easier on the eye I’ve put it into a dataframe that is sorted by correlation strength</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">chi2_results</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">significant_cols</span><span class="p">],</span>
+        <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">chi2_results</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s1">&#39;F&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">significant_cols</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">significant_cols</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that features such as Contract type, OnlineSecurity and TechSupport have a strong correlation with Churning.</p>
+</div>
+<div class="section" id="numerical-vs-categorical-correlation">
+<h3><span class="section-number">36.5.3. </span>Numerical vs Categorical correlation<a class="headerlink" href="#numerical-vs-categorical-correlation" title="Permalink to this headline">¶</a></h3>
+<p>Next we would like to know if numerical features have a correlation with our Churn, using ANOVA we can mathematically calculate this. First let’s look at the averages of tenure between Yes and No Churn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Churn&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tenure</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Churn
+No     37.569965
+Yes    17.979133
+Name: tenure, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is already a clear difference, but let’s not jump to conclusion, ANOVA also takes into account group sizes and variation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">f_oneway</span><span class="p">(</span>
+    <span class="n">churn_df</span><span class="p">[</span><span class="n">churn_df</span><span class="o">.</span><span class="n">Churn</span><span class="o">==</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tenure</span><span class="p">,</span> 
+    <span class="n">churn_df</span><span class="p">[</span><span class="n">churn_df</span><span class="o">.</span><span class="n">Churn</span><span class="o">==</span><span class="s1">&#39;No&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tenure</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F_onewayResult(statistic=997.2680104991438, pvalue=7.999057960610892e-205)
+</pre></div>
+</div>
+</div>
+</div>
+<p>That p-values sure does speak for itself, there is a clear difference in tenures for users that have churned and others!</p>
+</div>
+<div class="section" id="unsupervised-clustering">
+<h3><span class="section-number">36.5.4. </span>unsupervised clustering<a class="headerlink" href="#unsupervised-clustering" title="Permalink to this headline">¶</a></h3>
+<p>Our customers also asked us to find out if we can find specific clusters of users in their dataset, so we perform a clustering analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We create a clustering algorithm and specify that we would like to have 2 clusters, perhaps they will overlap with churn and nochurn. Then we fit the algorithm with our dataset without the churn feature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">churn_ohe_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Churn&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KMeans(n_clusters=2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>After training on the dataset we can ask it to give us the labels for each record that it assigned, [0, 1] are the 2 clusters that it used to seperate our data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, ..., 0, 0, 1], dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great! Now we just have to do some data manipulation by adding the labels as a new feature to a new dataframe. We end up with churn_cluster_df, the same as churn_df but with an unsupervised clustering label.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_cluster_df</span> <span class="o">=</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">churn_cluster_df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+<span class="c1">#churn_cluster_df[[&#39;dist_0&#39;, &#39;dist_1&#39;]] = kmeans.transform(churn_ohe_df.drop(columns=&#39;Churn&#39;))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can calculate a comparison matrix, where for each combination of churn and cluster we count how many records there are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span><span class="s1">&#39;cluster&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>cluster</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>3404</td>
+      <td>1770</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>1547</td>
+      <td>322</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Looks like the overlap is not as clear as we would have expect it, this is common in unsupervised techniques as we did not specify the Churn feature to the algorithm. This does not imply our work is useless as it might give other insight to our data.</p>
+<p>Same for the regular data we create 2 functions that aggregate our data based on a specific column name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_cluster_matrix</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">col_name</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">mean_cluster_matrix</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">col_name</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As an example we count the occurences of Device Protection with our clusters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_cluster_matrix</span><span class="p">(</span><span class="s1">&#39;DeviceProtection&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>DeviceProtection</th>
+      <th>No</th>
+      <th>No internet service</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2432</td>
+      <td>1526</td>
+      <td>993</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>663</td>
+      <td>0</td>
+      <td>1429</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Cluster 1 seems to not contains any users that did not have internet access, so we can already see that this cluster only contains users with internet and mostly have device protection.</p>
+<p>To automate results, we again perform the contingency analysis, this time on the cluster feature instead of the churn feature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cl_significant_cols</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">cl_chi2_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Churn&#39;</span><span class="p">):</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">count_cluster_matrix</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">F</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">&lt;</span><span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">cl_significant_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="n">cl_chi2_results</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="n">F</span><span class="p">,</span>
+            <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span>
+            <span class="s1">&#39;real&#39;</span><span class="p">:</span> <span class="n">counts</span><span class="p">,</span>
+            <span class="s1">&#39;exp&#39;</span><span class="p">:</span> <span class="n">exp</span><span class="p">,</span>
+            <span class="s1">&#39;diff&#39;</span><span class="p">:</span> <span class="n">counts</span> <span class="o">-</span> <span class="n">exp</span><span class="p">,</span>
+        <span class="p">}</span>
+        
+<span class="c1"># sort in descending F value</span>
+<span class="n">cl_chi2_results</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cl_chi2_results</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;F&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The significant columns can be completely different, yet seem fairly similar</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cl_significant_cols</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;SeniorCitizen&#39;,
+ &#39;Partner&#39;,
+ &#39;Dependents&#39;,
+ &#39;PhoneService&#39;,
+ &#39;MultipleLines&#39;,
+ &#39;InternetService&#39;,
+ &#39;OnlineSecurity&#39;,
+ &#39;OnlineBackup&#39;,
+ &#39;DeviceProtection&#39;,
+ &#39;TechSupport&#39;,
+ &#39;StreamingTV&#39;,
+ &#39;StreamingMovies&#39;,
+ &#39;Contract&#39;,
+ &#39;PaperlessBilling&#39;,
+ &#39;PaymentMethod&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We ask for the difference, which only seems to be the PhoneService, this feature is important for the clusters but not the churning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">cl_significant_cols</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">significant_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;PhoneService&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get a better picture I opted to print all the significant results in order of correlation strenght. Both for Churn as for cluster.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Churn significant features&#39;</span><span class="p">)</span>
+<span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">chi2_results</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Churn significant features
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Contract&#39;: 1184.5965720837926,
+ &#39;OnlineSecurity&#39;: 849.9989679615962,
+ &#39;TechSupport&#39;: 828.1970684587393,
+ &#39;InternetService&#39;: 732.309589667794,
+ &#39;PaymentMethod&#39;: 648.1423274814,
+ &#39;OnlineBackup&#39;: 601.8127901134089,
+ &#39;DeviceProtection&#39;: 558.419369407389,
+ &#39;StreamingMovies&#39;: 375.6614793452656,
+ &#39;StreamingTV&#39;: 374.20394331098134,
+ &#39;PaperlessBilling&#39;: 258.27764906707307,
+ &#39;Dependents&#39;: 189.12924940423474,
+ &#39;SeniorCitizen&#39;: 159.42630036838742,
+ &#39;Partner&#39;: 158.7333820309922,
+ &#39;MultipleLines&#39;: 11.33044148319756}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cluster significant features&#39;</span><span class="p">)</span>
+<span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">cl_chi2_results</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cluster significant features
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;DeviceProtection&#39;: 1742.0880663243113,
+ &#39;OnlineBackup&#39;: 1665.2730646044615,
+ &#39;StreamingTV&#39;: 1655.5343860608277,
+ &#39;StreamingMovies&#39;: 1643.5321794643069,
+ &#39;TechSupport&#39;: 1391.976678378673,
+ &#39;OnlineSecurity&#39;: 1333.6884498651216,
+ &#39;MultipleLines&#39;: 1115.4765363222418,
+ &#39;Contract&#39;: 1041.6388959111168,
+ &#39;InternetService&#39;: 998.482344451734,
+ &#39;PaymentMethod&#39;: 578.5875906673851,
+ &#39;Partner&#39;: 480.3441523872099,
+ &#39;PaperlessBilling&#39;: 145.83172959071203,
+ &#39;PhoneService&#39;: 89.14446552423011,
+ &#39;SeniorCitizen&#39;: 54.438061283034386,
+ &#39;Dependents&#39;: 17.631250785385838}
+</pre></div>
+</div>
+</div>
+</div>
+<p>I meantioned PhoneService earlier, when we print the difference between truth and expected, we see that a lot more persons that have a phone service are in cluster 1. We already knew cluster 1 has the users with internet service, now it seems users with phone services are also more present in cluster 1. It seems to be filled with customers that have most services…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cl_chi2_results</span><span class="p">[</span><span class="s1">&#39;PhoneService&#39;</span><span class="p">][</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>PhoneService</th>
+      <th>No</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>107.576175</td>
+      <td>-107.576175</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-107.576175</td>
+      <td>107.576175</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Another this that caught my attention is the payment method, cluster 1 uses way more often an automatic payment method. Perhaps these are sleeping customers that have no idea about what they pay.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cl_chi2_results</span><span class="p">[</span><span class="s1">&#39;PaymentMethod&#39;</span><span class="p">][</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>PaymentMethod</th>
+      <th>Bank transfer (automatic)</th>
+      <th>Credit card (automatic)</th>
+      <th>Electronic check</th>
+      <th>Mailed check</th>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-206.381798</td>
+      <td>-194.916513</td>
+      <td>75.481897</td>
+      <td>325.816413</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>206.381798</td>
+      <td>194.916513</td>
+      <td>-75.481897</td>
+      <td>-325.816413</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For numerical features we can see that cluster 1 usually has much higher values. This cluster consist of customers that are loyal, pay more per month and therefore also in total.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;cluster&#39;</span><span class="p">)[[</span><span class="s1">&#39;tenure&#39;</span><span class="p">,</span> <span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tenure</th>
+      <th>MonthlyCharges</th>
+      <th>TotalCharges</th>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21.144617</td>
+      <td>53.591820</td>
+      <td>977.746748</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>58.940249</td>
+      <td>91.196702</td>
+      <td>5361.063360</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The tenure and total charges reverses in case of grouping per Churn, yet the monthly charges on average are still higher, customers churn early as they have high monthly charges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Churn&#39;</span><span class="p">)[[</span><span class="s1">&#39;tenure&#39;</span><span class="p">,</span> <span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tenure</th>
+      <th>MonthlyCharges</th>
+      <th>TotalCharges</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>37.569965</td>
+      <td>61.265124</td>
+      <td>2549.911442</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>17.979133</td>
+      <td>74.441332</td>
+      <td>1531.796094</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="nearest-neighbour-classification">
+<h3><span class="section-number">36.5.5. </span>Nearest Neighbour classification<a class="headerlink" href="#nearest-neighbour-classification" title="Permalink to this headline">¶</a></h3>
+<p>Our client asked if we could predict future churning, we could solve this with a classification algorithm. I chose for KNN as it is simple and explainable. we start by importing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To classify users between churn and nochurn we create a knn classifier, I opted to go for 5 neighbours so it will look at the 5 most similar users in our dataset and see if they churned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We train the algorithm by fitting on the churn data, notice how we both supply input (all columns but churn) and output (only churn column) so the algorithm knows the outcome.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">churn_ohe_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Churn&#39;</span><span class="p">),</span> <span class="n">churn_ohe_df</span><span class="o">.</span><span class="n">Churn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KNeighborsClassifier()
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that the algorithm is trained, we create a new dataframe that not only contains the truth (Churn) but also the prediction as new feature (predict).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_predicted_df</span> <span class="o">=</span> <span class="n">churn_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">churn_predicted_df</span><span class="p">[</span><span class="s1">&#39;predict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">churn_ohe_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Churn&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To evaluate the results, we create a confusion matrix, where all 4 combinations are counted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_matrix</span> <span class="o">=</span> <span class="n">churn_predicted_df</span><span class="p">[[</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span> <span class="s1">&#39;predict&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">conf_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>predict</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>4778</td>
+      <td>396</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>796</td>
+      <td>1073</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Of all churners, (1869) we found 1073, which is not bad, yet us calculate accuracy (amount of flagged users that is actually a churner) and recall (amount of churners that is found by the algorithm).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;accuracy: </span><span class="si">{</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">conf_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;accuracy: 73.04%&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;recall: </span><span class="si">{</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">conf_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;recall: 57.41%&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualisation">
+<h2><span class="section-number">36.6. </span>Visualisation<a class="headerlink" href="#visualisation" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have explored the content of our data, we need to create an appealing visualisation to demonstrate the relations.</p>
+<div class="section" id="categorical-correlation">
+<h3><span class="section-number">36.6.1. </span>Categorical correlation<a class="headerlink" href="#categorical-correlation" title="Permalink to this headline">¶</a></h3>
+<p>We deduced earlier that features such as Contract and OnlineSecurity are good predictors for churning, I can think of 2 ways to visualise categorical correlations, heatmaps and stacked bar charts. First again our results, both the contingency result as the mean matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi2_results</span><span class="p">[</span><span class="s1">&#39;Contract&#39;</span><span class="p">][</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Contract</th>
+      <th>Month-to-month</th>
+      <th>One year</th>
+      <th>Two year</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>-626.691751</td>
+      <td>224.88982</td>
+      <td>401.801931</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>626.691751</td>
+      <td>-224.88982</td>
+      <td>-401.801931</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_matrix</span><span class="p">(</span><span class="s1">&#39;Contract&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Contract</th>
+      <th>Month-to-month</th>
+      <th>One year</th>
+      <th>Two year</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>0.572903</td>
+      <td>0.887305</td>
+      <td>0.971681</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.427097</td>
+      <td>0.112695</td>
+      <td>0.028319</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What we would like to do now is turn this dataframe into a color coded version, a heatmap. Our Seaborn library makes this very easy and we can even annotate this</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">mean_matrix</span><span class="p">(</span><span class="s1">&#39;Contract&#39;</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_124_0.png" src="../_images/Churn_124_0.png" />
+</div>
+</div>
+<p>This plot shows that for Churn==Yes (lower row) the most of them come from the Month-to-month category, indicating that user who pay month-to-month are more susceptible to churn. We could make a bold claim and say that if ONLY the Contract was the determining factor and not other features, we could save about 30% of the month-to-month group if our services would improve in that category similarly to other groups. Or if we would be able to convert all users in that category to the one-year contract.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_df</span><span class="o">.</span><span class="n">Contract</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[</span><span class="s1">&#39;Month-to-month&#39;</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mf">0.427</span><span class="o">-</span><span class="mf">0.1126</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1218.3
+</pre></div>
+</div>
+</div>
+</div>
+<p>About 1200 Churners would have been prevented! that is a whole lot! obviously to mention that this is only true if the Contract was the ONLY feature that would make a change.</p>
+<p>To make a bar plot we first need some more data wrangling, we create the following view so seaborn can create the stacked bar plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vis_matrix</span> <span class="o">=</span> <span class="n">mean_matrix</span><span class="p">(</span><span class="s1">&#39;Contract&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">vis_matrix</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">vis_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Churn</th>
+      <th>Contract</th>
+      <th>No</th>
+      <th>Yes</th>
+      <th>sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Month-to-month</td>
+      <td>0.572903</td>
+      <td>0.427097</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>One year</td>
+      <td>0.887305</td>
+      <td>0.112695</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Two year</td>
+      <td>0.971681</td>
+      <td>0.028319</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>With this visualisation matrix we have not only no and yes for churn as features, but also the sum. There are other methods to obtain the stacked bar chart but the result is the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Contract&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">vis_matrix</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Churned&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Contract&quot;</span><span class="p">,</span>  <span class="n">y</span><span class="o">=</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">vis_matrix</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;No Churn&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_130_0.png" src="../_images/Churn_130_0.png" />
+</div>
+</div>
+<p>I like to think that this graph clearly displays the disparity between different contracts and the relation to Churning, the red portion indications the percentage of churned customers, keep in mind that some categories might not be large so a larger portion of churners is not as detrimental in that case, but as we saw earlier about 1200 churners could have been prevented if the proportions for month-to-month contract would be the same.</p>
+<p>We can perform a similar result for online security.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi2_results</span><span class="p">[</span><span class="s1">&#39;OnlineSecurity&#39;</span><span class="p">][</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>OnlineSecurity</th>
+      <th>No</th>
+      <th>No internet service</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>-532.736192</td>
+      <td>291.954423</td>
+      <td>240.781769</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>532.736192</td>
+      <td>-291.954423</td>
+      <td>-240.781769</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_matrix</span><span class="p">(</span><span class="s1">&#39;OnlineSecurity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>OnlineSecurity</th>
+      <th>No</th>
+      <th>No internet service</th>
+      <th>Yes</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>0.582333</td>
+      <td>0.92595</td>
+      <td>0.853888</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>0.417667</td>
+      <td>0.07405</td>
+      <td>0.146112</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">mean_matrix</span><span class="p">(</span><span class="s1">&#39;OnlineSecurity&#39;</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_134_0.png" src="../_images/Churn_134_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_df</span><span class="o">.</span><span class="n">OnlineSecurity</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[</span><span class="s1">&#39;No&#39;</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mf">0.417</span><span class="o">-</span><span class="mf">0.146</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>947.9580000000001
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vis_matrix</span> <span class="o">=</span> <span class="n">mean_matrix</span><span class="p">(</span><span class="s1">&#39;OnlineSecurity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">vis_matrix</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">vis_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Churn</th>
+      <th>OnlineSecurity</th>
+      <th>No</th>
+      <th>Yes</th>
+      <th>sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>No</td>
+      <td>0.582333</td>
+      <td>0.417667</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>No internet service</td>
+      <td>0.925950</td>
+      <td>0.074050</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Yes</td>
+      <td>0.853888</td>
+      <td>0.146112</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;OnlineSecurity&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">vis_matrix</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Churned&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;OnlineSecurity&quot;</span><span class="p">,</span>  <span class="n">y</span><span class="o">=</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">vis_matrix</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;No Churn&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_137_0.png" src="../_images/Churn_137_0.png" />
+</div>
+</div>
+<p>Again a big difference in groups, this time we could have saved about 950 churners if we would have convinced users that no online security is a bad idea.</p>
+</div>
+<div class="section" id="id1">
+<h3><span class="section-number">36.6.2. </span>Numerical vs Categorical correlation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>When visualising numerical and categorical correlation it usually comes down to histograms. Here I will look into MonthlyCharges and tenure.
+For a refreshment we group per churn and print the averages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Churn&#39;</span><span class="p">)[[</span><span class="s1">&#39;tenure&#39;</span><span class="p">,</span> <span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tenure</th>
+      <th>MonthlyCharges</th>
+      <th>TotalCharges</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>37.569965</td>
+      <td>61.265124</td>
+      <td>2549.911442</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>17.979133</td>
+      <td>74.441332</td>
+      <td>1531.796094</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The trick for histograms with different categories is to overlap multiple histograms, we seperate our dataset into churned and nochurn and plot both results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_df</span><span class="p">[</span><span class="n">churn_df</span><span class="o">.</span><span class="n">Churn</span><span class="o">==</span><span class="s1">&#39;No&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">MonthlyCharges</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NoChurn&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_df</span><span class="p">[</span><span class="n">churn_df</span><span class="o">.</span><span class="n">Churn</span><span class="o">==</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">MonthlyCharges</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_142_0.png" src="../_images/Churn_142_0.png" />
+</div>
+</div>
+<p>For monthly charges we can see that although there was a significant difference found by ANOVA and the means are different, the distributions look alike. The culprit behind this is probably the long peak of no churn in the beginning, the dataset seems to have a lot of small customers that are happy with their services as the price is low. A good example how with non normal data we should not simply rely on mathematics to say something is significant!</p>
+<p>Perhaps to overcome non normality we could opt for the median instead of the mean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churn_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Churn&#39;</span><span class="p">)[[</span><span class="s1">&#39;tenure&#39;</span><span class="p">,</span> <span class="s1">&#39;MonthlyCharges&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalCharges&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tenure</th>
+      <th>MonthlyCharges</th>
+      <th>TotalCharges</th>
+    </tr>
+    <tr>
+      <th>Churn</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>38.0</td>
+      <td>64.425</td>
+      <td>1679.525</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>10.0</td>
+      <td>79.650</td>
+      <td>703.550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Although the values have changed (indicating again non normal data) we see that the difference is still present, so our non normality has not been ‘solved’. We are warned.</p>
+<p>Similar to the previous plot, we create a histogram for tenure</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_df</span><span class="p">[</span><span class="n">churn_df</span><span class="o">.</span><span class="n">Churn</span><span class="o">==</span><span class="s1">&#39;No&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tenure</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NoChurn&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_df</span><span class="p">[</span><span class="n">churn_df</span><span class="o">.</span><span class="n">Churn</span><span class="o">==</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tenure</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Churned&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_146_0.png" src="../_images/Churn_146_0.png" />
+</div>
+</div>
+<p>This looks really great! we can see that churned users usually have a lower tenure, perhaps onboarding of new customers is a problem?</p>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">36.6.3. </span>Unsupervised clustering<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Similar to the churn feature, we can also use the cluster feature, basically the same method, but a different outcome.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_cluster_df</span><span class="p">[</span><span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">cluster</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tenure</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cluster0&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_cluster_df</span><span class="p">[</span><span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">cluster</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tenure</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cluster1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_149_0.png" src="../_images/Churn_149_0.png" />
+</div>
+</div>
+<p>Here you can see the power of clustering, the algorithm clearly used the tenure as a input to determine the clusters. cluster 1 contains most of the longer customers (that all have internet and most of them phone service).</p>
+<p>In case of montly charges we also see a big difference.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_cluster_df</span><span class="p">[</span><span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">cluster</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">MonthlyCharges</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cluster0&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">churn_cluster_df</span><span class="p">[</span><span class="n">churn_cluster_df</span><span class="o">.</span><span class="n">cluster</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">MonthlyCharges</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cluster1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_151_0.png" src="../_images/Churn_151_0.png" />
+</div>
+</div>
+<p>cluster 1 again contains the higher paying customers, which is explainable as they mostly all have phone and internet. These customers might be ‘sleeping’ as they are not aware of higher charges.</p>
+<p>To show the phone services I created a simple heatmap.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">mean_cluster_matrix</span><span class="p">(</span><span class="s1">&#39;InternetService&#39;</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_153_0.png" src="../_images/Churn_153_0.png" />
+</div>
+</div>
+<p>It shows in which cluster the internet users are, again all users that have no internet are in cluster 0.</p>
+</div>
+<div class="section" id="k-nearest-neighbours">
+<h3><span class="section-number">36.6.4. </span>K Nearest Neighbours<a class="headerlink" href="#k-nearest-neighbours" title="Permalink to this headline">¶</a></h3>
+<p>Illustrating a machine learning algorithm is always difficult, a we are dealing with categorical variables it is exceptionally hard.</p>
+<p>The only thing I can think of here is to create a heatmap from the confusion matrix, with a logarithmic scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LogNorm</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Churn_156_0.png" src="../_images/Churn_156_0.png" />
+</div>
+</div>
+<p>Not great, but shows that the false positives (no churnes that are flagged) and false negatives (churners that not have been flagged) are fairly low.</p>
+</div>
+<div class="section" id="summary">
+<h3><span class="section-number">36.6.5. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<p>At this point it would be a good idea to reconnect with our client and discuss our results.</p>
+<p>In our analysis we found some significant difference for churners, being:</p>
+<ul class="simple">
+<li><p>A short tenure</p></li>
+<li><p>Having a month-to-month contract</p></li>
+<li><p>Not having additional options on services</p></li>
+<li><p>Senior Citizenship</p></li>
+</ul>
+<p>To prevent this they could for example:</p>
+<ul class="simple">
+<li><p>Give attention to new customers, create a better onboarding</p></li>
+<li><p>Create promotion/discount for longer subscription plans</p></li>
+<li><p>Create promotion/discount on additional services</p></li>
+<li><p>Improve elpdesk for less technology abled persons</p></li>
+</ul>
+<p>When we cluster the customers in 2 groups, we did not find a clear overlap with the churn parameter, however it seems the second cluster found customers that have higher tenures and more additional services.
+Looking at Charges, this cluster had a significantly higher amount, indicating that the most profitable customers belong to this cluster.</p>
+<p>A (simple) machine learning exercise has shown there is a possibility of having a 75% accuracy (amount of flagged users that is actually a churner) and a recall of 57% (amount of churners that is found by the algorithm).
+These results are not great, but not bad either, further improvements might be needed but this implementation is not critical, i.e. flagging a user as a churner whilst he/she is not, is not necessary crucial for operation.</p>
 </div>
 </div>
 </div>
