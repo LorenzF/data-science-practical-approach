@@ -51,10 +51,10 @@ set_matplotlib_formats('svg')
 # In[2]:
 
 
-if not os.path.exists("/root/.kaggle"):
-    os.mkdir("/root/.kaggle")
+if not os.path.exists(os.path.expanduser('~/.kaggle')):
+    os.mkdir(os.path.expanduser('~/.kaggle'))
 
-with open('/root/.kaggle/kaggle.json', 'w') as f:
+with open(os.path.expanduser('~/.kaggle/kaggle.json'), 'w') as f:
     json.dump(
         {
             "username":"lorenzf",
@@ -428,8 +428,8 @@ products_w_price.describe()
 
 
 for name, col in products_w_price.loc[:,(products_w_price.dtypes == float).values].iteritems():
-  print(name)
-  print(scipy.stats.shapiro(col.dropna()))
+    print(name)
+    print(scipy.stats.shapiro(col.dropna()))
 
 
 # #### Numerical correlation
@@ -463,8 +463,8 @@ vif_compatible_price = vif_compatible_price.dropna(axis='index')
 vif_compatible_price = vif_compatible_price.values
 vif_price = {}
 for idx, col in enumerate(cols_to_keep):
-  vif_price[col] = variance_inflation_factor(vif_compatible_price, idx)
-  print(col + ": \t" + str(variance_inflation_factor(vif_compatible_price, idx)))
+    vif_price[col] = variance_inflation_factor(vif_compatible_price, idx)
+    print(col + ": \t" + str(variance_inflation_factor(vif_compatible_price, idx)))
 
 
 # As mentioned earlier, the values here are hard to interpret, however the values seem to be lower than my experience expected. If infinite values arise we know that we need to do things different. Let's assume the collinearity between these columns is ok and they don't interfere with eachother enough to make a difference in the outcome.
@@ -487,7 +487,7 @@ result = scipy.stats.f_oneway(*products_w_price_p_category)
 
 anova_price = {}
 for name, test, p in zip(list(products_w_price.dtypes[(products_w_price.dtypes == float)].index), result[0], result[1]):
-  anova_price[name] = [test, p]
+    anova_price[name] = [test, p]
 
 anova_price = pd.DataFrame.from_dict(anova_price, columns=['test', 'p'], orient='index')
 anova_price
@@ -770,45 +770,3 @@ ax.set_xticklabels(ax.get_xticklabels(),rotation=-20,horizontalalignment='left')
 # We split up our dataset by grouping per category and removing small categories, now we could see that a relative change in correlation - meaning that the correlation of a column in our dataset with the price was different in that category compared to the overall correlation of this column with the price - was present for all categories. For each category we selected both the highest increase in correlation - meaning a 'spike' in importance - for that category and the highest decrease - meaning a 'drop' in importance - for that category.
 # 
 # These plots hence show the most important and least important attributes for an item concerning the price e.g. if we want to increase the price of an item in the computers category, we need to make sure it has enough pictures and not try to decrease the weight value.
-
-# ## Playground
-# 
-# here I can experiment with new ideas, and so can you!
-
-# In[75]:
-
-
-order_reviews
-
-
-# In[76]:
-
-
-reviews_per_seller = order_reviews.merge(orders, how='left', left_on='order_id', right_index=True)
-
-
-# In[77]:
-
-
-av_review = reviews_per_seller[reviews_per_seller['order_item_id']==1.0].groupby('seller_id')['review_score'].agg(['count', 'mean'])
-
-
-# In[78]:
-
-
-total_revenue = orders[orders['order_item_id']==1.0].groupby('seller_id')['price'].sum()
-total_revenue.name = 'revenue'
-
-
-# In[79]:
-
-
-reviews = pd.merge(av_review, total_revenue, left_index=True, right_index=True)
-reviews
-
-
-# In[80]:
-
-
-reviews.corr(method='spearman')
-

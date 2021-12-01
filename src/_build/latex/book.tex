@@ -79,7 +79,7 @@
         
 
 \title{Data Science - A practical Approach}
-\date{Nov 25, 2021}
+\date{Dec 01, 2021}
 \release{}
 \author{Lorenz Feyen}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -7758,7 +7758,7 @@ we start out by importing all necessary libraries
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\PYGZus{}14147/4057771804.py:10: DeprecationWarning: `set\PYGZus{}matplotlib\PYGZus{}formats` is deprecated since IPython 7.23, directly use `matplotlib\PYGZus{}inline.backend\PYGZus{}inline.set\PYGZus{}matplotlib\PYGZus{}formats()`
+/tmp/ipykernel\PYGZus{}6945/4057771804.py:10: DeprecationWarning: `set\PYGZus{}matplotlib\PYGZus{}formats` is deprecated since IPython 7.23, directly use `matplotlib\PYGZus{}inline.backend\PYGZus{}inline.set\PYGZus{}matplotlib\PYGZus{}formats()`
   set\PYGZus{}matplotlib\PYGZus{}formats(\PYGZsq{}svg\PYGZsq{})
 \end{sphinxVerbatim}
 
@@ -7766,29 +7766,16 @@ we start out by importing all necessary libraries
 in order to download datasets from kaggle, we need an API key to access their API, we’ll make that here
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
-    \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{expanduser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZti{}/.kaggle}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{expanduser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZti{}/.kaggle}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
 
-\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/root/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
+\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{expanduser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZti{}/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
     \PYG{n}{json}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}
         \PYG{p}{\PYGZob{}}
             \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{username}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{lorenzf}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
             \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{key}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{7a44a9e99b27e796177d793a3d85b8cf}\PYG{l+s+s2}{\PYGZdq{}}
         \PYG{p}{\PYGZcb{}}
         \PYG{p}{,} \PYG{n}{f}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{n+ne}{PermissionError}\PYG{g+gWhitespace}{                           }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}14147}\PYG{o}{/}\PYG{l+m+mf}{3113012040.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{1} \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{2}     \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{3} 
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{4} \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/root/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{5}     \PYG{n}{json}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}
-
-\PYG{n+ne}{PermissionError}: [Errno 13] Permission denied: \PYGZsq{}/root/.kaggle\PYGZsq{}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -7801,7 +7788,14 @@ now we can import kaggle too and download the datasets
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run \PYGZsq{}chmod 600 /root/.kaggle/kaggle.json\PYGZsq{}
+\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n+ne}{ModuleNotFoundError}\PYG{g+gWhitespace}{                       }Traceback (most recent call last)
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}6945}\PYG{o}{/}\PYG{l+m+mf}{819357782.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{k+kn}{import} \PYG{n+nn}{kaggle}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{2} \PYG{n}{kaggle}\PYG{o}{.}\PYG{n}{api}\PYG{o}{.}\PYG{n}{dataset\PYGZus{}download\PYGZus{}files}\PYG{p}{(}\PYG{n}{dataset}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{olistbr/brazilian\PYGZhy{}ecommerce}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{path}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{unzip}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{3} \PYG{n}{kaggle}\PYG{o}{.}\PYG{n}{api}\PYG{o}{.}\PYG{n}{dataset\PYGZus{}download\PYGZus{}files}\PYG{p}{(}\PYG{n}{dataset}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{olistbr/marketing\PYGZhy{}funnel\PYGZhy{}olist}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{path}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{unzip}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+\PYG{n+ne}{ModuleNotFoundError}: No module named \PYGZsq{}kaggle\PYGZsq{}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -8640,8 +8634,8 @@ When we would want to predict the price of an item, it means the the other infor
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{for} \PYG{n}{name}\PYG{p}{,} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n}{products\PYGZus{}w\PYGZus{}price}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{p}{:}\PYG{p}{,}\PYG{p}{(}\PYG{n}{products\PYGZus{}w\PYGZus{}price}\PYG{o}{.}\PYG{n}{dtypes} \PYG{o}{==} \PYG{n+nb}{float}\PYG{p}{)}\PYG{o}{.}\PYG{n}{values}\PYG{p}{]}\PYG{o}{.}\PYG{n}{iteritems}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-  \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{name}\PYG{p}{)}
-  \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{scipy}\PYG{o}{.}\PYG{n}{stats}\PYG{o}{.}\PYG{n}{shapiro}\PYG{p}{(}\PYG{n}{col}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{name}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{scipy}\PYG{o}{.}\PYG{n}{stats}\PYG{o}{.}\PYG{n}{shapiro}\PYG{p}{(}\PYG{n}{col}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -8719,8 +8713,8 @@ We have to take into account that freight value is on itself correlating with th
 \PYG{n}{vif\PYGZus{}compatible\PYGZus{}price} \PYG{o}{=} \PYG{n}{vif\PYGZus{}compatible\PYGZus{}price}\PYG{o}{.}\PYG{n}{values}
 \PYG{n}{vif\PYGZus{}price} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{p}{\PYGZcb{}}
 \PYG{k}{for} \PYG{n}{idx}\PYG{p}{,} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{cols\PYGZus{}to\PYGZus{}keep}\PYG{p}{)}\PYG{p}{:}
-  \PYG{n}{vif\PYGZus{}price}\PYG{p}{[}\PYG{n}{col}\PYG{p}{]} \PYG{o}{=} \PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}\PYG{p}{(}\PYG{n}{vif\PYGZus{}compatible\PYGZus{}price}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{)}
-  \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{col} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}\PYG{p}{(}\PYG{n}{vif\PYGZus{}compatible\PYGZus{}price}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n}{vif\PYGZus{}price}\PYG{p}{[}\PYG{n}{col}\PYG{p}{]} \PYG{o}{=} \PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}\PYG{p}{(}\PYG{n}{vif\PYGZus{}compatible\PYGZus{}price}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{col} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{: }\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{variance\PYGZus{}inflation\PYGZus{}factor}\PYG{p}{(}\PYG{n}{vif\PYGZus{}compatible\PYGZus{}price}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -8757,7 +8751,7 @@ Something interesting we haven’t looked into yet is the product category, we c
 
 \PYG{n}{anova\PYGZus{}price} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{p}{\PYGZcb{}}
 \PYG{k}{for} \PYG{n}{name}\PYG{p}{,} \PYG{n}{test}\PYG{p}{,} \PYG{n}{p} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{products\PYGZus{}w\PYGZus{}price}\PYG{o}{.}\PYG{n}{dtypes}\PYG{p}{[}\PYG{p}{(}\PYG{n}{products\PYGZus{}w\PYGZus{}price}\PYG{o}{.}\PYG{n}{dtypes} \PYG{o}{==} \PYG{n+nb}{float}\PYG{p}{)}\PYG{p}{]}\PYG{o}{.}\PYG{n}{index}\PYG{p}{)}\PYG{p}{,} \PYG{n}{result}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{result}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}\PYG{p}{:}
-  \PYG{n}{anova\PYGZus{}price}\PYG{p}{[}\PYG{n}{name}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[}\PYG{n}{test}\PYG{p}{,} \PYG{n}{p}\PYG{p}{]}
+    \PYG{n}{anova\PYGZus{}price}\PYG{p}{[}\PYG{n}{name}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[}\PYG{n}{test}\PYG{p}{,} \PYG{n}{p}\PYG{p}{]}
 
 \PYG{n}{anova\PYGZus{}price} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{o}{.}\PYG{n}{from\PYGZus{}dict}\PYG{p}{(}\PYG{n}{anova\PYGZus{}price}\PYG{p}{,} \PYG{n}{columns}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{test}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{orient}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{index}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{n}{anova\PYGZus{}price}
@@ -9314,80 +9308,6 @@ We split up our dataset by grouping per category and removing small categories, 
 These plots hence show the most important and least important attributes for an item concerning the price e.g. if we want to increase the price of an item in the computers category, we need to make sure it has enough pictures and not try to decrease the weight value.
 
 
-\section{Playground}
-\label{\detokenize{c7_case_studies/Olist:playground}}
-\sphinxAtStartPar
-here I can experiment with new ideas, and so can you!
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{order\PYGZus{}reviews}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-                              review\PYGZus{}id  ... review\PYGZus{}answer\PYGZus{}timestamp
-0      7bc2406110b926393aa56f80a40eba40  ...     2018\PYGZhy{}01\PYGZhy{}18 21:46:59
-1      80e641a11e56f04c1ad469d5645fdfde  ...     2018\PYGZhy{}03\PYGZhy{}11 03:05:13
-2      228ce5500dc1d8e020d8d1322874b6f0  ...     2018\PYGZhy{}02\PYGZhy{}18 14:36:24
-3      e64fb393e7b32834bb789ff8bb30750e  ...     2017\PYGZhy{}04\PYGZhy{}21 22:02:06
-4      f7c4243c7fe1938f181bec41a392bdeb  ...     2018\PYGZhy{}03\PYGZhy{}02 10:26:53
-...                                 ...  ...                     ...
-99219  574ed12dd733e5fa530cfd4bbf39d7c9  ...     2018\PYGZhy{}07\PYGZhy{}14 17:18:30
-99220  f3897127253a9592a73be9bdfdf4ed7a  ...     2017\PYGZhy{}12\PYGZhy{}11 20:06:42
-99221  b3de70c89b1510c4cd3d0649fd302472  ...     2018\PYGZhy{}03\PYGZhy{}23 09:10:43
-99222  1adeb9d84d72fe4e337617733eb85149  ...     2018\PYGZhy{}07\PYGZhy{}02 12:59:13
-99223  efe49f1d6f951dd88b51e6ccd4cc548f  ...     2017\PYGZhy{}07\PYGZhy{}03 21:01:49
-
-[99224 rows x 7 columns]
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{reviews\PYGZus{}per\PYGZus{}seller} \PYG{o}{=} \PYG{n}{order\PYGZus{}reviews}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{orders}\PYG{p}{,} \PYG{n}{how}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{left}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{left\PYGZus{}on}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{order\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{right\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{av\PYGZus{}review} \PYG{o}{=} \PYG{n}{reviews\PYGZus{}per\PYGZus{}seller}\PYG{p}{[}\PYG{n}{reviews\PYGZus{}per\PYGZus{}seller}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{order\PYGZus{}item\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{==}\PYG{l+m+mf}{1.0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{seller\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{review\PYGZus{}score}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{agg}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{count}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mean}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{total\PYGZus{}revenue} \PYG{o}{=} \PYG{n}{orders}\PYG{p}{[}\PYG{n}{orders}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{order\PYGZus{}item\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{==}\PYG{l+m+mf}{1.0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{seller\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{price}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}
-\PYG{n}{total\PYGZus{}revenue}\PYG{o}{.}\PYG{n}{name} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{revenue}\PYG{l+s+s1}{\PYGZsq{}}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{reviews} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{av\PYGZus{}review}\PYG{p}{,} \PYG{n}{total\PYGZus{}revenue}\PYG{p}{,} \PYG{n}{left\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{right\PYGZus{}index}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{n}{reviews}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-                                  count      mean   revenue
-seller\PYGZus{}id                                                  
-0015a82c2db000af6aaaf3ae2ecb0532      3  3.666667   2685.00
-001cca7ae9ae17fb1caed9dfb1094831    196  4.000000  20904.54
-001e6ad469a905060d959994f1b41e4f      1  1.000000    250.00
-002100f778ceb8431b7a1020ff7ab48f     51  3.882353   1151.00
-003554e2dce176b5555353e4f3555ac8      1  5.000000    120.00
-...                                 ...       ...       ...
-ffcfefa19b08742c5d315f2791395ee5      1  1.000000     69.90
-ffdd9f82b9a447f6f8d4b91554cc7dd3     18  4.333333   1823.60
-ffeee66ac5d5a62fe688b9d26f83f534     14  4.214286   1839.86
-fffd5413c0700ac820c7069d66d98c89     56  3.964286   8660.60
-ffff564a4f9085cd26170f4732393726     20  2.100000   1426.30
-
-[3083 rows x 3 columns]
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{reviews}\PYG{o}{.}\PYG{n}{corr}\PYG{p}{(}\PYG{n}{method}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{spearman}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-            count      mean   revenue
-count    1.000000 \PYGZhy{}0.108698  0.850416
-mean    \PYGZhy{}0.108698  1.000000 \PYGZhy{}0.109698
-revenue  0.850416 \PYGZhy{}0.109698  1.000000
-\end{sphinxVerbatim}
-
-
 \chapter{Case Study: Churn}
 \label{\detokenize{c7_case_studies/Churn:case-study-churn}}\label{\detokenize{c7_case_studies/Churn::doc}}
 \sphinxAtStartPar
@@ -9458,44 +9378,26 @@ we start out by importing all libraries
 \PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
 \PYG{k+kn}{import} \PYG{n+nn}{seaborn} \PYG{k}{as} \PYG{n+nn}{sns}
 \PYG{k+kn}{import} \PYG{n+nn}{scipy}\PYG{n+nn}{.}\PYG{n+nn}{stats}
+\PYG{k+kn}{import} \PYG{n+nn}{sklearn}
 \PYG{k+kn}{import} \PYG{n+nn}{matplotlib}\PYG{n+nn}{.}\PYG{n+nn}{pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
 \PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{set\PYGZus{}matplotlib\PYGZus{}formats}
 \PYG{o}{\PYGZpc{}}\PYG{k}{matplotlib} inline
-\PYG{n}{set\PYGZus{}matplotlib\PYGZus{}formats}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{svg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\PYGZus{}5355/4057771804.py:10: DeprecationWarning: `set\PYGZus{}matplotlib\PYGZus{}formats` is deprecated since IPython 7.23, directly use `matplotlib\PYGZus{}inline.backend\PYGZus{}inline.set\PYGZus{}matplotlib\PYGZus{}formats()`
-  set\PYGZus{}matplotlib\PYGZus{}formats(\PYGZsq{}svg\PYGZsq{})
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
 in order to download datasets from kaggle, we need an API key to access their API, we’ll make that here
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
-    \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{expanduser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZti{}/.kaggle}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{expanduser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZti{}/.kaggle}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
 
-\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/root/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
+\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{expanduser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZti{}/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
     \PYG{n}{json}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}
         \PYG{p}{\PYGZob{}}
             \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{username}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{lorenzf}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
             \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{key}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{7a44a9e99b27e796177d793a3d85b8cf}\PYG{l+s+s2}{\PYGZdq{}}
         \PYG{p}{\PYGZcb{}}
         \PYG{p}{,} \PYG{n}{f}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{n+ne}{PermissionError}\PYG{g+gWhitespace}{                           }Traceback (most recent call last)
-\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}5355}\PYG{o}{/}\PYG{l+m+mf}{3113012040.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{1} \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{2}     \PYG{n}{os}\PYG{o}{.}\PYG{n}{mkdir}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{/root/.kaggle}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{3} 
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{4} \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/root/.kaggle/kaggle.json}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
-\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{5}     \PYG{n}{json}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}
-
-\PYG{n+ne}{PermissionError}: [Errno 13] Permission denied: \PYGZsq{}/root/.kaggle\PYGZsq{}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -9507,7 +9409,13 @@ now we can import kaggle too and download the datasets
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run \PYGZsq{}chmod 600 /root/.kaggle/kaggle.json\PYGZsq{}
+\PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n+ne}{ModuleNotFoundError}\PYG{g+gWhitespace}{                       }Traceback (most recent call last)
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}6913}\PYG{o}{/}\PYG{l+m+mf}{3288988394.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{k+kn}{import} \PYG{n+nn}{kaggle}
+\PYG{g+gWhitespace}{      }\PYG{l+m+mi}{2} \PYG{n}{kaggle}\PYG{o}{.}\PYG{n}{api}\PYG{o}{.}\PYG{n}{dataset\PYGZus{}download\PYGZus{}files}\PYG{p}{(}\PYG{n}{dataset}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{blastchar/telco\PYGZhy{}customer\PYGZhy{}churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{path}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{unzip}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+\PYG{n+ne}{ModuleNotFoundError}: No module named \PYGZsq{}kaggle\PYGZsq{}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -9535,12 +9443,33 @@ shape: (7043, 21)
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-   customerID  gender  SeniorCitizen  ... MonthlyCharges TotalCharges  Churn
-0  7590\PYGZhy{}VHVEG  Female              0  ...          29.85        29.85     No
-1  5575\PYGZhy{}GNVDE    Male              0  ...          56.95       1889.5     No
-2  3668\PYGZhy{}QPYBK    Male              0  ...          53.85       108.15    Yes
-3  7795\PYGZhy{}CFOCW    Male              0  ...          42.30      1840.75     No
-4  9237\PYGZhy{}HQITU  Female              0  ...          70.70       151.65    Yes
+   customerID  gender  SeniorCitizen Partner Dependents  tenure PhoneService  \PYGZbs{}
+0  7590\PYGZhy{}VHVEG  Female              0     Yes         No       1           No   
+1  5575\PYGZhy{}GNVDE    Male              0      No         No      34          Yes   
+2  3668\PYGZhy{}QPYBK    Male              0      No         No       2          Yes   
+3  7795\PYGZhy{}CFOCW    Male              0      No         No      45           No   
+4  9237\PYGZhy{}HQITU  Female              0      No         No       2          Yes   
+
+      MultipleLines InternetService OnlineSecurity  ... DeviceProtection  \PYGZbs{}
+0  No phone service             DSL             No  ...               No   
+1                No             DSL            Yes  ...              Yes   
+2                No             DSL            Yes  ...               No   
+3  No phone service             DSL            Yes  ...              Yes   
+4                No     Fiber optic             No  ...               No   
+
+  TechSupport StreamingTV StreamingMovies        Contract PaperlessBilling  \PYGZbs{}
+0          No          No              No  Month\PYGZhy{}to\PYGZhy{}month              Yes   
+1          No          No              No        One year               No   
+2          No          No              No  Month\PYGZhy{}to\PYGZhy{}month              Yes   
+3         Yes          No              No        One year               No   
+4          No          No              No  Month\PYGZhy{}to\PYGZhy{}month              Yes   
+
+               PaymentMethod MonthlyCharges  TotalCharges Churn  
+0           Electronic check          29.85         29.85    No  
+1               Mailed check          56.95        1889.5    No  
+2               Mailed check          53.85        108.15   Yes  
+3  Bank transfer (automatic)          42.30       1840.75    No  
+4           Electronic check          70.70        151.65   Yes  
 
 [5 rows x 21 columns]
 \end{sphinxVerbatim}
@@ -9633,7 +9562,7 @@ Data columns (total 21 columns):
  19  TotalCharges      7043 non\PYGZhy{}null   object  
  20  Churn             7043 non\PYGZhy{}null   category
 dtypes: category(17), float64(1), int64(1), object(2)
-memory usage: 338.9+ KB
+memory usage: 339.4+ KB
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -9648,46 +9577,67 @@ I’m going to make them floating numbers
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gt}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{n+ne}{ValueError}\PYG{g+gWhitespace}{                                }Traceback (most recent call last)
-\PYG{n+nn}{\PYGZlt{}ipython\PYGZhy{}input\PYGZhy{}8\PYGZhy{}0ae90e86afc5\PYGZgt{}} in \PYG{n+ni}{\PYGZlt{}module\PYGZgt{}}\PYG{n+nt}{()}
+\PYG{o}{/}\PYG{n}{tmp}\PYG{o}{/}\PYG{n}{ipykernel\PYGZus{}6003}\PYG{o}{/}\PYG{l+m+mf}{2494845660.}\PYG{n}{py} \PYG{o+ow}{in} \PYG{o}{\PYGZlt{}}\PYG{n}{module}\PYG{o}{\PYGZgt{}}
 \PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1} \PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]} \PYG{o}{=} \PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{float}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gWhitespace}{      }\PYG{l+m+mi}{2} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
 
-\PYG{n+nn}{/usr/local/lib/python3.7/dist\PYGZhy{}packages/pandas/core/generic.py} in \PYG{n+ni}{astype}\PYG{n+nt}{(self, dtype, copy, errors)}
-\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5546}         \PYG{k}{else}\PYG{p}{:}
-\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5547}             \PYG{c+c1}{\PYGZsh{} else, only a single dtype is given}
-\PYG{n+ne}{\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{5548}             \PYG{n}{new\PYGZus{}data} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}mgr}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n}{dtype}\PYG{o}{=}\PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{n}{errors}\PYG{p}{,}\PYG{p}{)}
-\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5549}             \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}constructor}\PYG{p}{(}\PYG{n}{new\PYGZus{}data}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}finalize\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{method}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{astype}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5550} 
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/generic.py} in \PYG{n+ni}{astype}\PYG{n+nt}{(self, dtype, copy, errors)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5813}         \PYG{k}{else}\PYG{p}{:}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5814}             \PYG{c+c1}{\PYGZsh{} else, only a single dtype is given}
+\PYG{n+ne}{\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{5815}             \PYG{n}{new\PYGZus{}data} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}mgr}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n}{dtype}\PYG{o}{=}\PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{n}{errors}\PYG{p}{)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5816}             \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}constructor}\PYG{p}{(}\PYG{n}{new\PYGZus{}data}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}finalize\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{method}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{astype}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{5817} 
 
-\PYG{n+nn}{/usr/local/lib/python3.7/dist\PYGZhy{}packages/pandas/core/internals/managers.py} in \PYG{n+ni}{astype}\PYG{n+nt}{(self, dtype, copy, errors)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{602}         \PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{p}{:} \PYG{n+nb}{bool} \PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{errors}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{raise}\PYG{l+s+s2}{\PYGZdq{}}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{603}     \PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BlockManager}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{604}         \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{apply}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{astype}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{n}{errors}\PYG{p}{)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{605} 
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{606}     \PYG{k}{def} \PYG{n+nf}{convert}\PYG{p}{(}
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/internals/managers.py} in \PYG{n+ni}{astype}\PYG{n+nt}{(self, dtype, copy, errors)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{416} 
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{417}     \PYG{k}{def} \PYG{n+nf}{astype}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{:} \PYG{n}{T}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{p}{:} \PYG{n+nb}{bool} \PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{errors}\PYG{p}{:} \PYG{n+nb}{str} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{raise}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{T}\PYG{p}{:}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{418}         \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{apply}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{astype}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{n}{errors}\PYG{p}{)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{419} 
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{420}     \PYG{k}{def} \PYG{n+nf}{convert}\PYG{p}{(}
 
-\PYG{n+nn}{/usr/local/lib/python3.7/dist\PYGZhy{}packages/pandas/core/internals/managers.py} in \PYG{n+ni}{apply}\PYG{n+nt}{(self, f, align\PYGZus{}keys, **kwargs)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{407}                 \PYG{n}{applied} \PYG{o}{=} \PYG{n}{b}\PYG{o}{.}\PYG{n}{apply}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{408}             \PYG{k}{else}\PYG{p}{:}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{409}                 \PYG{n}{applied} \PYG{o}{=} \PYG{n+nb}{getattr}\PYG{p}{(}\PYG{n}{b}\PYG{p}{,} \PYG{n}{f}\PYG{p}{)}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{410}             \PYG{n}{result\PYGZus{}blocks} \PYG{o}{=} \PYG{n}{\PYGZus{}extend\PYGZus{}blocks}\PYG{p}{(}\PYG{n}{applied}\PYG{p}{,} \PYG{n}{result\PYGZus{}blocks}\PYG{p}{)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{411} 
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/internals/managers.py} in \PYG{n+ni}{apply}\PYG{n+nt}{(self, f, align\PYGZus{}keys, ignore\PYGZus{}failures, **kwargs)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{325}                     \PYG{n}{applied} \PYG{o}{=} \PYG{n}{b}\PYG{o}{.}\PYG{n}{apply}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{326}                 \PYG{k}{else}\PYG{p}{:}
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{327}                     \PYG{n}{applied} \PYG{o}{=} \PYG{n+nb}{getattr}\PYG{p}{(}\PYG{n}{b}\PYG{p}{,} \PYG{n}{f}\PYG{p}{)}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{328}             \PYG{k}{except} \PYG{p}{(}\PYG{n+ne}{TypeError}\PYG{p}{,} \PYG{n+ne}{NotImplementedError}\PYG{p}{)}\PYG{p}{:}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{329}                 \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{ignore\PYGZus{}failures}\PYG{p}{:}
 
-\PYG{n+nn}{/usr/local/lib/python3.7/dist\PYGZhy{}packages/pandas/core/internals/blocks.py} in \PYG{n+ni}{astype}\PYG{n+nt}{(self, dtype, copy, errors)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{593}             \PYG{n}{vals1d} \PYG{o}{=} \PYG{n}{values}\PYG{o}{.}\PYG{n}{ravel}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{594}             \PYG{k}{try}\PYG{p}{:}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{595}                 \PYG{n}{values} \PYG{o}{=} \PYG{n}{astype\PYGZus{}nansafe}\PYG{p}{(}\PYG{n}{vals1d}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{596}             \PYG{k}{except} \PYG{p}{(}\PYG{n+ne}{ValueError}\PYG{p}{,} \PYG{n+ne}{TypeError}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{597}                 \PYG{c+c1}{\PYGZsh{} e.g. astype\PYGZus{}nansafe can fail on object\PYGZhy{}dtype of strings}
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/internals/blocks.py} in \PYG{n+ni}{astype}\PYG{n+nt}{(self, dtype, copy, errors)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{590}         \PYG{n}{values} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{values}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{591} 
+\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{592}         \PYG{n}{new\PYGZus{}values} \PYG{o}{=} \PYG{n}{astype\PYGZus{}array\PYGZus{}safe}\PYG{p}{(}\PYG{n}{values}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{,} \PYG{n}{errors}\PYG{o}{=}\PYG{n}{errors}\PYG{p}{)}
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{593} 
+\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{594}         \PYG{n}{new\PYGZus{}values} \PYG{o}{=} \PYG{n}{maybe\PYGZus{}coerce\PYGZus{}values}\PYG{p}{(}\PYG{n}{new\PYGZus{}values}\PYG{p}{)}
 
-\PYG{n+nn}{/usr/local/lib/python3.7/dist\PYGZhy{}packages/pandas/core/dtypes/cast.py} in \PYG{n+ni}{astype\PYGZus{}nansafe}\PYG{n+nt}{(arr, dtype, copy, skipna)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{995}     \PYG{k}{if} \PYG{n}{copy} \PYG{o+ow}{or} \PYG{n}{is\PYGZus{}object\PYGZus{}dtype}\PYG{p}{(}\PYG{n}{arr}\PYG{p}{)} \PYG{o+ow}{or} \PYG{n}{is\PYGZus{}object\PYGZus{}dtype}\PYG{p}{(}\PYG{n}{dtype}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{996}         \PYG{c+c1}{\PYGZsh{} Explicit copy, or required since NumPy can\PYGZsq{}t view from / to object.}
-\PYG{n+ne}{\PYGZhy{}\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{997}         \PYG{k}{return} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{998} 
-\PYG{g+gWhitespace}{    }\PYG{l+m+mi}{999}     \PYG{k}{return} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{view}\PYG{p}{(}\PYG{n}{dtype}\PYG{p}{)}
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/dtypes/cast.py} in \PYG{n+ni}{astype\PYGZus{}array\PYGZus{}safe}\PYG{n+nt}{(values, dtype, copy, errors)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1307} 
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1308}     \PYG{k}{try}\PYG{p}{:}
+\PYG{n+ne}{\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1309}         \PYG{n}{new\PYGZus{}values} \PYG{o}{=} \PYG{n}{astype\PYGZus{}array}\PYG{p}{(}\PYG{n}{values}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1310}     \PYG{k}{except} \PYG{p}{(}\PYG{n+ne}{ValueError}\PYG{p}{,} \PYG{n+ne}{TypeError}\PYG{p}{)}\PYG{p}{:}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1311}         \PYG{c+c1}{\PYGZsh{} e.g. astype\PYGZus{}nansafe can fail on object\PYGZhy{}dtype of strings}
 
-\PYG{n+ne}{ValueError}: could not convert string to float: 
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/dtypes/cast.py} in \PYG{n+ni}{astype\PYGZus{}array}\PYG{n+nt}{(values, dtype, copy)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1255} 
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1256}     \PYG{k}{else}\PYG{p}{:}
+\PYG{n+ne}{\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1257}         \PYG{n}{values} \PYG{o}{=} \PYG{n}{astype\PYGZus{}nansafe}\PYG{p}{(}\PYG{n}{values}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1258} 
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1259}     \PYG{c+c1}{\PYGZsh{} in pandas we don\PYGZsq{}t store numpy str dtypes, so convert to object}
+
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/dtypes/cast.py} in \PYG{n+ni}{astype\PYGZus{}nansafe}\PYG{n+nt}{(arr, dtype, copy, skipna)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1093}     \PYG{k}{if} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{ndim} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{:}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1094}         \PYG{n}{flat} \PYG{o}{=} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{ravel}\PYG{p}{(}\PYG{p}{)}
+\PYG{n+ne}{\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1095}         \PYG{n}{result} \PYG{o}{=} \PYG{n}{astype\PYGZus{}nansafe}\PYG{p}{(}\PYG{n}{flat}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{,} \PYG{n}{skipna}\PYG{o}{=}\PYG{n}{skipna}\PYG{p}{)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1096}         \PYG{c+c1}{\PYGZsh{} error: Item \PYGZdq{}ExtensionArray\PYGZdq{} of \PYGZdq{}Union[ExtensionArray, ndarray]\PYGZdq{} has no}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1097}         \PYG{c+c1}{\PYGZsh{} attribute \PYGZdq{}reshape\PYGZdq{}}
+
+\PYG{n+nn}{\PYGZti{}/.local/lib/python3.8/site\PYGZhy{}packages/pandas/core/dtypes/cast.py} in \PYG{n+ni}{astype\PYGZus{}nansafe}\PYG{n+nt}{(arr, dtype, copy, skipna)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1199}     \PYG{k}{if} \PYG{n}{copy} \PYG{o+ow}{or} \PYG{n}{is\PYGZus{}object\PYGZus{}dtype}\PYG{p}{(}\PYG{n}{arr}\PYG{o}{.}\PYG{n}{dtype}\PYG{p}{)} \PYG{o+ow}{or} \PYG{n}{is\PYGZus{}object\PYGZus{}dtype}\PYG{p}{(}\PYG{n}{dtype}\PYG{p}{)}\PYG{p}{:}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1200}         \PYG{c+c1}{\PYGZsh{} Explicit copy, or required since NumPy can\PYGZsq{}t view from / to object.}
+\PYG{n+ne}{\PYGZhy{}\PYGZgt{} }\PYG{l+m+mi}{1201}         \PYG{k}{return} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1202} 
+\PYG{g+gWhitespace}{   }\PYG{l+m+mi}{1203}     \PYG{k}{return} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n}{dtype}\PYG{p}{,} \PYG{n}{copy}\PYG{o}{=}\PYG{n}{copy}\PYG{p}{)}
+
+\PYG{n+ne}{ValueError}: could not convert string to float: \PYGZsq{}\PYGZsq{}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -9699,18 +9649,70 @@ We print out the rows that create an error and observe.
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-      customerID  gender SeniorCitizen  ... MonthlyCharges TotalCharges  Churn
-488   4472\PYGZhy{}LVYGI  Female            No  ...          52.55                  No
-753   3115\PYGZhy{}CZMZD    Male            No  ...          20.25                  No
-936   5709\PYGZhy{}LVOEQ  Female            No  ...          80.85                  No
-1082  4367\PYGZhy{}NUYAO    Male            No  ...          25.75                  No
-1340  1371\PYGZhy{}DWPAZ  Female            No  ...          56.05                  No
-3331  7644\PYGZhy{}OMVMY    Male            No  ...          19.85                  No
-3826  3213\PYGZhy{}VVOLG    Male            No  ...          25.35                  No
-4380  2520\PYGZhy{}SGTTA  Female            No  ...          20.00                  No
-5218  2923\PYGZhy{}ARZLG    Male            No  ...          19.70                  No
-6670  4075\PYGZhy{}WKNIU  Female            No  ...          73.35                  No
-6754  2775\PYGZhy{}SEFEE    Male            No  ...          61.90                  No
+      customerID  gender SeniorCitizen Partner Dependents  tenure  \PYGZbs{}
+488   4472\PYGZhy{}LVYGI  Female            No     Yes        Yes       0   
+753   3115\PYGZhy{}CZMZD    Male            No      No        Yes       0   
+936   5709\PYGZhy{}LVOEQ  Female            No     Yes        Yes       0   
+1082  4367\PYGZhy{}NUYAO    Male            No     Yes        Yes       0   
+1340  1371\PYGZhy{}DWPAZ  Female            No     Yes        Yes       0   
+3331  7644\PYGZhy{}OMVMY    Male            No     Yes        Yes       0   
+3826  3213\PYGZhy{}VVOLG    Male            No     Yes        Yes       0   
+4380  2520\PYGZhy{}SGTTA  Female            No     Yes        Yes       0   
+5218  2923\PYGZhy{}ARZLG    Male            No     Yes        Yes       0   
+6670  4075\PYGZhy{}WKNIU  Female            No     Yes        Yes       0   
+6754  2775\PYGZhy{}SEFEE    Male            No      No        Yes       0   
+
+     PhoneService     MultipleLines InternetService       OnlineSecurity  ...  \PYGZbs{}
+488            No  No phone service             DSL                  Yes  ...   
+753           Yes                No              No  No internet service  ...   
+936           Yes                No             DSL                  Yes  ...   
+1082          Yes               Yes              No  No internet service  ...   
+1340           No  No phone service             DSL                  Yes  ...   
+3331          Yes                No              No  No internet service  ...   
+3826          Yes               Yes              No  No internet service  ...   
+4380          Yes                No              No  No internet service  ...   
+5218          Yes                No              No  No internet service  ...   
+6670          Yes               Yes             DSL                   No  ...   
+6754          Yes               Yes             DSL                  Yes  ...   
+
+         DeviceProtection          TechSupport          StreamingTV  \PYGZbs{}
+488                   Yes                  Yes                  Yes   
+753   No internet service  No internet service  No internet service   
+936                   Yes                   No                  Yes   
+1082  No internet service  No internet service  No internet service   
+1340                  Yes                  Yes                  Yes   
+3331  No internet service  No internet service  No internet service   
+3826  No internet service  No internet service  No internet service   
+4380  No internet service  No internet service  No internet service   
+5218  No internet service  No internet service  No internet service   
+6670                  Yes                  Yes                  Yes   
+6754                   No                  Yes                   No   
+
+          StreamingMovies  Contract PaperlessBilling  \PYGZbs{}
+488                    No  Two year              Yes   
+753   No internet service  Two year               No   
+936                   Yes  Two year               No   
+1082  No internet service  Two year               No   
+1340                   No  Two year               No   
+3331  No internet service  Two year               No   
+3826  No internet service  Two year               No   
+4380  No internet service  Two year               No   
+5218  No internet service  One year              Yes   
+6670                   No  Two year               No   
+6754                   No  Two year              Yes   
+
+                  PaymentMethod MonthlyCharges  TotalCharges Churn  
+488   Bank transfer (automatic)          52.55                  No  
+753                Mailed check          20.25                  No  
+936                Mailed check          80.85                  No  
+1082               Mailed check          25.75                  No  
+1340    Credit card (automatic)          56.05                  No  
+3331               Mailed check          19.85                  No  
+3826               Mailed check          25.35                  No  
+4380               Mailed check          20.00                  No  
+5218               Mailed check          19.70                  No  
+6670               Mailed check          73.35                  No  
+6754  Bank transfer (automatic)          61.90                  No  
 
 [11 rows x 21 columns]
 \end{sphinxVerbatim}
@@ -9755,7 +9757,7 @@ Data columns (total 21 columns):
  19  TotalCharges      7043 non\PYGZhy{}null   float64 
  20  Churn             7043 non\PYGZhy{}null   category
 dtypes: category(17), float64(2), int64(1), object(1)
-memory usage: 338.9+ KB
+memory usage: 339.4+ KB
 \end{sphinxVerbatim}
 
 
@@ -9822,15 +9824,45 @@ It is more convenient to work with an index, our dataset already contains an id 
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-            gender SeniorCitizen Partner  ... MonthlyCharges  TotalCharges Churn
-customerID                                ...                                   
-7590\PYGZhy{}VHVEG  Female            No     Yes  ...          29.85         29.85    No
-5575\PYGZhy{}GNVDE    Male            No      No  ...          56.95       1889.50    No
-3668\PYGZhy{}QPYBK    Male            No      No  ...          53.85        108.15   Yes
-7795\PYGZhy{}CFOCW    Male            No      No  ...          42.30       1840.75    No
-9237\PYGZhy{}HQITU  Female            No      No  ...          70.70        151.65   Yes
+            gender SeniorCitizen Partner Dependents  tenure PhoneService  \PYGZbs{}
+customerID                                                                 
+7590\PYGZhy{}VHVEG  Female            No     Yes         No       1           No   
+5575\PYGZhy{}GNVDE    Male            No      No         No      34          Yes   
+3668\PYGZhy{}QPYBK    Male            No      No         No       2          Yes   
+7795\PYGZhy{}CFOCW    Male            No      No         No      45           No   
+9237\PYGZhy{}HQITU  Female            No      No         No       2          Yes   
 
-[5 rows x 20 columns]
+               MultipleLines InternetService OnlineSecurity OnlineBackup  \PYGZbs{}
+customerID                                                                 
+7590\PYGZhy{}VHVEG  No phone service             DSL             No          Yes   
+5575\PYGZhy{}GNVDE                No             DSL            Yes           No   
+3668\PYGZhy{}QPYBK                No             DSL            Yes          Yes   
+7795\PYGZhy{}CFOCW  No phone service             DSL            Yes           No   
+9237\PYGZhy{}HQITU                No     Fiber optic             No           No   
+
+           DeviceProtection TechSupport StreamingTV StreamingMovies  \PYGZbs{}
+customerID                                                            
+7590\PYGZhy{}VHVEG               No          No          No              No   
+5575\PYGZhy{}GNVDE              Yes          No          No              No   
+3668\PYGZhy{}QPYBK               No          No          No              No   
+7795\PYGZhy{}CFOCW              Yes         Yes          No              No   
+9237\PYGZhy{}HQITU               No          No          No              No   
+
+                  Contract PaperlessBilling              PaymentMethod  \PYGZbs{}
+customerID                                                               
+7590\PYGZhy{}VHVEG  Month\PYGZhy{}to\PYGZhy{}month              Yes           Electronic check   
+5575\PYGZhy{}GNVDE        One year               No               Mailed check   
+3668\PYGZhy{}QPYBK  Month\PYGZhy{}to\PYGZhy{}month              Yes               Mailed check   
+7795\PYGZhy{}CFOCW        One year               No  Bank transfer (automatic)   
+9237\PYGZhy{}HQITU  Month\PYGZhy{}to\PYGZhy{}month              Yes           Electronic check   
+
+            MonthlyCharges  TotalCharges Churn  
+customerID                                      
+7590\PYGZhy{}VHVEG           29.85         29.85    No  
+5575\PYGZhy{}GNVDE           56.95       1889.50    No  
+3668\PYGZhy{}QPYBK           53.85        108.15   Yes  
+7795\PYGZhy{}CFOCW           42.30       1840.75    No  
+9237\PYGZhy{}HQITU           70.70        151.65   Yes  
 \end{sphinxVerbatim}
 
 
@@ -9845,7 +9877,7 @@ By using functions I keep things dynamic without having to store a dataframe for
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{def} \PYG{n+nf}{count\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{col\PYGZus{}name}\PYG{p}{)}\PYG{p}{:}
-  \PYG{k}{return} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{col\PYGZus{}name}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{col\PYGZus{}name}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -9864,8 +9896,8 @@ aside from the counts I would also like to know the mean, as some groups have a 
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{def} \PYG{n+nf}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{col\PYGZus{}name}\PYG{p}{)}\PYG{p}{:}
-  \PYG{n}{df} \PYG{o}{=} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{col\PYGZus{}name}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
-  \PYG{k}{return} \PYG{n}{df}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{df}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{columns}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{index}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{df} \PYG{o}{=} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{col\PYGZus{}name}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{df}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{df}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{index}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{columns}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -9875,8 +9907,8 @@ aside from the counts I would also like to know the mean, as some groups have a 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 DeviceProtection        No  No internet service       Yes
 Churn                                                    
-No                0.364128             0.273096  0.362775
-Yes               0.647940             0.060460  0.291600
+No                0.608724              0.92595  0.774979
+Yes               0.391276              0.07405  0.225021
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -9891,104 +9923,137 @@ out of curiosity, let’s print all those ‘mean matrices’
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 gender    Female      Male
 Churn                     
-No      0.492656  0.507344
-Yes     0.502408  0.497592
+No      0.730791  0.738397
+Yes     0.269209  0.261603
 
 SeniorCitizen        No       Yes
 Churn                            
-No             0.871279  0.128721
-Yes            0.745318  0.254682
+No             0.763938  0.583187
+Yes            0.236062  0.416813
 
-Partner        No       Yes
-Churn                      
-No       0.471782  0.528218
-Yes      0.642055  0.357945
+Partner       No       Yes
+Churn                     
+No       0.67042  0.803351
+Yes      0.32958  0.196649
 
 Dependents        No       Yes
 Churn                         
-No          0.655199  0.344801
-Yes         0.825575  0.174425
+No          0.687209  0.845498
+Yes         0.312791  0.154502
 
-tenure        0         1         2   ...        70        71        72
-Churn                                 ...                              
-No      0.002126  0.045033  0.022227  ...  0.020874  0.031697  0.068806
-Yes     0.000000  0.203317  0.065811  ...  0.005886  0.003210  0.003210
+tenure   0         1         2     3         4         5         6         7   \PYGZbs{}
+Churn                                                                           
+No      1.0  0.380098  0.483193  0.53  0.528409  0.518797  0.636364  0.610687   
+Yes     0.0  0.619902  0.516807  0.47  0.471591  0.481203  0.363636  0.389313   
+
+tenure        8         9   ...        63    64        65        66        67  \PYGZbs{}
+Churn                       ...                                                 
+No      0.658537  0.613445  ...  0.944444  0.95  0.881579  0.853933  0.897959   
+Yes     0.341463  0.386555  ...  0.055556  0.05  0.118421  0.146067  0.102041   
+
+tenure    68        69        70        71        72  
+Churn                                                 
+No      0.91  0.915789  0.907563  0.964706  0.983425  
+Yes     0.09  0.084211  0.092437  0.035294  0.016575  
 
 [2 rows x 73 columns]
 
 PhoneService        No       Yes
 Churn                           
-No            0.098956  0.901044
-Yes           0.090958  0.909042
+No            0.750733  0.732904
+Yes           0.249267  0.267096
 
 MultipleLines        No  No phone service       Yes
 Churn                                              
-No             0.491109          0.098956  0.409934
-Yes            0.454254          0.090958  0.454789
+No             0.749558          0.750733  0.713901
+Yes            0.250442          0.249267  0.286099
 
-InternetService       DSL  Fiber optic        No
-Churn                                           
-No               0.379204     0.347700  0.273096
-Yes              0.245586     0.693954  0.060460
+InternetService       DSL  Fiber optic       No
+Churn                                          
+No               0.810409     0.581072  0.92595
+Yes              0.189591     0.418928  0.07405
 
 OnlineSecurity        No  No internet service       Yes
 Churn                                                  
-No              0.393699             0.273096  0.333204
-Yes             0.781701             0.060460  0.157838
+No              0.582333              0.92595  0.853888
+Yes             0.417667              0.07405  0.146112
 
 OnlineBackup        No  No internet service       Yes
 Churn                                                
-No            0.358523             0.273096  0.368380
-Yes           0.659711             0.060460  0.279829
+No            0.600712              0.92595  0.784685
+Yes           0.399288              0.07405  0.215315
 
 DeviceProtection        No  No internet service       Yes
 Churn                                                    
-No                0.364128             0.273096  0.362775
-Yes               0.647940             0.060460  0.291600
+No                0.608724              0.92595  0.774979
+Yes               0.391276              0.07405  0.225021
 
 TechSupport        No  No internet service       Yes
 Churn                                               
-No           0.391767             0.273096  0.335137
-Yes          0.773676             0.060460  0.165864
+No           0.583645              0.92595  0.848337
+Yes          0.416355              0.07405  0.151663
 
 StreamingTV        No  No internet service       Yes
 Churn                                               
-No           0.361036             0.273096  0.365868
-Yes          0.504013             0.060460  0.435527
+No           0.664769              0.92595  0.699298
+Yes          0.335231              0.07405  0.300702
 
 StreamingMovies        No  No internet service       Yes
 Churn                                                   
-No               0.356977             0.273096  0.369927
-Yes              0.501873             0.060460  0.437667
+No               0.663196              0.92595  0.700586
+Yes              0.336804              0.07405  0.299414
 
 Contract  Month\PYGZhy{}to\PYGZhy{}month  One year  Two year
 Churn                                       
-No              0.429068  0.252609  0.318322
-Yes             0.885500  0.088818  0.025682
+No              0.572903  0.887305  0.971681
+Yes             0.427097  0.112695  0.028319
 
 PaperlessBilling        No       Yes
 Churn                               
-No                0.464438  0.535562
-Yes               0.250936  0.749064
+No                0.836699  0.664349
+Yes               0.163301  0.335651
 
-PaymentMethod  Bank transfer (automatic)  ...  Mailed check
-Churn                                     ...              
-No                              0.248550  ...      0.252029
-Yes                             0.138042  ...      0.164794
+PaymentMethod  Bank transfer (automatic)  Credit card (automatic)  \PYGZbs{}
+Churn                                                               
+No                              0.832902                 0.847569   
+Yes                             0.167098                 0.152431   
 
-[2 rows x 4 columns]
+PaymentMethod  Electronic check  Mailed check  
+Churn                                          
+No                     0.547146      0.808933  
+Yes                    0.452854      0.191067  
 
-MonthlyCharges    18.25     18.40     18.55   ...    118.60    118.65    118.75
-Churn                                         ...                              
-No              0.000193  0.000193  0.000193  ...  0.000387  0.000193  0.000193
-Yes             0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000
+MonthlyCharges  18.25   18.40   18.55   18.70   18.75   18.80   18.85   \PYGZbs{}
+Churn                                                                    
+No                 1.0     1.0     1.0     1.0     1.0     1.0     0.8   
+Yes                0.0     0.0     0.0     0.0     0.0     0.0     0.2   
+
+MonthlyCharges  18.90     18.95     19.00   ...  117.35  117.45  117.50  \PYGZbs{}
+Churn                                       ...                           
+No                 1.0  0.833333  0.857143  ...     1.0     0.0     1.0   
+Yes                0.0  0.166667  0.142857  ...     0.0     1.0     0.0   
+
+MonthlyCharges  117.60  117.80  118.20  118.35  118.60  118.65  118.75  
+Churn                                                                   
+No                 1.0     0.0     1.0     0.0     1.0     1.0     1.0  
+Yes                0.0     1.0     0.0     1.0     0.0     0.0     0.0  
 
 [2 rows x 1585 columns]
 
-TotalCharges   0.00      18.80     18.85    ...   8670.10   8672.45   8684.80
-Churn                                       ...                              
-No            0.002126  0.000193  0.000193  ...  0.000193  0.000193  0.000000
-Yes           0.000000  0.000000  0.000535  ...  0.000000  0.000000  0.000535
+TotalCharges  0.00     18.80    18.85    18.90    19.00    19.05     19.10    \PYGZbs{}
+Churn                                                                          
+No                1.0      1.0      0.5      1.0      1.0      1.0  0.666667   
+Yes               0.0      0.0      0.5      0.0      0.0      0.0  0.333333   
+
+TotalCharges  19.15    19.20     19.25    ...  8477.70  8496.70  8529.50  \PYGZbs{}
+Churn                                     ...                              
+No                1.0      1.0  0.666667  ...      1.0      1.0      1.0   
+Yes               0.0      0.0  0.333333  ...      0.0      0.0      0.0   
+
+TotalCharges  8543.25  8547.15  8564.75  8594.40  8670.10  8672.45  8684.80  
+Churn                                                                        
+No                1.0      1.0      1.0      1.0      1.0      1.0      0.0  
+Yes               0.0      0.0      0.0      0.0      0.0      0.0      1.0  
 
 [2 rows x 6531 columns]
 \end{sphinxVerbatim}
@@ -10013,13 +10078,61 @@ I would also like to run the data into an algorithm, yet computers don’t like 
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-            tenure  MonthlyCharges  ...  PaymentMethod\PYGZus{}Mailed check  Churn
-customerID                          ...                                   
-7590\PYGZhy{}VHVEG       1           29.85  ...                           0      0
-5575\PYGZhy{}GNVDE      34           56.95  ...                           1      0
-3668\PYGZhy{}QPYBK       2           53.85  ...                           1      1
-7795\PYGZhy{}CFOCW      45           42.30  ...                           0      0
-9237\PYGZhy{}HQITU       2           70.70  ...                           0      1
+            tenure  MonthlyCharges  TotalCharges  gender\PYGZus{}Female  gender\PYGZus{}Male  \PYGZbs{}
+customerID                                                                     
+7590\PYGZhy{}VHVEG       1           29.85         29.85              1            0   
+5575\PYGZhy{}GNVDE      34           56.95       1889.50              0            1   
+3668\PYGZhy{}QPYBK       2           53.85        108.15              0            1   
+7795\PYGZhy{}CFOCW      45           42.30       1840.75              0            1   
+9237\PYGZhy{}HQITU       2           70.70        151.65              1            0   
+
+            SeniorCitizen\PYGZus{}No  SeniorCitizen\PYGZus{}Yes  Partner\PYGZus{}No  Partner\PYGZus{}Yes  \PYGZbs{}
+customerID                                                                 
+7590\PYGZhy{}VHVEG                 1                  0           0            1   
+5575\PYGZhy{}GNVDE                 1                  0           1            0   
+3668\PYGZhy{}QPYBK                 1                  0           1            0   
+7795\PYGZhy{}CFOCW                 1                  0           1            0   
+9237\PYGZhy{}HQITU                 1                  0           1            0   
+
+            Dependents\PYGZus{}No  ...  Contract\PYGZus{}Month\PYGZhy{}to\PYGZhy{}month  Contract\PYGZus{}One year  \PYGZbs{}
+customerID                 ...                                               
+7590\PYGZhy{}VHVEG              1  ...                        1                  0   
+5575\PYGZhy{}GNVDE              1  ...                        0                  1   
+3668\PYGZhy{}QPYBK              1  ...                        1                  0   
+7795\PYGZhy{}CFOCW              1  ...                        0                  1   
+9237\PYGZhy{}HQITU              1  ...                        1                  0   
+
+            Contract\PYGZus{}Two year  PaperlessBilling\PYGZus{}No  PaperlessBilling\PYGZus{}Yes  \PYGZbs{}
+customerID                                                                 
+7590\PYGZhy{}VHVEG                  0                    0                     1   
+5575\PYGZhy{}GNVDE                  0                    1                     0   
+3668\PYGZhy{}QPYBK                  0                    0                     1   
+7795\PYGZhy{}CFOCW                  0                    1                     0   
+9237\PYGZhy{}HQITU                  0                    0                     1   
+
+            PaymentMethod\PYGZus{}Bank transfer (automatic)  \PYGZbs{}
+customerID                                            
+7590\PYGZhy{}VHVEG                                        0   
+5575\PYGZhy{}GNVDE                                        0   
+3668\PYGZhy{}QPYBK                                        0   
+7795\PYGZhy{}CFOCW                                        1   
+9237\PYGZhy{}HQITU                                        0   
+
+            PaymentMethod\PYGZus{}Credit card (automatic)  \PYGZbs{}
+customerID                                          
+7590\PYGZhy{}VHVEG                                      0   
+5575\PYGZhy{}GNVDE                                      0   
+3668\PYGZhy{}QPYBK                                      0   
+7795\PYGZhy{}CFOCW                                      0   
+9237\PYGZhy{}HQITU                                      0   
+
+            PaymentMethod\PYGZus{}Electronic check  PaymentMethod\PYGZus{}Mailed check  Churn  
+customerID                                                                     
+7590\PYGZhy{}VHVEG                               1                           0      0  
+5575\PYGZhy{}GNVDE                               0                           1      0  
+3668\PYGZhy{}QPYBK                               0                           1      1  
+7795\PYGZhy{}CFOCW                               0                           0      0  
+9237\PYGZhy{}HQITU                               1                           0      1  
 
 [5 rows x 47 columns]
 \end{sphinxVerbatim}
@@ -10091,6 +10204,891 @@ Name: Churn, dtype: float64
 We can see that complementary categories show an inverse correlation, indicating that we are dealing with a excess of information.
 Logical as when option A is not chosen, option B is.
 However in this case, as some categoricals have 3 options I opt to keep all info, although it would be a good idea to remove 1 option for each category, this should become appearent in data exploration.
+
+
+\section{Exploration}
+\label{\detokenize{c7_case_studies/Churn:exploration}}
+\sphinxAtStartPar
+Here we start with the exploration of our dataset, we look into normal distribution of numerical data, categorical correlations, numerical and categorical correlation, cluster results, and a simple machine learning implementation.
+
+
+\subsection{Normal distribution}
+\label{\detokenize{c7_case_studies/Churn:normal-distribution}}
+\sphinxAtStartPar
+As a precaution I will check the normality of our numerical data.
+Although most probably not essential for further analysis it might be useful later.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{n}{name}\PYG{p}{,} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tenure}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{iteritems}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{name}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{scipy}\PYG{o}{.}\PYG{n}{stats}\PYG{o}{.}\PYG{n}{shapiro}\PYG{p}{(}\PYG{n}{col}\PYG{o}{.}\PYG{n}{dropna}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+tenure
+ShapiroResult(statistic=0.9037491083145142, pvalue=0.0)
+MonthlyCharges
+ShapiroResult(statistic=0.9208902716636658, pvalue=0.0)
+TotalCharges
+ShapiroResult(statistic=0.8601524233818054, pvalue=0.0)
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/home/lorenzf/.local/lib/python3.8/site\PYGZhy{}packages/scipy/stats/morestats.py:1760: UserWarning: p\PYGZhy{}value may not be accurate for N \PYGZgt{} 5000.
+  warnings.warn(\PYGZdq{}p\PYGZhy{}value may not be accurate for N \PYGZgt{} 5000.\PYGZdq{})
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+It is clear that our numerical data is not normally distributed, as mentioned not essential, therefore I will not be transforming the data and keeping it as it is. This is useful later because we keep the meaning of the values.
+
+
+\subsection{Categorical correlations}
+\label{\detokenize{c7_case_studies/Churn:categorical-correlations}}
+\sphinxAtStartPar
+We have a lot of categorical features that could correlate with our Churn parameter, for each of those we would like to know how strong their correlation is. We can use the count\_matrix function we created earlier for this.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{count\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DeviceProtection}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+DeviceProtection    No  No internet service   Yes
+Churn                                            
+No                1884                 1413  1877
+Yes               1211                  113   545
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Using the Chi Squared Contingency test we can find out if any category of the chosen feature correlates with our Churn feature. it returns the test statistic F (strength of correlation), the p\sphinxhyphen{}value (chance of correlation) and expected values if no correlation is present.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{F}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{df}\PYG{p}{,} \PYG{n}{exp} \PYG{o}{=} \PYG{n}{scipy}\PYG{o}{.}\PYG{n}{stats}\PYG{o}{.}\PYG{n}{chi2\PYGZus{}contingency}\PYG{p}{(}\PYG{n}{count\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DeviceProtection}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Something I find interesting is to subtract the expected values from the true values, this case we see where the surplusses are.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{count\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DeviceProtection}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{exp}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+DeviceProtection         No  No internet service        Yes
+Churn                                                      
+No               \PYGZhy{}389.68025           291.954423  97.725827
+Yes               389.68025          \PYGZhy{}291.954423 \PYGZhy{}97.725827
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+To make our lives simpler, we extract all the categorical columns that we want to test against the Churn feature.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cat\PYGZus{}cols} \PYG{o}{=} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tenure}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{cat\PYGZus{}cols}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Index([\PYGZsq{}gender\PYGZsq{}, \PYGZsq{}SeniorCitizen\PYGZsq{}, \PYGZsq{}Partner\PYGZsq{}, \PYGZsq{}Dependents\PYGZsq{}, \PYGZsq{}PhoneService\PYGZsq{},
+       \PYGZsq{}MultipleLines\PYGZsq{}, \PYGZsq{}InternetService\PYGZsq{}, \PYGZsq{}OnlineSecurity\PYGZsq{}, \PYGZsq{}OnlineBackup\PYGZsq{},
+       \PYGZsq{}DeviceProtection\PYGZsq{}, \PYGZsq{}TechSupport\PYGZsq{}, \PYGZsq{}StreamingTV\PYGZsq{}, \PYGZsq{}StreamingMovies\PYGZsq{},
+       \PYGZsq{}Contract\PYGZsq{}, \PYGZsq{}PaperlessBilling\PYGZsq{}, \PYGZsq{}PaymentMethod\PYGZsq{}],
+      dtype=\PYGZsq{}object\PYGZsq{})
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Here I’ve written a small script that for each of those columns performs the Chi Squared test and writes the results down.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{significant\PYGZus{}cols} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+\PYG{n}{chi2\PYGZus{}results} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{p}{\PYGZcb{}}
+\PYG{k}{for} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n}{cat\PYGZus{}cols}\PYG{p}{:}
+    \PYG{n}{counts} \PYG{o}{=} \PYG{n}{count\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{col}\PYG{p}{)}
+    \PYG{n}{F}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{df}\PYG{p}{,} \PYG{n}{exp} \PYG{o}{=} \PYG{n}{scipy}\PYG{o}{.}\PYG{n}{stats}\PYG{o}{.}\PYG{n}{chi2\PYGZus{}contingency}\PYG{p}{(}\PYG{n}{counts}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{p}\PYG{o}{\PYGZlt{}}\PYG{l+m+mf}{0.05}\PYG{p}{:}
+        \PYG{n}{significant\PYGZus{}cols}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{col}\PYG{p}{)}
+        \PYG{n}{chi2\PYGZus{}results}\PYG{p}{[}\PYG{n}{col}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{F}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{p}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{real}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{counts}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{exp}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{exp}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{diff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{counts} \PYG{o}{\PYGZhy{}} \PYG{n}{exp}\PYG{p}{,}
+        \PYG{p}{\PYGZcb{}}
+            
+\PYG{c+c1}{\PYGZsh{} sort in descending F value}
+\PYG{n}{chi2\PYGZus{}results} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n+nb}{sorted}\PYG{p}{(}\PYG{n}{chi2\PYGZus{}results}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{key}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{reverse}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The features that are significant have a p\sphinxhyphen{}value less than 0.05, indicating only a 5\% chance that this occurs randomly. We list them here
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{significant\PYGZus{}cols}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+[\PYGZsq{}SeniorCitizen\PYGZsq{},
+ \PYGZsq{}Partner\PYGZsq{},
+ \PYGZsq{}Dependents\PYGZsq{},
+ \PYGZsq{}MultipleLines\PYGZsq{},
+ \PYGZsq{}InternetService\PYGZsq{},
+ \PYGZsq{}OnlineSecurity\PYGZsq{},
+ \PYGZsq{}OnlineBackup\PYGZsq{},
+ \PYGZsq{}DeviceProtection\PYGZsq{},
+ \PYGZsq{}TechSupport\PYGZsq{},
+ \PYGZsq{}StreamingTV\PYGZsq{},
+ \PYGZsq{}StreamingMovies\PYGZsq{},
+ \PYGZsq{}Contract\PYGZsq{},
+ \PYGZsq{}PaperlessBilling\PYGZsq{},
+ \PYGZsq{}PaymentMethod\PYGZsq{}]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Lets zoom into one of them, here we print the difference of the true values and the expected
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chi2\PYGZus{}results}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{SeniorCitizen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{diff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+SeniorCitizen          No         Yes
+Churn                                
+No             172.947608 \PYGZhy{}172.947608
+Yes           \PYGZhy{}172.947608  172.947608
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We can see that there are about 173 persons more in the group of SeniorCitizen that have Churned than was expected. Perhaps the provided service was not Senior friendly?
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{SeniorCitizen}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+SeniorCitizen         No        Yes
+Churn                              
+No             76.393832  58.318739
+Yes            23.606168  41.681261
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We can see the same pattern in our mean matrix, from the Senior Citizens about 18\% more have churned than the non SeniorCitizen group! To make things more easier on the eye I’ve put it into a dataframe that is sorted by correlation strength
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{corr\PYGZus{}df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}
+    \PYG{p}{\PYGZob{}}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{n}{chi2\PYGZus{}results}\PYG{p}{[}\PYG{n}{col}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{k}{for} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n}{significant\PYGZus{}cols}\PYG{p}{]}\PYG{p}{,}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{n}{chi2\PYGZus{}results}\PYG{p}{[}\PYG{n}{col}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{k}{for} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n}{significant\PYGZus{}cols}\PYG{p}{]}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{p}{,} \PYG{n}{index}\PYG{o}{=}\PYG{n}{significant\PYGZus{}cols}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{ascending}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We can see that features such as Contract type, OnlineSecurity and TechSupport have a strong correlation with Churning.
+
+
+\subsection{Numerical vs Categorical correlation}
+\label{\detokenize{c7_case_studies/Churn:numerical-vs-categorical-correlation}}
+\sphinxAtStartPar
+Next we would like to know if numerical features have a correlation with our Churn, using ANOVA we can mathematically calculate this. First let’s look at the averages of tenure between Yes and No Churn.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{tenure}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Churn
+No     37.569965
+Yes    17.979133
+Name: tenure, dtype: float64
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+This is already a clear difference, but let’s not jump to conclusion, ANOVA also takes into account group sizes and variation.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{scipy}\PYG{o}{.}\PYG{n}{stats}\PYG{o}{.}\PYG{n}{f\PYGZus{}oneway}\PYG{p}{(}
+    \PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{Churn}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tenure}\PYG{p}{,} 
+    \PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{Churn}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{No}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tenure}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+F\PYGZus{}onewayResult(statistic=997.2680104991438, pvalue=7.999057960610892e\PYGZhy{}205)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+That p\sphinxhyphen{}values sure does speak for itself, there is a clear difference in tenures for users that have churned and others!
+
+
+\subsection{unsupervised clustering}
+\label{\detokenize{c7_case_studies/Churn:unsupervised-clustering}}
+\sphinxAtStartPar
+Our customers also asked us to find out if we can find specific clusters of users in their dataset, so we perform a clustering analysis.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{cluster} \PYG{k+kn}{import} \PYG{n}{KMeans}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We create a clustering algorithm and specify that we would like to have 2 clusters, perhaps they will overlap with churn and nochurn. Then we fit the algorithm with our dataset without the churn feature.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kmeans} \PYG{o}{=} \PYG{n}{KMeans}\PYG{p}{(}\PYG{n}{n\PYGZus{}clusters}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
+\PYG{n}{kmeans}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{churn\PYGZus{}ohe\PYGZus{}df}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+KMeans(n\PYGZus{}clusters=2)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+After training on the dataset we can ask it to give us the labels for each record that it assigned, {[}0, 1{]} are the 2 clusters that it used to seperate our data.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{kmeans}\PYG{o}{.}\PYG{n}{labels\PYGZus{}}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+array([0, 0, 0, ..., 0, 0, 1], dtype=int32)
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Great! Now we just have to do some data manipulation by adding the labels as a new feature to a new dataframe. We end up with churn\_cluster\_df, the same as churn\_df but with an unsupervised clustering label.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df} \PYG{o}{=} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cluster}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{kmeans}\PYG{o}{.}\PYG{n}{labels\PYGZus{}}
+\PYG{c+c1}{\PYGZsh{}churn\PYGZus{}cluster\PYGZus{}df[[\PYGZsq{}dist\PYGZus{}0\PYGZsq{}, \PYGZsq{}dist\PYGZus{}1\PYGZsq{}]] = kmeans.transform(churn\PYGZus{}ohe\PYGZus{}df.drop(columns=\PYGZsq{}Churn\PYGZsq{}))}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We can calculate a comparison matrix, where for each combination of churn and cluster we count how many records there are.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cluster}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+cluster     0     1
+Churn              
+No       3404  1770
+Yes      1547   322
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Looks like the overlap is not as clear as we would have expect it, this is common in unsupervised techniques as we did not specify the Churn feature to the algorithm. This does not imply our work is useless as it might give other insight to our data.
+
+\sphinxAtStartPar
+Same for the regular data we create 2 functions that aggregate our data based on a specific column name.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{count\PYGZus{}cluster\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{col\PYGZus{}name}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{return} \PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cluster}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{col\PYGZus{}name}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{mean\PYGZus{}cluster\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{col\PYGZus{}name}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{df} \PYG{o}{=} \PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cluster}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{col\PYGZus{}name}\PYG{p}{]}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{df}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{df}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{index}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}\PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{columns}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+As an example we count the occurences of Device Protection with our clusters
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{count\PYGZus{}cluster\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DeviceProtection}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+DeviceProtection    No  No internet service   Yes
+cluster                                          
+0                 2432                 1526   993
+1                  663                    0  1429
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Cluster 1 seems to not contains any users that did not have internet access, so we can already see that this cluster only contains users with internet and mostly have device protection.
+
+\sphinxAtStartPar
+To automate results, we again perform the contingency analysis, this time on the cluster feature instead of the churn feature.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cl\PYGZus{}significant\PYGZus{}cols} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+\PYG{n}{cl\PYGZus{}chi2\PYGZus{}results} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{p}{\PYGZcb{}}
+\PYG{k}{for} \PYG{n}{col} \PYG{o+ow}{in} \PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{columns}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{counts} \PYG{o}{=} \PYG{n}{count\PYGZus{}cluster\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{col}\PYG{p}{)}
+    \PYG{n}{F}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{df}\PYG{p}{,} \PYG{n}{exp} \PYG{o}{=} \PYG{n}{scipy}\PYG{o}{.}\PYG{n}{stats}\PYG{o}{.}\PYG{n}{chi2\PYGZus{}contingency}\PYG{p}{(}\PYG{n}{counts}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{p}\PYG{o}{\PYGZlt{}}\PYG{l+m+mf}{0.05}\PYG{p}{:}
+        \PYG{n}{cl\PYGZus{}significant\PYGZus{}cols}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{col}\PYG{p}{)}
+        \PYG{n}{cl\PYGZus{}chi2\PYGZus{}results}\PYG{p}{[}\PYG{n}{col}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{F}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{p}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{real}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{counts}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{exp}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{exp}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{diff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{counts} \PYG{o}{\PYGZhy{}} \PYG{n}{exp}\PYG{p}{,}
+        \PYG{p}{\PYGZcb{}}
+        
+\PYG{c+c1}{\PYGZsh{} sort in descending F value}
+\PYG{n}{cl\PYGZus{}chi2\PYGZus{}results} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n+nb}{sorted}\PYG{p}{(}\PYG{n}{cl\PYGZus{}chi2\PYGZus{}results}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{key}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{reverse}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The significant columns can be completely different, yet seem fairly similar
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cl\PYGZus{}significant\PYGZus{}cols}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+[\PYGZsq{}SeniorCitizen\PYGZsq{},
+ \PYGZsq{}Partner\PYGZsq{},
+ \PYGZsq{}Dependents\PYGZsq{},
+ \PYGZsq{}PhoneService\PYGZsq{},
+ \PYGZsq{}MultipleLines\PYGZsq{},
+ \PYGZsq{}InternetService\PYGZsq{},
+ \PYGZsq{}OnlineSecurity\PYGZsq{},
+ \PYGZsq{}OnlineBackup\PYGZsq{},
+ \PYGZsq{}DeviceProtection\PYGZsq{},
+ \PYGZsq{}TechSupport\PYGZsq{},
+ \PYGZsq{}StreamingTV\PYGZsq{},
+ \PYGZsq{}StreamingMovies\PYGZsq{},
+ \PYGZsq{}Contract\PYGZsq{},
+ \PYGZsq{}PaperlessBilling\PYGZsq{},
+ \PYGZsq{}PaymentMethod\PYGZsq{}]
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We ask for the difference, which only seems to be the PhoneService, this feature is important for the clusters but not the churning.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{set}\PYG{p}{(}\PYG{n}{cl\PYGZus{}significant\PYGZus{}cols}\PYG{p}{)}\PYG{o}{.}\PYG{n}{difference}\PYG{p}{(}\PYG{n}{significant\PYGZus{}cols}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZob{}\PYGZsq{}PhoneService\PYGZsq{}\PYGZcb{}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+To get a better picture I opted to print all the significant results in order of correlation strenght. Both for Churn as for cluster.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn significant features}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}\PYG{n}{col}\PYG{p}{:} \PYG{n}{result}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{k}{for} \PYG{n}{col}\PYG{p}{,} \PYG{n}{result} \PYG{o+ow}{in} \PYG{n}{chi2\PYGZus{}results}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Churn significant features
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZob{}\PYGZsq{}Contract\PYGZsq{}: 1184.5965720837926,
+ \PYGZsq{}OnlineSecurity\PYGZsq{}: 849.9989679615962,
+ \PYGZsq{}TechSupport\PYGZsq{}: 828.1970684587393,
+ \PYGZsq{}InternetService\PYGZsq{}: 732.309589667794,
+ \PYGZsq{}PaymentMethod\PYGZsq{}: 648.1423274814,
+ \PYGZsq{}OnlineBackup\PYGZsq{}: 601.8127901134089,
+ \PYGZsq{}DeviceProtection\PYGZsq{}: 558.419369407389,
+ \PYGZsq{}StreamingMovies\PYGZsq{}: 375.6614793452656,
+ \PYGZsq{}StreamingTV\PYGZsq{}: 374.20394331098134,
+ \PYGZsq{}PaperlessBilling\PYGZsq{}: 258.27764906707307,
+ \PYGZsq{}Dependents\PYGZsq{}: 189.12924940423474,
+ \PYGZsq{}SeniorCitizen\PYGZsq{}: 159.42630036838742,
+ \PYGZsq{}Partner\PYGZsq{}: 158.7333820309922,
+ \PYGZsq{}MultipleLines\PYGZsq{}: 11.33044148319756\PYGZcb{}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Cluster significant features}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}\PYG{n}{col}\PYG{p}{:} \PYG{n}{result}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{k}{for} \PYG{n}{col}\PYG{p}{,} \PYG{n}{result} \PYG{o+ow}{in} \PYG{n}{cl\PYGZus{}chi2\PYGZus{}results}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(}\PYG{p}{)}\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Cluster significant features
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZob{}\PYGZsq{}DeviceProtection\PYGZsq{}: 1742.0880663243113,
+ \PYGZsq{}OnlineBackup\PYGZsq{}: 1665.2730646044615,
+ \PYGZsq{}StreamingTV\PYGZsq{}: 1655.5343860608277,
+ \PYGZsq{}StreamingMovies\PYGZsq{}: 1643.5321794643069,
+ \PYGZsq{}TechSupport\PYGZsq{}: 1391.976678378673,
+ \PYGZsq{}OnlineSecurity\PYGZsq{}: 1333.6884498651216,
+ \PYGZsq{}MultipleLines\PYGZsq{}: 1115.4765363222418,
+ \PYGZsq{}Contract\PYGZsq{}: 1041.6388959111168,
+ \PYGZsq{}InternetService\PYGZsq{}: 998.482344451734,
+ \PYGZsq{}PaymentMethod\PYGZsq{}: 578.5875906673851,
+ \PYGZsq{}Partner\PYGZsq{}: 480.3441523872099,
+ \PYGZsq{}PaperlessBilling\PYGZsq{}: 145.83172959071203,
+ \PYGZsq{}PhoneService\PYGZsq{}: 89.14446552423011,
+ \PYGZsq{}SeniorCitizen\PYGZsq{}: 54.438061283034386,
+ \PYGZsq{}Dependents\PYGZsq{}: 17.631250785385838\PYGZcb{}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+I meantioned PhoneService earlier, when we print the difference between truth and expected, we see that a lot more persons that have a phone service are in cluster 1. We already knew cluster 1 has the users with internet service, now it seems users with phone services are also more present in cluster 1. It seems to be filled with customers that have most services…
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cl\PYGZus{}chi2\PYGZus{}results}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PhoneService}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{diff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+PhoneService          No         Yes
+cluster                             
+0             107.576175 \PYGZhy{}107.576175
+1            \PYGZhy{}107.576175  107.576175
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Another this that caught my attention is the payment method, cluster 1 uses way more often an automatic payment method. Perhaps these are sleeping customers that have no idea about what they pay.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cl\PYGZus{}chi2\PYGZus{}results}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{PaymentMethod}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{diff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+PaymentMethod  Bank transfer (automatic)  Credit card (automatic)  \PYGZbs{}
+cluster                                                             
+0                            \PYGZhy{}206.381798              \PYGZhy{}194.916513   
+1                             206.381798               194.916513   
+
+PaymentMethod  Electronic check  Mailed check  
+cluster                                        
+0                     75.481897    325.816413  
+1                    \PYGZhy{}75.481897   \PYGZhy{}325.816413  
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+For numerical features we can see that cluster 1 usually has much higher values. This cluster consist of customers that are loyal, pay more per month and therefore also in total.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cluster}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tenure}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+            tenure  MonthlyCharges  TotalCharges
+cluster                                         
+0        21.144617       53.591820    977.746748
+1        58.940249       91.196702   5361.063360
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The tenure and total charges reverses in case of grouping per Churn, yet the monthly charges on average are still higher, customers churn early as they have high monthly charges.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tenure}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+          tenure  MonthlyCharges  TotalCharges
+Churn                                         
+No     37.569965       61.265124   2549.911442
+Yes    17.979133       74.441332   1531.796094
+\end{sphinxVerbatim}
+
+
+\subsection{Nearest Neighbour classification}
+\label{\detokenize{c7_case_studies/Churn:nearest-neighbour-classification}}
+\sphinxAtStartPar
+Our client asked if we could predict future churning, we could solve this with a classification algorithm. I chose for KNN as it is simple and explainable. we start by importing.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn}\PYG{n+nn}{.}\PYG{n+nn}{neighbors} \PYG{k+kn}{import} \PYG{n}{KNeighborsClassifier}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+To classify users between churn and nochurn we create a knn classifier, I opted to go for 5 neighbours so it will look at the 5 most similar users in our dataset and see if they churned.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{knn} \PYG{o}{=} \PYG{n}{KNeighborsClassifier}\PYG{p}{(}\PYG{n}{n\PYGZus{}neighbors}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+We train the algorithm by fitting on the churn data, notice how we both supply input (all columns but churn) and output (only churn column) so the algorithm knows the outcome.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{knn}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{churn\PYGZus{}ohe\PYGZus{}df}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,} \PYG{n}{churn\PYGZus{}ohe\PYGZus{}df}\PYG{o}{.}\PYG{n}{Churn}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+KNeighborsClassifier()
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Now that the algorithm is trained, we create a new dataframe that not only contains the truth (Churn) but also the prediction as new feature (predict).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}predicted\PYGZus{}df} \PYG{o}{=} \PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{churn\PYGZus{}predicted\PYGZus{}df}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{predict}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{knn}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{churn\PYGZus{}ohe\PYGZus{}df}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{columns}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+To evaluate the results, we create a confusion matrix, where all 4 combinations are counted.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{conf\PYGZus{}matrix} \PYG{o}{=} \PYG{n}{churn\PYGZus{}predicted\PYGZus{}df}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{predict}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unstack}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{conf\PYGZus{}matrix}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+predict     0     1
+Churn              
+No       4778   396
+Yes       796  1073
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Of all churners, (1869) we found 1073, which is not bad, yet us calculate accuracy (amount of flagged users that is actually a churner) and recall (amount of churners that is found by the algorithm).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{accuracy: }\PYG{l+s+si}{\PYGZob{}}\PYG{p}{(}\PYG{n}{conf\PYGZus{}matrix}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{/}\PYG{n}{conf\PYGZus{}matrix}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{p}{)}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZsq{}accuracy: 73.04\PYGZpc{}\PYGZsq{}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{recall: }\PYG{l+s+si}{\PYGZob{}}\PYG{p}{(}\PYG{n}{conf\PYGZus{}matrix}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{/}\PYG{n}{conf\PYGZus{}matrix}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{p}{)}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZsq{}recall: 57.41\PYGZpc{}\PYGZsq{}
+\end{sphinxVerbatim}
+
+
+\section{Visualisation}
+\label{\detokenize{c7_case_studies/Churn:visualisation}}
+\sphinxAtStartPar
+Now that we have explored the content of our data, we need to create an appealing visualisation to demonstrate the relations.
+
+
+\subsection{Categorical correlation}
+\label{\detokenize{c7_case_studies/Churn:categorical-correlation}}
+\sphinxAtStartPar
+We deduced earlier that features such as Contract and OnlineSecurity are good predictors for churning, I can think of 2 ways to visualise categorical correlations, heatmaps and stacked bar charts. First again our results, both the contingency result as the mean matrix.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chi2\PYGZus{}results}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Contract}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{diff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Contract  Month\PYGZhy{}to\PYGZhy{}month   One year    Two year
+Churn                                          
+No           \PYGZhy{}626.691751  224.88982  401.801931
+Yes           626.691751 \PYGZhy{}224.88982 \PYGZhy{}401.801931
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Contract}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Contract  Month\PYGZhy{}to\PYGZhy{}month  One year  Two year
+Churn                                       
+No              0.572903  0.887305  0.971681
+Yes             0.427097  0.112695  0.028319
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+What we would like to do now is turn this dataframe into a color coded version, a heatmap. Our Seaborn library makes this very easy and we can even annotate this
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{heatmap}\PYG{p}{(}\PYG{n}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Contract}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,} \PYG{n}{annot}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_124_0}.png}
+
+\sphinxAtStartPar
+This plot shows that for Churn==Yes (lower row) the most of them come from the Month\sphinxhyphen{}to\sphinxhyphen{}month category, indicating that user who pay month\sphinxhyphen{}to\sphinxhyphen{}month are more susceptible to churn. We could make a bold claim and say that if ONLY the Contract was the determining factor and not other features, we could save about 30\% of the month\sphinxhyphen{}to\sphinxhyphen{}month group if our services would improve in that category similarly to other groups. Or if we would be able to convert all users in that category to the one\sphinxhyphen{}year contract.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{Contract}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Month\PYGZhy{}to\PYGZhy{}month}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mf}{0.427}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1126}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+1218.3
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+About 1200 Churners would have been prevented! that is a whole lot! obviously to mention that this is only true if the Contract was the ONLY feature that would make a change.
+
+\sphinxAtStartPar
+To make a bar plot we first need some more data wrangling, we create the following view so seaborn can create the stacked bar plot.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{vis\PYGZus{}matrix} \PYG{o}{=} \PYG{n}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Contract}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{T}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{vis\PYGZus{}matrix}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sum}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{vis\PYGZus{}matrix}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Churn        Contract        No       Yes  sum
+0      Month\PYGZhy{}to\PYGZhy{}month  0.572903  0.427097    1
+1            One year  0.887305  0.112695    1
+2            Two year  0.971681  0.028319    1
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+With this visualisation matrix we have not only no and yes for churn as features, but also the sum. There are other methods to obtain the stacked bar chart but the result is the same.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{barplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Contract}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{sum}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data}\PYG{o}{=}\PYG{n}{vis\PYGZus{}matrix}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{red}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churned}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{barplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Contract}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}  \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{No}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data}\PYG{o}{=}\PYG{n}{vis\PYGZus{}matrix}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{darkblue}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{No Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_130_0}.png}
+
+\sphinxAtStartPar
+I like to think that this graph clearly displays the disparity between different contracts and the relation to Churning, the red portion indications the percentage of churned customers, keep in mind that some categories might not be large so a larger portion of churners is not as detrimental in that case, but as we saw earlier about 1200 churners could have been prevented if the proportions for month\sphinxhyphen{}to\sphinxhyphen{}month contract would be the same.
+
+\sphinxAtStartPar
+We can perform a similar result for online security.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{chi2\PYGZus{}results}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{OnlineSecurity}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{diff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+OnlineSecurity          No  No internet service         Yes
+Churn                                                      
+No             \PYGZhy{}532.736192           291.954423  240.781769
+Yes             532.736192          \PYGZhy{}291.954423 \PYGZhy{}240.781769
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{OnlineSecurity}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+OnlineSecurity        No  No internet service       Yes
+Churn                                                  
+No              0.582333              0.92595  0.853888
+Yes             0.417667              0.07405  0.146112
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{heatmap}\PYG{p}{(}\PYG{n}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{OnlineSecurity}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,} \PYG{n}{annot}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_134_0}.png}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{OnlineSecurity}\PYG{o}{.}\PYG{n}{value\PYGZus{}counts}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{No}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mf}{0.417}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.146}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+947.9580000000001
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{vis\PYGZus{}matrix} \PYG{o}{=} \PYG{n}{mean\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{OnlineSecurity}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{T}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{vis\PYGZus{}matrix}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sum}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{vis\PYGZus{}matrix}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+Churn       OnlineSecurity        No       Yes  sum
+0                       No  0.582333  0.417667    1
+1      No internet service  0.925950  0.074050    1
+2                      Yes  0.853888  0.146112    1
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{barplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{OnlineSecurity}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{sum}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data}\PYG{o}{=}\PYG{n}{vis\PYGZus{}matrix}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{red}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churned}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{barplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{OnlineSecurity}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}  \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{No}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data}\PYG{o}{=}\PYG{n}{vis\PYGZus{}matrix}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{darkblue}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{No Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_137_0}.png}
+
+\sphinxAtStartPar
+Again a big difference in groups, this time we could have saved about 950 churners if we would have convinced users that no online security is a bad idea.
+
+
+\subsection{Numerical vs Categorical correlation}
+\label{\detokenize{c7_case_studies/Churn:id1}}
+\sphinxAtStartPar
+When visualising numerical and categorical correlation it usually comes down to histograms. Here I will look into MonthlyCharges and tenure.
+For a refreshment we group per churn and print the averages.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tenure}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+          tenure  MonthlyCharges  TotalCharges
+Churn                                         
+No     37.569965       61.265124   2549.911442
+Yes    17.979133       74.441332   1531.796094
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The trick for histograms with different categories is to overlap multiple histograms, we seperate our dataset into churned and nochurn and plot both results.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{Churn}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{No}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{MonthlyCharges}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{skyblue}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NoChurn}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{Churn}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{MonthlyCharges}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{red}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Churned}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_142_0}.png}
+
+\sphinxAtStartPar
+For monthly charges we can see that although there was a significant difference found by ANOVA and the means are different, the distributions look alike. The culprit behind this is probably the long peak of no churn in the beginning, the dataset seems to have a lot of small customers that are happy with their services as the price is low. A good example how with non normal data we should not simply rely on mathematics to say something is significant!
+
+\sphinxAtStartPar
+Perhaps to overcome non normality we could opt for the median instead of the mean.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Churn}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tenure}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{MonthlyCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TotalCharges}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{median}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+       tenure  MonthlyCharges  TotalCharges
+Churn                                      
+No       38.0          64.425      1679.525
+Yes      10.0          79.650       703.550
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Although the values have changed (indicating again non normal data) we see that the difference is still present, so our non normality has not been ‘solved’. We are warned.
+
+\sphinxAtStartPar
+Similar to the previous plot, we create a histogram for tenure
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{Churn}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{No}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tenure}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{skyblue}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{NoChurn}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}df}\PYG{o}{.}\PYG{n}{Churn}\PYG{o}{==}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Yes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tenure}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{red}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Churned}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)} 
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_146_0}.png}
+
+\sphinxAtStartPar
+This looks really great! we can see that churned users usually have a lower tenure, perhaps onboarding of new customers is a problem?
+
+
+\subsection{Unsupervised clustering}
+\label{\detokenize{c7_case_studies/Churn:id2}}
+\sphinxAtStartPar
+Similar to the churn feature, we can also use the cluster feature, basically the same method, but a different outcome.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{cluster}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tenure}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{skyblue}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cluster0}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{cluster}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{tenure}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{red}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cluster1}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)} 
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_149_0}.png}
+
+\sphinxAtStartPar
+Here you can see the power of clustering, the algorithm clearly used the tenure as a input to determine the clusters. cluster 1 contains most of the longer customers (that all have internet and most of them phone service).
+
+\sphinxAtStartPar
+In case of montly charges we also see a big difference.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{cluster}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{MonthlyCharges}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{skyblue}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cluster0}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{sns}\PYG{o}{.}\PYG{n}{histplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{p}{[}\PYG{n}{churn\PYGZus{}cluster\PYGZus{}df}\PYG{o}{.}\PYG{n}{cluster}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{MonthlyCharges}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{red}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{cluster1}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)} 
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_151_0}.png}
+
+\sphinxAtStartPar
+cluster 1 again contains the higher paying customers, which is explainable as they mostly all have phone and internet. These customers might be ‘sleeping’ as they are not aware of higher charges.
+
+\sphinxAtStartPar
+To show the phone services I created a simple heatmap.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{heatmap}\PYG{p}{(}\PYG{n}{mean\PYGZus{}cluster\PYGZus{}matrix}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{InternetService}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,} \PYG{n}{annot}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_153_0}.png}
+
+\sphinxAtStartPar
+It shows in which cluster the internet users are, again all users that have no internet are in cluster 0.
+
+
+\subsection{K Nearest Neighbours}
+\label{\detokenize{c7_case_studies/Churn:k-nearest-neighbours}}
+\sphinxAtStartPar
+Illustrating a machine learning algorithm is always difficult, a we are dealing with categorical variables it is exceptionally hard.
+
+\sphinxAtStartPar
+The only thing I can think of here is to create a heatmap from the confusion matrix, with a logarithmic scale.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{matplotlib}\PYG{n+nn}{.}\PYG{n+nn}{colors} \PYG{k+kn}{import} \PYG{n}{LogNorm}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{sns}\PYG{o}{.}\PYG{n}{heatmap}\PYG{p}{(}\PYG{n}{conf\PYGZus{}matrix}\PYG{p}{,} \PYG{n}{annot}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}  \PYG{n}{norm}\PYG{o}{=}\PYG{n}{LogNorm}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{Churn_156_0}.png}
+
+\sphinxAtStartPar
+Not great, but shows that the false positives (no churnes that are flagged) and false negatives (churners that not have been flagged) are fairly low.
+
+
+\subsection{Summary}
+\label{\detokenize{c7_case_studies/Churn:summary}}
+\sphinxAtStartPar
+At this point it would be a good idea to reconnect with our client and discuss our results.
+
+\sphinxAtStartPar
+In our analysis we found some significant difference for churners, being:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+A short tenure
+
+\item {} 
+\sphinxAtStartPar
+Having a month\sphinxhyphen{}to\sphinxhyphen{}month contract
+
+\item {} 
+\sphinxAtStartPar
+Not having additional options on services
+
+\item {} 
+\sphinxAtStartPar
+Senior Citizenship
+
+\end{itemize}
+
+\sphinxAtStartPar
+To prevent this they could for example:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Give attention to new customers, create a better onboarding
+
+\item {} 
+\sphinxAtStartPar
+Create promotion/discount for longer subscription plans
+
+\item {} 
+\sphinxAtStartPar
+Create promotion/discount on additional services
+
+\item {} 
+\sphinxAtStartPar
+Improve elpdesk for less technology abled persons
+
+\end{itemize}
+
+\sphinxAtStartPar
+When we cluster the customers in 2 groups, we did not find a clear overlap with the churn parameter, however it seems the second cluster found customers that have higher tenures and more additional services.
+Looking at Charges, this cluster had a significantly higher amount, indicating that the most profitable customers belong to this cluster.
+
+\sphinxAtStartPar
+A (simple) machine learning exercise has shown there is a possibility of having a 75\% accuracy (amount of flagged users that is actually a churner) and a recall of 57\% (amount of churners that is found by the algorithm).
+These results are not great, but not bad either, further improvements might be needed but this implementation is not critical, i.e. flagging a user as a churner whilst he/she is not, is not necessary crucial for operation.
 
 
 \chapter{Case Study: Olympic medals}

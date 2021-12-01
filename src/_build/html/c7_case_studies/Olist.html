@@ -51,7 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="36. Case Study: Olympic medals" href="Churn.html" />
+    <link rel="next" title="36. Case Study: Churn" href="Churn.html" />
     <link rel="prev" title="34. Machine Learning" href="../c6_machine_learning/introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -307,7 +307,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Churn.html">
-   36. Case Study: Olympic medals
+   36. Case Study: Churn
   </a>
  </li>
  <li class="toctree-l1">
@@ -593,11 +593,6 @@
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#playground">
-   35.8. Playground
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -654,7 +649,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_14147/4057771804.py:10: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6945/4057771804.py:10: DeprecationWarning: `set_matplotlib_formats` is deprecated since IPython 7.23, directly use `matplotlib_inline.backend_inline.set_matplotlib_formats()`
   set_matplotlib_formats(&#39;svg&#39;)
 </pre></div>
 </div>
@@ -663,30 +658,16 @@
 <p>in order to download datasets from kaggle, we need an API key to access their API, we’ll make that here</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.kaggle&#39;</span><span class="p">)):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.kaggle&#39;</span><span class="p">))</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.kaggle/kaggle.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
         <span class="p">{</span>
             <span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;lorenzf&quot;</span><span class="p">,</span>
             <span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;7a44a9e99b27e796177d793a3d85b8cf&quot;</span>
         <span class="p">}</span>
         <span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">PermissionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_14147</span><span class="o">/</span><span class="mf">3113012040.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/.kaggle&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/root/.kaggle/kaggle.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
-
-<span class="ne">PermissionError</span>: [Errno 13] Permission denied: &#39;/root/.kaggle&#39;
 </pre></div>
 </div>
 </div>
@@ -701,7 +682,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run &#39;chmod 600 /root/.kaggle/kaggle.json&#39;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_6945</span><span class="o">/</span><span class="mf">819357782.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">kaggle</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;olistbr/brazilian-ecommerce&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;olistbr/marketing-funnel-olist&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;kaggle&#39;
 </pre></div>
 </div>
 </div>
@@ -3104,8 +3092,8 @@ memory usage: 7.0+ MB
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">products_w_price</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">dropna</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">dropna</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
@@ -3316,8 +3304,8 @@ We have to take into account that freight value is on itself correlating with th
 <span class="n">vif_compatible_price</span> <span class="o">=</span> <span class="n">vif_compatible_price</span><span class="o">.</span><span class="n">values</span>
 <span class="n">vif_price</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cols_to_keep</span><span class="p">):</span>
-  <span class="n">vif_price</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">vif_compatible_price</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">vif_compatible_price</span><span class="p">,</span> <span class="n">idx</span><span class="p">)))</span>
+    <span class="n">vif_price</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">vif_compatible_price</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">vif_compatible_price</span><span class="p">,</span> <span class="n">idx</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -3358,7 +3346,7 @@ freight_value: 	4.1851224676888155
 
 <span class="n">anova_price</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[(</span><span class="n">products_w_price</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-  <span class="n">anova_price</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">test</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span>
+    <span class="n">anova_price</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">test</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span>
 
 <span class="n">anova_price</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">anova_price</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
 <span class="n">anova_price</span>
@@ -4497,344 +4485,6 @@ Length: 522, dtype: float64
 <p>These plots hence show the most important and least important attributes for an item concerning the price e.g. if we want to increase the price of an item in the computers category, we need to make sure it has enough pictures and not try to decrease the weight value.</p>
 </div>
 </div>
-<div class="section" id="playground">
-<h2><span class="section-number">35.8. </span>Playground<a class="headerlink" href="#playground" title="Permalink to this headline">¶</a></h2>
-<p>here I can experiment with new ideas, and so can you!</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order_reviews</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>review_id</th>
-      <th>order_id</th>
-      <th>review_score</th>
-      <th>review_comment_title</th>
-      <th>review_comment_message</th>
-      <th>review_creation_date</th>
-      <th>review_answer_timestamp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>7bc2406110b926393aa56f80a40eba40</td>
-      <td>73fc7af87114b39712e6da79b0a377eb</td>
-      <td>4</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2018-01-18 00:00:00</td>
-      <td>2018-01-18 21:46:59</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>80e641a11e56f04c1ad469d5645fdfde</td>
-      <td>a548910a1c6147796b98fdf73dbeba33</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2018-03-10 00:00:00</td>
-      <td>2018-03-11 03:05:13</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>228ce5500dc1d8e020d8d1322874b6f0</td>
-      <td>f9e4b658b201a9f2ecdecbb34bed034b</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2018-02-17 00:00:00</td>
-      <td>2018-02-18 14:36:24</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>e64fb393e7b32834bb789ff8bb30750e</td>
-      <td>658677c97b385a9be170737859d3511b</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>Recebi bem antes do prazo estipulado.</td>
-      <td>2017-04-21 00:00:00</td>
-      <td>2017-04-21 22:02:06</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>f7c4243c7fe1938f181bec41a392bdeb</td>
-      <td>8e6bfb81e283fa7e4f11123a3fb894f1</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>Parabéns lojas lannister adorei comprar pela I...</td>
-      <td>2018-03-01 00:00:00</td>
-      <td>2018-03-02 10:26:53</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>99219</th>
-      <td>574ed12dd733e5fa530cfd4bbf39d7c9</td>
-      <td>2a8c23fee101d4d5662fa670396eb8da</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2018-07-07 00:00:00</td>
-      <td>2018-07-14 17:18:30</td>
-    </tr>
-    <tr>
-      <th>99220</th>
-      <td>f3897127253a9592a73be9bdfdf4ed7a</td>
-      <td>22ec9f0669f784db00fa86d035cf8602</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2017-12-09 00:00:00</td>
-      <td>2017-12-11 20:06:42</td>
-    </tr>
-    <tr>
-      <th>99221</th>
-      <td>b3de70c89b1510c4cd3d0649fd302472</td>
-      <td>55d4004744368f5571d1f590031933e4</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>Excelente mochila, entrega super rápida. Super...</td>
-      <td>2018-03-22 00:00:00</td>
-      <td>2018-03-23 09:10:43</td>
-    </tr>
-    <tr>
-      <th>99222</th>
-      <td>1adeb9d84d72fe4e337617733eb85149</td>
-      <td>7725825d039fc1f0ceb7635e3f7d9206</td>
-      <td>4</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2018-07-01 00:00:00</td>
-      <td>2018-07-02 12:59:13</td>
-    </tr>
-    <tr>
-      <th>99223</th>
-      <td>efe49f1d6f951dd88b51e6ccd4cc548f</td>
-      <td>90531360ecb1eec2a1fbb265a0db0508</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>meu produto chegou e ja tenho que devolver, po...</td>
-      <td>2017-07-03 00:00:00</td>
-      <td>2017-07-03 21:01:49</td>
-    </tr>
-  </tbody>
-</table>
-<p>99224 rows × 7 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_per_seller</span> <span class="o">=</span> <span class="n">order_reviews</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">av_review</span> <span class="o">=</span> <span class="n">reviews_per_seller</span><span class="p">[</span><span class="n">reviews_per_seller</span><span class="p">[</span><span class="s1">&#39;order_item_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="mf">1.0</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;seller_id&#39;</span><span class="p">)[</span><span class="s1">&#39;review_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_revenue</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="n">orders</span><span class="p">[</span><span class="s1">&#39;order_item_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="mf">1.0</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;seller_id&#39;</span><span class="p">)[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">total_revenue</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;revenue&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">av_review</span><span class="p">,</span> <span class="n">total_revenue</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">reviews</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>revenue</th>
-    </tr>
-    <tr>
-      <th>seller_id</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0015a82c2db000af6aaaf3ae2ecb0532</th>
-      <td>3</td>
-      <td>3.666667</td>
-      <td>2685.00</td>
-    </tr>
-    <tr>
-      <th>001cca7ae9ae17fb1caed9dfb1094831</th>
-      <td>196</td>
-      <td>4.000000</td>
-      <td>20904.54</td>
-    </tr>
-    <tr>
-      <th>001e6ad469a905060d959994f1b41e4f</th>
-      <td>1</td>
-      <td>1.000000</td>
-      <td>250.00</td>
-    </tr>
-    <tr>
-      <th>002100f778ceb8431b7a1020ff7ab48f</th>
-      <td>51</td>
-      <td>3.882353</td>
-      <td>1151.00</td>
-    </tr>
-    <tr>
-      <th>003554e2dce176b5555353e4f3555ac8</th>
-      <td>1</td>
-      <td>5.000000</td>
-      <td>120.00</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>ffcfefa19b08742c5d315f2791395ee5</th>
-      <td>1</td>
-      <td>1.000000</td>
-      <td>69.90</td>
-    </tr>
-    <tr>
-      <th>ffdd9f82b9a447f6f8d4b91554cc7dd3</th>
-      <td>18</td>
-      <td>4.333333</td>
-      <td>1823.60</td>
-    </tr>
-    <tr>
-      <th>ffeee66ac5d5a62fe688b9d26f83f534</th>
-      <td>14</td>
-      <td>4.214286</td>
-      <td>1839.86</td>
-    </tr>
-    <tr>
-      <th>fffd5413c0700ac820c7069d66d98c89</th>
-      <td>56</td>
-      <td>3.964286</td>
-      <td>8660.60</td>
-    </tr>
-    <tr>
-      <th>ffff564a4f9085cd26170f4732393726</th>
-      <td>20</td>
-      <td>2.100000</td>
-      <td>1426.30</td>
-    </tr>
-  </tbody>
-</table>
-<p>3083 rows × 3 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>revenue</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>1.000000</td>
-      <td>-0.108698</td>
-      <td>0.850416</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>-0.108698</td>
-      <td>1.000000</td>
-      <td>-0.109698</td>
-    </tr>
-    <tr>
-      <th>revenue</th>
-      <td>0.850416</td>
-      <td>-0.109698</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -4879,7 +4529,7 @@ Length: 522, dtype: float64
         <a class="right-next" href="Churn.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">36. </span>Case Study: Olympic medals</p>
+                <p class="prevnext-title"><span class="section-number">36. </span>Case Study: Churn</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
