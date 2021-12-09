@@ -40,7 +40,8 @@ import scipy.stats
 import matplotlib.pyplot as plt
 from IPython.display import set_matplotlib_formats
 get_ipython().run_line_magic('matplotlib', 'inline')
-set_matplotlib_formats('svg')
+#set_matplotlib_formats('svg')
+plt.rcParams['figure.figsize'] = [10, 10]
 
 
 # in order to download datasets from kaggle, we need an API key to access their API, we'll make that here
@@ -48,10 +49,10 @@ set_matplotlib_formats('svg')
 # In[2]:
 
 
-if not os.path.exists("/root/.kaggle"):
-    os.mkdir("/root/.kaggle")
+if not os.path.exists(os.path.expanduser('~/.kaggle')):
+    os.mkdir(os.path.expanduser('~/.kaggle'))
 
-with open('/root/.kaggle/kaggle.json', 'w') as f:
+with open(os.path.expanduser('~/.kaggle/kaggle.json'), 'w') as f:
     json.dump(
         {
             "username":"lorenzf",
@@ -254,12 +255,769 @@ avg_stats_df
 
 
 # ## Exploration
+# 
+# At first we would like to know which countries are performing well, we could simply do a sum of all medals for each country as shown below
+
+# In[21]:
+
+
+medals_agg_df = medals_country_df.groupby('NOC').sum().sort_values(by='Gold', ascending=False)
+medals_agg_df.head(20)
+
+
+# As expected, USA leads the charts, interestingly although disbanded over 30 years ago, the soviet are still second in amount of medals, this leads me to several questions:
+# - does every country have the same resources? 
+# - are some sports easier to obtain medals?
+# - is the type of medal important?
+# 
+# To create a simple answer on the last one, we could for each country calculate the percentage of gold/silver/bronze medals they obtained, meaning that not the amount but the ratio is important.
+
+# In[22]:
+
+
+medals_perc_df = medals_agg_df[medals_agg_df.sum(axis='columns')>20].apply(lambda x: x/x.sum(), axis='columns').sort_values(by='Gold', ascending=False)
+medals_perc_df.head(20)
+
+
+# In[23]:
+
+
+medals_agg_df.loc['ETH']
+
+
+# Out of nowhere Ethiopia seems to be the highest achiever when it comes to gold medals, but this might be an anomaly as their total medal count is rather low, but still impressive! Also China steps up showing that they don't take second best.
+# 
+# I also mentioned resources, some countries are not as big as USA an China and therefore send less athletes.
+# We could have checked for the amount of athlete's yet opted to go for each countries population.
+# If a country has a bigger population it means it has a bigger pool of genetically favored persons for a sport.
+# 
+# To investigate this I searched for a dataset containing the data, coming from the worldbank API, in the next section we download the data.
+
+# In[24]:
+
+
+from io import BytesIO
+from zipfile import ZipFile
+from urllib.request import urlopen
+
+
+# In[25]:
+
+
+resp = urlopen("https://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=csv")
+zipfile = ZipFile(BytesIO(resp.read()))
+print(f"found files: {zipfile.namelist()}")
+
+
+# In[26]:
+
+
+file_name = 'API_SP.POP.TOTL_DS2_en_csv_v2_3358390.csv'
+zipfile.extract(file_name, './data')
+pop_df = pd.read_csv('./data/'+file_name, encoding='', skiprows=4)
+pop_df.head()
+
+
+# You can see that for each year from 1960 the population for each country is given, we first have to stack/unpivot the data to obtain a view that is useful for our purpose.
+
+# In[27]:
+
+
+pop_df = pop_df.drop(columns=['Country Name', 'Indicator Name', 'Indicator Code'] + pop_df.columns[pop_df.columns.str.contains('Unnamed')].tolist()).set_index('Country Code').stack()
+pop_df = pop_df.rename('population')
+pop_df.head(5)
+
+
+# Now we have to match this with our medals dataset we created earlier
+
+# In[28]:
+
+
+medals_country_df.head()
+
+
+# There seems to be a problem, our medals dataset does not indicate the year, we can solve this by adding a column
+
+# In[29]:
+
+
+medals_country_df['year'] = medals_country_df.index.get_level_values('Games').str[:4]
+medals_country_df.head()
+
+
+# Great! now we can merge the population data with our medals data
+
+# In[30]:
+
+
+medals_country_pop_df = pd.merge(medals_country_df, pop_df, left_on=[medals_country_df.index.get_level_values('NOC'), 'year'], right_index=True, how='left')
+medals_country_pop_df
+
+
+# As our population data only contained data from 1960 onwards, we need to discard some of our rows, we do this with the dropna method
+
+# In[31]:
+
+
+medals_country_pop_df = medals_country_pop_df.dropna()
+medals_country_pop_df
+
+
+# In order to use our population information, we need to be creative, I decided to keep things simple and for each type of medal divide the amount with the population, therefore the value is changed from:
+# 
+# - the amount of medals earned for a country
+# 
+# to
+# 
+# - the amount of medals earned per person for a country
+# 
+# Which will be much lower for countries with a higher population
+
+# In[32]:
+
+
+medals_pop_df = medals_country_pop_df[['Gold', 'Silver', 'Bronze']].div(medals_country_pop_df.population,axis='index')
+medals_pop_df
+
+
+# You can see that these values are much lower as populations are very high. Now we can do exactly the same as before and sort per highest total amount.
+
+# In[33]:
+
+
+medals_pop_df.groupby('NOC').sum().sort_values(by='Gold', ascending=False).head(20)
+
+
+# Our data is now completely different, for the reason that Liechtenstein is very small it scores very high.
+# You could argue that being small is an advantage here, yet it also means you have less chance to have highly athletic persons. Just to make sure that they did not by accident get a gold medal let's get all of their medals.
+
+# In[34]:
+
+
+athlete_events[(athlete_events.NOC=='LIE') & ~(athlete_events.Medal.isna())]
+
+
+# In my opinion this looks about right, 2 gold medals, 2 silver and 5 bronze is impressive for a country with less than 40k inhabitants.
+# 
+# Also a lot of scandinavian countries seem to have taken the lead, this might be indicating that there is less competition in winter sports as they are known to excel there.
+# 
+# Most remarkable is the fall of the USA, which falls to the 20th place, indicating that if we correct for the amount of persons in the country it does not perform that well.
+# 
+# In a same method we could also account for the Gross Domestic Product per Capita, indicating the wealth of a country, again we download data from worldbank
+
+# In[35]:
+
+
+resp = urlopen("https://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.CD?downloadformat=csv")
+zipfile = ZipFile(BytesIO(resp.read()))
+print(f"found files: {zipfile.namelist()}")
+
+
+# In[36]:
+
+
+file_name = 'API_NY.GDP.PCAP.CD_DS2_en_csv_v2_3358201.csv'
+zipfile.extract(file_name, './data')
+gdp_cap_df = pd.read_csv('./data/'+file_name, encoding='', skiprows=4)
+gdp_cap_df.head()
+
+
+# In[37]:
+
+
+gdp_cap_df = gdp_cap_df.drop(columns=['Country Name', 'Indicator Name', 'Indicator Code'] + gdp_cap_df.columns[gdp_cap_df.columns.str.contains('Unnamed')].tolist()).set_index('Country Code').stack()
+gdp_cap_df = gdp_cap_df.rename('gdp')
+gdp_cap_df.head(5)
+
+
+# Again data from 1960 untill recent that we can use, we merge this with our original medals data.
+
+# In[38]:
+
+
+medals_country_gdp_df = pd.merge(medals_country_df, gdp_cap_df, left_on=[medals_country_df.index.get_level_values('NOC'), 'year'], right_index=True, how='left').dropna()
+medals_country_gdp_df
+
+
+# And again we recompute our metric, by dividing the amount of medals by the GDP, indicating not how many medals but how many medals per dollar of weight per person obtained
+
+# In[39]:
+
+
+medals_country_gdp_df = medals_country_gdp_df[['Gold', 'Silver', 'Bronze']].div(medals_country_gdp_df.gdp,axis='index')
+medals_country_gdp_df
+
+
+# In order to compare we calulcate again the total medal/wealth metric for each country
+
+# In[40]:
+
+
+medals_country_gdp_df.groupby('NOC').sum().sort_values(by='Gold', ascending=False).head(20)
+
+
+# As expected China performs well, but also Etheopia again scores high together with Kenia, I'm assuming a lot of runners come from this region. Remarkable is that countries such as USA and Japan, which are known to have a high GDP are still performing outstanding.
+# 
+# Now that we have 3 versions of the same analysis it debatable which one is 'more accurate', I personally believe that good athlete's depend more on the countries population than wealth, as talent will always emerge from a pool and GDP is not a great indicator if the country has the resources to support an athlete.
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# ### Medals per group (season, sport,...)
+# 
+# I mentioned earlier that Scandinavian countries are good at winter sports, let's prove it, we divide our dataset in 'Summer' and 'Winter'.
+
+# In[41]:
+
+
+medals_country_df['season'] = medals_country_df.index.get_level_values('Games').str[5:]
+medals_country_df.head()
+
+
+# By grouping per season and country and counting the total amount of medals (here gold, silver or bronze does not matter) we get 2 values for each country. We first sum all types of medals, then group by season and country and last pivot the season feature to create columns for each season
+
+# In[42]:
+
+
+medals_season_df = medals_country_df.set_index('season', append=True)[['Gold', 'Silver', 'Bronze']].sum(axis='columns').unstack('NOC').groupby('season').sum().T
+medals_season_df
+
+
+# Using our contingengy table chi squared test we can easily find out if for certain rows the distribution of our 2 columns (Summer and Winter) is skewed.
+
+# In[43]:
+
+
+F, p, df, exp = scipy.stats.chi2_contingency(medals_season_df)
+F, p
+
+
+# with a p-value of 0.0 we know there is a definite shift for certain countries, using the expected values we calculate the diff and sort it by descending order on summer
+
+# In[44]:
+
+
+medals_season_diff_df = medals_season_df-exp
+medals_season_diff_df.sort_values(by='Summer', ascending=False)
+
+
+# Although having bad weather, the british do not fancy some snow at all, similar for the United States.
+# In contrast, countries as Norway, Austria, Canada, Finland, Switzerland, ... really excel in winter sports!
+# 
+# Similarly to this analysis we can to the same for countries and types of sports, we do the same manipulation and obtain the next view of our data.
+
+# In[45]:
+
+
+medals_sport_df = medals_country_df.sum(axis='columns').unstack('Sport').groupby('NOC').sum()
+medals_sport_df.index = medals_sport_df.index.astype('str')
+medals_sport_df
+
+
+# So instead of knowing which countries are performing different on summer and winter games, we can not figure out which sports are excelled by a nation.
+
+# In[46]:
+
+
+F, p, df, exp = scipy.stats.chi2_contingency(medals_sport_df)
+F, p
+
+
+# Again a p-value of 0.0 indicate the correlation is not a coincidence, so we should investigate with the differences, as we have a lot of sports and countries, it would be wise to select a single country or sport.
+
+# In[47]:
+
+
+medals_sport_diff_df = medals_sport_df-exp
+medals_sport_diff_df.loc['NED'].sort_values(ascending=False).head(10)
+
+
+# As you can see I took the Dutch which clearly have a favorite. Speed Skating and Hockey where 2 sports where I thought they would be scoring well, but they also perform well on cycling and swimming!
+# 
+# It also works the other way around if we select a sport and see which countries are good, I wanted to known which countries are good at sailing.
+
+# In[48]:
+
+
+medals_sport_diff_df['Sailing'].sort_values(ascending=False).head()
+
+
+# Looks like Great Britain is good at sailing, all those years of colonialism still seem to pay of...
+# 
+# ### Athlete attributes
+# 
+# In this section we will be looking at attributes from athletes, age, height and weight are all given in the dataset, yet with a lot of missing values. To make our life easier I created 2 functions that retrieves groups of athletes based on a grouping and the mean of each groups for the grouping, also you can set if we only take athletes that received a medal.
+
+# In[49]:
+
+
+def group_athletes(grouping=['Sex'], agg=False, medals=False):
+    df = athlete_events.drop_duplicates(subset=['Name', 'Age', 'NOC'])
+    df = df.dropna(subset=['Age', 'Height', 'Weight'])
+    if medals:
+        df = df[~df.Medal.isna()]
+    return [x[1][['Age', 'Height', 'Weight']] for x in df.groupby(grouping) if len(x[1])>5]
+
+
+# In[50]:
+
+
+def median_athletes(grouping=['Sex'], medals=False):
+    df = athlete_events.dropna(subset=['Age', 'Height', 'Weight'])
+    if medals:
+        df = df[~df.Medal.isna()]
+    return df.groupby(grouping)[['Age', 'Height', 'Weight']].median()
+
+
+# To give an example, here is the result of the mean for athletes grouped per gender. I want to remark here that I did not perform a non-normal test as a fact that I always know data such as this is not normal distributed. A mean is not the perfect indicator for this!
+
+# In[51]:
+
+
+median_athletes(['Sex'])
+
+
+# Now for each attribute we would like to perform an ANOVA with the initial values, we can do this with the scipy library, where we supply the data from the (in this case) 2 groups.
+
+# In[52]:
+
+
+F, p = scipy.stats.f_oneway(*group_athletes(['Sex']))
+print(f'F: {F}')
+print(f'p: {p}')
+
+
+# You can See that the p-values are all less that 0.05 indicating no chance this happend by accident, so there is a clear difference for Age, Height and Weight for Male and Female Athletes. Which was also visible in the earlier table we created, yet we know it is not by random coincidence.
+# 
+# How about we only take athletes that have obtained a medal? do we see a difference then?
+
+# In[53]:
+
+
+F, p = scipy.stats.f_oneway(*group_athletes(['Sex'], medals=True))
+print(f'F: {F}')
+print(f'p: {p}')
+
+
+# Again the results are very clear, yet we can see that the F-Values are much lower, indicating the difference is much lower, let's look at medians
+
+# In[54]:
+
+
+median_athletes(['Sex'], medals=True)
+
+
+# Although no big differences most values have shifted upwards indicating being taller and heavier gives you more chance on a medal?
+# 
+# Instead of focussing on gender, let's look at sports, as I assume not every sports prefers the same athlete.
+
+# In[55]:
+
+
+F, p = scipy.stats.f_oneway(*group_athletes(['Sport'], medals=True))
+print(f'F: {F}')
+print(f'p: {p}')
+
+
+# F values are much less, yet we should not compare as we changed our grouping, the p-values as usually are so low there is no chance of randomness.
+# 
+# As we have too many sports, I decided to sort them by Height and only show the shortest.
+
+# In[56]:
+
+
+median_sport_df = median_athletes(['Sport']).dropna().sort_values(by='Height')
+median_sport_df.head()
+
+
+# Clearly there are some sports that favor being small, there are probably numerous arguments why that would be, but I'm not going to go there. 
+# 
+# Now that we are here, let's look at the sports with the heaviest athletes.
+
+# In[57]:
+
+
+median_sport_df.sort_values(by='Weight', ascending=False).head()
+
+
+# Although not a sport anymore, Tug-Of-War still has the heaviest contestants, which indicates that weight sure is a way to win an old-fashioned tug of war.
+# 
+# To give it some more insight, we could divide each row with it's mean, this would give a differential compared to the mean.
+
+# In[58]:
+
+
+median_sport_df.apply(lambda x: x-x.mean())
+
+
+# This way you can see that the median basketball player is 15.5 cm taller than an average athlete.
+# 
+# Aside from grouping on 1 attribute (Gender or Sport) we can also combine them, but this makes things more complicated. Here we group on Gender and Sport type and only select medal wining athletes.
+
+# In[59]:
+
+
+sport_gender_df = median_athletes(['Sex', 'Sport'], medals=True).dropna().unstack('Sex')
+sport_gender_df.head()
+
+
+# The options of comparison grow exponentially with every grouping level, therefore I selected one which I thought might be interesting, we are comparing per sport the height of males and females. so a negative value means females are higher than males. 
+
+# In[60]:
+
+
+(sport_gender_df['Height']['M']-sport_gender_df['Height']['F']).rename('height_difference').sort_values(ascending=False).dropna()
+
+
+# Here you can read that e.g. basketbalplayers in general have a taller height, yet difference between male and female is also 15cms so the height advantage is not that appearant in female basketball. On the other side, Boxing has a lower height difference, yet boxing already was a sport that benefits smaller athletes than average.
+# 
+# To end this section I would like to take a grouping where the difference is not that obvious, by grouping per medal.
+
+# In[61]:
+
+
+F, p = scipy.stats.f_oneway(*group_athletes(['Medal']))
+print(f'F: {F}')
+print(f'p: {p}')
+
+
+# You can see that for age we have a p-value of 0.67, indicating no difference in age for athletes that have obtained different types of medals, yet for height and weight the p-value is significant.
+# However if we look at the median values we see nearly no difference.
+
+# In[62]:
+
+
+median_athletes(['Medal'])
+
+
+# This is a great example of how significance does not imply relevance, the differences here are so small they are irrelevant.
 
 # ## Visualization
+# 
+# Before we start creating graphics, a little recall we started out with a view of our data for each games, NOC and sport the amount of medals
+
+# In[63]:
+
+
+medals_country_df.head()
+
+
+# What I would be interested in is the evoluation of amount of medals for the highest achieving countries, therefore we need a list of the best countries, I selected the top 10 countries with most medals.
+
+# In[64]:
+
+
+most_medals = medals_country_df.groupby('NOC')[['Gold','Silver','Bronze']].sum().sum(axis='columns').sort_values(ascending=False).head(10).index.values
+most_medals
+
+
+# Now for those countries we create a new view on our data that contains the won medals for each of those countries.
+
+# In[65]:
+
+
+medals_country_wide_df = medals_country_df.reset_index().groupby(['year','NOC'])[['Gold', 'Silver', 'Bronze']].sum().sum(axis='columns').unstack()
+medals_country_wide_df = medals_country_wide_df[most_medals].fillna(0)
+medals_country_wide_df.tail()
+
+
+# We can create a simple line plot for this, where the x-axis is the chronological years of each games and y is the amount of medals
+
+# In[66]:
+
+
+sns.lineplot(data=medals_country_wide_df)
+plt.xticks(rotation=45)
+plt.show()
+
+
+# Looks like we forgot something, we are plotting the amount of medals per year and not cumulative, fortunately a builtin method can solve this
+
+# In[67]:
+
+
+sns.lineplot(data=medals_country_wide_df.cumsum())
+plt.xticks(rotation=45)
+plt.show()
+
+
+# I did the same for the population corrected data, creating a line plot, this is in my opinion more interesting as it gives a more honest take on the competition.
+
+# In[68]:
+
+
+most_medals_pop = medals_pop_df.groupby('NOC')[['Gold','Silver','Bronze']].sum().sum(axis='columns').sort_values(ascending=False).head(10).index.values
+medals_pop_df['year'] = medals_pop_df.index.get_level_values('Games').str[:4].astype('int')
+medals_country_wide_pop_df = medals_pop_df.reset_index().groupby(['year','NOC'])[['Gold', 'Silver', 'Bronze']].sum().sum(axis='columns').unstack()
+medals_country_wide_pop_df = medals_country_wide_pop_df[most_medals_pop].fillna(0)
+sns.lineplot(data=medals_country_wide_pop_df.cumsum())
+plt.xticks(rotation=45)
+plt.show()
+
+
+# There seems to have been a golden age for Liechtenstein, as they are taking up a lot of space I opted to remove them and plot again
+
+# In[69]:
+
+
+sns.lineplot(data=medals_country_wide_pop_df.drop(columns=['LIE']).cumsum())
+plt.xticks(rotation=45)
+plt.show()
+
+
+# Great! a lot of other interesting countries performances, note that CHI stands for Chile which catches up phenomenally.
+# 
+# Another take would be a pie chart, although not my favorite it would make a good option in this situation, as we want to compare the relative portions of countries. When we use the regular data we obtain the following.
+
+# In[70]:
+
+
+medals_country_df.groupby(level='NOC').sum().sum(axis='columns').sort_values(ascending=False).plot.pie()
+
+
+# Verry messy, as most countries are not visible on the pie chart, a good option would be to only take the top 20 countries and put the others in a 'other' category.
+
+# In[71]:
+
+
+medals_country_vis_df = medals_country_df.groupby(level='NOC').sum().sum(axis='columns').sort_values(ascending=False)[:19]
+medals_country_vis_df['other'] = medals_country_df.groupby(level='NOC').sum().sum(axis='columns').sort_values(ascending=False)[19:].sum()
+medals_country_vis_df.plot.pie()
+
+
+# Much better, with this pie plot we can see that 10 countries obtained about half of all medals and the next 10 have about 25%, the other 130 countries are in the botton quarter.
+# 
+# Now to add more depth we can divide our dataset, something we mentioned earlier is the dominance in winter sports, here we create the same pie chart but only take events from winter games.
+
+# In[72]:
+
+
+medals_winter_df = medals_country_df[medals_country_df.season=='Winter'].groupby(level='NOC').sum().sum(axis='columns').sort_values(ascending=False)[:19]
+medals_winter_df['other'] = medals_country_df[medals_country_df.season=='Winter'].groupby(level='NOC').sum().sum(axis='columns').sort_values(ascending=False)[19:].sum()
+medals_winter_df.plot.pie()
+
+
+# You can compare them and see that some countries fall and some rise, indicating that countries definitely have a preference.
+# 
+# Again we can do the same with population corrected data.
+
+# In[73]:
+
+
+medals_pop_vis_df = medals_pop_df.groupby(level='NOC').sum()[['Gold','Silver','Bronze']].sum(axis='columns').sort_values(ascending=False)[:19]
+medals_pop_vis_df['other'] = medals_pop_df.groupby(level='NOC').sum()[['Gold','Silver','Bronze']].sum(axis='columns').sort_values(ascending=False)[19:].sum()
+(medals_pop_vis_df*1200).plot.pie()
+
+
+# Or GDP corrected data
+
+# In[74]:
+
+
+medals_gdp_vis_df = medals_country_gdp_df.groupby(level='NOC').sum()[['Gold','Silver','Bronze']].sum(axis='columns').sort_values(ascending=False)[:19]
+medals_gdp_vis_df['other'] = medals_country_gdp_df.groupby(level='NOC').sum()[['Gold','Silver','Bronze']].sum(axis='columns').sort_values(ascending=False)[19:].sum()
+medals_gdp_vis_df.plot.pie()
+
+
+# ### best performing per sport
+# 
+# To visualise the best performing country per sport we first need the country that won the most medals per sport. we do this with the following code
+
+# In[75]:
+
+
+best_country_sport_df = pd.concat(
+    [
+        medals_country_df.groupby(level=['NOC', 'Sport']).sum().sum(axis='columns').groupby(level='Sport').apply(lambda x: x.idxmax()[0]),
+        medals_country_df.groupby(level=['NOC', 'Sport']).sum().sum(axis='columns').groupby(level='Sport').apply(lambda x: x.max())
+    ], axis='columns', keys=['country', 'medals']
+)
+
+best_country_sport_df.head()
+
+
+# As there are to many sports, I opted to only visualise the top 20 most popular sports, by the amount of medals
+
+# In[76]:
+
+
+total_medals_sport = medals_country_df.groupby(level='Sport').sum().sum(axis='columns').rename('medals').sort_values(ascending=False).reset_index().head(20)
+popular_sports = list(total_medals_sport.Sport)
+best_country_sport_df.loc[popular_sports].medals
+
+
+# Now we can create a bar plot, where the portion of each best performing country is shown together with the region name.
+
+# In[77]:
+
+
+sns.barplot(x=total_medals_sport.Sport.astype('str'), y=total_medals_sport.medals, color='b')
+sns.barplot(x=popular_sports, y=best_country_sport_df.loc[popular_sports].medals, color='r')
+
+for idx, sport in enumerate(popular_sports):
+    plt.text(idx, best_country_sport_df.loc[sport].medals+10, best_country_sport_df.loc[sport].country, horizontalalignment='center', size='medium', color='white', rotation=90)
+
+plt.xticks(rotation=90)
+plt.show()
+
+
+# This both indicates the popularity of the sport (by amount of total medals) and the amount of medals won by the best performing country.
+# 
+# Another approach would be to use the difference between truth and expected values, we calculated the difference earlier.
+
+# In[78]:
+
+
+medals_sport_diff_df.head()
+
+
+# By sorting on the values in this matrix, we find the combination of region and sport that are most extreme, meaning either much more medals then expected, or much less medals than expected.
+
+# In[79]:
+
+
+medals_diff_df = medals_sport_diff_df.stack().sort_values(ascending=False)
+medals_diff_df.head()
+
+
+# So now we know that USA has aboutn 224 more medals in Swimming than expected, we could put this in a bar chart
+
+# In[80]:
+
+
+sns.barplot(x=medals_diff_df.head(), y=medals_diff_df.head().index.values, color='b')
+plt.show()
+
+
+# This reveals that USA seems to be investing a lot in Swimming or Athletics sports, which are by coincidence sports that have the most medals.
+# You could argue that due to the cold war show-off they have fallen prey to the cobra effect where they used the amount of medals they could get as a target instead of a measure of performance, shifting them towards sports where more medals can be obtained.
+# 
+# Anyway, the same analysis can be done for the worst combinations.
+
+# In[81]:
+
+
+sns.barplot(x=medals_diff_df.tail(), y=medals_diff_df.tail().index.values, color='r')
+plt.show()
+
+
+# This analysis can also be performed on Country level, here we see that Belgium is good at
+
+# In[82]:
+
+
+medals_sport_diff_df.loc['BEL']
+
+
+# And we can put this in the same type of barchart to make it comparible with the previous chart
+
+# In[83]:
+
+
+sns.barplot(x=medals_sport_diff_df.loc['BEL'].sort_values(ascending=False).head(10), y=medals_sport_diff_df.loc['BEL'].sort_values(ascending=False).head(10).index.astype('str').values, color='b')
+
+
+# ### Athlete attributes
+# 
+# We also investigated athlete specific attributes, to refresh our memory a printout of how the dataset looks
+
+# In[84]:
+
+
+df = athlete_events.drop_duplicates(subset=['Name', 'Age', 'NOC'])
+df = df.dropna(subset=['Age', 'Height', 'Weight'])[['Sex', 'Sport', 'Medal', 'Age', 'Height', 'Weight']].reset_index(drop=True)
+df.head()
+
+
+# I kept features such as gender, Sport, ... as these were attributes on which the physical appearance was different, we can use these features to group our athletes and visualise the distribution with a histogram.
+
+# In[85]:
+
+
+sns.histplot(data = df, x='Age', hue='Sex', bins=20, kde=True)
+
+
+# In[86]:
+
+
+sns.histplot(data = df, x='Height', hue='Sex', bins=20, kde=True)
+
+
+# For gender, the difference in age is not that appearent, yet the shift in height is, women are in general less tall as men.
+# 
+# When grouping per sport we saw significant differences.
+
+# In[87]:
+
+
+ax = sns.kdeplot(data=df, x='Age', hue='Sport')
+plt.legend().remove()
+
+
+# If we put all sports like this in a distribution plot, it becomes a big mess, I had to remove the legend as there are a lot of sports and the bins all overlap. It seems not a good idea to make such a plot.
+# 
+# For medals we only have 3 different groups.
+
+# In[88]:
+
+
+ax = sns.histplot(data=df, x='Weight', hue='Medal', bins=20, kde=True)
+
+
+# Obviously for each ceremony we have 1 gold, 1 silver and 1 bronze, so distributions are equal in size.
+# We saw erlier that the groups do not have significant differences and this is confirmed with the histogram, although you can see some small differences that perhaps show a pattern?
+# 
+# Lastly I would like to add another dimension to the plots by using scatterplots, it will be messy but creates a new perspective.
+# For the scatter plot I would first plot all athlete's height and weight (you could add lines of equal BMI here) and superpose in other colors subgroups of athletes based on groups.
+# Here I use the sport to show all athletes, gymnastics and weightlifting.
+
+# In[89]:
+
+
+sns.scatterplot(data=df, x='Weight', y='Height', label='all')
+sns.scatterplot(data=df[df.Sport=='Gymnastics'], x='Weight', y='Height', label='Gymnastics')
+sns.scatterplot(data=df[df.Sport=='Weightlifting'], x='Weight', y='Height', label='Weightlifting')
+
+
+# you can clearly see how gymnastics are the smallest athletes and whilst weightlifting are also fairly small, they have a much higher weight, as they need muscles to perform their sport.
+
+# In[90]:
+
+
+sns.scatterplot(data=df[df.Medal.isna()], x='Weight', y='Height', label='all', color='blue')
+sns.scatterplot(data=df[df.Medal=='Bronze'], x='Weight', y='Height', label='Bronze', color='brown', alpha=0.4)
+sns.scatterplot(data=df[df.Medal=='Silver'], x='Weight', y='Height', label='Silver', color='grey', alpha=0.4)
+sns.scatterplot(data=df[df.Medal=='Gold'], x='Weight', y='Height', label='Gold', color='yellow', alpha=0.4)
+
+
+# Looking at this graph we can see that while there is no difference for athlete that achieves different types of medals, there is a clear area in which you should be in order to be a medal winner, outside that area clearly dimishishes your chances.
+# 
+# Also there seems to be an athlete that is more than 200kgs?
+
+# In[91]:
+
+
+athlete_events[athlete_events.Weight==athlete_events.Weight.max()]
+
 
 # ## Summary
 
-# In[20]:
+# 
+# 
+# - Best performing depends on metric
+# - Some countries focus on different sports due to multiple reasons (# medals, heritage, ...)
+# - Your sport and physical attributes are related, there is a ideal weight and height
+
+# In[ ]:
 
 
 

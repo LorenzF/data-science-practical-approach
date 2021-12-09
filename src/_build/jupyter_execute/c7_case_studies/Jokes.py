@@ -48,10 +48,10 @@ set_matplotlib_formats('svg')
 # In[2]:
 
 
-if not os.path.exists("/root/.kaggle"):
-    os.mkdir("/root/.kaggle")
+if not os.path.exists(os.path.expanduser('~/.kaggle')):
+    os.mkdir(os.path.expanduser('~/.kaggle'))
 
-with open('/root/.kaggle/kaggle.json', 'w') as f:
+with open(os.path.expanduser('~/.kaggle/kaggle.json'), 'w') as f:
     json.dump(
         {
             "username":"lorenzf",
@@ -101,9 +101,9 @@ reddit_jokes_df.head()
 
 
 for col in reddit_jokes_df.columns:
-  print(col)
-  print(reddit_jokes_df[col].nunique())
-  print()
+    print(col)
+    print(reddit_jokes_df[col].nunique())
+    print()
 
 
 # a few columns only have 1 value, also the links are not important for our case, so we drop them too.
@@ -208,7 +208,7 @@ reddit_jokes_df = reddit_jokes_df.sort_values('score').drop_duplicates(subset=['
 
 
 for col in ['selftext', 'title']:
-  reddit_jokes_df[col] = reddit_jokes_df[col].replace(to_replace="[^a-zA-Z,.!? ]", value="", regex=True).str.lower()
+    reddit_jokes_df[col] = reddit_jokes_df[col].replace(to_replace="[^a-zA-Z,.!? ]", value="", regex=True).str.lower()
 
 reddit_jokes_df.head()
 
@@ -336,4 +336,416 @@ idf.head()
 
 
 idf.sort_values(by='idf', ascending=False).head(10)
+
+
+# ## Exploration
+
+# In[30]:
+
+
+good_jokes = reddit_jokes_df[reddit_jokes_df.score>10000].copy()
+good_jokes
+
+
+# In[ ]:
+
+
+
+
+
+# In[31]:
+
+
+good_jokes_word_cnt = pd.concat(
+    [
+        pd.Series(cnt_vect.get_feature_names_out()),
+        pd.Series(np.asarray(bow_jokes[good_jokes.index].sum(axis=0)).squeeze()),
+    ], axis='columns', keys=['word', 'count']
+)
+good_jokes_word_cnt
+
+
+# In[32]:
+
+
+good_jokes_word_cnt.sort_values('count', ascending=False).head(20)
+
+
+# In[33]:
+
+
+for joke in good_jokes[good_jokes.joke.str.contains(' man ')].tail(5).joke:
+    print(joke)
+    print()
+
+
+# In[34]:
+
+
+good_jokes_word_idf = pd.concat(
+    [
+        pd.Series(tfidf_vect.get_feature_names_out()),
+        pd.Series(np.asarray(tfidf_jokes[good_jokes.index].sum(axis=0)).squeeze()),
+    ], axis='columns', keys=['word', 'count']
+)
+good_jokes_word_idf
+
+
+# In[35]:
+
+
+good_jokes_word_idf[~good_jokes_word_idf.word.isin(stopwords.words('english'))].sort_values('count', ascending=False).head(20)
+
+
+# In[36]:
+
+
+tfidf_good_vect = TfidfVectorizer()
+tfidf_good_jokes = tfidf_good_vect.fit_transform(good_jokes.joke.values)
+tfidf_good_jokes
+
+
+# In[37]:
+
+
+good_jokes_word_idf = pd.concat(
+    [
+        pd.Series(tfidf_good_vect.get_feature_names_out()),
+        pd.Series(np.asarray(tfidf_good_jokes.sum(axis=0)).squeeze()),
+    ], axis='columns', keys=['word', 'count']
+)
+good_jokes_word_idf
+
+
+# In[38]:
+
+
+good_jokes_word_idf[~good_jokes_word_idf.word.isin(stopwords.words('english'))].sort_values('count', ascending=False).head(20)
+
+
+# In[39]:
+
+
+from sklearn.cluster import KMeans
+
+
+# In[40]:
+
+
+kmeans = KMeans(n_clusters=100)
+kmeans.fit(tfidf_good_jokes)
+
+
+# In[41]:
+
+
+good_jokes['label'] = kmeans.labels_
+
+
+# In[42]:
+
+
+good_jokes.head()
+
+
+# In[43]:
+
+
+jokes_cluster_counts = good_jokes.label.value_counts()
+jokes_cluster_counts
+
+
+# In[44]:
+
+
+for joke in good_jokes[good_jokes.label==jokes_cluster_counts.index[0]].sort_values('score', ascending=False).joke.head():
+    print(joke)
+    print()
+
+
+# In[45]:
+
+
+for joke in good_jokes[good_jokes.label==jokes_cluster_counts.index[-1]].sort_values('score', ascending=False).joke.head():
+    print(joke)
+    print()
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[46]:
+
+
+kaggle.api.dataset_download_files(dataset='vikashrajluhaniwal/jester-17m-jokes-ratings-dataset', path='./data', unzip=True)
+
+
+# In[47]:
+
+
+jester_jokes_df = pd.read_csv('./data/jester_items.csv')
+print('shape: ' + str(jester_jokes_df.shape))
+jester_jokes_df.head()
+
+
+# In[48]:
+
+
+jester_ratings_df = pd.read_csv('./data/jester_ratings.csv')
+print('shape: ' + str(jester_ratings_df.shape))
+jester_ratings_df.head()
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[49]:
+
+
+jester_ratings_df.groupby('jokeId').rating.mean()
+
+
+# In[50]:
+
+
+jester_sorted = jester_ratings_df.groupby('jokeId').rating.mean().to_frame().join(jester_jokes_df).sort_values('rating', ascending=False)
+jester_sorted.head()
+
+
+# In[51]:
+
+
+for joke in jester_sorted.head().jokeText:
+    print(joke)
+    print('---')
+
+
+# In[52]:
+
+
+jester_ratings_pivot_df = jester_ratings_df.pivot(index='userId', columns='jokeId', values='rating')
+jester_ratings_pivot_df.head()
+
+
+# In[53]:
+
+
+kmeans = KMeans(n_clusters=100)
+kmeans.fit(jester_ratings_pivot_df.fillna(0))
+
+
+# In[54]:
+
+
+user_clusters = pd.Series(kmeans.labels_, index=jester_ratings_pivot_df.index)
+user_clusters
+
+
+# In[55]:
+
+
+user_cluster_counts = user_clusters.value_counts()
+user_cluster_counts
+
+
+# In[56]:
+
+
+users_set = set(user_clusters[user_clusters==user_cluster_counts.index[0]].index)
+print(users_set)
+
+
+# In[57]:
+
+
+jester_group_sorted = jester_ratings_df[jester_ratings_df.userId.isin(users_set)].groupby('jokeId').rating.mean().to_frame().join(jester_jokes_df).sort_values('rating', ascending=False)
+jester_group_sorted.head()
+
+
+# In[58]:
+
+
+users_set = set(user_clusters[user_clusters==user_cluster_counts.index[-5]].index)
+jester_group_sorted = jester_ratings_df[jester_ratings_df.userId.isin(users_set)].groupby('jokeId').rating.mean().to_frame().join(jester_jokes_df).sort_values('rating', ascending=False)
+jester_group_sorted.head()
+
+
+# In[59]:
+
+
+kmeans.inertia_
+
+
+# In[60]:
+
+
+kmeans = KMeans(n_clusters=200)
+kmeans.fit(jester_ratings_pivot_df.fillna(0))
+
+
+# In[61]:
+
+
+kmeans.inertia_
+
+
+# In[62]:
+
+
+user_clusters = pd.Series(kmeans.labels_, index=jester_ratings_pivot_df.index)
+user_clusters.value_counts()
+
+
+# In[63]:
+
+
+users_set = set(user_clusters[user_clusters==49].index)
+jester_group_sorted = jester_ratings_df[jester_ratings_df.userId.isin(users_set)].groupby('jokeId').rating.mean().to_frame().join(jester_jokes_df).sort_values('rating', ascending=False)
+jester_group_sorted.head()
+
+
+# In[64]:
+
+
+elbow_dict = {}
+for k in [5, 10, 50, 100, 200, 500]:
+    print(k)
+    elbow_dict[k] = {}
+    kmeans = KMeans(n_clusters=k)
+    kmeans.fit(jester_ratings_pivot_df.fillna(0))
+    
+    elbow_dict[k]['kmeans'] = kmeans
+    elbow_dict[k]['inertia'] = kmeans.inertia_
+    elbow_dict[k]['user_cluster'] = pd.Series(kmeans.labels_, index=jester_ratings_pivot_df.index)
+
+
+# In[65]:
+
+
+for k, clustering in elbow_dict.items():
+    print(clustering['inertia'])
+
+
+# In[66]:
+
+
+inertia = pd.Series([clustering['inertia'] for k, clustering in elbow_dict.items()], index=elbow_dict.keys())
+sns.lineplot(x=inertia.index, y=inertia)
+
+
+# In[ ]:
+
+
+
+
+
+# In[67]:
+
+
+elbow_dict[100]['user_cluster'].value_counts()
+
+
+# In[68]:
+
+
+elbow_dict[500]['user_cluster'].value_counts()
+
+
+# In[ ]:
+
+
+
+
+
+# In[69]:
+
+
+from sklearn.neighbors import NearestNeighbors
+
+
+# In[70]:
+
+
+nbrs = NearestNeighbors(n_neighbors=5)
+nbrs.fit(jester_ratings_pivot_df.fillna(0))
+
+
+# In[71]:
+
+
+jester_ratings_pivot_df.fillna(0).loc[[1]]
+
+
+# In[72]:
+
+
+dist, neighbours = nbrs.kneighbors(jester_ratings_pivot_df.fillna(0).loc[[1]])
+neighbours[0].tolist()
+
+
+# In[73]:
+
+
+neighbours_ratings = jester_ratings_pivot_df.iloc[neighbours[0].tolist()[1:]]
+neighbours_ratings
+
+
+# In[74]:
+
+
+approriate_jokes = neighbours_ratings.mean()[neighbours_ratings.mean()>7].index.tolist()
+approriate_jokes
+
+
+# In[75]:
+
+
+recommended_jokes = jester_ratings_pivot_df.loc[1,approriate_jokes]
+recommended_jokes
+
+
+# In[76]:
+
+
+recommended_jokes[recommended_jokes.isna()].index.tolist()
+
+
+# In[77]:
+
+
+for joke in jester_jokes_df[jester_jokes_df.jokeId.isin(recommended_jokes[~recommended_jokes.isna()].index.tolist())].jokeText:
+    print(joke)
+    print('---')
+
+
+# In[78]:
+
+
+for joke in jester_jokes_df[jester_jokes_df.jokeId.isin(recommended_jokes[recommended_jokes.isna()].index.tolist())].jokeText:
+    print(joke)
+    print('---')
+
+
+# In[ ]:
+
+
+
 
